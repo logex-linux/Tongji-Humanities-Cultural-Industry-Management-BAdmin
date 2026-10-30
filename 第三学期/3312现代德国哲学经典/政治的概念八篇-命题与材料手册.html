@@ -1,0 +1,435 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>《政治的概念》八篇 · 命题与材料手册</title><style>
+:root{--ink:#26312f;--muted:#717d76;--accent:#285c48;--accent-soft:#a8baa2;--line:#dce3db;--paper:#fffefa;--bg:#f5f6f1;--soft:#eef2ea;--serif:Georgia,"Songti SC","STSong",serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);background:var(--bg);font:16px/1.9 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;overflow-wrap:anywhere}
+a{color:var(--accent);text-underline-offset:4px}
+.page{max-width:880px;margin:0 auto;padding:52px 28px 70px}
+header.top{border-bottom:1px solid var(--line);padding-bottom:30px;margin-bottom:26px}
+.eyebrow{font-size:12px;color:var(--muted);letter-spacing:.12em;margin:0}
+h1{font:700 clamp(28px,4vw,40px)/1.4 var(--serif);letter-spacing:-.02em;margin:12px 0 10px}
+.lead{font-size:16px;color:#536158;max-width:54em;margin:0 0 14px}
+.meta{font-size:12.5px;color:var(--muted);margin:0}
+.tools{margin-top:16px}.tools button{border:1px solid var(--line);border-radius:6px;background:var(--paper);padding:9px 15px;color:var(--accent);font-size:13px;min-height:42px;cursor:pointer}
+.stats{display:flex;flex-wrap:wrap;gap:26px;margin:20px 0 0;padding:16px 20px;background:var(--paper);border:1px solid var(--line);border-radius:8px}
+.stat b{display:block;font:700 22px/1.3 var(--serif);color:var(--accent)}
+.stat span{font-size:12px;color:var(--muted)}
+.howto{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:20px 24px;margin:22px 0 0}
+.howto h2{font:700 17px/1.6 var(--serif);margin:0 0 10px}
+.howto ol{margin:0;padding-left:22px}
+.howto li{font-size:14px;margin:6px 0;color:#3d4a43}
+nav.anchors{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 40px}
+nav.anchors a{font-size:12.5px;text-decoration:none;color:#56615a;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:7px 14px;min-height:38px;display:inline-flex;align-items:center}
+nav.anchors a:hover{background:var(--soft);color:var(--accent)}
+nav.anchors a b{color:var(--accent);font-weight:600;margin-right:5px}
+section.chapter{margin:56px 0;scroll-margin-top:20px}
+.chapter-title{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding-bottom:13px}
+.chapter-title .no{font-size:12px;color:var(--accent);font-variant-numeric:tabular-nums;letter-spacing:.08em}
+.chapter-title h2{font:700 24px/1.5 var(--serif);margin:0;flex:1 1 auto}
+.chapter-title .en{font:italic 13px/1.5 var(--serif);color:var(--muted)}
+.badge{font-size:11.5px;border-radius:4px;padding:3px 9px;letter-spacing:.05em;white-space:nowrap}
+.badge.must{background:var(--accent);color:#fff}
+.badge.pick{border:1px solid var(--accent);color:var(--accent)}
+.badge.skip{background:#e7e9e2;color:#77827b}
+.loc{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tagline{font-size:13px;color:#5d695f;margin:14px 0 0}
+.core{margin:20px 0 24px;padding:16px 22px;background:var(--soft);border-radius:8px;text-align:center}
+.core .lab{font-size:11px;color:var(--accent);letter-spacing:.2em;display:block;margin-bottom:8px}
+.core p{margin:0;font:600 17px/1.8 var(--serif);color:#23312b}
+.prompt{margin:22px 0 26px;padding:18px 22px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 8px 8px 0}
+.prompt .tag{font-size:11.5px;color:var(--accent);letter-spacing:.14em;display:block;margin-bottom:10px}
+.prompt ol{margin:0;padding-left:0;list-style:none;counter:qq}
+.prompt ol li{counter-increment:qq;position:relative;padding:7px 0 7px 34px;font:600 16px/1.85 var(--serif)}
+.prompt ol li::before{content:"(" counter(qq, cjk-ideographic) ")";position:absolute;left:0;top:8px;color:var(--accent);font:600 14px/1 var(--serif)}
+.prompt .use{font-size:12.5px;color:var(--muted);margin:12px 0 0;padding-top:10px;border-top:1px dashed var(--line)}
+.prompt .use b{color:var(--accent);font-weight:600}
+h3.sub{font-size:15px;margin:30px 0 12px;color:var(--ink);letter-spacing:.06em}
+h3.sub::before{content:"";display:inline-block;width:8px;height:8px;background:var(--accent);border-radius:2px;margin-right:9px;vertical-align:2px}
+.passage{margin:0 0 20px;padding:4px 0 4px 18px;border-left:3px solid var(--accent-soft)}
+.passage .src{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums;margin-bottom:6px;display:block}
+.passage p{margin:6px 0;font-size:15px;line-height:2}
+.passage .en-inline{font-style:italic;color:#4a5a50}
+ol.qs{padding-left:0;list-style:none;counter:q;margin:14px 0}
+ol.qs li{counter-increment:q;position:relative;padding:12px 0 12px 40px;border-bottom:1px dashed var(--line);font-size:15px}
+ol.qs li:last-child{border-bottom:0}
+ol.qs li::before{content:"Q" counter(q);position:absolute;left:0;top:14px;font:600 12px/1 var(--serif);color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:4px 6px}
+.connect{font-size:13.5px;color:#536158;background:var(--soft);border-radius:8px;padding:13px 18px;margin-top:22px}
+.connect b{color:var(--accent);font-weight:600}
+.table-scroll{max-width:100%;overflow:auto;margin:18px 0}
+table{border-collapse:collapse;width:100%;font-size:13px;background:var(--paper)}
+th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--soft);font-size:12px;letter-spacing:.04em}
+td.c{text-align:center;white-space:nowrap}
+.decide{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:20px 24px;margin:20px 0 0;font-size:14px}
+.decide h2{font:700 16px/1.6 var(--serif);margin:0 0 10px}
+.decide p{margin:8px 0;color:#3d4a43}
+.tips{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:24px 28px;margin:56px 0 40px}
+.tips h2{font:700 21px/1.5 var(--serif);margin:0 0 14px}
+.tips ol{margin:0;padding-left:22px}
+.tips li{font-size:14.5px;margin:9px 0}
+.essays{margin:56px 0 40px}
+.essays h2{font:700 21px/1.5 var(--serif);margin:0 0 6px}
+.essays .sub2{font-size:13px;color:var(--muted);margin:0 0 18px}
+.essay{border:1px solid var(--line);border-radius:8px;background:var(--paper);padding:18px 22px;margin:14px 0}
+.essay h3{font:600 15.5px/1.7 var(--serif);margin:0 0 8px;color:var(--ink)}
+.essay p{font-size:13.5px;color:#536158;margin:0}
+.essay .from{font-size:12px;color:var(--accent);margin-top:8px;display:block}
+footer{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:22px;margin-top:44px}
+footer p{margin:6px 0}
+@media(max-width:640px){.page{padding:34px 16px 50px}.chapter-title h2{font-size:21px}.stats{gap:18px}.core p{font-size:15.5px}}
+@media print{body{background:#fff}.page{max-width:none;padding:0}nav.anchors,.tools{display:none}section.chapter{break-inside:auto}.prompt,.passage,.connect,.core,.essay{break-inside:avoid}}
+</style></head><body><div class="page">
+
+<header class="top">
+  <p class="eyebrow">3312 现代德国哲学经典 · 阅读助手 · 第七节（10-28）之后使用</p>
+  <h1>《政治的概念》八篇：命题与材料手册</h1>
+  <p class="lead">第二本书的读书笔记作战图：每篇给出<strong>核心句</strong>、<strong>命题</strong>（分小问的简答题）、<strong>中文材料</strong>（关键段中译，附英文页码定位）、<strong>追问</strong>（接你自己前四篇的问题线）。你读材料，自己写答案和疑问——答案必须是你的。</p>
+  <p class="meta">依据：10-21、10-28 两节课堂讲稿 + 英文精读文件（Schwab 译本）· 生成于 2026-10-29</p>
+  <div class="tools"><button type="button" onclick="window.print()">打印手册</button></div>
+  <div class="stats">
+    <div class="stat"><b>4 篇</b><span>已交（《政治的神学》）</span></div>
+    <div class="stat"><b>5–6 篇</b><span>本书还需（全文 9–10 篇）</span></div>
+    <div class="stat"><b>6 篇</b><span>建议选题（见总览）</span></div>
+    <div class="stat"><b>下节</b><span>讲第二篇：敌友区分</span></div>
+  </div>
+  <div class="howto">
+    <h2>三步用法（每篇约 15–20 分钟）</h2>
+    <ol>
+      <li><strong>读材料</strong>：只看本篇“材料”里的中译段落（每条附英文定位，中译卡住就回查英文）；先读“核心句”，知道这篇要记住哪一句。</li>
+      <li><strong>答命题</strong>：按小问逐条写，每问三四句话，用自己的话，允许引用一句原文（带定位）。命题答案合计 400–600 字。</li>
+      <li><strong>写追问</strong>：从本篇“追问”里挑一个你真卡住的写进笔记（100–200 字），或者另起一个——这一栏是教师最看重的东西，写“我没想明白”比写正确的话值钱。</li>
+    </ol>
+  </div>
+</header>
+
+<nav class="anchors">
+  <a href="#ch1"><b>补课</b>第一篇 · 国家与社会</a>
+  <a href="#ch2"><b>★</b>第二篇 · 敌友区分</a>
+  <a href="#ch3"><b>★</b>第三篇 · 公敌与战争</a>
+  <a href="#ch4"><b>★</b>第四篇 · 政治统一体</a>
+  <a href="#ch5"><b>★</b>第五篇 · 战争权与保护</a>
+  <a href="#ch6"><b>△</b>第六篇 · 多元世界</a>
+  <a href="#ch7"><b>★</b>第七篇 · 人性前提</a>
+  <a href="#ch8"><b>★</b>第八篇 · 自由主义</a>
+  <a href="#tips">自检与弹药</a>
+</nav>
+
+<h3 class="sub">总览：八篇里选六篇</h3>
+<div class="table-scroll"><table>
+<thead><tr><th>篇</th><th>主题</th><th class="c">优先级</th><th>一句话命题</th><th>英文定位</th></tr></thead>
+<tbody>
+<tr><td>一</td><td>国家的与政治的</td><td class="c"><span class="badge pick">补课</span></td><td>“国家＝政治”何时成立、何时失效？</td><td class="loc">PDF 52–58</td></tr>
+<tr><td>二</td><td>政治的判准：敌友区分</td><td class="c"><span class="badge must">必写</span></td><td>政治为什么用“敌友”来定性？</td><td class="loc">PDF 58–60</td></tr>
+<tr><td>三</td><td>公敌、战斗与战争的可能性</td><td class="c"><span class="badge must">必写</span></td><td>去掉“战争的可能”，政治还剩什么？</td><td class="loc">PDF 60–70</td></tr>
+<tr><td>四</td><td>政治统一体与多元主义</td><td class="c"><span class="badge must">必写</span></td><td>谁能作“极端情形”的决断？</td><td class="loc">PDF 70–78</td></tr>
+<tr><td>五</td><td>战争权、内部和平与保护服从</td><td class="c"><span class="badge must">必写</span></td><td>国家要求赴死的资格从哪来？</td><td class="loc">PDF 78–86</td></tr>
+<tr><td>六</td><td>多元世界与人类概念</td><td class="c"><span class="badge skip">可略</span></td><td>“人道”为什么能成为战争的理由？</td><td class="loc">PDF 86–91</td></tr>
+<tr><td>七</td><td>人性前提与政治判断</td><td class="c"><span class="badge must">必写</span></td><td>“人性危险”是发现还是公理？</td><td class="loc">PDF 91–102</td></tr>
+<tr><td>八</td><td>自由主义的伦理与经济两极</td><td class="c"><span class="badge must">必写</span></td><td>自由主义为什么“没有政治”？</td><td class="loc">PDF 102–112</td></tr>
+</tbody></table></div>
+<div class="decide">
+  <h2>怎么落成六篇</h2>
+  <p><strong>跟上课堂（默认路径）</strong>：下周讲第二篇，你就写第二篇；之后每讲一篇写一篇。八篇讲完，六篇自然凑齐，而且每篇都有课堂讲解兜底。</p>
+  <p><strong>落后时的优先级</strong>：二 ＞ 七 ＞ 八 ＞ 四 ＞ 三 ＞ 五 ＞ 六。保前四篇（二、四、七、八）——它们接你的问题线最紧；第三篇并进第二篇笔记末尾；第六篇只抄核心句备用。</p>
+</div>
+
+<!-- ================= 第一篇 · 补课 ================= -->
+<section class="chapter" id="ch1">
+  <div class="chapter-title"><span class="no">第〇篇 · 补课</span><h2>国家的与政治的</h2><span class="en">State and Politics</span><span class="badge pick">10-28 那节课</span></div>
+  <p class="tagline">本篇地位：第二本书的地基。这篇不写进六篇正选，但 10-28 那节课没听懂的话，先花二十分钟把这篇的命题答一遍，等于给后面七篇打底。</p>
+  <div class="core"><span class="lab">核 心 句</span><p>“一切都是至少潜在的政治。”——当国家与社会互相渗透，再也不可能就国家断言一种特定的政治特征。（§7）</p></div>
+  <div class="prompt"><span class="tag">命 题</span>
+    <ol>
+      <li>“国家＝政治”这个等式，施米特认为在什么条件下暂时够用？（提示：材料里有两种历史情形）</li>
+      <li>国家与社会互相渗透之后，为什么这个等式“变成错误和欺骗性的”？请用“潜在的政治性”说清楚：宗教、文化、教育、经济这些“中立领域”失去了什么保证？</li>
+    </ol>
+    <p class="use">要用材料：<b>§6</b>（等式成立的条件）、<b>§7</b>（渗透与整体国家）、<b>§10</b>（布克哈特论民主：模糊边界）。</p>
+  </div>
+
+  <h3 class="sub">材料（中译）</h3>
+  <div class="passage"><span class="src">§6 · 英文 PDF 54–55／书内 21–22</span>
+  <p>这类迁就于法律实践的定义……根本不旨在给出政治的一般定义。因此，只要国家和公共机构还能被当作不言自明、具体的东西，这类政治的定义就够用；那些只是附带地提及国家的政治一般定义，也只有在下述条件下才可以理解（并且在智力上说得过去）：<span class="en-inline">国家真正是一个清晰而无歧义的崇高实体，面对着一群非政治的群体和事务——换言之，只要国家垄断着政治。</span>这种情况存在于：国家（如十八世纪那样）尚未把社会认作一种对立力量，或者（如十九世纪至二十世纪的德国）高踞于社会之上，作为一股稳定而分明的力量。</p></div>
+  <div class="passage"><span class="src">§7 · 英文 PDF 55／书内 22</span>
+  <p>国家＝政治这个等式，<span class="en-inline">恰恰在国家与社会互相渗透的那一刻变成错误的、欺骗性的。</span>此前属于国家的事务由此变成社会事务，反之，此前纯粹社会的事务变成国家事务——在一个民主地组织起来的单元中，这必然发生。此前看似中立的领域——宗教、文化、教育、经济——于是不再中立……作为反对这种中立化和去政治化的论战概念，出现了<span class="en-inline">整体国家</span>，它潜在地拥抱每一个领域，其结果是国家与社会的同一。在这样的国家里，<span class="en-inline">一切都是至少潜在的政治</span>，而再也不可能就国家断言一种特定的政治特征了。</p></div>
+  <div class="passage"><span class="src">§10 · 英文 PDF 56–57／书内 23–24</span>
+  <p>布克哈特论民主：它“只在一点上是一贯的，即它对国家控制个人的要求永不知足。因此它模糊了国家与社会的边界，并指望国家去做社会很可能拒绝做的事”；民主的内在矛盾在于——“国家应当无所不能，却不允许做任何事。”</p></div>
+
+  <h3 class="sub">追问</h3>
+  <ol class="qs">
+  <li>“潜在的政治性”是什么意思？——不是一切随时都在斗争，而是“中立”没有保证。这个词是全书后面批评“去政治化”的根。</li>
+  <li>民主（谁统治）和自由（国家能管到哪）为什么是两个问题？10-28 课堂原话：“民主最终要独裁，自由没了——大家一定知道，民主自由是两种东西，有的时候会相互反对。”</li>
+  <li>如果国家不等于政治，那政治到底“在”哪里？——第二篇就是回答这个问题的。</li>
+  </ol>
+  <div class="connect"><b>连接：</b>10-28 课堂的三个抓手——①先问政治“不是”什么；②country／nation／state 不能混用；③“暂时不干预”≠“权力受原则限制”。</div>
+</section>
+
+<!-- ================= 第二篇 ================= -->
+<section class="chapter" id="ch2">
+  <div class="chapter-title"><span class="no">第二篇</span><h2>政治的判准：敌友区分</h2><span class="en">The Friend–Enemy Criterion</span><span class="badge must">必写 · 下节课</span></div>
+  <p class="tagline">本篇地位：全书最著名的一篇，教师下节课讲的就是它。写这一篇 = 带着自己的问题去上课。</p>
+  <div class="core"><span class="lab">核 心 句</span><p>“敌友区分表示结合或分离的极端强度。”（§15）</p></div>
+  <div class="prompt"><span class="tag">命 题</span>
+    <ol>
+      <li>施米特说道德、美学、经济各有各的“最终区分”。请先列出这三者的判准，再回答：他说政治拥有“自己的”判准，是什么意思？为什么强调这不是“一个崭新的领域”？</li>
+      <li>为什么是“敌与友”，而不是“善与恶”？材料里哪几句说明政治敌人不必是坏人、好人也不必是朋友？</li>
+      <li>§15 说这叫“作为判准的定义，而不是穷尽性的定义”——判准和定义差在哪里？他为什么不直接给政治下一个定义？</li>
+    </ol>
+    <p class="use">要用材料：<b>§14</b>（各领域的判准＋“独立”的含义）、<b>§15</b>（极端强度＋敌人不必是恶人＋判准非定义）、<b>§16</b>（只有实际参与者能判断）。</p>
+  </div>
+
+  <h3 class="sub">材料（中译）</h3>
+  <div class="passage"><span class="src">§14 · 英文 PDF 58–59／书内 25–26</span>
+  <p>政治的定义只能通过发现和定义那些特定地属于政治的范畴来获得……让我们假定：在道德领域，最终区分是善与恶；在美学领域，美与丑；在经济领域，有利与无利。那么问题就在于：是否也存在一种特殊的区分，可以作为政治的简单判准？政治的这种区分，其性质当然不同于其他那些区分——<span class="en-inline">它是独立的，不是指一个崭新的领域，而是指它既不能基于其他任何一种对立，也不能被归结到其他对立上去。</span></p></div>
+  <div class="passage"><span class="src">§15 · 英文 PDF 59–60／书内 26–27</span>
+  <p>政治行动和动机可以归结到的特定政治区分，<span class="en-inline">就是友与敌的区分。</span>这提供的是一个作为判准的定义，而不是穷尽性的定义……敌友区分表示<span class="en-inline">结合或分离的极端强度</span>。政治敌人不必是道德上恶的或美学上丑的，不必是经济竞争者，甚至与他做生意可能还有好处。但他始终是他者、陌生人；他的本性只在于：他在一种特别强烈的意义上是<span class="en-inline">生存性地不同且异在</span>，以至于在极端情形下与他发生冲突是可能的。<span class="en-inline">这些冲突既不能由预先设定的一般规范来裁决，也不能由一个无涉的、因而是中立的第三方的判断来裁决。</span></p></div>
+  <div class="passage"><span class="src">§16 · 英文 PDF 60／书内 27</span>
+  <p>只有实际参与者才能正确认识、理解和判断具体处境，裁断冲突的极端情形……反过来也成立：<span class="en-inline">道德上恶的、美学上丑的、经济上有害的，不必就是敌人；道德上善的、美学上美的、经济上有利的，也不必就成为特定政治意义上的朋友。</span></p></div>
+
+  <h3 class="sub">追问</h3>
+  <ol class="qs">
+  <li>§15 最后一句——“不能由一般规范裁决，也不能由中立第三方裁决”——和你第一篇写的“例外状态”是同一个结构。敌友冲突和例外决断，是同一个结构换到了政治领域吗？</li>
+  <li>敌人是被“发现”的还是被“建构”的？§16 说只有实际参与者能判断，那判断的依据是什么？</li>
+  <li>“判准”这个词很怪——一个不定义对象、只标记强度的词，怎么能当一门学问的入口？（这个问题可以留着问教师。）</li>
+  </ol>
+  <div class="connect"><b>连接：</b>《政治的神学》第一篇（例外→决断：谁也不能从规范中推出决断）；10-14 课堂“公意只能是单数”（一个最高意志 vs 复数主体）。</div>
+</section>
+
+<!-- ================= 第三篇 ================= -->
+<section class="chapter" id="ch3">
+  <div class="chapter-title"><span class="no">第三篇</span><h2>公敌、战斗与战争的可能性</h2><span class="en">The Public Enemy, Combat, War</span><span class="badge must">必写</span></div>
+  <p class="tagline">本篇地位：第二篇的极端化——从“区分友敌”一路推到“可能互相杀戮”。可以并进第二篇笔记末尾写。</p>
+  <div class="core"><span class="lab">核 心 句</span><p>“战争源于敌意……它不必常见、正常、理想或可欲；但只要敌人概念仍然有效，它就必须始终保留为一种真实可能。”（§22）</p></div>
+  <div class="prompt"><span class="tag">命 题</span>
+    <ol>
+      <li>施米特区分 hostis（公敌）和 inimicus（私敌），是为了解决什么问题？为什么他说《圣经》“爱你的敌人”那句话根本没有谈到政治敌人？</li>
+      <li>§22 说“武器的本质是物理上杀死人的手段”。请据此回答：为什么“战争的真实可能性”对敌人概念是必需的？——再往下推一步：§26 说一个彻底消除战争的世界将没有政治，为什么？</li>
+      <li>§21 说当国内党争成为唯一的政治区分，冲突所指“不再是国家间的战争，而是内战”。这对“政治统一体”提出了什么问题？</li>
+    </ol>
+    <p class="use">要用材料：<b>§18</b>（公敌／私敌）、<b>§21</b>（党争与内战）、<b>§22</b>（战斗与杀戮）、<b>§26</b>（没有战争的世界）。</p>
+  </div>
+
+  <h3 class="sub">材料（中译）</h3>
+  <div class="passage"><span class="src">§18 · 英文 PDF 61–62／书内 28–29</span>
+  <p>敌人不只是任何竞争者或一般意义上的冲突伙伴，也不是你私下憎恨的那个对手。<span class="en-inline">只有当至少一个战斗性的人群集合面对另一个类似集合时，敌人才存在。敌人仅仅是公敌</span>——因为一切与这种人群集合、尤其与整个民族相关的东西，都借此成为公共的。敌人是 <span class="en-inline">hostis</span>，不是广义的 <span class="en-inline">inimicus</span>……政治意义上的敌人无需被私人仇恨，只有在私人领域里“爱你的敌人”才讲得通。《圣经》那句话（“爱你的敌人”）说的是 inimicos，<span class="en-inline">根本没有提到政治敌人。</span></p></div>
+  <div class="passage"><span class="src">§21 · 英文 PDF 65／书内 32</span>
+  <p>如果国内党派间的冲突成了唯一的政治区分，最极端的内政紧张程度就达成了——即国内的、而非国外的友敌分组对武装冲突具有决定性。永远要把冲突的可能性记在心里。<span class="en-inline">那么这冲突所指的就不再是国家组织间的战争，而是内战。</span></p></div>
+  <div class="passage"><span class="src">§22 · 英文 PDF 65–66／书内 32–33</span>
+  <p>武器的本质，是物理上杀死人的手段……战斗一词同样要在其原本的生存意义上理解：它不是竞争，也不是纯粹的思想争论……<span class="en-inline">敌友战斗概念获得其真实意义，正因为它们指向真实的身体杀戮的可能。战争源于敌意，是敌人的生存性否定，是敌意最极端的后果。它不必常见、正常、理想或可欲；但只要敌人概念仍然有效，它就必须始终保留为一种真实可能。</span></p></div>
+  <div class="passage"><span class="src">§26 · 英文 PDF 68／书内 35</span>
+  <p>一个战争可能被彻底消除的世界、一个完全绥靖的地球，将是一个没有敌友区分、因而没有政治的世界……<span class="en-inline">不存在一种有意义的对立，能要求人献出生命、授权流血、杀死他人。</span>至于这样一个没有政治的世界作为理想是否可欲，对政治的定义来说甚至无关。</p></div>
+
+  <h3 class="sub">追问</h3>
+  <ol class="qs">
+  <li>§22 说战争“不必可欲、但必须可能”——这是描述还是规范？一个不允许战争的世界，为什么在他这里就不是“好世界”，而是“没有政治的世界”？</li>
+  <li>“公敌／私敌”的区分解决了什么问题？（可对照 10-28 课堂上 country／nation／state 的辨词方法：一个译名含混，论证就塌。）</li>
+  <li>如果政治的核心是“可能杀戮”，那外交、条约、联盟是政治的弱化形式，还是政治的常态形态？</li>
+  </ol>
+  <div class="connect"><b>连接：</b>《政治的神学》第一篇——战争是终极的例外状态；10-14 课堂“奇迹／例外：对一般规律的个别干预”。</div>
+</section>
+
+<!-- ================= 第四篇 ================= -->
+<section class="chapter" id="ch4">
+  <div class="chapter-title"><span class="no">第四篇</span><h2>政治统一体与多元主义</h2><span class="en">Political Unity and Pluralism</span><span class="badge must">必写</span></div>
+  <p class="tagline">本篇地位：全书论证的中枢——“最后谁来决断”。这一篇是施米特给 10-14 课堂“人民主权难题”的正面回答。</p>
+  <div class="core"><span class="lab">核 心 句</span><p>“政治实体依其本性就是决定性的实体……它存在或不存在。如果存在，它就是最高的，即在决定情形中权威的实体。”（§34）</p></div>
+  <div class="prompt"><span class="tag">命 题</span>
+    <ol>
+      <li>多元主义（工会能叫会员不去教堂，教会能叫会员退出工会）为什么被施米特判为回答不了“谁决断”？请说清“忠诚的冲突”和“极端情形的决断”差在哪里。</li>
+      <li>用 §34 俾斯麦的例子回答：教皇和工会为什么都不能阻止一场战争？——这说明了“决断”的什么性质？</li>
+      <li>§30 说政治实体“在这个意义上是主权的”。把这个定义和《政治的神学》里“主权＝决定非常状态”并排放，比较一下：两者说的是同一件事吗？</li>
+    </ol>
+    <p class="use">要用材料：<b>§29</b>（对立如何变成政治对立）、<b>§30</b>（强度与主权）、<b>§32</b>（多元主义的例子）、<b>§34</b>（谁决断＋俾斯麦）。</p>
+  </div>
+
+  <h3 class="sub">材料（中译）</h3>
+  <div class="passage"><span class="src">§29 · 英文 PDF 70–71／书内 37–38</span>
+  <p><span class="en-inline">每一种宗教的、道德的、经济的、伦理的或其他对立，只要它足够强烈，能有效地按友敌来组拢人，就转变为政治的对立。</span>政治不在于战斗本身——战斗有它自己的技术、心理和军事规律——而在于由这种可能性所决定的行为方式……一个与其他宗教共同体作战的宗教共同体，已经不止是一个宗教共同体，而是一个政治实体。</p></div>
+  <div class="passage"><span class="src">§30 · 英文 PDF 71／书内 38</span>
+  <p>政治不描述自己的实体，只描述人的结合或分离的强度，其动机可以是宗教的、民族的、经济的或别的，并在不同时期造成不同的结合与分离……<span class="en-inline">这个群体因此总是决定性的人类分组、政治实体。如果它存在，它就总是决定性的实体，它在这个意义上是主权的：关于危急情形的决断——即使它是例外——必然总在它那里。</span></p></div>
+  <div class="passage"><span class="src">§32 · 英文 PDF 72–74／书内 39–41</span>
+  <p>科尔和拉斯基的“多元主义”理论，<span class="en-inline">在于通过反复强调个人生活在众多不同的社会实体和社团之中，来否认政治实体的主权</span>：他属于一个宗教团体、民族、工会、家庭、体育俱乐部……这些团体在不同情形下以不同强度控制他，使他负有一束义务，<span class="en-inline">以至于没有一个社团能被说成是决定性的和主权的</span>。可以设想工会命令会员不去教堂而会员照去，同时教会要求会员退出工会也无人理睬——<span class="en-inline">忠诚的冲突只能个案解决。</span></p></div>
+  <div class="passage"><span class="src">§34 · 英文 PDF 75–77／书内 42–44</span>
+  <p><span class="en-inline">但问题仍然没有回答：哪个社会实体决定极端情形、决定决定性的友敌分组？</span>无论是教会、工会还是两者的联盟，都不能禁止或阻止俾斯麦的德意志帝国可能想发动的战争——教皇之所以不能宣战，只是因为他不再拥有战争权；社会主义工会也不想以参战方的面目出现……<span class="en-inline">政治实体依其本性就是决定性的实体……它存在或不存在。如果存在，它就是最高的，即在决定情形中权威的实体。</span></p></div>
+
+  <h3 class="sub">追问</h3>
+  <ol class="qs">
+  <li>多元主义的例子（工会 vs 教堂）为什么被施米特认为只是“个案”？什么级别的冲突才配叫“极端情形”？这个界线由谁划？</li>
+  <li>复数的人民主权，能形成一个统一决断吗？（接 10-14 课堂：general will 是单数，人民是复数。）如果按 §30，“人民”要成为政治实体，需要什么条件？</li>
+  <li>§34 的论证方式其实是谁主张谁举证：他要求多元主义“证明”自己能阻止战争。这个证明责任放得对吗？</li>
+  </ol>
+  <div class="connect"><b>连接：</b>《政治的神学》第二篇（决断的归属）；10-14 课堂“人民主权的难题”。</div>
+</section>
+
+<!-- ================= 第五篇 ================= -->
+<section class="chapter" id="ch5">
+  <div class="chapter-title"><span class="no">第五篇</span><h2>战争权、内部和平与保护服从</h2><span class="en">Jus Belli, Internal Peace, Protection</span><span class="badge must">必写</span></div>
+  <p class="tagline">本篇地位：两本书之间的桥——§38 直接回接《政治的神学》第二篇“规范以正常情形为前提”。</p>
+  <div class="core"><span class="lab">核 心 句</span><p>“没有任何秩序形式……能够没有保护和服从而存在。我保护，故我约束——是国家的我思故我在。”（§46）</p></div>
+  <div class="prompt"><span class="tag">命 题</span>
+    <ol>
+      <li>§38 说“每种规范都以正常情形为前提；没有规范能在完全反常的情形中有效”。这和你第一篇写的“法律不能自我实现”是同一个论证吗？如果是，差在哪半句？</li>
+      <li>用“保护换服从”解释：国家要求成员赴死、并授权成员杀敌，这个资格是从哪来的？为什么施米特说意识不到这句话的政治理论“始终是一个不充分的碎片”？</li>
+      <li>§47 说如果国家内部有团体能给会员“比国家更多的保护”，国家就沦为附属。把这句话套到你对现实社会的观察上，能想出对应的例子吗？（举例＋一句分析即可，这是追问不是结论。）</li>
+    </ol>
+    <p class="use">要用材料：<b>§38</b>（战争权与规范的前提）、<b>§46</b>（保护服从＝国家的我思）、<b>§47</b>（霍布斯与内战经验）、<b>§48</b>（不设防的民族）。</p>
+  </div>
+
+  <h3 class="sub">材料（中译）</h3>
+  <div class="passage"><span class="src">§38 · 英文 PDF 79／书内 46</span>
+  <p>国家作为决定性的政治实体拥有一项巨大的权力：发动战争、从而公开处置人的生命的可能。战争权包含着一种双重可能——<span class="en-inline">要求自己的成员准备赴死，并毫不犹豫地杀死敌人。</span>正常国家的首要事业，首先在于确保国家及其领土内的全面和平……<span class="en-inline">每种规范都以正常情形为前提；没有规范能在完全反常的情形中有效。</span></p></div>
+  <div class="passage"><span class="src">§46 · 英文 PDF 85／书内 52（作者插注）</span>
+  <p><span class="en-inline">没有任何秩序形式、没有任何合理的正当性或合法性，能够没有保护和服从而存在。</span>Protego ergo obligo——我保护，故我约束——<span class="en-inline">是国家的 cogito ergo sum（我思故我在）。</span>一种没有系统意识到这句话的政治理论，始终是一个不充分的碎片。霍布斯在其《利维坦》末尾指明：真正的目的，是让人重新记起“保护与服从的相互关系”。</p></div>
+  <div class="passage"><span class="src">§47 · 英文 PDF 85–86／书内 52–53</span>
+  <p>霍布斯本人在内战的可怕岁月里体验到了这条真理——因为那时，人们在安宁岁月里喜欢用来欺骗自己的全部正当性和规范性幻觉都消失了。<span class="en-inline">如果国家内部存在着能够向其成员提供比国家更多保护的有组织团体，国家至多沦为这类团体的附属，而单个公民知道该服从谁。</span></p></div>
+  <div class="passage"><span class="src">§48 · 英文 PDF 86／书内 53</span>
+  <p>相信一个不设防的民族除了朋友便一无所有，是可笑的想法……<span class="en-inline">如果一个民族不再拥有在政治领域维持自身的能量或意志，政治并不会因此从世界上消失。只有弱小的民族会消失。</span></p></div>
+
+  <h3 class="sub">追问</h3>
+  <ol class="qs">
+  <li>“我保护故我约束”是“国家的我思”——它和“主权＝决定例外”哪个更根本？一个是权力来源，一个是权力边界？还是同一个命题的两种说法？</li>
+  <li>保护换服从：如果国家保护不了（战败、内乱），服从的义务还在吗？（接你第四篇的正当性追问；再想想 10-14 课堂的“正当性是时代意见”。）</li>
+  <li>§48“只有弱小的民族会消失”——这句话是描述优胜劣汰，还是在为“必须保持政治意志”作规范论证？</li>
+  </ol>
+  <div class="connect"><b>连接：</b>《政治的神学》第一篇（主权者在法律边缘）；第二篇（规范依赖可适用的常态）。</div>
+</section>
+
+<!-- ================= 第六篇 ================= -->
+<section class="chapter" id="ch6">
+  <div class="chapter-title"><span class="no">第六篇</span><h2>多元世界与人类概念</h2><span class="en">Plurality and Humanity</span><span class="badge skip">可略 · 抄两句备用</span></div>
+  <p class="tagline">本篇地位：可略过不写。但“以人道的名义行征服”这个观察很锋利，抄进第八篇或期末文章都好用。</p>
+  <div class="core"><span class="lab">核 心 句</span><p>“当一个国家以人道的名义与其政治敌人作战时，那不是为了人道的战争，而是一个特定国家窃取一个普遍概念，用来对抗其军事对手。”（§50）</p></div>
+  <div class="prompt"><span class="tag">命 题</span>
+    <ol>
+      <li>“政治世界是一个多元宇宙（pluriverse），而不是一个宇宙（universe）”——这句话想砍掉哪种政治想象？</li>
+      <li>为什么“以人道的名义”发动的战争，在施米特这里恰恰是政治性最强的战争？请用 §51“否认敌人具有人的资格”来解释。</li>
+    </ol>
+    <p class="use">要用材料：<b>§49</b>（多元宇宙）、<b>§50</b>（窃取普遍概念）、<b>§51</b>（人类法外者）、<b>§55</b>（谁掌握世界组织的权力）。</p>
+  </div>
+
+  <h3 class="sub">材料（中译）</h3>
+  <div class="passage"><span class="src">§49 · 英文 PDF 86–87／书内 53–54</span>
+  <p>政治实体以一个敌人的真实存在、因而以与另一个政治实体的共存为前提……<span class="en-inline">政治世界是一个多元宇宙（pluriverse），而不是一个宇宙（universe）。</span>政治实体依其本性不可能是普世的，不可能把全人类和整个世界都拥抱在内。</p></div>
+  <div class="passage"><span class="src">§50 · 英文 PDF 87／书内 54</span>
+  <p>人道本身不能进行战争，因为它没有敌人……<span class="en-inline">当一个国家以人道的名义与其政治敌人作战时，那不是为了人道的战争，而是一个特定国家窃取一个普遍概念，用来对抗其军事对手。</span>正如人们可以滥用和平、正义、进步、文明这些词，据为己有而否认敌人也配享用。</p></div>
+  <div class="passage"><span class="src">§51 · 英文 PDF 87–88／书内 54–55</span>
+  <p>没收“人道”这个词、援引并垄断这样一个术语，其效果是不可估量的：<span class="en-inline">否认敌人具有人的资格，宣布他为人类法外者——一场战争由此能被驱向最极端的不人道。</span>但除了这种对非政治词“人道”的高度政治性利用之外，不存在什么人道的战争。</p></div>
+  <div class="passage"><span class="src">§55 · 英文 PDF 90–91／书内 57–58</span>
+  <p>要尖锐地提问：一个囊括全球的经济技术组织，其所蕴含的可怕权力将落在谁头上？绝不能相信一切都会自动运转、事情会自行管理、人对人的统治将成多余……他们究竟为什么而自由？</p></div>
+
+  <h3 class="sub">追问</h3>
+  <ol class="qs">
+  <li>以“人道”之名的战争，是政治的例外，还是政治的极致？（这条可以并进第八篇一起写。）</li>
+  <li>§51“把对手排除出人类会使敌对无限化”——和第二篇“敌人不必是恶人”正好是一枚硬币的两面？</li>
+  </ol>
+  <div class="connect"><b>连接：</b>第二篇（敌人≠恶人，但敌人必须被承认为“人”才能构成政治对立）；第八篇（伦理—经济两极的“去政治化”词汇表）。</div>
+</section>
+
+<!-- ================= 第七篇 ================= -->
+<section class="chapter" id="ch7">
+  <div class="chapter-title"><span class="no">第七篇</span><h2>人性前提与政治判断</h2><span class="en">Anthropology and Political Judgment</span><span class="badge must">必写</span></div>
+  <p class="tagline">本篇地位：两本书的接通点——§59 的名单里直接出现德·迈斯特和唐纳索·科尔特斯。你第四篇笔记写柯尔特斯，这里他回来了。</p>
+  <div class="core"><span class="lab">核 心 句</span><p>“一切真正的政治理论都预设人是恶的，即绝不是不成问题的，而是危险而动态的存在。”（§59）</p></div>
+  <div class="prompt"><span class="tag">命 题</span>
+    <ol>
+      <li>§59 的“恶”为什么不等于道德上的坏？施米特把它改写成了什么词（§56 有原话）？这个改写为什么让“人性论”变成了政治问题？</li>
+      <li>如果“人性危险”只是各家理论的公理而不是发现，§56 说的“可以按其人类学来检验”——检验出来的到底是什么？</li>
+      <li>§72 说“看不见敌人是政治终结的症状”（革命前的法国贵族把人民浪漫化为善）。这是历史论证还是修辞？如果反例很多，这个命题还站得住吗？</li>
+    </ol>
+    <p class="use">要用材料：<b>§56</b>（人类学检验＋“危险的存在”）、<b>§58</b>（性善论与无政府主义／自由主义）、<b>§59</b>（真正的理论预设恶）、<b>§70</b>（区分友敌是政治高点）、<b>§72</b>（看不见敌人＝政治终结）。</p>
+  </div>
+
+  <h3 class="sub">材料（中译）</h3>
+  <div class="passage"><span class="src">§56 · 英文 PDF 91／书内 58</span>
+  <p>一切国家理论和政治观念都可以按其人类学来检验，从而分类：它们有意识或无意识地预设人本性善或本性恶……<span class="en-inline">成问题的或不成问题的人性构想，对一切进一步的政治思考具有决定性——即人是不是一种危险的存在，一种有风险的还是无害的造物。</span></p></div>
+  <div class="passage"><span class="src">§58 · 英文 PDF 93–94／书内 60–61</span>
+  <p>天真的无政府主义揭示：对人性自然善的信仰，与对国家和政府的根本否定紧密相连——一者源于另一者，两者互相助长。对自由派来说，人的善只不过是一个论证工具，用来使国家服务于社会。潘恩的古典表述：<span class="en-inline">社会源于我们理性调节的需要，政府源于我们的恶性。</span>……资产阶级自由主义从未在政治意义上是激进的。</p></div>
+  <div class="passage"><span class="src">§59 · 英文 PDF 94／书内 61</span>
+  <p><span class="en-inline">留下来的是一个了不起的、对许多人当然令人不安的诊断：一切真正的政治理论都预设人是恶的，即绝不是不成问题的，而是危险而动态的存在。</span>这一点可以在每个特定政治思想家的著作里轻易得到印证——马基雅维利、霍布斯、博须埃、费希特（一旦他忘记自己的人道主义理想）、<span class="en-inline">德·迈斯特、唐纳索·科尔特斯</span>、泰纳，以及黑格尔。</p></div>
+  <div class="passage"><span class="src">§70 · 英文 PDF 100／书内 67</span>
+  <p>政治思想和政治本能，在理论上和实践上证明于区分友与敌的能力。<span class="en-inline">政治的高峰时刻，同时就是敌人被具体而清晰地认作敌人的时刻。</span></p></div>
+  <div class="passage"><span class="src">§72 · 英文 PDF 101／书内 68</span>
+  <p>反过来也成立：在政治史上，无论对内还是对外，不能或不愿作这种区分，<span class="en-inline">是政治终结的症状。</span>革命前的法国贵族社会把“本性善的人”和群众的美德感性化——托克维尔记述道：没有人嗅出革命的气味；令人难以置信地看着这些特权阶层谈论人民的善良、温和与无辜，<span class="en-inline">而 1793 已经迫近——“可笑而可怕的景象”（spectacle ridicule et terrible）。</span></p></div>
+
+  <h3 class="sub">追问</h3>
+  <ol class="qs">
+  <li>“人性危险”是公理而不是发现——那么它和《政治的神学》第四章柯尔特斯的原罪论（论战性而非教义性）是同一类东西吗？公理和论战武器怎么区分？</li>
+  <li>§72 托克维尔的例子，是论证还是修辞？“看不见敌人＝政治终结”这个等式，对现实政治适用吗？</li>
+  <li>§70 说政治的高峰是“认清敌人”——照这个逻辑，最成功的政治家是最会树敌的人？这个推论哪里让人不舒服，不舒服在哪儿？</li>
+  </ol>
+  <div class="connect"><b>连接：</b>《政治的神学》第四章 §75 的人性公理（善／恶）——§59 的名单里直接出现 de Maistre 和 Donoso Cortés，两本书在此接通。这是期末文章的现成素材。</div>
+</section>
+
+<!-- ================= 第八篇 ================= -->
+<section class="chapter" id="ch8">
+  <div class="chapter-title"><span class="no">第八篇</span><h2>自由主义的伦理与经济两极</h2><span class="en">Liberalism between Ethics and Economics</span><span class="badge must">必写</span></div>
+  <p class="tagline">本篇地位：全书收束——“去政治化”批判的总账。也回接《政治的神学》第四章柯尔特斯的“讨论的阶级”。</p>
+  <div class="core"><span class="lab">核 心 句</span><p>“存在着贸易、教会、教育方面的自由主义政策，但绝对不存在自由主义政治，只存在对政治的批评。”（§74）</p></div>
+  <div class="prompt"><span class="tag">命 题</span>
+    <ol>
+      <li>§73 施米特承认自由派确实从政，却说“绝对不存在自由主义政治，只存在对政治的批评”。他描述的是什么现象？这个判断和《政治的神学》第四章柯尔特斯的“讨论的阶级”有什么相同之处？</li>
+      <li>§75 说自由主义在“伦理与经济”两极之间摆动，且“要求牺牲生命”是一贯的个人主义无法辩护的。请据此回答：自由主义为什么产生不出“积极的政治理论”？</li>
+      <li>§90 说敌人被改叫“和平的扰乱者”、被“指定为人类法外者”。为什么“改名”反而不是去政治化，而是政治的极致？（接第六篇 §51。）</li>
+    </ol>
+    <p class="use">要用材料：<b>§73</b>（能否从个人主义推出政治观念）、<b>§74</b>（只有对政治的批评）、<b>§75</b>（伦理—经济两极＋牺牲不可辩护）、<b>§77</b>（战斗变竞争、国家变社会）、<b>§88</b>（经济变成政治）、<b>§90</b>（改名与人类法外者）。</p>
+  </div>
+
+  <h3 class="sub">材料（中译）</h3>
+  <div class="passage"><span class="src">§73 · 英文 PDF 102–103／书内 69–70</span>
+  <p>自由主义以一种特有的、系统的方式改变了全部政治观念……它的中立化和去政治化当然具有政治意义，各国的自由派也确实像其他党派一样从事政治。<span class="en-inline">但问题在于：能否从纯粹一贯的个人主义自由主义概念中，推导出一种特定的政治观念。这要予以否认。</span></p></div>
+  <div class="passage"><span class="src">§74 · 英文 PDF 103／书内 70</span>
+  <p>每一种一贯的个人主义都内在包含着对政治的否定，它必然导致对国家、政府的一切可设想形式的怀疑实践，<span class="en-inline">但从不凭自身产生一种关于国家、政府和政治的积极理论。</span>存在着贸易、教会、教育方面的自由主义政策，<span class="en-inline">但绝对不存在自由主义政治，只存在对政治的批评。</span>……在危急时刻——特别是 1848 年——这导致了如此矛盾的立场，以至于一切好的观察者（施泰因、马克思、施塔尔、<span class="en-inline">唐纳索·科尔特斯</span>）都绝望于在此找到一个政治原则或智力上一贯的观念。</p></div>
+  <div class="passage"><span class="src">§75 · 英文 PDF 103–104／书内 70–71</span>
+  <p>自由主义思想逃避或无视国家与政治，而运动于两个异质领域的典型而反复出现的两极之间：伦理与经济、精神与交易、教育与财产……政治实体在必要时必须要求牺牲生命。<span class="en-inline">这种要求是一贯的个人主义无法辩护的——没有任何一贯的个人主义，能把处置个人身体生命的权利托付给个体自身以外的任何人。</span>对于个体本身，不存在一个他必须与之进行生死斗争的敌人。</p></div>
+  <div class="passage"><span class="src">§77 · 英文 PDF 104–105／书内 71–72</span>
+  <p><span class="en-inline">战斗在自由主义思想中变成经济领域的竞争和思想领域的讨论。</span>……国家变成社会：在伦理—精神一边变成人道主义的人类观念，在经济—技术一边变成生产与交通的体系。<span class="en-inline">政治上统一的人民，一方面变成文化兴趣的公众，另一方面变成工业企业和消费者大众。</span></p></div>
+  <div class="passage"><span class="src">§88 · 英文 PDF 111／书内 78</span>
+  <p>国家和政治不能被消灭……拉特瑙那句常被引用的名言——“今天的命运不是政治，而是经济”——更正确的说法是：<span class="en-inline">政治继续是命运，但发生的是经济已经变成政治、从而变成了命运。</span></p></div>
+  <div class="passage"><span class="src">§90 · 英文 PDF 112／书内 79</span>
+  <p>战争被谴责，而处决、制裁、惩罚性远征、绥靖、条约保护、国际警察、保障和平的措施却保留下来。<span class="en-inline">敌人不再被称作敌人，而被称作和平的扰乱者，并由此被指定为人类法外者。</span>……但这个号称非政治、甚至反政治的体系，服务于现存或新生的友敌分组，<span class="en-inline">不能逃脱政治的逻辑。</span></p></div>
+
+  <h3 class="sub">追问</h3>
+  <ol class="qs">
+  <li>“绝对不存在自由主义政治”——这是描述还是论战？（§73 里施米特自己承认自由派确实从政。描述和评价怎么分开？这正是 10-14 课堂“理解≠赞同”的用武之地。）</li>
+  <li>§88“经济变成政治”——接 10-28 课堂的“潜在政治性”：中立领域是怎么变成政治的？有没有反向的例子？</li>
+  <li>§90“改名不能使敌友逻辑消失”——那么，人类历史上有没有真正“去政治化”成功的领域？（这个问题是你的期末文章可以用的反例库。）</li>
+  </ol>
+  <div class="connect"><b>连接：</b>《政治的神学》第四章——柯尔特斯的“讨论的阶级”（自由主义不决断、只讨论）在这一篇被系统化；第三篇自然神论的“上帝退场但保留存在”，恰似自由主义的“限制国家但保留国家”。</div>
+</section>
+
+<!-- ================= 自检与弹药 ================= -->
+<div class="tips" id="tips">
+  <h2>交作业前的自检清单</h2>
+  <ol>
+    <li>命题的每一小问都答了（漏答小问是教师一眼能看到的事）；</li>
+    <li>答案里至少有一处原文引用，带定位（§xx／PDF 页码）——证明你真读了文本；</li>
+    <li>有一个你自己真正卡住的问题，而不是“综上所述受益匪浅”；</li>
+    <li>没有大段抄手册原话——手册给你材料和问题，答案和疑问必须是你自己的。</li>
+  </ol>
+</div>
+
+<div class="essays">
+  <h2>期末两篇文章的弹药方向</h2>
+  <p class="sub2">现在写笔记时就有意识地攒这三条线，期末从里面挑。</p>
+  <div class="essay">
+    <h3>方向一：从“例外决断”到“敌友区分”——两个判准的同构</h3>
+    <p>《政治的神学》的例外（不能从一般规范推出、无中立第三方）与《政治的概念》的敌友（结合或分离的极端强度、只有参与者能判断）是否同一个结构？一篇比较式文章的骨架。</p>
+    <span class="from">用第二篇＋你旧笔记第一篇</span>
+  </div>
+  <div class="essay">
+    <h3>方向二：人性公理作为政治理论的前提</h3>
+    <p>从柯尔特斯的原罪论（论战性）到 §59“一切真正的政治理论预设人是恶的”——“人性危险”是发现、公理，还是论战武器？这是两本书接缝处的真问题。</p>
+    <span class="from">用第七篇＋你旧笔记第四篇</span>
+  </div>
+  <div class="essay">
+    <h3>方向三：自由主义真的消除了政治吗</h3>
+    <p>“讨论的阶级”→“绝对不存在自由主义政治，只存在对政治的批评”→“经济变成政治”→“改名不能使敌友逻辑消失”。可以找一两个现实中的“去政治化”案例作反例，文章立刻有锋芒。</p>
+    <span class="from">用第八篇＋第六篇备用段</span>
+  </div>
+</div>
+
+<footer>
+  <p><strong>材料出处</strong>：全部中译据课程英文精读文件（Carl Schmitt, <em>The Concept of the Political</em>, George Schwab 英译）相应段落译出，定位为该文件标注的英文 PDF 页码／书内§；《政治的神学》部分引自课堂讲稿（10-14、10-21）。</p>
+  <p><strong>配套文件</strong>：课件与阅读/精读笔记/政治的概念八篇-英文原文与解析.html（英文原文＋逐段中文解析）；考核作业/连续读书笔记/施米特课程作业.docx（你的作业文档）。</p>
+  <p>3312 现代德国哲学经典 · 阅读助手 · 2026-10-29 修订</p>
+</footer>
+
+</div></body></html>

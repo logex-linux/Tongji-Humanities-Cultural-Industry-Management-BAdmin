@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第7章：Transformer与注意力机制</title>
+<style>
+:root {
+  --bg: #fefefe; --text: #1a1a2e; --accent: #4361ee; --accent-light: #eef2ff;
+  --green: #059669; --green-bg: #ecfdf5; --orange: #d97706; --orange-bg: #fffbeb;
+  --red: #dc2626; --red-bg: #fef2f2; --purple: #7c3aed; --purple-bg: #f5f3ff;
+  --gray: #6b7280; --border: #e5e7eb; --code-bg: #f8fafc; --radius: 10px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, "PingFang SC", "Noto Sans SC", sans-serif; background: var(--bg); color: var(--text); line-height: 1.9; max-width: 800px; margin: 0 auto; padding: 40px 24px 100px; }
+h1 { font-size: 1.8rem; margin-bottom: 8px; color: var(--accent); }
+h2 { font-size: 1.35rem; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--accent-light); }
+h3 { font-size: 1.1rem; margin: 32px 0 12px; color: var(--accent); }
+p { margin: 12px 0; }
+.subtitle { color: var(--gray); font-size: 0.95rem; margin-bottom: 32px; }
+.prereq { background: var(--accent-light); border-radius: var(--radius); padding: 16px 20px; margin: 20px 0; font-size: 0.9rem; }
+.prereq strong { color: var(--accent); }
+.concept-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: var(--radius); padding: 20px; margin: 20px 0; }
+.concept-box .label { font-weight: 700; color: #0284c7; font-size: 0.85rem; margin-bottom: 8px; }
+.example-box { background: var(--green-bg); border: 1px solid #a7f3d0; border-radius: var(--radius); padding: 20px; margin: 20px 0; }
+.example-box .label { font-weight: 700; color: var(--green); font-size: 0.85rem; margin-bottom: 8px; }
+.exercise-box { background: var(--orange-bg); border: 1px solid #fde68a; border-radius: var(--radius); padding: 20px; margin: 20px 0; }
+.exercise-box .label { font-weight: 700; color: var(--orange); font-size: 0.85rem; margin-bottom: 8px; }
+.answer-box { background: var(--red-bg); border: 1px solid #fecaca; border-radius: var(--radius); padding: 20px; margin: 12px 0; display: none; }
+.answer-box.show { display: block; }
+.answer-box .label { font-weight: 700; color: var(--red); font-size: 0.85rem; margin-bottom: 8px; }
+.show-answer { background: none; border: 1px solid var(--red); color: var(--red); padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 8px; }
+.show-answer:hover { background: var(--red-bg); }
+pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 16px; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; margin: 12px 0; }
+code { font-family: "SF Mono", "Fira Code", monospace; }
+p code, li code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.88em; }
+ul, ol { padding-left: 24px; margin: 12px 0; }
+li { margin: 6px 0; }
+svg { display: block; margin: 20px auto; max-width: 100%; }
+.formula { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px 20px; margin: 16px 0; text-align: center; font-size: 1.05rem; font-family: "SF Mono", monospace; }
+.step { margin: 8px 0; padding: 8px 16px; border-left: 3px solid var(--accent); background: var(--accent-light); border-radius: 0 6px 6px 0; }
+.toc { background: var(--code-bg); border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+.toc a { color: var(--accent); text-decoration: none; }
+.toc li { margin: 4px 0; }
+.nav-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; }
+.nav-footer a { color: var(--accent); text-decoration: none; font-size: 0.9rem; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+th, td { padding: 10px 14px; border: 1px solid var(--border); text-align: left; }
+th { background: var(--accent-light); font-weight: 600; }
+.highlight { background: #fef08a; padding: 2px 4px; border-radius: 3px; }
+</style>
+<link rel="stylesheet" href="apple-design.css">
+</head>
+<body>
+
+<h1>第7章：Transformer 与注意力机制</h1>
+<p class="subtitle">AI 数学基础 · 第 7/10 章 · 预计学习时间：6-7 小时</p>
+
+<div class="prereq">
+<strong>前置知识：</strong>第1-5章（向量、矩阵、梯度下降、神经网络、反向传播）<br>
+<strong>本章目标：</strong>理解注意力机制的直觉和计算过程，掌握 Transformer 的完整架构，能手算一个简单的自注意力。
+</div>
+
+<div class="toc">
+<strong>本章目录</strong>
+<ol>
+<li><a href="#s1">7.1 为什么需要注意力？——RNN 的困境</a></li>
+<li><a href="#s2">7.2 注意力的直觉——"我该关注谁？"</a></li>
+<li><a href="#s3">7.3 Q、K、V——查询、键、值</a></li>
+<li><a href="#s4">7.4 自注意力的完整计算（手算）</a></li>
+<li><a href="#s5">7.5 缩放因子——为什么要除以 √d？</a></li>
+<li><a href="#s6">7.6 多头注意力——关注不同方面</a></li>
+<li><a href="#s7">7.7 Transformer 完整架构</a></li>
+<li><a href="#s8">7.8 位置编码——注入顺序信息</a></li>
+<li><a href="#s9">7.9 用 Python 从零实现自注意力</a></li>
+<li><a href="#s10">7.10 本章习题</a></li>
+</ol>
+</div>
+
+<!-- ============ 7.1 ============ -->
+<h2 id="s1">7.1 为什么需要注意力？——RNN 的困境</h2>
+
+<h3>序列数据的挑战</h3>
+<p>语言是序列：词有顺序，"猫追狗" ≠ "狗追猫"。处理序列需要记住上下文。</p>
+
+<h3>RNN 的问题</h3>
+<ul>
+<li><strong>顺序计算：</strong>必须一个词一个词处理，无法并行（慢！）</li>
+<li><strong>长距离遗忘：</strong>第 1 个词的信息经过 100 步后几乎消失</li>
+</ul>
+
+<p>2017 年，Google 的论文 "Attention Is All You Need" 提出了 Transformer：</p>
+<ul>
+<li>完全不用循环，所有位置<strong>同时</strong>计算（可并行，快！）</li>
+<li>任意两个位置<strong>直接</strong>交互（不管距离多远）</li>
+</ul>
+
+<div class="concept-box">
+<div class="label">📌 Transformer 的革命性</div>
+<p>Transformer 是当前几乎所有 AI 的基础：</p>
+<ul>
+<li>GPT / Claude / Qwen → Decoder-only Transformer</li>
+<li>BERT → Encoder-only Transformer</li>
+<li>Stable Diffusion → 用 Transformer 做文本理解</li>
+<li>ViT → 用 Transformer 做图像识别</li>
+</ul>
+<p>理解了 Transformer，你就理解了现代 AI 的核心引擎。</p>
+</div>
+
+<!-- ============ 7.2 ============ -->
+<h2 id="s2">7.2 注意力的直觉——"我该关注谁？"</h2>
+
+<h3>一个例子</h3>
+<p>句子："这只<strong>猫</strong>很可爱，<strong>它</strong>已经 3 岁了"</p>
+<p>当模型处理"它"这个词时，需要知道"它"指的是"猫"。注意力机制就是让"它"去<strong>查看</strong>句子中所有其他词，决定"我应该重点关注谁"。</p>
+
+<svg width="500" height="180" viewBox="0 0 500 180">
+  <!-- 词 -->
+  <text x="30" y="40" font-size="14" fill="#333">这</text>
+  <text x="70" y="40" font-size="14" fill="#333">只</text>
+  <text x="110" y="40" font-size="16" fill="#4361ee" font-weight="bold">猫</text>
+  <text x="150" y="40" font-size="14" fill="#333">很</text>
+  <text x="190" y="40" font-size="14" fill="#333">可</text>
+  <text x="230" y="40" font-size="14" fill="#333">爱</text>
+  <text x="280" y="40" font-size="16" fill="#dc2626" font-weight="bold">它</text>
+  <text x="320" y="40" font-size="14" fill="#333">已</text>
+  <text x="360" y="40" font-size="14" fill="#333">经</text>
+  <text x="400" y="40" font-size="14" fill="#333">3</text>
+  <text x="430" y="40" font-size="14" fill="#333">岁</text>
+  <text x="460" y="40" font-size="14" fill="#333">了</text>
+  
+  <!-- 注意力箭头 -->
+  <defs><marker id="attArr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#dc2626"/></marker></defs>
+  <path d="M 285 50 Q 200 100 115 50" fill="none" stroke="#dc2626" stroke-width="2.5" marker-end="url(#attArr)"/>
+  <text x="180" y="95" font-size="11" fill="#dc2626" font-weight="bold">注意力权重: 0.72</text>
+  
+  <!-- 弱注意力 -->
+  <path d="M 285 50 Q 250 80 195 50" fill="none" stroke="#fca5a5" stroke-width="1" stroke-dasharray="3,2"/>
+  <path d="M 285 50 Q 310 80 325 50" fill="none" stroke="#fca5a5" stroke-width="1" stroke-dasharray="3,2"/>
+  
+  <text x="30" y="140" font-size="12" fill="#666">"它"处理时，高度关注"猫"（权重0.72），</text>
+  <text x="30" y="160" font-size="12" fill="#666">对其他词关注较少 → 理解了"它=猫"</text>
+</svg>
+
+
+<!-- 动画：注意力信息流 -->
+<style>
+@keyframes attn-flow1 { 0% { stroke-dashoffset: 60; opacity:0.3; } 50% { opacity:1; } 100% { stroke-dashoffset: 0; opacity:0.3; } }
+@keyframes attn-flow2 { 0% { stroke-dashoffset: 60; opacity:0.2; } 50% { opacity:0.6; } 100% { stroke-dashoffset: 0; opacity:0.2; } }
+@keyframes attn-glow { 0%,100% { r:16; } 50% { r:19; } }
+@keyframes attn-weight { 0%,100% { opacity:0.5; } 50% { opacity:1; } }
+.af1 { animation: attn-flow1 2.5s ease-in-out infinite; stroke-dasharray: 8 4; }
+.af2 { animation: attn-flow2 2.5s ease-in-out infinite 0.3s; stroke-dasharray: 8 4; }
+.af3 { animation: attn-flow2 2.5s ease-in-out infinite 0.6s; stroke-dasharray: 8 4; }
+.af4 { animation: attn-flow1 2.5s ease-in-out infinite 0.9s; stroke-dasharray: 8 4; }
+.aglow { animation: attn-glow 2s ease-in-out infinite; }
+.aw { animation: attn-weight 2.5s ease-in-out infinite; }
+</style>
+
+<div style="text-align:center; margin: 24px 0;">
+<p style="font-size:0.85rem; color:#666; margin-bottom:8px;">👇 动画：观察"它"如何从其他词收集信息（线条粗细 = 注意力权重）</p>
+<svg width="520" height="220" viewBox="0 0 520 220" style="background:#fafbfc; border-radius:12px; border:1px solid #e5e7eb;">
+  <!-- 词节点 -->
+  <circle cx="60" cy="60" r="16" fill="#eef2ff" stroke="#4361ee" stroke-width="2"/>
+  <text x="60" y="65" font-size="13" fill="#4361ee" text-anchor="middle">这</text>
+
+  <circle cx="150" cy="60" r="16" fill="#eef2ff" stroke="#4361ee" stroke-width="2"/>
+  <text x="150" y="65" font-size="13" fill="#4361ee" text-anchor="middle">只</text>
+
+  <circle cx="240" cy="60" r="18" fill="#dbeafe" stroke="#4361ee" stroke-width="3" class="aglow"/>
+  <text x="240" y="65" font-size="14" fill="#4361ee" text-anchor="middle" font-weight="bold">猫</text>
+
+  <circle cx="330" cy="60" r="16" fill="#eef2ff" stroke="#4361ee" stroke-width="2"/>
+  <text x="330" y="65" font-size="13" fill="#4361ee" text-anchor="middle">很</text>
+
+  <circle cx="420" cy="60" r="16" fill="#eef2ff" stroke="#4361ee" stroke-width="2"/>
+  <text x="420" y="65" font-size="13" fill="#4361ee" text-anchor="middle">可爱</text>
+
+  <!-- 目标词 "它" -->
+  <circle cx="240" cy="170" r="20" fill="#fef2f2" stroke="#dc2626" stroke-width="3" class="aglow"/>
+  <text x="240" y="176" font-size="15" fill="#dc2626" text-anchor="middle" font-weight="bold">它</text>
+  <text x="240" y="205" font-size="10" fill="#dc2626" text-anchor="middle">← 正在处理这个词</text>
+
+  <!-- 注意力连线（从各词到"它"） -->
+  <!-- 猫→它：最强注意力 -->
+  <line class="af1" x1="240" y1="78" x2="240" y2="150" stroke="#dc2626" stroke-width="4"/>
+  <text class="aw" x="252" y="120" font-size="11" fill="#dc2626" font-weight="bold">0.72</text>
+
+  <!-- 很→它：弱注意力 -->
+  <line class="af2" x1="330" y1="76" x2="255" y2="155" stroke="#f59e0b" stroke-width="1.5"/>
+  <text class="aw" x="305" y="125" font-size="10" fill="#f59e0b">0.08</text>
+
+  <!-- 可爱→它：弱注意力 -->
+  <line class="af3" x1="420" y1="76" x2="258" y2="158" stroke="#f59e0b" stroke-width="1"/>
+  <text class="aw" x="355" y="135" font-size="10" fill="#f59e0b">0.05</text>
+
+  <!-- 这→它：弱注意力 -->
+  <line class="af4" x1="60" y1="76" x2="225" y2="155" stroke="#f59e0b" stroke-width="1"/>
+  <text class="aw" x="120" y="125" font-size="10" fill="#f59e0b">0.05</text>
+
+  <!-- 只→它 -->
+  <line class="af3" x1="150" y1="76" x2="230" y2="152" stroke="#f59e0b" stroke-width="1"/>
+  <text class="aw" x="175" y="120" font-size="10" fill="#f59e0b">0.10</text>
+
+  <!-- 图例 -->
+  <line x1="380" y1="170" x2="410" y2="170" stroke="#dc2626" stroke-width="4"/>
+  <text x="415" y="174" font-size="10" fill="#666">高注意力</text>
+  <line x1="380" y1="190" x2="410" y2="190" stroke="#f59e0b" stroke-width="1"/>
+  <text x="415" y="194" font-size="10" fill="#666">低注意力</text>
+</svg>
+</div>
+
+<div class="concept-box">
+<div class="label">📌 注意力的本质</div>
+<p>对于序列中的每个词，计算它和其他所有词的<strong>相关性分数</strong>，然后用这些分数对所有词的信息做<strong>加权平均</strong>。</p>
+<p>结果：每个词的输出都"融合"了整句话的信息，重点融合了最相关的词。</p>
+</div>
+
+<!-- ============ 7.3 ============ -->
+<h2 id="s3">7.3 Q、K、V——查询、键、值</h2>
+
+<h3>图书馆类比</h3>
+<p>想象你去图书馆找书：</p>
+<ul>
+<li><strong>Query (Q)：</strong>你的需求——"我想找一本关于猫的书"</li>
+<li><strong>Key (K)：</strong>每本书的标签——"动物"、"编程"、"历史"...</li>
+<li><strong>Value (V)：</strong>书的实际内容</li>
+</ul>
+<p>过程：用你的 Query 和每本书的 Key 做匹配（点积），得到相关度分数。分数高的书，你多看几页（Value 权重大）。</p>
+
+<h3>在 Transformer 中</h3>
+<p>每个词通过三个不同的线性变换，得到自己的 Q、K、V：</p>
+<div class="formula">
+Q = x × W_Q &nbsp;&nbsp;（"我在找什么信息？"）<br>
+K = x × W_K &nbsp;&nbsp;（"我能提供什么信息？"）<br>
+V = x × W_V &nbsp;&nbsp;（"我的实际内容是什么？"）
+</div>
+<p>W_Q、W_K、W_V 是三个可学习的权重矩阵。</p>
+
+<!-- ============ 7.4 ============ -->
+
+<style>
+.bridge-box {
+  background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px;
+  padding: 16px 20px; margin: 20px 0; border-left: 4px solid #22c55e;
+}
+.bridge-box .br-label {
+  font-weight: 700; color: #16a34a; font-size: 0.85rem; margin-bottom: 8px;
+}
+.bridge-box p { font-size: 0.9rem; margin: 6px 0; }
+.bridge-box .br-link { color: #4361ee; font-weight: 600; }
+</style>
+
+<div class="bridge-box">
+<div class="br-label">🌉 直觉桥梁：连接第1-2章</div>
+<p>注意力机制的核心就是<span class="br-link">第1章的余弦相似度</span> + <span class="br-link">第2章的矩阵乘法</span>：</p>
+<p>① Q×Kᵀ = 每对词做点积（衡量相似度）→ 这就是第1章！</p>
+<p>② softmax = 把分数变成概率（归一化）</p>
+<p>③ 概率 × V = 加权平均（矩阵乘法）→ 这就是第2章！</p>
+<p>Transformer 看起来很复杂，但拆开就是你已经学过的点积和矩阵乘法。</p>
+</div>
+
+<h2 id="s4">7.4 自注意力的完整计算（手算）</h2>
+
+<div class="example-box">
+<div class="label">✏️ 例题 7.1：手算自注意力（最重要的例题！）</div>
+<p><strong>句子：</strong>"我 爱 你"（3 个词）</p>
+<p><strong>假设每个词的向量是 2 维：</strong></p>
+<ul>
+<li>"我" = [1, 0]</li>
+<li>"爱" = [0, 1]</li>
+<li>"你" = [1, 1]</li>
+</ul>
+<p><strong>为简化，假设 Q=K=V=原始向量</strong>（实际中要乘以 W_Q, W_K, W_V）</p>
+
+<h4>第1步：计算注意力分数（Q × Kᵀ）</h4>
+<p>每个词的 Q 和所有词的 K 做点积：</p>
+<div class="step">"我"的Q=[1,0] · "我"的K=[1,0] = 1×1+0×0 = <strong>1</strong></div>
+<div class="step">"我"的Q=[1,0] · "爱"的K=[0,1] = 1×0+0×1 = <strong>0</strong></div>
+<div class="step">"我"的Q=[1,0] · "你"的K=[1,1] = 1×1+0×1 = <strong>1</strong></div>
+<p>所以"我"对三个词的分数 = [1, 0, 1]</p>
+
+<p>同理计算"爱"和"你"的分数：</p>
+<div class="step">"爱"的分数 = [0×1+1×0, 0×0+1×1, 0×1+1×1] = [0, 1, 1]</div>
+<div class="step">"你"的分数 = [1×1+1×0, 1×0+1×1, 1×1+1×1] = [1, 1, 2]</div>
+
+<p><strong>分数矩阵：</strong></p>
+<pre><code>     我  爱  你
+我 [ 1   0   1 ]
+爱 [ 0   1   1 ]
+你 [ 1   1   2 ]</code></pre>
+
+<h4>第2步：缩放（除以 √d）</h4>
+<div class="step">d = 2（向量维度），√d = √2 ≈ 1.414</div>
+<div class="step">缩放后分数 = 原始分数 / 1.414</div>
+<pre><code>我 [ 0.71  0     0.71 ]
+爱 [ 0     0.71  0.71 ]
+你 [ 0.71  0.71  1.41 ]</code></pre>
+
+<h4>第3步：Softmax（变成概率，每行和为1）</h4>
+<div class="step">"我"这行：softmax([0.71, 0, 0.71])</div>
+<div class="step">= [e^0.71, e^0, e^0.71] / 总和 = [2.03, 1.00, 2.03] / 5.06</div>
+<div class="step">= [<strong>0.40</strong>, <strong>0.20</strong>, <strong>0.40</strong>]</div>
+<p>含义："我"关注"我"40%，关注"爱"20%，关注"你"40%</p>
+
+<p>同理：</p>
+<pre><code>注意力权重矩阵（每行和为1）：
+我 [ 0.40  0.20  0.40 ]  ← "我"最关注"我"和"你"
+爱 [ 0.20  0.40  0.40 ]  ← "爱"最关注"爱"和"你"
+你 [ 0.28  0.28  0.44 ]  ← "你"最关注"你"自己</code></pre>
+
+<h4>第4步：加权求和（注意力权重 × V）</h4>
+<div class="step">"我"的输出 = 0.40×[1,0] + 0.20×[0,1] + 0.40×[1,1]</div>
+<div class="step">= [0.40, 0] + [0, 0.20] + [0.40, 0.40] = <strong>[0.80, 0.60]</strong></div>
+<p>原来"我"=[1,0]，现在变成了 [0.80, 0.60]——融合了"爱"和"你"的信息！</p>
+</div>
+
+<div class="concept-box">
+<div class="label">📌 自注意力公式（必须记住）</div>
+<div class="formula" style="font-size: 1.15rem;">
+Attention(Q, K, V) = softmax(Q × Kᵀ / √d_k) × V
+</div>
+<ol>
+<li>Q × Kᵀ：计算每对词之间的相关性分数</li>
+<li>/ √d_k：缩放，防止分数太大</li>
+<li>softmax：把分数变成概率（每行和为1）</li>
+<li>× V：用概率对所有词的值做加权平均</li>
+</ol>
+</div>
+
+<!-- ============ 7.5 ============ -->
+<h2 id="s5">7.5 缩放因子——为什么要除以 √d？</h2>
+
+<p>当向量维度 d 很大时（如 512），点积的结果也会很大（因为加了很多项）。</p>
+<p>大分数 → softmax 后变成接近 [1, 0, 0, ...] → 梯度接近 0 → 训练困难。</p>
+<p>除以 √d 把分数拉回到合理范围，让 softmax 输出更"平滑"。</p>
+
+<div class="example-box">
+<div class="label">✏️ 例题 7.2：缩放的效果</div>
+<p>分数 = [10, 1, 1]（没缩放）→ softmax ≈ [0.9999, 0.0001, 0.0001]（太尖锐！）</p>
+<p>分数 = [10, 1, 1] / √512 ≈ [0.44, 0.04, 0.04] → softmax ≈ [0.45, 0.27, 0.27]（平滑）</p>
+</div>
+
+<!-- ============ 7.6 ============ -->
+<h2 id="s6">7.6 多头注意力——关注不同方面</h2>
+
+<h3>为什么需要多头？</h3>
+<p>一个注意力头只能关注一种关系。但语言中有多种关系：</p>
+<ul>
+<li>语法关系："猫"是主语，"追"是谓语</li>
+<li>指代关系："它" → "猫"</li>
+<li>修饰关系："大" → "猫"</li>
+</ul>
+
+<p><strong>多头注意力 = 多个注意力头并行</strong>，每个头关注不同方面，最后拼接起来。</p>
+
+<svg width="500" height="160" viewBox="0 0 500 160">
+  <!-- 输入 -->
+  <rect x="200" y="10" width="100" height="30" rx="4" fill="#eef2ff" stroke="#4361ee" stroke-width="1.5"/>
+  <text x="220" y="30" font-size="11" fill="#4361ee">输入 x</text>
+  
+  <!-- 三个头 -->
+  <line x1="250" y1="40" x2="100" y2="65" stroke="#ccc" stroke-width="1"/>
+  <line x1="250" y1="40" x2="250" y2="65" stroke="#ccc" stroke-width="1"/>
+  <line x1="250" y1="40" x2="400" y2="65" stroke="#ccc" stroke-width="1"/>
+  
+  <rect x="50" y="65" width="100" height="35" rx="4" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="60" y="87" font-size="10" fill="#7c3aed">Head 1 (语法)</text>
+  
+  <rect x="200" y="65" width="100" height="35" rx="4" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+  <text x="210" y="87" font-size="10" fill="#d97706">Head 2 (指代)</text>
+  
+  <rect x="350" y="65" width="100" height="35" rx="4" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+  <text x="360" y="87" font-size="10" fill="#059669">Head 3 (修饰)</text>
+  
+  <!-- 拼接 -->
+  <line x1="100" y1="100" x2="250" y2="125" stroke="#ccc" stroke-width="1"/>
+  <line x1="250" y1="100" x2="250" y2="125" stroke="#ccc" stroke-width="1"/>
+  <line x1="400" y1="100" x2="250" y2="125" stroke="#ccc" stroke-width="1"/>
+  
+  <rect x="190" y="125" width="120" height="30" rx="4" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="200" y="145" font-size="10" fill="#dc2626">Concat + Linear</text>
+</svg>
+
+<pre><code># 多头注意力的参数
+# 假设 d_model=512, n_heads=8
+# 每个头的维度 = 512/8 = 64
+# 8个头各自独立计算注意力，最后拼接回512维
+
+# PyTorch 内置
+import torch.nn as nn
+mha = nn.MultiheadAttention(embed_dim=512, num_heads=8)
+# 内部自动处理 Q/K/V 投影、多头分割、拼接</code></pre>
+
+<!-- ============ 7.7 ============ -->
+<h2 id="s7">7.7 Transformer 完整架构</h2>
+
+<svg width="400" height="420" viewBox="0 0 400 420">
+  <!-- Encoder 侧 -->
+  <text x="60" y="20" font-size="13" fill="#4361ee" font-weight="bold">Encoder</text>
+  
+  <rect x="40" y="350" width="120" height="30" rx="4" fill="#eef2ff" stroke="#4361ee" stroke-width="1.5"/>
+  <text x="55" y="370" font-size="10" fill="#4361ee">输入 Embedding</text>
+  
+  <rect x="40" y="300" width="120" height="30" rx="4" fill="#f0f9ff" stroke="#0284c7" stroke-width="1"/>
+  <text x="50" y="320" font-size="10" fill="#0284c7">+ 位置编码</text>
+  
+  <rect x="40" y="240" width="120" height="40" rx="4" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="50" y="258" font-size="10" fill="#7c3aed">Multi-Head</text>
+  <text x="50" y="272" font-size="10" fill="#7c3aed">Self-Attention</text>
+  
+  <rect x="40" y="200" width="120" height="25" rx="4" fill="#fef2f2" stroke="#dc2626" stroke-width="1"/>
+  <text x="55" y="217" font-size="10" fill="#dc2626">Add & Norm</text>
+  
+  <rect x="40" y="150" width="120" height="35" rx="4" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+  <text x="50" y="172" font-size="10" fill="#d97706">Feed Forward</text>
+  
+  <rect x="40" y="115" width="120" height="25" rx="4" fill="#fef2f2" stroke="#dc2626" stroke-width="1"/>
+  <text x="55" y="132" font-size="10" fill="#dc2626">Add & Norm</text>
+  
+  <text x="70" y="105" font-size="10" fill="#666">× N 层</text>
+  
+  <!-- Decoder 侧 -->
+  <text x="260" y="20" font-size="13" fill="#059669" font-weight="bold">Decoder</text>
+  
+  <rect x="240" y="350" width="120" height="30" rx="4" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+  <text x="250" y="370" font-size="10" fill="#059669">输出 Embedding</text>
+  
+  <rect x="240" y="290" width="120" height="40" rx="4" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="250" y="308" font-size="10" fill="#7c3aed">Masked Self-</text>
+  <text x="250" y="322" font-size="10" fill="#7c3aed">Attention</text>
+  
+  <rect x="240" y="240" width="120" height="35" rx="4" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.5"/>
+  <text x="250" y="262" font-size="10" fill="#0284c7">Cross-Attention</text>
+  
+  <rect x="240" y="190" width="120" height="35" rx="4" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+  <text x="250" y="212" font-size="10" fill="#d97706">Feed Forward</text>
+  
+  <rect x="240" y="140" width="120" height="30" rx="4" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+  <text x="255" y="160" font-size="10" fill="#059669">Linear+Softmax</text>
+  
+  <text x="270" y="130" font-size="10" fill="#666">× N 层</text>
+  
+  <!-- 连接 -->
+  <line x1="160" y1="260" x2="240" y2="257" stroke="#999" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="175" y="250" font-size="9" fill="#999">K,V</text>
+</svg>
+
+<div class="concept-box">
+<div class="label">📌 Transformer Block 的核心组件</div>
+<ol>
+<li><strong>Self-Attention：</strong>让每个词看到所有其他词</li>
+<li><strong>Add & Norm：</strong>残差连接 + LayerNorm（稳定训练）</li>
+<li><strong>Feed Forward：</strong>两层全连接（增加非线性表达能力）</li>
+<li><strong>位置编码：</strong>告诉模型词的顺序</li>
+</ol>
+<p>现代 LLM（GPT）只用 Decoder 部分，而且用了一些改进（如 RoPE 位置编码、GQA 等）。</p>
+</div>
+
+<!-- ============ 7.8 ============ -->
+<h2 id="s8">7.8 位置编码——注入顺序信息</h2>
+
+<p>自注意力是"位置无关"的——打乱词序，结果一样。但"猫追狗" ≠ "狗追猫"！</p>
+<p>解决方案：给每个位置加一个唯一的"位置向量"：</p>
+<div class="formula">
+输入 = 词向量 + 位置向量
+</div>
+<p>原始 Transformer 用 sin/cos 函数生成位置编码。现代模型（如 LLaMA）用 RoPE（旋转位置编码）。</p>
+
+<!-- ============ 7.9 ============ -->
+<h2 id="s9">7.9 用 Python 从零实现自注意力</h2>
+
+<pre><code>import numpy as np
+import math
+
+def softmax(x, axis=-1):
+    """数值稳定的 softmax"""
+    e_x = np.exp(x - np.max(x, axis=axis, keepdims=True))
+    return e_x / e_x.sum(axis=axis, keepdims=True)
+
+def self_attention(X):
+    """
+    X: shape (seq_len, d_model) — 每个词的向量
+    返回: shape (seq_len, d_model) — 注意力输出
+    """
+    # 简化版：Q=K=V=X（实际中要乘以 W_Q, W_K, W_V）
+    Q = X
+    K = X
+    V = X
+    
+    d_k = Q.shape[-1]
+    
+    # 第1步：计算分数 Q × Kᵀ
+    scores = Q @ K.T  # (seq_len, seq_len)
+    
+    # 第2步：缩放
+    scores = scores / math.sqrt(d_k)
+    
+    # 第3步：Softmax（每行归一化）
+    attention_weights = softmax(scores, axis=-1)
+    
+    # 第4步：加权求和
+    output = attention_weights @ V  # (seq_len, d_model)
+    
+    return output, attention_weights
+
+# ===== 测试 =====
+# 3个词，每个4维
+X = np.array([
+    [1, 0, 1, 0],  # "我"
+    [0, 1, 0, 1],  # "爱"
+    [1, 1, 0, 0],  # "你"
+], dtype=float)
+
+output, weights = self_attention(X)
+
+print("注意力权重矩阵：")
+print(np.round(weights, 3))
+# 每行和为1，表示每个词对其他词的关注程度
+
+print("\n输出（融合了上下文信息）：")
+print(np.round(output, 3))</code></pre>
+
+<pre><code># ===== 带因果掩码的版本（GPT 用）=====
+def causal_self_attention(X):
+    """GPT 风格：每个词只能看到它前面的词"""
+    Q, K, V = X, X, X
+    d_k = Q.shape[-1]
+    seq_len = X.shape[0]
+    
+    scores = Q @ K.T / math.sqrt(d_k)
+    
+    # 因果掩码：上三角设为 -inf（softmax后变成0）
+    mask = np.triu(np.ones((seq_len, seq_len)), k=1) * (-1e9)
+    scores = scores + mask
+    
+    attention_weights = softmax(scores, axis=-1)
+    output = attention_weights @ V
+    return output, attention_weights
+
+output, weights = causal_self_attention(X)
+print("因果注意力权重（下三角）：")
+print(np.round(weights, 3))
+# [[1.000, 0.000, 0.000],   ← "我"只能看自己
+#  [0.378, 0.622, 0.000],   ← "爱"能看"我"和自己
+#  [0.276, 0.356, 0.368]]   ← "你"能看所有前面的词</code></pre>
+
+<!-- ============ 7.10 ============ -->
+
+<!-- 常见误区样式 -->
+<style>
+.misconception-box {
+  background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px;
+  padding: 18px 20px; margin: 20px 0;
+}
+.misconception-box .mc-label {
+  font-weight: 700; color: #dc2626; font-size: 0.85rem; margin-bottom: 10px;
+}
+.misconception-box .mc-item { margin: 10px 0; font-size: 0.9rem; }
+.misconception-box .mc-wrong { color: #dc2626; font-weight: 600; }
+.misconception-box .mc-right { color: #059669; font-weight: 600; }
+</style>
+
+<div class="misconception-box">
+<div class="mc-label">⚠️ 常见误区（初学者最容易踩的坑）</div>
+<div class="mc-item">
+  <span class="mc-wrong">✗ "Q、K、V 是三种不同的输入数据"</span><br>
+  <span class="mc-right">✓ Q、K、V 是同一个输入的三种不同投影。</span>每个词 x 分别乘以 W_Q、W_K、W_V 得到自己的 Q、K、V。它们来自同一个词，只是"角色"不同。
+</div>
+<div class="mc-item">
+  <span class="mc-wrong">✗ "Transformer 不需要位置信息"</span><br>
+  <span class="mc-right">✓ 自注意力本身是位置无关的，必须额外加位置编码。</span>没有位置编码，"猫追狗"和"狗追猫"对模型来说完全一样。
+</div>
+<div class="mc-item">
+  <span class="mc-wrong">✗ "注意力权重就是'重要性'"</span><br>
+  <span class="mc-right">✓ 注意力权重更像是"信息流通量"。</span>它表示"从这个词拿多少信息过来"，不完全等于"这个词有多重要"。
+</div>
+</div>
+
+
+<style>
+.checklist-box {
+  background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px;
+  padding: 18px 20px; margin: 24px 0;
+}
+.checklist-box .ck-label {
+  font-weight: 700; color: #2563eb; font-size: 0.9rem; margin-bottom: 10px;
+}
+.checklist-box label {
+  display: block; font-size: 0.88rem; margin: 7px 0; cursor: pointer; color: #334155;
+}
+.checklist-box input[type="checkbox"] { margin-right: 8px; accent-color: #2563eb; }
+</style>
+
+<div class="checklist-box">
+<div class="ck-label">✅ 学完本章，你应该能够：</div>
+<label><input type="checkbox"> 手算一个简单的自注意力（Q×Kᵀ → softmax → ×V）</label>
+<label><input type="checkbox"> 解释 Q、K、V 分别代表什么</label>
+<label><input type="checkbox"> 解释为什么要除以 √d_k</label>
+<label><input type="checkbox"> 解释多头注意力的好处</label>
+<label><input type="checkbox"> 用 Python 从零实现自注意力函数</label>
+</div>
+
+<h2 id="s10">7.10 本章习题</h2>
+
+<div class="exercise-box">
+<div class="label">📝 概念理解题</div>
+<ol>
+<li>自注意力解决了 RNN 的哪两个主要问题？</li>
+<li>Q、K、V 分别代表什么？用图书馆类比解释。</li>
+<li>注意力公式中为什么要除以 √d_k？</li>
+<li>多头注意力比单头注意力好在哪里？</li>
+<li>因果掩码（causal mask）的作用是什么？为什么 GPT 需要它？</li>
+</ol>
+<button class="show-answer" onclick="this.nextElementSibling.classList.toggle('show')">显示答案</button>
+<div class="answer-box">
+<div class="label">参考答案</div>
+<ol>
+<li>① 顺序计算无法并行 → Transformer 所有位置同时计算；② 长距离信息衰减 → 任意两位置直接交互</li>
+<li>Q=查询（我在找什么），K=键（我能提供什么标签），V=值（我的实际内容）。用Q和K匹配得到相关度，对相关度高的V加权求和。</li>
+<li>维度大时点积值大，softmax输出过于尖锐（接近one-hot），梯度接近0。除以√d让分数回到合理范围。</li>
+<li>每个头可以关注不同类型的关系（语法、指代、修饰等），信息更丰富。</li>
+<li>防止"偷看"未来的词。GPT是逐词生成的，生成第3个词时不应该知道第4个词是什么。</li>
+</ol>
+</div>
+</div>
+
+<div class="exercise-box">
+<div class="label">📝 手算题</div>
+<ol start="6">
+<li>两个词，向量分别为 [1,0] 和 [0,1]。计算它们的注意力分数（Q=K=V=原始向量，不缩放）。</li>
+<li>上题中，对分数做 softmax 后，"词1"的输出向量是什么？</li>
+<li>如果 d_k=64，分数为 [8, 2, 2]，缩放后是多少？（除以 √64=8）</li>
+<li>一个 Transformer 有 8 个头，d_model=512。每个头的维度是多少？</li>
+</ol>
+<button class="show-answer" onclick="this.nextElementSibling.classList.toggle('show')">显示答案</button>
+<div class="answer-box">
+<div class="label">参考答案</div>
+<ol start="6">
+<li>分数矩阵：[[1×1+0×0, 1×0+0×1], [0×1+1×0, 0×0+1×1]] = [[1,0],[0,1]]</li>
+<li>softmax([1,0]) = [e¹/(e¹+e⁰), e⁰/(e¹+e⁰)] = [0.731, 0.269]<br>
+输出 = 0.731×[1,0] + 0.269×[0,1] = <strong>[0.731, 0.269]</strong></li>
+<li>[8/8, 2/8, 2/8] = [1, 0.25, 0.25]</li>
+<li>512/8 = <strong>64</strong> 维/头</li>
+</ol>
+</div>
+</div>
+
+<div class="exercise-box">
+<div class="label">📝 编程实践题</div>
+<ol start="10">
+<li>运行本章的 <code>self_attention</code> 代码，修改输入向量，观察注意力权重如何变化。</li>
+<li>实现带 W_Q, W_K, W_V 的完整自注意力（随机初始化三个 4×4 矩阵）。</li>
+<li>用 PyTorch 的 <code>nn.MultiheadAttention</code> 处理一个长度为 10、维度 64 的序列，打印输出形状。</li>
+<li>挑战：跟着 3Blue1Brown 的 "But what is a GPT?" 视频，实现一个完整的 mini-Transformer（字符级语言模型）。</li>
+</ol>
+<button class="show-answer" onclick="this.nextElementSibling.classList.toggle('show')">显示答案</button>
+<div class="answer-box">
+<div class="label">参考答案（题12）</div>
+<pre><code>import torch, torch.nn as nn
+
+mha = nn.MultiheadAttention(embed_dim=64, num_heads=4)
+x = torch.randn(10, 1, 64)  # (seq_len, batch, d_model)
+output, weights = mha(x, x, x)
+print(output.shape)   # [10, 1, 64]
+print(weights.shape)  # [1, 10, 10]（注意力权重矩阵）</code></pre>
+</div>
+</div>
+
+<h2>本章小结</h2>
+<table>
+<tr><th>概念</th><th>一句话总结</th></tr>
+<tr><td>注意力</td><td>每个词计算和其他词的相关度，加权融合信息</td></tr>
+<tr><td>Q, K, V</td><td>查询、键、值——匹配后取值</td></tr>
+<tr><td>公式</td><td>softmax(QKᵀ/√d) × V</td></tr>
+<tr><td>多头</td><td>多个头并行关注不同关系</td></tr>
+<tr><td>因果掩码</td><td>防止看到未来（GPT 生成时必须）</td></tr>
+<tr><td>位置编码</td><td>注入词的顺序信息</td></tr>
+<tr><td>Transformer</td><td>Attention + FFN + 残差 + Norm</td></tr>
+</table>
+
+<div class="concept-box">
+<div class="label">🎯 本章最重要的认知</div>
+<p><strong>Transformer 的核心就是一个公式：softmax(QKᵀ/√d) × V</strong></p>
+<p>理解了"计算相关度 → 归一化 → 加权求和"这三步，你就理解了 GPT、BERT、Stable Diffusion 的共同基础。</p>
+<p>所有现代 LLM 都是这个公式的变体和堆叠。</p>
+</div>
+
+<div class="nav-footer">
+<a href="ch06-CNN.html">← 上一章：CNN</a>
+<a href="ch08-大语言模型.html">下一章：大语言模型与 Prompt →</a>
+</div>
+
+
+<!-- ============ 交互式板块 ============ -->
+<h2 id="s11">7.11 交互式练习</h2>
+
+<!-- 交互式测验 -->
+<style>
+.quiz-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 20px 0; }
+.quiz-box .q-label { font-weight: 700; color: #7c3aed; font-size: 0.9rem; margin-bottom: 12px; }
+.quiz-q { margin: 16px 0; padding: 14px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; }
+.quiz-q p { font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; }
+.quiz-opt { display: block; padding: 8px 14px; margin: 4px 0; border-radius: 6px; cursor: pointer; font-size: 0.85rem; border: 1px solid #e5e7eb; transition: all 0.15s; }
+.quiz-opt:hover { background: #f0f9ff; border-color: #93c5fd; }
+.quiz-opt.correct { background: #dcfce7; border-color: #4ade80; color: #166534; }
+.quiz-opt.wrong { background: #fef2f2; border-color: #fca5a5; color: #991b1b; }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.7; }
+.quiz-feedback { margin-top: 8px; font-size: 0.82rem; padding: 8px 12px; border-radius: 6px; display: none; }
+.quiz-feedback.show { display: block; }
+.quiz-feedback.ok { background: #dcfce7; color: #166534; }
+.quiz-feedback.no { background: #fef2f2; color: #991b1b; }
+</style>
+
+<div class="quiz-box">
+<div class="q-label">🧪 即时测验</div>
+
+<div class="quiz-q" id="q1">
+  <p>1. 自注意力中，Q×Kᵀ 的结果是什么？</p>
+  <span class="quiz-opt" onclick="checkQ7('q1',this,false)">A. 最终的输出向量</span>
+  <span class="quiz-opt" onclick="checkQ7('q1',this,true)">B. 每对词之间的相关性分数矩阵</span>
+  <span class="quiz-opt" onclick="checkQ7('q1',this,false)">C. 位置编码</span>
+  <span class="quiz-opt" onclick="checkQ7('q1',this,false)">D. 损失值</span>
+  <div class="quiz-feedback" id="q1-fb"></div>
+</div>
+
+<div class="quiz-q" id="q2">
+  <p>2. 为什么要除以 √d_k ？</p>
+  <span class="quiz-opt" onclick="checkQ7('q2',this,false)">A. 让计算更快</span>
+  <span class="quiz-opt" onclick="checkQ7('q2',this,true)">B. 防止点积值过大导致 softmax 输出过于尖锐（梯度消失）</span>
+  <span class="quiz-opt" onclick="checkQ7('q2',this,false)">C. 减少参数量</span>
+  <span class="quiz-opt" onclick="checkQ7('q2',this,false)">D. 让输出为整数</span>
+  <div class="quiz-feedback" id="q2-fb"></div>
+</div>
+
+<div class="quiz-q" id="q3">
+  <p>3. 多头注意力的好处是：</p>
+  <span class="quiz-opt" onclick="checkQ7('q3',this,false)">A. 减少计算量</span>
+  <span class="quiz-opt" onclick="checkQ7('q3',this,false)">B. 让模型更深</span>
+  <span class="quiz-opt" onclick="checkQ7('q3',this,true)">C. 让不同的头关注不同类型的关系（语法、指代、修饰等）</span>
+  <span class="quiz-opt" onclick="checkQ7('q3',this,false)">D. 避免过拟合</span>
+  <div class="quiz-feedback" id="q3-fb"></div>
+</div>
+
+<div class="quiz-q" id="q4">
+  <p>4. GPT 使用的因果掩码（causal mask）的作用是：</p>
+  <span class="quiz-opt" onclick="checkQ7('q4',this,false)">A. 加速训练</span>
+  <span class="quiz-opt" onclick="checkQ7('q4',this,true)">B. 防止每个词"偷看"它后面的词（只能看到前面的）</span>
+  <span class="quiz-opt" onclick="checkQ7('q4',this,false)">C. 减少内存占用</span>
+  <span class="quiz-opt" onclick="checkQ7('q4',this,false)">D. 让注意力更分散</span>
+  <div class="quiz-feedback" id="q4-fb"></div>
+</div>
+
+<div class="quiz-q" id="q5">
+  <p>5. softmax 在注意力中的作用是：</p>
+  <span class="quiz-opt" onclick="checkQ7('q5',this,false)">A. 让分数变大</span>
+  <span class="quiz-opt" onclick="checkQ7('q5',this,false)">B. 让分数变成整数</span>
+  <span class="quiz-opt" onclick="checkQ7('q5',this,true)">C. 把分数变成概率（每行和为1），表示"关注多少"</span>
+  <span class="quiz-opt" onclick="checkQ7('q5',this,false)">D. 去除负数</span>
+  <div class="quiz-feedback" id="q5-fb"></div>
+</div>
+</div>
+
+<script src="quiz.js"></script>
+
+<!-- 交互式注意力可视化 -->
+<h3>🎨 交互式：点击词，看它关注谁</h3>
+<p>下面是一个简化的注意力矩阵。点击任意一个词，看看它"关注"其他词的程度（颜色越深 = 关注度越高）：</p>
+
+<style>
+.attn-viz { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 20px 0; text-align: center; }
+.attn-words { display: flex; justify-content: center; gap: 8px; margin: 12px 0; flex-wrap: wrap; }
+.attn-word { padding: 8px 16px; border-radius: 8px; border: 2px solid #e5e7eb; cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: all 0.2s; background: #fff; }
+.attn-word:hover { border-color: #93c5fd; }
+.attn-word.active { border-color: #4361ee; background: #eef2ff; color: #4361ee; }
+.attn-bars { margin: 16px auto; max-width: 400px; text-align: left; }
+.attn-bar-row { display: flex; align-items: center; margin: 6px 0; }
+.attn-bar-label { width: 50px; font-size: 0.82rem; font-weight: 600; text-align: right; padding-right: 10px; }
+.attn-bar-track { flex: 1; height: 24px; background: #f1f5f9; border-radius: 6px; overflow: hidden; position: relative; }
+.attn-bar-fill { height: 100%; border-radius: 6px; transition: width 0.4s ease; display: flex; align-items: center; padding-left: 8px; font-size: 0.75rem; color: #fff; font-weight: 600; }
+.attn-desc { font-size: 0.82rem; color: #666; margin-top: 12px; font-style: italic; }
+</style>
+
+<div class="attn-viz">
+  <p style="font-size:0.85rem; color:#666; margin-bottom:8px;">句子："这只猫很可爱，它已经3岁了"</p>
+  <div class="attn-words" id="attn-words"></div>
+  <div class="attn-bars" id="attn-bars"></div>
+  <div class="attn-desc" id="attn-desc">👆 点击上面的词，看它的注意力分布</div>
+</div>
+
+<script>
+(function() {
+  var words = ['这只', '猫', '很', '可爱', '它', '已经', '3岁', '了'];
+  // 简化的注意力矩阵（每行和为1）
+  var attn = [
+    [0.35, 0.30, 0.05, 0.10, 0.05, 0.05, 0.05, 0.05], // 这只
+    [0.25, 0.30, 0.05, 0.15, 0.05, 0.05, 0.10, 0.05], // 猫
+    [0.05, 0.15, 0.20, 0.40, 0.05, 0.05, 0.05, 0.05], // 很
+    [0.05, 0.20, 0.30, 0.20, 0.05, 0.05, 0.10, 0.05], // 可爱
+    [0.05, 0.55, 0.02, 0.08, 0.10, 0.05, 0.10, 0.05], // 它 → 主要关注"猫"！
+    [0.03, 0.10, 0.03, 0.05, 0.15, 0.25, 0.30, 0.09], // 已经
+    [0.03, 0.15, 0.03, 0.05, 0.10, 0.20, 0.35, 0.09], // 3岁
+    [0.05, 0.10, 0.05, 0.10, 0.10, 0.15, 0.30, 0.15], // 了
+  ];
+  var descs = [
+    '"这只"主要关注自己和"猫"（确定指代对象）',
+    '"猫"关注自己、"这只"和"可爱"（核心名词）',
+    '"很"最关注"可爱"（程度副词修饰形容词）',
+    '"可爱"关注"很"和"猫"（被修饰+描述对象）',
+    '"它"最关注"猫"（55%！指代消解：它=猫）',
+    '"已经"关注"3岁"（时间副词+数量）',
+    '"3岁"关注自己、"已经"和"猫"（年龄属于谁）',
+    '"了"关注"3岁"和"已经"（语气词依附谓语）',
+  ];
+  var colors = ['#4361ee','#059669','#d97706','#dc2626','#7c3aed','#0891b2','#db2777','#65a30d'];
+
+  var wordsEl = document.getElementById('attn-words');
+  var barsEl = document.getElementById('attn-bars');
+  var descEl = document.getElementById('attn-desc');
+
+  words.forEach(function(w, i) {
+    var btn = document.createElement('div');
+    btn.className = 'attn-word';
+    btn.textContent = w;
+    btn.onclick = function() { showAttn(i); };
+    wordsEl.appendChild(btn);
+  });
+
+  function showAttn(idx) {
+    var btns = wordsEl.querySelectorAll('.attn-word');
+    btns.forEach(function(b, i) { b.classList.toggle('active', i === idx); });
+    barsEl.innerHTML = '';
+    var row = attn[idx];
+    words.forEach(function(w, j) {
+      var pct = Math.round(row[j] * 100);
+      var div = document.createElement('div');
+      div.className = 'attn-bar-row';
+      div.innerHTML = '<span class="attn-bar-label">' + w + '</span>' +
+        '<div class="attn-bar-track"><div class="attn-bar-fill" style="width:' + pct + '%; background:' + colors[j] + '">' +
+        (pct >= 10 ? pct + '%' : '') + '</div></div>';
+      barsEl.appendChild(div);
+    });
+    descEl.textContent = '💡 ' + descs[idx];
+  }
+
+  showAttn(4); // 默认显示"它"的注意力
+})();
+</script>
+
+<div class="concept-box">
+<div class="label">💡 从这个可视化中学到什么</div>
+<ul>
+<li><strong>"它"最关注"猫"（55%）</strong>——这就是指代消解，模型通过注意力"理解"了"它=猫"</li>
+<li><strong>"很"最关注"可爱"</strong>——程度副词天然修饰形容词</li>
+<li><strong>每个词的关注模式不同</strong>——这就是为什么需要多头注意力：不同的头可以关注不同类型的关系</li>
+</ul>
+</div>
+
+</body>
+</html>

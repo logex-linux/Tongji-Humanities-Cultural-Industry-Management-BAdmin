@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 全栈教程 · 术语表</title>
+<link rel="stylesheet" href="apple-design.css">
+<style>
+/* glossary 专属（apple-design 浅色主题） */
+.page-wrap { max-width: 860px; margin: 0 auto; padding: 48px 24px 90px; }
+.glossary-hero { margin-bottom: 28px; }
+.glossary-hero .kicker { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 12px; }
+.glossary-hero h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); margin: 0 0 10px; }
+.glossary-hero p { color: var(--text-2); margin: 0 0 16px; }
+.glossary-hero .back { font-size: 0.85rem; font-weight: 600; }
+.search-box {
+  width: 100%; padding: 14px 20px 14px 46px; border-radius: 980px;
+  border: 1px solid var(--border-strong); background: var(--surface); color: var(--text);
+  font-size: 0.95rem; font-family: var(--font-body); outline: none;
+  box-shadow: var(--shadow-sm); transition: box-shadow var(--dur) var(--spring), border-color var(--dur) var(--spring);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2386868b' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: 18px center;
+}
+.search-box:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft), var(--shadow-sm); }
+.search-box::placeholder { color: var(--text-3); }
+.g-section-title {
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-3); margin: 36px 0 14px; font-family: var(--font-mono);
+}
+.term-grid { display: grid; gap: 10px; }
+.term {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+  padding: 16px 20px; display: grid; grid-template-columns: 150px 1fr; gap: 16px; align-items: start;
+  box-shadow: var(--shadow-sm); transition: transform var(--dur) var(--spring), box-shadow var(--dur) var(--spring);
+}
+.term:hover { transform: translateX(4px); box-shadow: var(--shadow-md); }
+.term-name { font-weight: 700; font-size: 0.95rem; color: var(--text); letter-spacing: -0.01em; }
+.term-en { font-size: 0.72rem; color: var(--text-3); font-weight: 400; display: block; font-family: var(--font-mono); margin-top: 2px; }
+.term-def { font-size: 0.86rem; color: var(--text-2); line-height: 1.6; }
+.term-ch { font-size: 0.68rem; color: var(--accent); margin-top: 6px; font-family: var(--font-mono); }
+.hidden { display: none !important; }
+@media (max-width: 640px) { .term { grid-template-columns: 1fr; gap: 6px; } }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+<div class="glossary-hero">
+  <div class="kicker">Glossary</div>
+  <h1>AI 术语表</h1>
+  <p>10 章核心术语 · 用大白话解释 · 随时查阅</p>
+  <a class="back" href="index.html">← 返回教程目录</a>
+</div>
+
+<input class="search-box" type="text" id="search" placeholder="🔍 搜索术语（如：梯度、注意力、Token...）" oninput="filterTerms()">
+
+<div id="terms">
+
+<div class="section-title">第1章 · 向量</div>
+<div class="term-grid">
+<div class="term" data-kw="向量 vector 数组"><div class="term-name">向量<span class="term-en">Vector</span></div><div class="term-def">一组有序的数字。在 AI 中用来表示数据（图片、文字、用户特征）。<div class="term-ch">第1章</div></div></div>
+<div class="term" data-kw="点积 内积 dot product 相似度"><div class="term-name">点积<span class="term-en">Dot Product</span></div><div class="term-def">对应分量相乘再求和。衡量两个向量的相似程度：正=相似，0=无关，负=相反。<div class="term-ch">第1章</div></div></div>
+<div class="term" data-kw="余弦相似度 cosine similarity 方向"><div class="term-name">余弦相似度<span class="term-en">Cosine Similarity</span></div><div class="term-def">点积除以两个向量的长度。只看方向不看大小，范围 [-1, 1]。AI 搜索和推荐的核心。<div class="term-ch">第1章</div></div></div>
+<div class="term" data-kw="范数 长度 norm 归一化"><div class="term-name">范数 / 归一化<span class="term-en">Norm / Normalize</span></div><div class="term-def">向量的"长度"（√各分量平方和）。归一化 = 除以长度，得到长度为 1 的单位向量。<div class="term-ch">第1章</div></div></div>
+</div>
+
+<div class="section-title">第2章 · 矩阵</div>
+<div class="term-grid">
+<div class="term" data-kw="矩阵 matrix 表格 权重"><div class="term-name">矩阵<span class="term-en">Matrix</span></div><div class="term-def">m行n列的数字表格。在 AI 中表示"变换规则"——把输入向量变成输出向量。<div class="term-ch">第2章</div></div></div>
+<div class="term" data-kw="线性变换 linear transform 映射"><div class="term-name">线性变换<span class="term-en">Linear Transform</span></div><div class="term-def">矩阵×向量。把输入空间中的点"变换"到输出空间。旋转、拉伸、投影都是线性变换。<div class="term-ch">第2章</div></div></div>
+<div class="term" data-kw="权重 weight 参数 parameter"><div class="term-name">权重 / 参数<span class="term-en">Weight / Parameter</span></div><div class="term-def">神经网络中需要学习的数字。训练就是调整这些数字让预测更准确。<div class="term-ch">第2章</div></div></div>
+<div class="term" data-kw="偏置 bias 截距"><div class="term-name">偏置<span class="term-en">Bias</span></div><div class="term-def">加在加权求和后面的常数。让模型能拟合不过原点的关系。y = Wx + <b>b</b>。<div class="term-ch">第2章</div></div></div>
+</div>
+
+<div class="section-title">第3章 · 梯度下降</div>
+<div class="term-grid">
+<div class="term" data-kw="损失函数 loss function 误差 目标"><div class="term-name">损失函数<span class="term-en">Loss Function</span></div><div class="term-def">衡量预测值和真实值差距的公式。越小越好。常用 MSE（均方误差）和交叉熵。<div class="term-ch">第3章</div></div></div>
+<div class="term" data-kw="梯度 gradient 导数 方向 下坡"><div class="term-name">梯度<span class="term-en">Gradient</span></div><div class="term-def">损失对参数的导数。指向损失增大最快的方向。沿负梯度走 = 下坡 = 损失减小。<div class="term-ch">第3章</div></div></div>
+<div class="term" data-kw="学习率 learning rate lr 步长 eta"><div class="term-name">学习率<span class="term-en">Learning Rate (η)</span></div><div class="term-def">每步走多远。太大→震荡发散；太小→收敛极慢。常用 0.001。<div class="term-ch">第3章</div></div></div>
+<div class="term" data-kw="epoch 轮次 迭代 iteration batch"><div class="term-name">Epoch / Batch<span class="term-en">Epoch / Batch</span></div><div class="term-def">Epoch = 所有数据过一遍。Batch = 每次用的一小批数据（如 32 个样本）。<div class="term-ch">第3章</div></div></div>
+</div>
+
+<div class="section-title">第4章 · 神经网络</div>
+<div class="term-grid">
+<div class="term" data-kw="神经元 neuron 节点 感知机"><div class="term-name">神经元<span class="term-en">Neuron</span></div><div class="term-def">网络的基本单元。做两步：加权求和 → 激活函数。y = f(W·x + b)。<div class="term-ch">第4章</div></div></div>
+<div class="term" data-kw="激活函数 activation relu sigmoid 非线性"><div class="term-name">激活函数<span class="term-en">Activation Function</span></div><div class="term-def">引入非线性的函数。没有它，100 层网络 = 1 层。ReLU 是默认选择。<div class="term-ch">第4章</div></div></div>
+<div class="term" data-kw="前向传播 forward pass 推理 inference"><div class="term-name">前向传播<span class="term-en">Forward Pass</span></div><div class="term-def">数据从输入层逐层流到输出层，得到预测值。就是"用模型做预测"。<div class="term-ch">第4章</div></div></div>
+<div class="term" data-kw="过拟合 overfitting 欠拟合 underfitting"><div class="term-name">过拟合 / 欠拟合<span class="term-en">Overfit / Underfit</span></div><div class="term-def">过拟合：训练好但测试差（背答案）。欠拟合：训练和测试都差（学不够）。<div class="term-ch">第4章</div></div></div>
+</div>
+
+<div class="section-title">第5章 · 反向传播</div>
+<div class="term-grid">
+<div class="term" data-kw="反向传播 backpropagation bp 链式法则"><div class="term-name">反向传播<span class="term-en">Backpropagation</span></div><div class="term-def">从输出往回逐层用链式法则计算梯度。一次前向+一次反向算出所有参数的梯度。<div class="term-ch">第5章</div></div></div>
+<div class="term" data-kw="链式法则 chain rule 复合函数 求导"><div class="term-name">链式法则<span class="term-en">Chain Rule</span></div><div class="term-def">复合函数求导：dy/dx = (dy/du)×(du/dx)。反向传播的数学基础。<div class="term-ch">第5章</div></div></div>
+<div class="term" data-kw="梯度消失 vanishing gradient 深层"><div class="term-name">梯度消失<span class="term-en">Vanishing Gradient</span></div><div class="term-def">深层网络中梯度逐层相乘变得越来越小，前面的层学不动。用 ReLU、残差连接解决。<div class="term-ch">第5章</div></div></div>
+</div>
+
+<div class="section-title">第6章 · CNN</div>
+<div class="term-grid">
+<div class="term" data-kw="卷积 convolution 滑动窗口 滤波器"><div class="term-name">卷积<span class="term-en">Convolution</span></div><div class="term-def">小窗口在输入上滑动，每个位置做点积。检测局部特征（边缘、纹理）。<div class="term-ch">第6章</div></div></div>
+<div class="term" data-kw="卷积核 kernel filter 滤波器 特征检测"><div class="term-name">卷积核<span class="term-en">Kernel / Filter</span></div><div class="term-def">一个小矩阵（如 3×3），是"特征检测器"。权重通过训练学出来。<div class="term-ch">第6章</div></div></div>
+<div class="term" data-kw="池化 pooling 下采样 maxpool"><div class="term-name">池化<span class="term-en">Pooling</span></div><div class="term-def">在小窗口内取最大值（或平均值），降低分辨率。提供平移不变性。<div class="term-ch">第6章</div></div></div>
+<div class="term" data-kw="残差连接 residual skip connection resnet"><div class="term-name">残差连接<span class="term-en">Residual Connection</span></div><div class="term-def">output = F(x) + x。让梯度可以"跳过"层传播，使训练 100+ 层成为可能。<div class="term-ch">第6章</div></div></div>
+</div>
+
+<div class="section-title">第7章 · Transformer</div>
+<div class="term-grid">
+<div class="term" data-kw="注意力 attention 关注 权重"><div class="term-name">注意力机制<span class="term-en">Attention</span></div><div class="term-def">让每个词"看到"所有其他词，计算相关度，加权融合信息。<div class="term-ch">第7章</div></div></div>
+<div class="term" data-kw="q k v query key value 查询 键 值"><div class="term-name">Q / K / V<span class="term-en">Query / Key / Value</span></div><div class="term-def">同一个词的三种投影。Q=我在找什么，K=我能提供什么，V=我的实际内容。<div class="term-ch">第7章</div></div></div>
+<div class="term" data-kw="多头注意力 multi-head attention 并行"><div class="term-name">多头注意力<span class="term-en">Multi-Head Attention</span></div><div class="term-def">多个注意力头并行，各自关注不同关系（语法、指代、修饰），最后拼接。<div class="term-ch">第7章</div></div></div>
+<div class="term" data-kw="位置编码 positional encoding rope 顺序"><div class="term-name">位置编码<span class="term-en">Positional Encoding</span></div><div class="term-def">告诉模型词的顺序。自注意力本身不知道顺序，必须额外注入。<div class="term-ch">第7章</div></div></div>
+</div>
+
+<div class="section-title">第8章 · 大语言模型</div>
+<div class="term-grid">
+<div class="term" data-kw="token 词元 分词 子词"><div class="term-name">Token<span class="term-en">Token</span></div><div class="term-def">文本的最小处理单位（子词级别）。英文约 1 token ≈ 0.75 词，中文约 1 字 ≈ 1-2 token。<div class="term-ch">第8章</div></div></div>
+<div class="term" data-kw="预训练 pretrain 基座 base model"><div class="term-name">预训练<span class="term-en">Pre-training</span></div><div class="term-def">在海量文本上训练"预测下一个词"。学到语言能力和世界知识。<div class="term-ch">第8章</div></div></div>
+<div class="term" data-kw="sft 微调 fine-tune 指令 对齐 rlhf dpo"><div class="term-name">SFT / 对齐<span class="term-en">SFT / Alignment</span></div><div class="term-def">SFT：用指令-回答对学会遵循指令。对齐（DPO/RLHF）：让回答有帮助、诚实、无害。<div class="term-ch">第8章</div></div></div>
+<div class="term" data-kw="prompt 提示词 指令 system"><div class="term-name">Prompt<span class="term-en">Prompt</span></div><div class="term-def">给模型的输入文本。好的 Prompt = 角色 + 任务 + 约束 + 格式 + 示例。<div class="term-ch">第8章</div></div></div>
+<div class="term" data-kw="cot chain of thought 思维链 推理"><div class="term-name">思维链 (CoT)<span class="term-en">Chain of Thought</span></div><div class="term-def">让模型"一步步思考"再给答案。显著提高数学和逻辑推理的准确率。<div class="term-ch">第8章</div></div></div>
+<div class="term" data-kw="lora 低秩 微调 适配器 adapter"><div class="term-name">LoRA<span class="term-en">Low-Rank Adaptation</span></div><div class="term-def">只训练一个小的"增量"（0.1% 参数），不动原始权重。单卡就能微调 7B 模型。<div class="term-ch">第8章</div></div></div>
+<div class="term" data-kw="幻觉 hallucination 编造 胡说"><div class="term-name">幻觉<span class="term-en">Hallucination</span></div><div class="term-def">模型编造不存在的事实（假论文、假引用）。RAG 是主要缓解手段。<div class="term-ch">第8章</div></div></div>
+</div>
+
+<div class="section-title">第9章 · RAG 与 Agent</div>
+<div class="term-grid">
+<div class="term" data-kw="rag 检索增强 retrieval augmented generation"><div class="term-name">RAG<span class="term-en">Retrieval-Augmented Generation</span></div><div class="term-def">先检索相关文档，再让 LLM 基于文档回答。减少幻觉，利用私有数据。<div class="term-ch">第9章</div></div></div>
+<div class="term" data-kw="embedding 嵌入 向量化 语义"><div class="term-name">Embedding<span class="term-en">Embedding</span></div><div class="term-def">把文本变成向量。含义相近的文本 → 向量相近。是语义搜索的基础。<div class="term-ch">第9章</div></div></div>
+<div class="term" data-kw="向量数据库 vector database faiss chroma milvus"><div class="term-name">向量数据库<span class="term-en">Vector Database</span></div><div class="term-def">专门存储和检索向量的数据库。能在百万向量中毫秒级找到最相似的 Top-K。<div class="term-ch">第9章</div></div></div>
+<div class="term" data-kw="agent 智能体 工具 tool 行动"><div class="term-name">Agent<span class="term-en">Agent / 智能体</span></div><div class="term-def">LLM + 工具调用 + 规划。能"做事"（搜索、计算、执行代码），不只是"说话"。<div class="term-ch">第9章</div></div></div>
+<div class="term" data-kw="function calling 函数调用 工具调用"><div class="term-name">Function Calling<span class="term-en">Function Calling</span></div><div class="term-def">LLM 决定调用什么工具、传什么参数。开发者实现工具函数，LLM 负责决策。<div class="term-ch">第9章</div></div></div>
+</div>
+
+<div class="section-title">第10章 · 部署与 MLOps</div>
+<div class="term-grid">
+<div class="term" data-kw="docker 容器 镜像 打包"><div class="term-name">Docker<span class="term-en">Docker</span></div><div class="term-def">把整个运行环境打包成"镜像"，任何机器都能一致运行。解决"在我机器上能跑"。<div class="term-ch">第10章</div></div></div>
+<div class="term" data-kw="量化 quantization int4 int8 压缩"><div class="term-name">量化<span class="term-en">Quantization</span></div><div class="term-def">减少每个参数的位数（如 FP32→INT4）。体积缩小 8 倍，精度损失 < 2%。<div class="term-ch">第10章</div></div></div>
+<div class="term" data-kw="推理 inference 预测 服务 serving"><div class="term-name">推理<span class="term-en">Inference</span></div><div class="term-def">用训练好的模型做预测。和"训练"相对。vLLM、Ollama 是推理引擎。<div class="term-ch">第10章</div></div></div>
+<div class="term" data-kw="数据漂移 data drift 退化 监控"><div class="term-name">数据漂移<span class="term-en">Data Drift</span></div><div class="term-def">线上数据分布和训练时不同，导致模型性能悄悄下降。需要持续监控。<div class="term-ch">第10章</div></div></div>
+</div>
+
+</div>
+</div>
+
+<script>
+function filterTerms() {
+  const q = document.getElementById('search').value.toLowerCase();
+  document.querySelectorAll('.term').forEach(t => {
+    const kw = (t.dataset.kw + ' ' + t.textContent).toLowerCase();
+    t.classList.toggle('hidden', q && !kw.includes(q));
+  });
+  document.querySelectorAll('.section-title').forEach(s => {
+    const grid = s.nextElementSibling;
+    const visible = grid ? grid.querySelectorAll('.term:not(.hidden)').length : 0;
+    s.classList.toggle('hidden', q && visible === 0);
+    if (grid) grid.classList.toggle('hidden', q && visible === 0);
+  });
+}
+</script>
+
+</body>
+</html>

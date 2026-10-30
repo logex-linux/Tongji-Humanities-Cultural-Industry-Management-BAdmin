@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>高伟权 · 课堂风格画像</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #0f0f1a; color: #e2e8f0; line-height: 1.8; overflow-x: hidden; }
+
+/* Hero */
+.hero { text-align: center; padding: 80px 20px 60px; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 30% 50%, rgba(99,102,241,.15) 0%, transparent 50%), radial-gradient(circle at 70% 30%, rgba(245,158,11,.1) 0%, transparent 50%); animation: float 20s linear infinite; }
+@keyframes float { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.hero h1 { font-size: 42px; margin: 0; position: relative; background: linear-gradient(135deg, #a78bfa, #f59e0b, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero .sub { margin-top: 12px; font-size: 16px; color: #94a3b8; position: relative; }
+.hero .meta { margin-top: 24px; font-size: 13px; color: #64748b; position: relative; }
+.hero .meta span { display: inline-block; margin: 0 12px; padding: 4px 12px; border: 1px solid rgba(255,255,255,.1); border-radius: 20px; }
+
+/* Stats bar */
+.stats { display: flex; justify-content: center; gap: 40px; padding: 24px; background: rgba(255,255,255,.02); border-bottom: 1px solid rgba(255,255,255,.05); flex-wrap: wrap; }
+.stat { text-align: center; }
+.stat .num { font-size: 32px; font-weight: 700; background: linear-gradient(135deg, #a78bfa, #6366f1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.stat .label { font-size: 12px; color: #64748b; margin-top: 4px; }
+
+/* Filter tabs */
+.tabs { display: flex; justify-content: center; gap: 8px; padding: 24px 16px 0; flex-wrap: wrap; position: sticky; top: 0; z-index: 10; background: rgba(15,15,26,.85); backdrop-filter: blur(12px); padding-bottom: 16px; }
+.tab { padding: 8px 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,.12); background: transparent; color: #94a3b8; cursor: pointer; font-size: 13px; transition: all .2s; font-family: inherit; }
+.tab:hover { border-color: #6366f1; color: #c4b5fd; }
+.tab.active { background: #6366f1; border-color: #6366f1; color: #fff; }
+
+/* Cards grid */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 20px; padding: 32px 40px; max-width: 1400px; margin: 0 auto; }
+.card { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); border-radius: 16px; padding: 28px; transition: all .3s; cursor: default; position: relative; overflow: hidden; }
+.card:hover { border-color: rgba(99,102,241,.3); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
+.card .icon { font-size: 32px; margin-bottom: 12px; }
+.card h3 { margin: 0 0 8px; font-size: 18px; color: #f1f5f9; }
+.card .card-desc { font-size: 13px; color: #94a3b8; margin-bottom: 16px; line-height: 1.6; }
+.card .quotes { border-left: 2px solid rgba(99,102,241,.3); padding-left: 16px; margin-top: 16px; }
+.card .quote { margin: 12px 0; padding: 10px 14px; background: rgba(255,255,255,.03); border-radius: 8px; font-size: 14px; line-height: 1.7; }
+.card .quote .q-text { color: #cbd5e1; font-style: italic; }
+.card .quote .q-src { display: block; margin-top: 6px; font-size: 11px; color: #64748b; }
+.card .quote .q-label { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; margin-right: 8px; background: rgba(99,102,241,.2); color: #a78bfa; }
+.card .tags { margin-top: 16px; display: flex; gap: 6px; flex-wrap: wrap; }
+.card .tag { padding: 3px 10px; border-radius: 12px; font-size: 11px; border: 1px solid rgba(255,255,255,.1); color: #94a3b8; }
+
+/* Detail modal */
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 100; backdrop-filter: blur(4px); }
+.overlay.show { display: flex; align-items: center; justify-content: center; }
+.modal { background: #1e293b; border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 32px; max-width: 700px; width: 90%; max-height: 80vh; overflow-y: auto; }
+.modal h3 { font-size: 22px; margin-bottom: 20px; color: #f1f5f9; }
+.modal .big-quote { margin: 16px 0; padding: 16px 20px; background: rgba(99,102,241,.08); border-left: 3px solid #6366f1; border-radius: 0 8px 8px 0; }
+.modal .big-quote p { margin: 8px 0; font-size: 15px; line-height: 1.8; color: #cbd5e1; font-style: italic; }
+.modal .big-quote .src { font-size: 12px; color: #64748b; margin-top: 8px; }
+.modal .close { float: right; background: none; border: none; color: #94a3b8; font-size: 24px; cursor: pointer; padding: 4px 8px; }
+
+/* Footer */
+.footer { text-align: center; padding: 40px; color: #64748b; font-size: 13px; border-top: 1px solid rgba(255,255,255,.05); margin-top: 40px; }
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; padding: 16px; }
+  .hero h1 { font-size: 28px; }
+  .stats { gap: 20px; }
+  .stat .num { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>高伟权 · 课堂风格画像</h1>
+  <div class="sub">从七讲课堂录音中提取的十三种个人风格特质，附原始例证</div>
+  <div class="meta">
+    <span>外国文学专题</span><span>2026 春</span><span>共 7 讲</span>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="num">13</div><div class="label">风格维度</div></div>
+  <div class="stat"><div class="num">40+</div><div class="label">课堂原句引证</div></div>
+  <div class="stat"><div class="num">7</div><div class="label">来源课次</div></div>
+  <div class="stat"><div class="num">5</div><div class="label">交叉学科</div></div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-filter="all">全部</button>
+  <button class="tab" data-filter="语言">🗣 语言风格</button>
+  <button class="tab" data-filter="思想">💡 思想立场</button>
+  <button class="tab" data-filter="教学">🎓 教学方法</button>
+  <button class="tab" data-filter="人格">❤️ 人格特质</button>
+</div>
+
+<div class="grid" id="grid">
+
+<!-- 1. 双语切换 -->
+<div class="card" data-tags="语言">
+  <div class="icon">🗣️</div>
+  <h3>一、中英双语无缝切换</h3>
+  <div class="card-desc">经常以英文开场，再转回中文；课堂中英文学术术语与汉语句子自由穿插，不加翻译也不加解释。</div>
+  <div class="quotes">
+    <div class="quote">
+      <span class="q-label">第二讲·开场</span>
+      <span class="q-text">"Life is too short to experience all the lives in human history. That's why we need old books — they bring past lives back into our present experience. 你听懂吗？……那我就纯汉语。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第四讲·总结</span>
+      <span class="q-text">"By dint of Araby, James Joyce aims to elaborate an ethical paradox deeply and implicitly rooted in philanthrocapitalism." ——一段全英文精炼总结后，立刻切回中文让学生理解。</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第五讲·术语</span>
+      <span class="q-text">"殖民——Colony，本意就是移民团。" "Puritan觉得work is calling——这个词叫天职。"</span>
+    </div>
+  </div>
+  <div class="tags"><span class="tag">中英夹杂</span><span class="tag">学术口语</span><span class="tag">翻译意识</span></div>
+</div>
+
+<!-- 2. 学术深度+强烈观点 -->
+<div class="card" data-tags="思想">
+  <div class="icon">🔥</div>
+  <h3>二、学术深度的强烈个人判断</h3>
+  <div class="card-desc">从不做中立含糊的表达，在任何话题上都给出旗帜鲜明的判断，甚至直接挑战学界共识。</div>
+  <div class="quotes">
+    <div class="quote">
+      <span class="q-label">第二讲·评陈星</span>
+      <span class="q-text">"做学术读博士的时候去看文章，一看看到陈星这篇文章。我怎麼覺得這個名字這麼熟悉？后来去看了一下，是南京大学的……2007年的冠军……后来他的文章发在外国文学的顶刊上——就是很让人佩服，做什么都做到最极致。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第四讲·评梭罗</span>
+      <span class="q-text">"Emerson被稱為美國的孔子……他的學生梭羅有一本書叫《瓦爾登湖》……在我們英語系有老師是非常推崇這本書的。但是我對這本書是極其批判的。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第五讲·评卢梭</span>
+      <span class="q-text">"我的理解跟陈星对亚里士多德的理解是不一样的。" ——当面纠正文献中引用的定义。</span>
+    </div>
+  </div>
+  <div class="tags"><span class="tag">学术立场</span><span class="tag">不中立</span><span class="tag">挑战共识</span></div>
+</div>
+
+<!-- 3. 文学为人生的信念 -->
+<div class="card" data-tags="人格 思想">
+  <div class="icon">📖</div>
+  <h3>三、"指导生活的是文学"</h3>
+  <div class="card-desc">反复强调文学的根本价值不在学术圈，而在指导每个人的日常生活和心灵。</div>
+  <div class="quotes">
+    <div class="quote">
+      <span class="q-label">第六讲·Rip部分</span>
+      <span class="q-text">"指导生活的是文学。它会让你的心穿越时空去想象你的存在，然后你再回来去念你的生活的时候，你知道——还不错。这是文学最本体的东西。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第四讲·论写作</span>
+      <span class="q-text">"我总觉得文学写作应该成为我们所有同学的一个基本的生活方面——不是一個專業，不僅僅應該是一個專業，它應該在我們生活當中一直存在著。或許你不用把它寫下來變成文字，而你應該在你的心裡面有這樣一個過程——這是文學的心靈的過程。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第四讲·文学价值</span>
+      <span class="q-text">"这是前两年做PPT，我还问怎麼辦？放棄文學？……后来是我自己找到了——文学的价值还在那，不可撼动。所以我覺得應該收回這種鄙視性的、帶著階級負氣的這種Connell式的脾氣，然後重新回到文學的事業當中去。"</span>
+    </div>
+  </div>
+  <div class="tags"><span class="tag">文学信仰</span><span class="tag">人生哲学</span><span class="tag">心灵</span></div>
+</div>
+
+<!-- 4. 自我暴露和反思 -->
+<div class="card" data-tags="人格">
+  <div class="icon">🪞</div>
+  <h3>四、高度的自我袒露与反思</h3>
+  <div class="card-desc">频繁在课堂上讲述个人经历、情感变化和思想演化过程，甚至包括自我怀疑。</div>
+  <div class="quotes">
+    <div class="quote">
+      <span class="q-label">第四讲·自我反思</span>
+      <span class="q-text">"其实在前两年我在讲鲁尼的时候，我还摸不太很透。我觉得变老真是一件好事——开始思考的多了，慢慢地就看透了，就明白了。因为前两年我还有点对文学有点怀疑呢。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第二讲·回忆本科</span>
+      <span class="q-text">"我读本科的时候是2010年，那个时候我们英语专业的学生都要去参加21世纪杯演讲比赛……就去备赛，备赛的时候就去看陈星的演讲。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第四讲·留学经历</span>
+      <span class="q-text">"我去留学的时候，我的老师很吃惊我的家境——就说你这样的家境，爸爸是农民，怎么可能来学文学？……通过他的提醒我也表示很吃惊——为什么我不能学？咱都是被这种比较平等的氛围下长大的，大家都可以学。"</span>
+    </div>
+  </div>
+  <div class="tags"><span class="tag">自我暴露</span><span class="tag">真诚</span><span class="tag">成长叙事</span></div>
+</div>
+
+<!-- 5. 辛辣社会批判 -->
+<div class="card" data-tags="思想">
+  <div class="icon">⚔️</div>
+  <h3>五、毫不留情的制度批判</h3>
+  <div class="card-desc">对资本主义、帝国主义、殖民逻辑进行直接而尖锐的批判，强调"批判制度而非个人"。</div>
+  <div class="quotes">
+    <div class="quote">
+      <span class="q-label">第一讲·英国本质</span>
+      <span class="q-text">"主政的英格蘭內核的思想是剝削，從來不是同化。……就是本著這樣一種精神，這幾個民族就長期處於分裂的狀態。它最終只能形成一個United Kingdom，而這個聯合只是表面上的聯合——是形合、神不合、心不合的。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第七讲·总结</span>
+      <span class="q-text">"There are no winners in the system of imperialism. The colonized suffer from it — but the imperialists are no exception. 一个制度之下的人是非常可怜的。所以我们一定要声讨制度。如果这个制度不行，一定要去改变这个制度。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第三讲·慈善批判</span>
+      <span class="q-text">"我们所批判的仅仅是system per se——这个制度本身。这是我们做学术和文学教育展开批判的根本性证据。只有那个无意识的、在意识当中生成出来的机制，是值得批判和反思的。"</span>
+    </div>
+  </div>
+  <div class="tags"><span class="tag">制度批判</span><span class="tag">反殖民</span><span class="tag">马克思主义</span></div>
+</div>
+
+<!-- 6. 跨学科引用 -->
+<div class="card" data-tags="思想">
+  <div class="icon">🌐</div>
+  <h3>六、横跨五个学科的广谱引用</h3>
+  <div class="card-desc">一堂课内自如调用哲学、政治学、经济学、心理学、电影研究等多学科资源。</div>
+  <div class="quotes">
+    <div class="quote">
+      <span class="q-label">哲学全景</span>
+      <span class="q-text">亚里士多德、尼采（日神/酒神）、德勒兹（Immanent Self）、福柯（话语分析）、巴迪欧（"爱是最小单位的共产主义"）、齐泽克（星巴克批判）、勒内·基拉尔（欲望三角）、阿兰·巴迪欧</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">政治学</span>
+      <span class="q-text">本尼迪克特·安德森《想象的共同体》、卢卡奇（"他父亲是银行家，他找不到生活的意义"）、马克思《哥达纲领批判》</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">经济学/社会学</span>
+      <span class="q-text">亚当·斯密、马克斯·韦伯《新教伦理与资本主义精神》、彼得·巴菲特"慈善工业情结"</span>
+    </div>
+  </div>
+  <div class="tags"><span class="tag">跨学科</span><span class="tag">哲学</span><span class="tag">政治学</span><span class="tag">经济学</span></div>
+</div>
+
+<!-- 7. 中西对比思维 -->
+<div class="card" data-tags="思想 语言">
+  <div class="icon">🀄</div>
+  <h3>七、频繁的中西文明对比</h3>
+  <div class="card-desc">在讲西方文学时不断引入中国坐标，既有宏观文明判断，也有微观文本对照。</div>
+  <div class="quotes">
+    <div class="quote">
+      <span class="q-label">第一讲·诗骚对比</span>
+      <span class="q-text">"Beowulf——英国的第一部史诗，它的地位相当于我们的《诗经》。你看中国是喜欢Lyric的民族，我们是喜欢抒情诗的民族；他们是喜欢史诗的民族。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第二讲·语言观对比</span>
+      <span class="q-text">"钱钟书说：中国的文明和思想太早熟了，在先秦的时候我们已经形成了基本的观念——言不尽意。……西方是到了1960年代才开始对语言形成体系化的理论化的讨论。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第六讲·文献传统对比</span>
+      <span class="q-text">"这让我们想起我们中国的谁？蒲松龄或者是司马迁——喜欢找人问故事。问故事他就这里面有真实的历史。"</span>
+    </div>
+  </div>
+  <div class="tags"><span class="tag">中西比较</span><span class="tag">文明视角</span><span class="tag">钱钟书</span></div>
+</div>
+
+<!-- 8. 反AI立场 -->
+<div class="card" data-tags="教学 思想">
+  <div class="icon">🤖</div>
+  <h3>八、近乎激进的AI反对</h3>
+  <div class="card-desc">多次在课堂上直接批评AI，认为AI让人停止思考、用AI的学生一眼可辨。</div>
+  <div class="quotes">
+    <div class="quote">
+      <span class="q-label">第一讲·翻译练习</span>
+      <span class="q-text">"No AI please. 不要拍个照放到AI上。AI stupefies people——它会让我们不思考。因为语言，你学语言，你会让自己聪明的、让自己有灵气的、让你脑子越用越好用的。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第七讲·考试警告</span>
+      <span class="q-text">"禁止使用AI作答，一经发现判为零分。……今年是AI灾难的一年，为什么这么说？我给硕士生开文学研究论文写作的时候，不止一个同学全篇使用AI论文。……我不需要任何证据，我就可以判断出来——我说是AI就是AI。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第六讲·AI与文学</span>
+      <span class="q-text">"AI没有脑子。人文学还是靠人的两个眼睛读了close reading——你反思了，跟我们的生活有一个接触了，你才能写出那个答案。AI会想象，非常会胡说八道，说的一本正经地胡说八道，写一大段，然后你看不懂他在说什么。"</span>
+    </div>
+  </div>
+  <div class="tags"><span class="tag">反AI</span><span class="tag">人文精神</span><span class="tag">独立思考</span></div>
+</div>
+
+<!-- 9. 幽默感和自嘲 -->
+<div class="card" data-tags="人格 语言">
+  <div class="icon">😄</div>
+  <h3>九、自嘲式幽默与课堂调侃</h3>
+  <div class="card-desc">讲课中频繁插入自嘲、对学生的善意调侃和对体制的幽默讽刺。</div>
+  <div class="quotes">
+    <div class="quote">
+      <span class="q-label">第四讲·自嘲写作</span>
+      <span class="q-text">"我也自己写小说——当然你一落笔去，你不懂外语，那小说写得那么好，语言那么出彩。所以即便你们去了中文系，后面也要不断地去学习外文。——所以老师有点狂，现在越来越狂，一镜头都快交光了。老夫聊发少年狂。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第五讲·调侃学生</span>
+      <span class="q-text">"大部分同学——我不能说所有——99%的同学无心于做这样的思想交流。可能我觉得99%的同学希望找到一个毕业之后立马进一个大厂，然后就过上了幸福的生活——这是我对你们的非常恶意的揣测，希望你们狠狠打我的脸。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第五讲·英语专业</span>
+      <span class="q-text">"没选英语的后悔吧。"（笑谈）</span>
+    </div>
+  </div>
+  <div class="tags"><span class="tag">幽默</span><span class="tag">自嘲</span><span class="tag">课堂氛围</span></div>
+</div>
+
+<!-- 10. 对学生人生的关怀 -->
+<div class="card" data-tags="人格 教学">
+  <div class="icon">💝</div>
+  <h3>十、"比学习更重要的是你们的生活"</h3>
+  <div class="card-desc">在学术讲解之外，对学生的情感生活、心理健康和人生选择给出充满温情的劝诫。</div>
+  <div class="quotes">
+    <div class="quote">
+      <span class="q-label">第七讲·结课赠言</span>
+      <span class="q-text">"我觉得比学习更重要的是你们的生活，所以我更想祝大家的生活一帆风顺。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第三讲·恋爱劝诫</span>
+      <span class="q-text">"同学们要记住：当你在一个爱情里面现在很疯狂的时候，请你冷静下来想一想——你为何如此的疯狂？其实有点蠢的。尤其是我带的学生因为失恋就休学，我就更不能接受。所以我替你们这个青春洋溢的年龄泼上一盆冷水：请你们理性恋爱。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第四讲·专业选择</span>
+      <span class="q-text">"大家我觉得尊重内心。你一定要尊重内心。你后面要读硕士，你再想想你那个硕士还要搞那个东西，可不可以？烦不烦？你喜欢那个东西，你有热情去坚持它，我觉得这个很重要。不要被社会的那些理性给捆绑住了——选一个你真正喜欢的专业。"</span>
+    </div>
+  </div>
+  <div class="tags"><span class="tag">学生关怀</span><span class="tag">人生建议</span><span class="tag">教育理念</span></div>
+</div>
+
+<!-- 11. 文本细读的示范 -->
+<div class="card" data-tags="教学">
+  <div class="icon">🔍</div>
+  <h3>十一、教科书级的文本细读示范</h3>
+  <div class="card-desc">在课上亲自带领学生逐句、逐词分析原文，甚至要求现场翻译并耐心纠正。</div>
+  <div class="quotes">
+    <div class="quote">
+      <span class="q-label">第七讲·James长句</span>
+      <span class="q-text">（让十几个学生逐一尝试翻译Marcher墓前段落后）"你们学英语最大的问题就是英语把你的汉语也不会说了，然后英语也没有好到哪里去。所以学英语需要很长的慢节奏……语言是从你的肉体里长出来的东西，需要时间的积定。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第一讲·乔叟四行</span>
+      <span class="q-text">"大家要用中文，不要被英语带走了——要用汉语把它翻译出来。先领会它的意思，然后用汉语表达出来。如果有可能的话，稍微带一点诗的味道。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第二讲·Sonnet 87</span>
+      <span class="q-text">"你要學會調詞序。它會為了押韻不斷地換詞序，所以你需要重新換詞、重新換序。"</span>
+    </div>
+  </div>
+  <div class="tags"><span class="tag">文本细读</span><span class="tag">翻译训练</span><span class="tag">语言学习</span></div>
+</div>
+
+<!-- 12. 精英意识与家国情怀 -->
+<div class="card" data-tags="思想 教学">
+  <div class="icon">🏛️</div>
+  <h3>十二、精英自觉与大国使命感</h3>
+  <div class="card-desc">反复提醒学生"你们是中国的精英"，应该用英语向世界发声，参与国际对话。</div>
+  <div class="quotes">
+    <div class="quote">
+      <span class="q-label">第五讲·文科使命</span>
+      <span class="q-text">"我们这个大国，有我们的经验，有我们的历史——如果跟你们交流了之后，我们会得出一种新的文明。这是文科人的使命。……所以一定要用英文往外出，跟其他国际友人进行交流——这才是文科人的使命。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第四讲·同济定位</span>
+      <span class="q-text">"因为你们的基础好——我们是中国的Top University，前十的。QS排名我们第九、第八，十五也有。所以你们就是中国的精英。精英的话，你们要做上层建设，必然你们要去考研的。"</span>
+    </div>
+  </div>
+  <div class="tags"><span class="tag">精英意识</span><span class="tag">国家使命</span><span class="tag">文化输出</span></div>
+</div>
+
+<!-- 13. 对文学制度本身的反思 -->
+<div class="card" data-tags="思想 人格">
+  <div class="icon">🎭</div>
+  <h3>十三、对文学体制的冷眼审视</h3>
+  <div class="card-desc">一面坚守文学信仰，一面毫不留情批判文学圈的文化表演和体制异化。</div>
+  <div class="quotes">
+    <div class="quote">
+      <span class="q-label">第四讲·文学危机</span>
+      <span class="q-text">"It was culture as class performance——文化是作为一种阶级表演的存在。Literature fetishized for its ability to take educated people on false emotional journeys——文学被物化成了一种能力：带着受过教育的人去看看那些情感上遇到挫折的人的真实经历，然后感觉比未受教育的人高贵。"</span>
+    </div>
+    <div class="quote">
+      <span class="q-label">第五讲·期刊批评</span>
+      <span class="q-text">"你写一个CSSCI的期刊，跟中国人自娱自乐的有啥意思？你挂在网上，十年引用率1，下载量200。然后你得了一大笔奖金，单位给你奖学金、助学金、国家奖学金、又找到工作了，单位还给你一笔奖金——你良心疼不疼？"</span>
+    </div>
+  </div>
+  <div class="tags"><span class="tag">体制批判</span><span class="tag">文学异化</span><span class="tag">自反性</span></div>
+</div>
+
+</div>
+
+<!-- Modal -->
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal"></div>
+</div>
+
+<div class="footer">
+  <p>从高伟权老师 2026 年春季"外国文学专题"七次课堂原始录音中提取</p>
+  <p>风格分析基于逐字讲稿 · 所有引文均为课堂现场原话</p>
+</div>
+
+<script>
+(function() {
+  // Filter tabs
+  const tabs = document.querySelectorAll('.tab');
+  const cards = document.querySelectorAll('.card');
+  
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      tabs.forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      const filter = this.dataset.filter;
+      
+      cards.forEach(card => {
+        if (filter === 'all') {
+          card.style.display = '';
+          card.style.animation = 'fadeIn .4s ease';
+        } else {
+          const tags = card.dataset.tags || '';
+          card.style.display = tags.includes(filter) ? '' : 'none';
+        }
+      });
+    });
+  });
+
+  // Card click → expand
+  cards.forEach(card => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', function(e) {
+      if (e.target.closest('.tab')) return;
+      const title = this.querySelector('h3').textContent;
+      const quotes = this.querySelectorAll('.quote');
+      const desc = this.querySelector('.card-desc').textContent;
+      const icon = this.querySelector('.icon').textContent;
+      
+      let html = '<button class="close" onclick="document.getElementById(\'overlay\').classList.remove(\'show\')">&times;</button>';
+      html += '<h3>' + icon + ' ' + title + '</h3>';
+      html += '<p style="color:#94a3b8;font-size:14px;margin-bottom:20px;">' + desc + '</p>';
+      quotes.forEach(q => {
+        html += '<div class="big-quote">';
+        html += '<p>' + q.querySelector('.q-text').textContent + '</p>';
+        const src = q.querySelector('.q-src') ? q.querySelector('.q-src').textContent : '';
+        const label = q.querySelector('.q-label') ? q.querySelector('.q-label').textContent : '';
+        if (label) html += '<div class="src">📎 ' + label + (src ? ' · ' + src : '') + '</div>';
+        html += '</div>';
+      });
+      document.getElementById('modal').innerHTML = html;
+      document.getElementById('overlay').classList.add('show');
+    });
+  });
+
+  // Close overlay on background click
+  document.getElementById('overlay').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('show');
+  });
+
+  // Keyboard close
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') document.getElementById('overlay').classList.remove('show');
+  });
+
+  // Add fade-in animation style
+  const styleEl = document.createElement('style');
+  styleEl.textContent = '@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }';
+  document.head.appendChild(styleEl);
+})();
+</script>
+</body>
+</html>

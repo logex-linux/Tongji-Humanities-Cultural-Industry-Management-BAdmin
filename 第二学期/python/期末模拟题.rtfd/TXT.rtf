@@ -1,0 +1,590 @@
+{\rtf1\ansi\ansicpg936\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Bold;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red19\green22\blue38;\red255\green255\blue255;\red151\green151\blue164;
+\red81\green85\blue96;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c9412\c11765\c20000;\cssrgb\c100000\c100000\c100000;\cssrgb\c65882\c65882\c70196;
+\cssrgb\c39216\c40784\c45098;\cssrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sa600\partightenfactor0
+
+\f0\b\fs32 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \uc0\u19968 \u12289  \u21333 \u36873 \u39064  \u65288 \u20849  15\u39064 \u65292 30.0 \u20998 \u65289 \cb1 \
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+
+\f1\b0\fs28 \cf2 \cb3 1.\'a0\cf4 \strokec4 (\uc0\u21333 \u36873 \u39064 , 2.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \uc0\u24050 \u30693 str1='a**b*c*d'\u65292 \u21017 str1.split('*')\u30340 \u36820 \u22238 \u20540 \u26159 ________\u12290 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 A\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 ['a**b', 'c', 'd']\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 B\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u25253 \u38169 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 C\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 ['a', '', 'b', 'c', 'd']\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 D\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 ['a', 'b', 'c', 'd']\cb1 \
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+\cf2 \cb3 2.\'a0\cf4 \strokec4 (\uc0\u21333 \u36873 \u39064 , 2.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \uc0\u25191 \u34892 \u20102 \u19979 \u38754 \u30340 plt.subplots()\u35821 \u21477 \u21518 \u65292 \u22312 \u26368 \u21518 \u19968 \u20010 \u32472 \u22270 \u21306 (\u21491 \u19979 \u35282 )\u32472 \u21046 \u26354 \u32447 \u30340 \u35821 \u21477 \u26159 ________\u12290 \cb1 \
+\cb3 \'a0\'a0\'a0\'a0fig,ax = plt.subplots(nrows=3,ncols=4,figsize=(4,3),dpi=100)\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 A\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 ax[3][4].plot((1,2,3),(4,3,6),'b')\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 B\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 ax[2][3].plot((1,2,3),(4,3,6),'b')\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 C\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 ax[11].plot((1,2,3),(4,3,6),'b')\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 D\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 ax[12].plot((1,2,3),(4,3,6),'b')\cb1 \
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+\cf2 \cb3 3.\'a0\cf4 \strokec4 (\uc0\u21333 \u36873 \u39064 , 2.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 jieba\uc0\u24211 \u30340 \u20013 \u25991 \u20998 \u35789 \u27169 \u24335 \u26377 \u19977 \u31181 :\u31934 \u31616 \u27169 \u24335 \u12289 \u20840 \u27169 \u24335 \u12289 \u25628 \u32034 \u24341 \u25806 \u27169 \u24335 \u65292 \u19979 \u21015 \u35821 \u21477 \u20013 \u23646 \u20110 \u31934 \u31616 \u27169 \u24335 \u30340 \u26159 ________\u12290 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 A\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 lst =jieba.lcut('\uc0\u23567 \u26126 \u26412 \u31185 \u27605 \u19994 \u20110 \u21516 \u27982 \u22823 \u23398 \u65292 \u21518 \u22312 \u32822 \u40065 \u22823 \u23398 \u28145 \u36896 ')\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 B\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 lst =jieba.analyse.extract_tags('\uc0\u23567 \u26126 \u26412 \u31185 \u27605 \u19994 \u20110 \u21516 \u27982 \u22823 \u23398 \u65292 \u21518 \u22312 \u32822 \u40065 \u22823 \u23398 \u28145 \u36896 ')\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 C\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 lst=jieba.lcut('\uc0\u23567 \u26126 \u26412 \u31185 \u27605 \u19994 \u20110 \u21516 \u27982 \u22823 \u23398 \u65292 \u21518 \u22312 \u32822 \u40065 \u22823 \u23398 \u28145 \u36896 ',cut_all=True)\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 D\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 lst =jieba.lcut_for_search('\uc0\u23567 \u26126 \u26412 \u31185 \u27605 \u19994 \u20110 \u21516 \u27982 \u22823 \u23398 \u65292 \u21518 \u22312 \u32822 \u40065 \u22823 \u23398 \u28145 \u36896 ')\cb1 \
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+\cf2 \cb3 4.\'a0\cf4 \strokec4 (\uc0\u21333 \u36873 \u39064 , 2.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \uc0\u32472 \u21046 \u19968 \u20010 \u28857 (0, 5)\u65292 \u27491 \u30830 \u30340 \u35821 \u21477 \u26159 ________\u12290 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 A\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 plt.plot([0, 5],c="b",marker="o")\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 B\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 plt.plot (5,c="b",marker="o")\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 C\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 plt.plot ([5,0],c="b",marker="o")\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 D\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 plt.plot ((0,5),c="b",marker="o")\cb1 \
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+\cf2 \cb3 5.\'a0\cf4 \strokec4 (\uc0\u21333 \u36873 \u39064 , 2.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \uc0\u29992 \u20110 \u21046 \u20316 \u32553 \u30053 \u22270 \u30340 \u26041 \u27861 \u26159 ________\u12290 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 A\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 resize\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 B\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 rotate\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 C\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 transpose\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 D\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 thumbnail\cb1 \
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+\cf2 \cb3 6.\'a0\cf4 \strokec4 (\uc0\u21333 \u36873 \u39064 , 2.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \uc0\u21033 \u29992 matplotlib\u36827 \u34892 \u32472 \u22270 \u65292 \u33021 \u26174 \u31034 \u22270 \u20363 \u30340 \u26041 \u27861 \u26159 ________\u12290 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 A\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 text\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 B\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 title\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 C\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 legend\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 D\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 show\cb1 \
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+\cf2 \cb3 7.\'a0\cf4 \strokec4 (\uc0\u21333 \u36873 \u39064 , 2.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \uc0\u19979 \u38754 \u19981 \u23646 \u20110 \u23545 \u35937 \u19977 \u35201 \u32032 \u30340 \u26159 ________\u12290 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 A\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u20107 \u20214 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 B\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u20989 \u25968 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 C\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u23646 \u24615 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 D\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u26041 \u27861 \cb1 \
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+\cf2 \cb3 8.\'a0\cf4 \strokec4 (\uc0\u21333 \u36873 \u39064 , 2.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \uc0\u31867 \u20013 \u23450 \u20041 \u20844 \u26377 \u25104 \u21592 \u30340 \u26041 \u27861 \u26159 ________\u12290 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 A\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u20197 \u20004 \u20010 \u19979 \u21010 \u32447 \u24320 \u22987 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 B\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u19981 \u20197 \u19979 \u21010 \u32447 \u24320 \u22987 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 C\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u20351 \u29992 public\u20851 \u38190 \u23383 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 D\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u20197 \u19968 \u20010 \u19979 \u21010 \u32447 \u24320 \u22987 \cb1 \
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+\cf2 \cb3 9.\'a0\cf4 \strokec4 (\uc0\u21333 \u36873 \u39064 , 2.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \uc0\u20551 \u23450 \u25191 \u34892 \u20102 \u22914 \u19979 \u30340 \u35821 \u21477 \u65292 \u21017 ________\u12290 \cb1 \
+\cb3 fp=open("test.txt","w")\cb1 \
+\cb3 x=66\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 A\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 fp.write(x)\uc0\u26159 \u27491 \u30830 \u30340 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 B\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 fp.writelines(x)\uc0\u26159 \u27491 \u30830 \u30340 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 C\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 fp.writelines(str(x),"66")\uc0\u26159 \u27491 \u30830 \u30340 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 D\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 fp.write(str(x))\uc0\u26159 \u27491 \u30830 \u30340 \cb1 \
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+\cf2 \cb3 10.\'a0\cf4 \strokec4 (\uc0\u21333 \u36873 \u39064 , 2.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \uc0\u20197 \u19979 \u21015 \u34920 \u25512 \u23548 \u24335 \u20013 \u65292 _______\u33021 \u27491 \u30830 \u29983 \u25104  1 \u21040  15 \u20043 \u38388 \u25152 \u26377 \u33021 \u34987  5 \u25972 \u38500 \u30340 \u25968 \u30340 \u31435 \u26041 \u32452 \u25104 \u30340 \u21015 \u34920 \u12290 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 A\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 [x**3 for x in range(1, 16) if x % 5 != 0]\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 B\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 [x**3 for x in range(5, 16) if x % 5 != 0]\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 C\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 [x**3 for x in range(1, 16) if x % 5 == 0]\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 D\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 [x**2 for x in range(1, 16) if x % 5 == 0]\cb1 \
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+\cf2 \cb3 11.\'a0\cf4 \strokec4 (\uc0\u21333 \u36873 \u39064 , 2.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \uc0\u22312 \u19979 \u21015 \u20851 \u20110 CSV\u25991 \u20214 \u30340 \u35828 \u27861 \u20013 \u65292 \u38169 \u35823 \u30340 \u26159 ________\u12290 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 A\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 CSV\uc0\u25991 \u20214 \u25968 \u25454 \u20043 \u38388 \u24120 \u29992 \u36887 \u21495 \u20316 \u20026 \u20998 \u38548 \u31526 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 B\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u22312 MS Excel\u20013 \u21487 \u20197 \u25171 \u24320 CSV\u25991 \u20214 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 C\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 CSV\uc0\u25991 \u20214 \u26159 \u32431 \u25991 \u26412 \u25991 \u20214 \u65292 \u21487 \u20197 \u29992 \u35760 \u20107 \u26412 \u25171 \u24320 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 D\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 CSV\uc0\u25991 \u20214 \u20013 \u23383 \u31526 \u25968 \u25454 \u19968 \u33324 \u24102 \u26377 \u21452 \u24341 \u21495 \u25110 \u21333 \u24341 \u21495 \cb1 \
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+\cf2 \cb3 12.\'a0\cf4 \strokec4 (\uc0\u21333 \u36873 \u39064 , 2.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \uc0\u22312 \u19979 \u21015 \u20851 \u20110 try\u35821 \u21477 \u25191 \u34892 \u30340 \u35828 \u27861 \u20013 \u65292 \u38169 \u35823 \u30340 \u26159 ________\u12290 \cb1 \
+\cb3 try:\cb1 \
+\cb3 \'a0\'a0\'a0\'a0n=int(input())\cb1 \
+\cb3 \'a0\'a0\'a0\'a0k=int(input())\cb1 \
+\cb3 \'a0\'a0\'a0\'a0m=n//k\cb1 \
+\cb3 \'a0\'a0\'a0\'a0print(m)\cb1 \
+\cb3 except ValueError:\cb1 \
+\cb3 \'a0\'a0\'a0\'a0print("error1")\cb1 \
+\cb3 except ZeroDivisionError:\cb1 \
+\cb3 \'a0\'a0\'a0\'a0print("error2")\cb1 \
+\cb3 except:\cb1 \
+\cb3 \'a0\'a0\'a0\'a0print("error3")\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 A\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u25191 \u34892 m=n//k\u35821 \u21477 \u26102 \u20986 \u29616 \u38169 \u35823 \u20250 \u25191 \u34892 print("error2")\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 B\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u21482 \u35201 \u20986 \u29616 \u38169 \u35823 \u37117 \u20250 \u25191 \u34892 print("error3")\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 C\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u25191 \u34892 n=int(input())\u35821 \u21477 \u36755 \u20837 \u25968 \u25454 \u26102 \u20986 \u29616 \u38169 \u35823 \u32780 \u25191 \u34892 print("error1")\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 D\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u25191 \u34892 m=int(input())\u35821 \u21477 \u36755 \u20837 \u25968 \u25454 \u26102 \u20986 \u29616 \u38169 \u35823 \u32780 \u25191 \u34892 print("error1")\cb1 \
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+\cf2 \cb3 13.\'a0\cf4 \strokec4 (\uc0\u21333 \u36873 \u39064 , 2.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 fp\uc0\u26159 \u25991 \u20214 \u23545 \u35937 \u65292 \u35821 \u21477 fp.writelines(s)\u20013 s\u30340 \u25968 \u25454 \u31867 \u22411 \u24212 \u26159 ________\u12290 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 A\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u21015 \u34920 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 B\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u20803 \u32452 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 C\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u23383 \u20856 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 D\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u23383 \u31526 \u20018 \cb1 \
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+\cf2 \cb3 14.\'a0\cf4 \strokec4 (\uc0\u21333 \u36873 \u39064 , 2.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \uc0\u25191 \u34892 \u35821 \u21477 from PIL import Image\u21518 \u65292 \u35201 \u25171 \u24320 \u25351 \u23450 \u30340 \u22270 \u20687 \u25991 \u20214 \u65292 \u20174 \u35821 \u27861 \u19978 \u26469 \u35828 \u65292 \u19979 \u38754 ________\u26159 \u27491 \u30830 \u30340 \u12290 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 A\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 im = Image.open("C:\\Test\\YZQ.jpg")\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 B\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 im = open(r"C:\\Test\\YZQ.jpg")\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 C\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 im = Image.open(r"C:\\Test\\YZQ.jpg")\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 D\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 im = open("C:\\Test\\YZQ.jpg")\cb1 \
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+\cf2 \cb3 15.\'a0\cf4 \strokec4 (\uc0\u21333 \u36873 \u39064 , 2.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \uc0\u22312 \u19979 \u21015 \u20851 \u20110 \u27169 \u22359 \u12289 \u21253 \u12289 \u24211 \u30340 \u35828 \u27861 \u20013 \u65292 \u38169 \u35823 \u30340 \u26159 ________\u12290 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 A\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u19968 \u20010 \u21253 \u20013 \u21487 \u20197 \u23384 \u22312 \u23376 \u21253 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 B\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u24211 Test.py\u12289 Jieba\u12289 Matplotlib\u12289 NumPy\u31561 \u38656 \u35201 \u29992 import\u23548 \u20837 \u21518 \u25165 \u21487 \u20197 \u20351 \u29992 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 C\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 Test.py\uc0\u21487 \u20197 \u35748 \u20026 \u26159 \u19968 \u20010 \u24211 \u65292 Jieba\u12289 Matplotlib\u21644 NumPy\u20063 \u26159 \u24211 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb3 \strokec5 D\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 \uc0\u19968 \u20010 \u21253 \u20013 \u30340 __init__.py\u27169 \u22359 \u19981 \u26159 \u19968 \u23450 \u38656 \u35201 \u26377 \u30340 \cb1 \
+\pard\pardeftab720\sa600\partightenfactor0
+
+\f0\b\fs32 \cf2 \cb3 \uc0\u20108 \u12289  \u31243 \u24207 \u22635 \u31354 \u39064  \u65288 \u20849  2\u39064 \u65292 24.0 \u20998 \u65289 \cb1 \
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+
+\f1\b0\fs28 \cf2 \cb3 16.\'a0\cf4 \strokec4 (\uc0\u31243 \u24207 \u22635 \u31354 \u39064 , 12.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs32 \cf2 \cb3 \strokec6 \uc0\u31243 \u24207 \u30340 \u21151 \u33021 \u26159 \u23558 \u24425 \u33394 \u22270 \u20687 \u36716 \u25442 \u20026 8\u20301 \u28784 \u24230 \u22270 \u20687 \u65292 \u28982 \u21518 \u23558 \u27599 \u19968 \u20010 \u20687 \u32032 \u30340 \u28784 \u24230 \u20540 \u23384 \u20837 \u22312 hd\u20013 \u65292 \u26368 \u21518 \u32472 \u21046 \u30452 \u26041 \u22270 \u65292 \u22914 \u22270 \u25152 \u31034 \u12290 
+\f1\fs28 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs32 \cf2 \cb3 \uc0\u21487 \u20197 \u19979 \u36733 Tulips.rar\u65292 Tulips.jpg\u22312 \u20854 \u20013 \u12290 
+\f1\fs28 \cb1 \
+\
+
+\f2\fs32 \cb3 import matplotlib.pyplot as plt
+\f1\fs28 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs32 \cf2 \cb3 \strokec6 from PIL import Image\cf0 \cb1 \uc0\u8232 \cf2 \cb3 __(1)__:\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 im = Image.open(r"Tulips.jpg")\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 im = im.convert("L")\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 w,h = im.size\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 __(2)__=[0]*w*h\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 n=0\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 for i in range(w):\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 for j in range(h):\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 pixel=im.getpixel((i,j))\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 hd[__(3)__]=pixel\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 n=n+1\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 print(hd)\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 plt.__(4)__(hd,256)\cf0 \cb1 \uc0\u8232 \cf2 \cb3 except FileNotFoundError:\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 print("\uc0\u25991 \u20214 \u19981 \u23384 \u22312 \u65281 ")\cf0 \cb1 \uc0\u8232 \cf2 \cb3 finally:\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 print("\uc0\u31243 \u24207 \u25191 \u34892 \u32467 \u26463 \u65281 ")
+\f1\fs28 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 {{\NeXTGraphic 7500d6a4d6e6cb091ca7568216ed1791.png \width9630 \height8580 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\pardeftab720\partightenfactor0
+\cf2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \strokec5 \uc0\u31532 1\u31354 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf0 \strokec6 \
+\
+\
+\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf5 \cb3 \strokec5 \uc0\u31532 2\u31354 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf0 \strokec6 \
+\
+\
+\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf5 \cb3 \strokec5 \uc0\u31532 3\u31354 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf0 \strokec6 \
+\
+\
+\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf5 \cb3 \strokec5 \uc0\u31532 4\u31354 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf0 \strokec6 \
+\
+\
+\
+\
+\
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 17.\'a0\cf4 \strokec4 (\uc0\u31243 \u24207 \u22635 \u31354 \u39064 , 12.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs36 \cf2 \cb3 \strokec6 \uc0\u31243 \u24207 \u30340 \u21151 \u33021 \u65306 \u39318 \u20808 \u35835 \u21462 \u19977 \u22269 \u28436 \u20041 .txt
+\f3 \uc0\u65292 \u28982 \u21518 \u36827 \u34892 \u20998 \u35789 \u65292 \u20877 \u24314 \u31435 \u23383 \u20856 \u65288 \u20803 \u32032 \u24418 \u24335 \u26159 \'94\u35789 :\u20986 \u29616 \u27425 \u25968 \'93\u65289 \u65292 \u26368 \u21518 \u36755 \u20837 \u19968 \u20010 \u35789 \u36890 \u36807 \u23383 \u20856 \u26597 \u35810 \u35813 \u35789 \u20986 \u29616 \u30340 \u27425 \u25968 \u65292 \u22914 \u22270 \u25152 \u31034 \u12290 
+\f1\fs28 \cb1 \strokec2 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs36 \cf2 \cb3 import jieba
+\f1\fs28 \cb1 \
+
+\f2\fs36 \cb3 file = open(r"\uc0\u19977 \u22269 \u28436 \u20041 .txt", "r", __(1)__='utf-8')
+\f1\fs28 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs36 \cf2 \cb3 \strokec6 txt=file.read() \'a0\'a0 \'a0\cf0 \cb1 \uc0\u8232 \cf2 \cb3 lists=__(2)__(txt)\cf0 \cb1 \uc0\u8232 \cf2 \cb3 dicts=\{\}\cf0 \cb1 \uc0\u8232 \cf2 \cb3 for x in lists:\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 if x in dicts:\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 dicts[x]=dicts[x]+1\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 else:\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 dicts[x]=__(3)__\cf0 \cb1 \uc0\u8232 \cf2 \cb3 print(dicts)\cf0 \cb1 \uc0\u8232 \cf2 \cb3 name=input("\uc0\u35831 \u36755 \u20837 \u19968 \u20010 \u35789 \u65306 ")\cf0 \cb1 \uc0\u8232 \cf2 \cb3 while True:\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 if name __(4)__ dicts:\'a0\'a0\'a0\'a0 \'a0\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 print(dicts[name])\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 break\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 name=input("\uc0\u35831 \u36755 \u20837 \u19968 \u20010 \u35789 \u65306 ")
+\f1\fs28 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \strokec5 \uc0\u31532 1\u31354 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf0 \strokec6 \
+\
+\
+\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf5 \cb3 \strokec5 \uc0\u31532 2\u31354 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf0 \strokec6 \
+\
+\
+\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf5 \cb3 \strokec5 \uc0\u31532 3\u31354 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf0 \strokec6 \
+\
+\
+\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf5 \cb3 \strokec5 \uc0\u31532 4\u31354 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf0 \strokec6 \
+\
+\
+\
+\
+\
+\pard\pardeftab720\sa600\partightenfactor0
+
+\f0\b\fs32 \cf2 \cb3 \strokec2 \uc0\u19977 \u12289  \u31243 \u24207 \u35843 \u35797 \u39064  \u65288 \u20849  2\u39064 \u65292 20.0 \u20998 \u65289 \cb1 \
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+
+\f1\b0\fs28 \cf2 \cb3 18.\'a0\cf4 \strokec4 (\uc0\u31243 \u24207 \u35843 \u35797 \u39064 , 10.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs32 \cf2 \cb3 \uc0\u19979 \u38754 \u30340 \u31243 \u24207 \u26377 4\u20010 \u38169 \u35823 \u65292 \u35831 \u25913 \u27491 \u12290 \u25913 \u27491 \u30340 \u35821 \u21477 \u21518 \u38754 \u28155 \u21152 \u27880 \u37322 \u65306 #\u27492 \u34892 \u26377 \u38169 \u35823 \u65292 \u24050 \u32463 \u25913 \u27491 
+\f1\fs28 \cb1 \
+
+\f2\fs32 \cb3 \uc0\u25913 \u27491 \u21518 \u30340 \u31243 \u24207 \u35831 \u31896 \u36148 \u22312 \u31572 \u39064 \u25991 \u26412 \u26694 \u20013 \u12290  \u27880 \u24847 \u65306 \u19981 \u24471 \u22686 \u21152 \u25110 \u21024 \u38500 \u35821 \u21477 \u65292 \u21482 \u33021 \u20462 \u25913 \u21407 \u26469 \u30340 \u35821 \u21477 \u12290 \cb1 \uc0\u8232 
+\f1\fs28 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs32 \cf2 \cb3 \strokec6 \uc0\u31243 \u24207 \u21151 \u33021 \u65306 \u19979 \u38754 \u34920 \u26684 \u26159 \u36890 \u36807 \u38382 \u21367 \u26143 \u25910 \u38598 \u21040 \u30340 \u20851 \u20110 \'93\u24744 \u35748 \u20026 \u26412 \u23567 \u21306 \u22403 \u22334 \u20998 \u31867 \u36824 \u23384 \u22312 \u21738 \u20123 \u38382 \u39064 \u65311 \'94\u30340 \u21453 \u39304 \u20449 \u24687 \u65292 \u35831 \u22312 \u24038 \u36793 \u32472 \u22270 \u21306 \u32472 \u21046 \u26609 \u29366 \u22270 \u65292 \u21491 \u36793 \u32472 \u21046 \u19968 \u20010 \u39292 \u22270 \u65292 \u22914 \u22270 \u25152 \u31034 \u12290 \cf0 \cb1 \uc0\u8232 \cf2 \cb3 import matplotlib as plt\cf0 \cb1 \uc0\u8232 \cf2 \cb3 plt.rcParams['font.sans-serif'] = ['SimHei']\cf0 \cb1 \uc0\u8232 \cf2 \cb3 fig=plt.figure(figsize=(12,9))\cf0 \cb1 \uc0\u8232 \cf2 \cb3 fig.add_subplot(121)\cf0 \cb1 \uc0\u8232 \cf2 \cb3 option=["\uc0\u23459 \u20256 \u19981 \u21040 \u20301 ","\u29615 \u20445 \u24847 \u35782 \u19981 \u24378 ","\u25910 \u38598 \u31449 \u20998 \u24067 \u19981 \u21512 \u29702 ","\u25237 \u25918 \u26102 \u38388 \u19981 \u26041 \u20415 ","\u20081 \u25172 \u22403 \u22334 \u26410 \u22788 \u32602 ","\u31649 \u29702 \u19981 \u21040 \u20301 "]\cf0 \cb1 \uc0\u8232 \cf2 \cb3 data=[17,44,17,41,24,19]\cf0 \cb1 \uc0\u8232 \cf2 \cb3 plt.hist(range(6),data)\cf0 \cb1 \uc0\u8232 \cf2 \cb3 plt.title("\uc0\u23567 \u21306 \u22403 \u22334 \u20998 \u31867 \u36824 \u23384 \u22312 \u30340 \u38382 \u39064 ")\cf0 \cb1 \uc0\u8232 \cf2 \cb3 plt.xticks(range(6),data, rotation=45)\cf0 \cb1 \uc0\u8232 \cf2 \cb3 plt.xlabel("\uc0\u36873 \u39033 ")\cf0 \cb1 \uc0\u8232 \cf2 \cb3 plt.ylabel("\uc0\u22238 \u22797 \u24773 \u20917 ")\cf0 \cb1 \uc0\u8232 \cf2 \cb3 fig.add_subplot(122)\cf0 \cb1 \uc0\u8232 \cf2 \cb3 plt.pie(labels=option,autopct='%4.1f%%')\cf0 \cb1 \uc0\u8232 \cf2 \cb3 plt.show()
+\f1\fs28 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 {{\NeXTGraphic cba4682cf95be95d1e6eb3661097dd79.jpg \width3495 \height2820 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\pardeftab720\partightenfactor0
+\cf2 {{\NeXTGraphic 7275e7b2f01ea1993e841884e8440c1e.jpg \width5602 \height4673 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\pardeftab720\partightenfactor0
+\cf2 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf0 \strokec6 \
+\
+\
+\
+\
+\
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 19.\'a0\cf4 \strokec4 (\uc0\u31243 \u24207 \u35843 \u35797 \u39064 , 10.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs32 \cf2 \cb3 \uc0\u19979 \u38754 \u30340 \u31243 \u24207 \u26377 4\u20010 \u38169 \u35823 \u65292 \u35831 \u25913 \u27491 \u12290 \u25913 \u27491 \u30340 \u35821 \u21477 \u21518 \u38754 \u28155 \u21152 \u27880 \u37322 \u65306 #\u27492 \u34892 \u26377 \u38169 \u35823 \u65292 \u24050 \u32463 \u25913 \u27491 
+\f1\fs28 \cb1 \
+
+\f2\fs32 \cb3 \uc0\u25913 \u27491 \u21518 \u30340 \u31243 \u24207 \u35831 \u31896 \u36148 \u22312 \u31572 \u39064 \u25991 \u26412 \u26694 \u20013 \u12290  \u27880 \u24847 \u65306 \u19981 \u24471 \u22686 \u21152 \u25110 \u21024 \u38500 \u35821 \u21477 \u65292 \u21482 \u33021 \u20462 \u25913 \u21407 \u26469 \u30340 \u35821 \u21477 \u12290 \cb1 \uc0\u8232 
+\f1\fs28 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs32 \cf2 \cb3 \strokec6 \uc0\u31243 \u24207 \u21151 \u33021 \u65306 \cf0 \cb1 \uc0\u8232 \cf2 \cb3 1.\uc0\u38543 \u26426 \u29983 \u25104 \u19968 \u20010 30\u20010 \u22823 \u20889 \u33521 \u25991 \u23383 \u27597 \u12290 \cf0 \cb1 \uc0\u8232 \cf2 \cb3 2.\uc0\u35843 \u29992 fun(x,y)\u32479 \u35745 x\u20013 A~G\u21644 U~Z\u30340 \u23383 \u27597 \u20010 \u25968 \u65292 \u20854 \u20013 \u65306 \u21442 \u25968 x\u26159 \u21015 \u34920 \u65292 \u23384 \u25918 30\u20010 \u22823 \u20889 \u33521 \u25991 \u23383 \u27597 \u65307 y\u20063 \u26159 \u19968 \u20010 \u21015 \u34920 \u65292 \u23384 \u25918 A~G\u21644 U~Z\u30340 \u23383 \u27597 \u20010 \u25968 \u65292 \u20363 \u22914 [7\u65292 9]\u34920 \u31034 \u26377 7\u20010 A~G\u30340 \u23383 \u27597 \u12289 9\u20010 U~Z\u30340 \u23383 \u27597 \u12290 \cf0 \cb1 \uc0\u8232 \cf2 \cb3 3.\uc0\u36755 \u20986 A~G\u21644 U~Z\u30340 \u23383 \u27597 \u20010 \u25968 \u12290 \cf0 \cb1 \uc0\u8232 \cf2 \cb3 4.\uc0\u23558 30\u20010 \u22823 \u20889 \u33521 \u25991 \u23383 \u27597 \u25490 \u24207 \u65288 \u20174 \u22823 \u21040 \u23567 \u65289 \u21518 \u65292 \u20197 \u27599 \u34892 5\u20010 \u30340 \u24418 \u24335 \u36755 \u20986 \u12290 \cf0 \cb1 \uc0\u8232 \cf2 \cb3 import random\cf0 \cb1 \uc0\u8232 \cf2 \cb3 def fun(x,y):\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 A_G=0\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 U_Z=0\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 for a in x:\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 if "A"<=a<="G":\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 A_G=A_G+1\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 else "U"<=a<="Z":\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 U_Z=U_Z+1\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 y[0]=A_G\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 #\uc0\u27492 \u34892 \u27809 \u26377 \u38169 \u35823 \cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 y[1]=U_Z\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0\'a0 #\uc0\u27492 \u34892 \u27809 \u26377 \u38169 \u35823 \cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 return\cf0 \cb1 \uc0\u8232 \cf2 \cb3 x=[]\'a0\'a0 \'a0\cf0 \cb1 \uc0\u8232 \cf2 \cb3 for i in range(30):\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 a=random.randint(0,25)\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 c=chr(a)\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 x.append(c)\cf0 \cb1 \uc0\u8232 \cf2 \cb3 result=[]\cf0 \cb1 \uc0\u8232 \cf2 \cb3 fun(x,result)\cf0 \cb1 \uc0\u8232 \cf2 \cb3 print("A~G\uc0\u23383 \u27597 \u20010 \u25968 :",result[0],"U~Z\u23383 \u27597 \u20010 \u25968 :",result[1])\cf0 \cb1 \uc0\u8232 \cf2 \cb3 x.sort(reverse=True)\cf0 \cb1 \uc0\u8232 \cf2 \cb3 i=1\cf0 \cb1 \uc0\u8232 \cf2 \cb3 for a in x:\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 print("\{:4s\}".format(a),end="")\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 i=i+1\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0 if i%5==0:\cf0 \cb1 \uc0\u8232 \cf2 \cb3 \'a0\'a0\'a0\'a0\'a0\'a0\'a0 print ("")
+\f1\fs28 \cb1 \strokec2 \
+
+\f2\fs32 \cb3 \strokec6 \uc0\u30028 \u38754 \u22914 \u22270 \u25152 \u31034 
+\f1\fs28 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 {{\NeXTGraphic 6af6adab667cbfce4898af1fc7a5dfa0.jpg \width3150 \height1635 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\pardeftab720\partightenfactor0
+\cf2 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf0 \strokec6 \
+\
+\
+\
+\
+\
+\pard\pardeftab720\sa600\partightenfactor0
+
+\f0\b\fs32 \cf2 \cb3 \strokec2 \uc0\u22235 \u12289  \u32534 \u31243 \u39064  \u65288 \u20849  2\u39064 \u65292 26.0 \u20998 \u65289 \cb1 \
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+
+\f1\b0\fs28 \cf2 \cb3 20.\'a0\cf4 \strokec4 (\uc0\u32534 \u31243 \u39064 , 14.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs32 \cf2 \cb3 \uc0\u32534 \u31243 \u39064 \u65306 \u35831 \u25353 \u35201 \u27714 \u32534 \u20889 \u31243 \u24207 \u65292 \u23558 \u20195 \u30721 \u31896 \u36148 \u22312 \u31572 \u39064 \u26694 \u20013 \u12290 
+\f1\fs28 \cb1 \
+
+\f2\fs32 \cb3 \uc0\u27880 \u24847 \u65306 \u19981 \u35201 \u19978 \u20256 \u38468 \u20214 \u12290 \cb1 \uc0\u8232 
+\f1\fs28 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs32 \cf2 \cb3 \strokec6 \uc0\u25991 \u26412 \u25991 \u20214 Data.csv\u20013 \u23384 \u25918 \u20102 \u26576 \u23398 \u20064 \u24179 \u21488 \u30340 \u23398 \u21592 \u22995 \u21517 \u12289 \u31215 \u20998 \u12289 \u25104 \u38271 \u20540 \u25968 \u25454 \u65292 \u25991 \u20214 \u20869 \u23481 \u22914 \u22270 \u25152 \u31034 \u12290 
+\f1\fs28 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs32 \cf2 {{\NeXTGraphic 65668bd09c71ab1d4b0334b62f0bdcfb.png \width6375 \height4545 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\pardeftab720\partightenfactor0
+
+\f1\fs28 \cf2 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs32 \cf2 \cb3 \uc0\u35831 \u32534 \u20889 \u31243 \u24207 \u65292 \u23436 \u25104 \u22914 \u19979 \u21151 \u33021 \u65306 
+\f1\fs28 \cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs32 \cf2 \cb3 \strokec6 \uc0\u9312  \u20174 \u25991 \u20214 \u20013 \u35835 \u20986 \u25968 \u25454 \u12290 \cf0 \cb1 \uc0\u8232 \cf2 \cb3 \uc0\u9313  \u35745 \u31639 \u26368 \u39640 \u25104 \u38271 \u20540 \u12289 \u26368 \u20302 \u25104 \u38271 \u20540 \u21644 \u24179 \u22343 \u25104 \u38271 \u20540 \u65292 \u26174 \u31034 \u24182 \u19988 \u20889 \u20837 \u25991 \u20214 New_Data.csv\u65292 \u22914 \u19979 \u22270 \u25152 \u31034 \u12290 
+\f3\fs36 \strokec2 \'a0 \'a0\'a0
+\f1\fs28 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 {{\NeXTGraphic c800d21775a285c4a2a6fb7d87a835cd.png \width2160 \height800 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \'a0 \'a0\'a0\cb1 {{\NeXTGraphic f0bbcf361e53da6e7db67d2d48f0338a.png \width7125 \height2880 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf0 \strokec6 \
+\
+\
+\
+\
+\
+\
+\pard\pardeftab720\li400\fi-400\ri400\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 21.\'a0\cf4 \strokec4 (\uc0\u32534 \u31243 \u39064 , 12.0 \u20998 )\cf2 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs32 \cf2 \cb3 \uc0\u32534 \u31243 \u39064 \u65306 \u35831 \u25353 \u35201 \u27714 \u32534 \u20889 \u31243 \u24207 \u65292 \u23558 \u20195 \u30721 \u31896 \u36148 \u22312 \u31572 \u39064 \u26694 \u20013 \u12290 
+\f1\fs28 \cb1 \
+
+\f2\fs32 \cb3 \uc0\u27880 \u24847 \u65306 \u19981 \u35201 \u19978 \u20256 \u38468 \u20214 \u12290 \cb1 \uc0\u8232 
+\f1\fs28 \
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs32 \cf2 \cb3 \strokec6 \uc0\u35774 \u35745 \u19968 \u20010 \u34920 \u31034 \u22270 \u20687 \u19978 \u20687 \u32032 \u30340 \u20687 \u32032 \u31867 \u65292 \u20855 \u26377 r\u12289 g\u12289 b\u19977 \u20010 \u25968 \u25454 \u25104 \u21592 \u65292 \u20182 \u20204 \u30340 \u21462 \u20540 \u33539 \u22260 \u20026 0~255\u65307 gray\u26041 \u27861 \u29992 \u20110 \u36820 \u22238 \u28784 \u24230 \u20540 \u65292 \u36716 \u25442 \u20844 \u24335 \u20026 \u65306 r*0.299 +g*0.587 +b*0.114\u65307 disp\u26041 \u27861 \u29992 \u20110 \u36755 \u20986 \u20687 \u32032 \u30340 \u22522 \u26412 \u20449 \u24687 \u65288 \u21253 \u25324 \u28784 \u24230 \u20540 \u65289 \u65307 \u36824 \u26377 \u26500 \u36896 \u20989 \u25968 \u12290 \u32534 \u20889 \u20027 \u31243 \u24207 \u27979 \u35797 \u25152 \u23450 \u20041 \u30340 \u31867 \u12290 \u35201 \u27714 \u65306 \u38543 \u26426 \u20135 \u29983 5\u20010 \u20687 \u32032 \u30340 \u25968 \u25454 \u65292 \u36755 \u20986 \u30028 \u38754 \u22914 \u19979 \u22270 \u25152 \u31034 \u12290 
+\f1\fs28 \cb1 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+\cf2 {{\NeXTGraphic 003e9bfac19ec9d907aa750d2ecd24df.png \width3950 \height2430 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\pardeftab720\partightenfactor0
+\cf2 \
+\pard\pardeftab720\partightenfactor0
+
+\fs24 \cf0 \strokec6 \
+\
+}

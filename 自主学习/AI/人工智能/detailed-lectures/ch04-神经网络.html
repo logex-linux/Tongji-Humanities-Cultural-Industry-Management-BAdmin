@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第4章：神经网络——从感知机到多层网络</title>
+<style>
+:root {
+  --bg: #fefefe; --text: #1a1a2e; --accent: #4361ee; --accent-light: #eef2ff;
+  --green: #059669; --green-bg: #ecfdf5; --orange: #d97706; --orange-bg: #fffbeb;
+  --red: #dc2626; --red-bg: #fef2f2; --purple: #7c3aed; --purple-bg: #f5f3ff;
+  --gray: #6b7280; --border: #e5e7eb; --code-bg: #f8fafc; --radius: 10px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, "PingFang SC", "Noto Sans SC", sans-serif; background: var(--bg); color: var(--text); line-height: 1.9; max-width: 800px; margin: 0 auto; padding: 40px 24px 100px; }
+h1 { font-size: 1.8rem; margin-bottom: 8px; color: var(--accent); }
+h2 { font-size: 1.35rem; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--accent-light); }
+h3 { font-size: 1.1rem; margin: 32px 0 12px; color: var(--accent); }
+p { margin: 12px 0; }
+.subtitle { color: var(--gray); font-size: 0.95rem; margin-bottom: 32px; }
+.prereq { background: var(--accent-light); border-radius: var(--radius); padding: 16px 20px; margin: 20px 0; font-size: 0.9rem; }
+.prereq strong { color: var(--accent); }
+.concept-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: var(--radius); padding: 20px; margin: 20px 0; }
+.concept-box .label { font-weight: 700; color: #0284c7; font-size: 0.85rem; margin-bottom: 8px; }
+.example-box { background: var(--green-bg); border: 1px solid #a7f3d0; border-radius: var(--radius); padding: 20px; margin: 20px 0; }
+.example-box .label { font-weight: 700; color: var(--green); font-size: 0.85rem; margin-bottom: 8px; }
+.exercise-box { background: var(--orange-bg); border: 1px solid #fde68a; border-radius: var(--radius); padding: 20px; margin: 20px 0; }
+.exercise-box .label { font-weight: 700; color: var(--orange); font-size: 0.85rem; margin-bottom: 8px; }
+.answer-box { background: var(--red-bg); border: 1px solid #fecaca; border-radius: var(--radius); padding: 20px; margin: 12px 0; display: none; }
+.answer-box.show { display: block; }
+.answer-box .label { font-weight: 700; color: var(--red); font-size: 0.85rem; margin-bottom: 8px; }
+.show-answer { background: none; border: 1px solid var(--red); color: var(--red); padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 8px; }
+.show-answer:hover { background: var(--red-bg); }
+pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 16px; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; margin: 12px 0; }
+code { font-family: "SF Mono", "Fira Code", monospace; }
+p code, li code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.88em; }
+ul, ol { padding-left: 24px; margin: 12px 0; }
+li { margin: 6px 0; }
+svg { display: block; margin: 20px auto; max-width: 100%; }
+.formula { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px 20px; margin: 16px 0; text-align: center; font-size: 1.05rem; font-family: "SF Mono", monospace; }
+.step { margin: 8px 0; padding: 8px 16px; border-left: 3px solid var(--accent); background: var(--accent-light); border-radius: 0 6px 6px 0; }
+.toc { background: var(--code-bg); border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+.toc a { color: var(--accent); text-decoration: none; }
+.toc li { margin: 4px 0; }
+.nav-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; }
+.nav-footer a { color: var(--accent); text-decoration: none; font-size: 0.9rem; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+th, td { padding: 10px 14px; border: 1px solid var(--border); text-align: left; }
+th { background: var(--accent-light); font-weight: 600; }
+.highlight { background: #fef08a; padding: 2px 4px; border-radius: 3px; }
+</style>
+<link rel="stylesheet" href="apple-design.css">
+</head>
+<body>
+
+<h1>第4章：神经网络——从感知机到多层网络</h1>
+<p class="subtitle">AI 数学基础 · 第 4/10 章 · 预计学习时间：5-6 小时</p>
+
+<div class="prereq">
+<strong>前置知识：</strong>第1-3章（向量、矩阵、梯度下降）<br>
+<strong>本章目标：</strong>理解神经元、激活函数、多层网络的结构，能手算一个简单网络的前向传播，并用 Python 从零实现。
+</div>
+
+<div class="toc">
+<strong>本章目录</strong>
+<ol>
+<li><a href="#s1">4.1 感知机——最简单的"神经元"</a></li>
+<li><a href="#s2">4.2 激活函数——引入非线性</a></li>
+<li><a href="#s3">4.3 多层感知机 (MLP)——堆叠的力量</a></li>
+<li><a href="#s4">4.4 前向传播——手算一个完整网络</a></li>
+<li><a href="#s5">4.5 为什么需要多层？——XOR 问题</a></li>
+<li><a href="#s6">4.6 用 Python 从零实现一个神经网络</a></li>
+<li><a href="#s7">4.7 用 PyTorch 实现（工业标准）</a></li>
+<li><a href="#s8">4.8 网络设计的实践指南</a></li>
+<li><a href="#s9">4.9 本章习题</a></li>
+</ol>
+</div>
+
+<!-- ============ 4.1 ============ -->
+<h2 id="s1">4.1 感知机——最简单的"神经元"</h2>
+
+<h3>生物神经元的简化模型</h3>
+<p>1957 年，Rosenblatt 受到生物神经元的启发，提出了"感知机"：</p>
+
+<svg width="500" height="200" viewBox="0 0 500 200">
+  <!-- 输入 -->
+  <circle cx="60" cy="50" r="18" fill="#eef2ff" stroke="#4361ee" stroke-width="2"/>
+  <text x="53" y="55" font-size="12" fill="#4361ee">x₁</text>
+  <circle cx="60" cy="100" r="18" fill="#eef2ff" stroke="#4361ee" stroke-width="2"/>
+  <text x="53" y="105" font-size="12" fill="#4361ee">x₂</text>
+  <circle cx="60" cy="150" r="18" fill="#eef2ff" stroke="#4361ee" stroke-width="2"/>
+  <text x="53" y="155" font-size="12" fill="#4361ee">x₃</text>
+  
+  <!-- 权重箭头 -->
+  <line x1="78" y1="50" x2="200" y2="90" stroke="#999" stroke-width="1.5"/>
+  <line x1="78" y1="100" x2="200" y2="100" stroke="#999" stroke-width="1.5"/>
+  <line x1="78" y1="150" x2="200" y2="110" stroke="#999" stroke-width="1.5"/>
+  <text x="120" y="60" font-size="11" fill="#d97706">w₁</text>
+  <text x="120" y="105" font-size="11" fill="#d97706">w₂</text>
+  <text x="120" y="145" font-size="11" fill="#d97706">w₃</text>
+  
+  <!-- 求和节点 -->
+  <circle cx="220" cy="100" r="22" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="212" y="105" font-size="14" fill="#d97706">Σ</text>
+  <text x="205" y="135" font-size="10" fill="#666">+b</text>
+  
+  <!-- 激活函数 -->
+  <line x1="242" y1="100" x2="310" y2="100" stroke="#999" stroke-width="1.5"/>
+  <rect x="310" y="80" width="60" height="40" rx="6" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <text x="325" y="105" font-size="12" fill="#7c3aed">f(z)</text>
+  <text x="310" y="135" font-size="10" fill="#666">激活函数</text>
+  
+  <!-- 输出 -->
+  <line x1="370" y1="100" x2="420" y2="100" stroke="#999" stroke-width="1.5"/>
+  <circle cx="440" cy="100" r="18" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text x="435" y="105" font-size="12" fill="#059669">y</text>
+  
+  <!-- 公式 -->
+  <text x="130" y="185" font-size="13" fill="#333" font-weight="bold">y = f(w₁x₁ + w₂x₂ + w₃x₃ + b) = f(W·x + b)</text>
+</svg>
+
+<div class="concept-box">
+<div class="label">📌 感知机的计算过程</div>
+<ol>
+<li><strong>加权求和：</strong>z = w₁x₁ + w₂x₂ + w₃x₃ + b（就是第2章的矩阵×向量！）</li>
+<li><strong>激活函数：</strong>y = f(z)（对求和结果做一个非线性变换）</li>
+</ol>
+<p>一个神经元 = 一次线性变换 + 一次非线性激活</p>
+</div>
+
+<div class="example-box">
+<div class="label">✏️ 例题 4.1：手算一个神经元</div>
+<p><strong>已知：</strong>输入 x = (2, 3)，权重 w = (1, -1)，偏置 b = 0.5，激活函数 f(z) = max(0, z)（ReLU）</p>
+<div class="step">第1步：加权求和 z = 1×2 + (-1)×3 + 0.5 = 2 - 3 + 0.5 = <strong>-0.5</strong></div>
+<div class="step">第2步：激活 y = ReLU(-0.5) = max(0, -0.5) = <strong>0</strong></div>
+<p>输出为 0（因为 z 是负数，被 ReLU "截断"了）</p>
+</div>
+
+<!-- ============ 4.2 ============ -->
+<h2 id="s2">4.2 激活函数——引入非线性</h2>
+
+<h3>为什么需要激活函数？</h3>
+<p>如果没有激活函数，多层线性变换还是线性的：</p>
+<div class="formula">
+y = W₂(W₁x + b₁) + b₂ = W₂W₁x + (W₂b₁ + b₂) = W'x + b'
+</div>
+<p>不管堆多少层，等价于一层！加了激活函数才能学习非线性关系。</p>
+
+<h3>常见激活函数</h3>
+
+<svg width="500" height="200" viewBox="0 0 500 200">
+  <!-- ReLU -->
+  <text x="30" y="20" font-size="12" fill="#4361ee" font-weight="bold">ReLU: max(0, x)</text>
+  <line x1="30" y1="100" x2="100" y2="100" stroke="#4361ee" stroke-width="2.5"/>
+  <line x1="100" y1="100" x2="170" y2="30" stroke="#4361ee" stroke-width="2.5"/>
+  <line x1="100" y1="30" x2="100" y2="120" stroke="#eee" stroke-width="1"/>
+  <line x1="30" y1="100" x2="170" y2="100" stroke="#eee" stroke-width="1"/>
+  <text x="50" y="130" font-size="10" fill="#666">负数→0，正数→本身</text>
+  
+  <!-- Sigmoid -->
+  <text x="200" y="20" font-size="12" fill="#059669" font-weight="bold">Sigmoid: 1/(1+e⁻ˣ)</text>
+  <path d="M 200 110 Q 240 108 260 95 Q 280 70 300 60 Q 320 55 340 53" fill="none" stroke="#059669" stroke-width="2.5"/>
+  <line x1="200" y1="110" x2="340" y2="110" stroke="#eee" stroke-width="1"/>
+  <line x1="270" y1="30" x2="270" y2="120" stroke="#eee" stroke-width="1"/>
+  <text x="345" y="55" font-size="10" fill="#666">→1</text>
+  <text x="345" y="112" font-size="10" fill="#666">→0</text>
+  <text x="210" y="130" font-size="10" fill="#666">输出压缩到(0,1)</text>
+  
+  <!-- Tanh -->
+  <text x="380" y="20" font-size="12" fill="#d97706" font-weight="bold">Tanh</text>
+  <path d="M 380 110 Q 410 108 430 90 Q 450 60 470 50 Q 490 45 500 43" fill="none" stroke="#d97706" stroke-width="2.5"/>
+  <path d="M 380 43 Q 390 45 400 55 Q 420 80 440 100 Q 460 108 500 110" fill="none" stroke="#d97706" stroke-width="0" />
+  <line x1="380" y1="75" x2="500" y2="75" stroke="#eee" stroke-width="1"/>
+  <text x="380" y="130" font-size="10" fill="#666">输出(-1,1)</text>
+</svg>
+
+<table>
+<tr><th>激活函数</th><th>公式</th><th>输出范围</th><th>用在哪里</th></tr>
+<tr><td><strong>ReLU</strong></td><td>max(0, x)</td><td>[0, +∞)</td><td>隐藏层（<strong>默认选择</strong>）</td></tr>
+<tr><td>Sigmoid</td><td>1/(1+e⁻ˣ)</td><td>(0, 1)</td><td>二分类输出层</td></tr>
+<tr><td>Tanh</td><td>(eˣ-e⁻ˣ)/(eˣ+e⁻ˣ)</td><td>(-1, 1)</td><td>RNN（了解即可）</td></tr>
+<tr><td>GELU</td><td>x·Φ(x)</td><td>≈[-0.17, +∞)</td><td>Transformer 中常用</td></tr>
+<tr><td>Softmax</td><td>eˣⁱ/Σeˣʲ</td><td>(0,1) 且和为1</td><td>多分类输出层</td></tr>
+</table>
+
+<pre><code>import numpy as np
+
+def relu(x):
+    return np.maximum(0, x)
+
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+def softmax(x):
+    exp_x = np.exp(x - np.max(x))  # 减最大值防溢出
+    return exp_x / exp_x.sum()
+
+# 测试
+print(relu(np.array([-2, -1, 0, 1, 2])))   # [0 0 0 1 2]
+print(sigmoid(np.array([-2, 0, 2])))         # [0.12 0.5 0.88]
+print(softmax(np.array([1, 2, 3])))          # [0.09 0.24 0.67]（和为1）</code></pre>
+
+<div class="concept-box">
+<div class="label">📌 选择激活函数的简单规则</div>
+<ul>
+<li><strong>隐藏层：</strong>用 ReLU（简单、快、效果好）</li>
+<li><strong>二分类输出：</strong>用 Sigmoid（输出一个概率）</li>
+<li><strong>多分类输出：</strong>用 Softmax（输出各类别概率，和为1）</li>
+<li><strong>回归输出：</strong>不加激活函数（直接输出数值）</li>
+</ul>
+</div>
+
+<!-- ============ 4.3 ============ -->
+
+<style>
+.bridge-box {
+  background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px;
+  padding: 16px 20px; margin: 20px 0; border-left: 4px solid #22c55e;
+}
+.bridge-box .br-label {
+  font-weight: 700; color: #16a34a; font-size: 0.85rem; margin-bottom: 8px;
+}
+.bridge-box p { font-size: 0.9rem; margin: 6px 0; }
+.bridge-box .br-link { color: #4361ee; font-weight: 600; }
+</style>
+
+<div class="bridge-box">
+<div class="br-label">🌉 直觉桥梁：连接第2-3章</div>
+<p>神经网络的一层 = <span class="br-link">第2章的矩阵乘法</span> + 激活函数：</p>
+<p style="font-family:monospace; background:#f0f0f0; padding:8px; border-radius:6px;">h = ReLU(W × x + b) &nbsp;&nbsp;← W×x 就是第2章学的！</p>
+<p>训练网络 = <span class="br-link">第3章的梯度下降</span>：计算损失 → 求梯度 → 更新 W 和 b。</p>
+<p>所以神经网络 = 你已会的矩阵运算 + 你已会的梯度下降，只是堆了很多层而已。</p>
+</div>
+
+<h2 id="s3">4.3 多层感知机 (MLP)——堆叠的力量</h2>
+
+<h3>网络结构</h3>
+<svg width="550" height="280" viewBox="0 0 550 280">
+  <!-- 输入层 -->
+  <text x="30" y="20" font-size="12" fill="#4361ee" font-weight="bold">输入层</text>
+  <circle cx="60" cy="70" r="16" fill="#eef2ff" stroke="#4361ee" stroke-width="2"/>
+  <circle cx="60" cy="140" r="16" fill="#eef2ff" stroke="#4361ee" stroke-width="2"/>
+  <circle cx="60" cy="210" r="16" fill="#eef2ff" stroke="#4361ee" stroke-width="2"/>
+  <text x="50" y="75" font-size="11" fill="#4361ee">x₁</text>
+  <text x="50" y="145" font-size="11" fill="#4361ee">x₂</text>
+  <text x="50" y="215" font-size="11" fill="#4361ee">x₃</text>
+  
+  <!-- 隐藏层1 -->
+  <text x="195" y="20" font-size="12" fill="#7c3aed" font-weight="bold">隐藏层1</text>
+  <circle cx="220" cy="55" r="16" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <circle cx="220" cy="120" r="16" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <circle cx="220" cy="185" r="16" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <circle cx="220" cy="250" r="16" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <text x="210" y="60" font-size="10" fill="#7c3aed">h₁</text>
+  <text x="210" y="125" font-size="10" fill="#7c3aed">h₂</text>
+  <text x="210" y="190" font-size="10" fill="#7c3aed">h₃</text>
+  <text x="210" y="255" font-size="10" fill="#7c3aed">h₄</text>
+  
+  <!-- 隐藏层2 -->
+  <text x="355" y="20" font-size="12" fill="#d97706" font-weight="bold">隐藏层2</text>
+  <circle cx="380" cy="90" r="16" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <circle cx="380" cy="160" r="16" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <circle cx="380" cy="230" r="16" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <text x="370" y="95" font-size="10" fill="#d97706">h₅</text>
+  <text x="370" y="165" font-size="10" fill="#d97706">h₆</text>
+  <text x="370" y="235" font-size="10" fill="#d97706">h₇</text>
+  
+  <!-- 输出层 -->
+  <text x="480" y="20" font-size="12" fill="#059669" font-weight="bold">输出层</text>
+  <circle cx="500" cy="120" r="16" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <circle cx="500" cy="190" r="16" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text x="492" y="125" font-size="11" fill="#059669">y₁</text>
+  <text x="492" y="195" font-size="11" fill="#059669">y₂</text>
+  
+  <!-- 连接线（部分） -->
+  <g stroke="#ddd" stroke-width="0.8">
+    <line x1="76" y1="70" x2="204" y2="55"/><line x1="76" y1="70" x2="204" y2="120"/>
+    <line x1="76" y1="70" x2="204" y2="185"/><line x1="76" y1="70" x2="204" y2="250"/>
+    <line x1="76" y1="140" x2="204" y2="55"/><line x1="76" y1="140" x2="204" y2="120"/>
+    <line x1="76" y1="140" x2="204" y2="185"/><line x1="76" y1="140" x2="204" y2="250"/>
+    <line x1="76" y1="210" x2="204" y2="55"/><line x1="76" y1="210" x2="204" y2="120"/>
+    <line x1="76" y1="210" x2="204" y2="185"/><line x1="76" y1="210" x2="204" y2="250"/>
+    <line x1="236" y1="55" x2="364" y2="90"/><line x1="236" y1="55" x2="364" y2="160"/>
+    <line x1="236" y1="120" x2="364" y2="90"/><line x1="236" y1="120" x2="364" y2="160"/>
+    <line x1="236" y1="185" x2="364" y2="160"/><line x1="236" y1="185" x2="364" y2="230"/>
+    <line x1="236" y1="250" x2="364" y2="160"/><line x1="236" y1="250" x2="364" y2="230"/>
+    <line x1="396" y1="90" x2="484" y2="120"/><line x1="396" y1="90" x2="484" y2="190"/>
+    <line x1="396" y1="160" x2="484" y2="120"/><line x1="396" y1="160" x2="484" y2="190"/>
+    <line x1="396" y1="230" x2="484" y2="120"/><line x1="396" y1="230" x2="484" y2="190"/>
+  </g>
+  
+  <!-- 标注 -->
+  <text x="100" y="270" font-size="11" fill="#666">3个输入</text>
+  <text x="200" y="270" font-size="11" fill="#666">4个神经元</text>
+  <text x="360" y="270" font-size="11" fill="#666">3个神经元</text>
+  <text x="480" y="270" font-size="11" fill="#666">2个输出</text>
+</svg>
+
+<div class="concept-box">
+<div class="label">📌 网络结构术语</div>
+<ul>
+<li><strong>输入层：</strong>接收原始数据（不算"一层"，因为不做计算）</li>
+<li><strong>隐藏层：</strong>中间的层，做实际的变换（可以有多个）</li>
+<li><strong>输出层：</strong>产生最终结果</li>
+<li><strong>全连接层：</strong>上一层的每个神经元和下一层的每个神经元都相连</li>
+<li><strong>参数：</strong>每条连接有一个权重 w，每个神经元有一个偏置 b</li>
+</ul>
+<p>上面的网络：输入3 → 隐藏4 → 隐藏3 → 输出2</p>
+<p>参数量 = (3×4+4) + (4×3+3) + (3×2+2) = 16 + 15 + 8 = <strong>39 个参数</strong></p>
+</div>
+
+<!-- ============ 4.4 ============ -->
+
+<!-- 动画：前向传播数据流 -->
+<style>
+@keyframes nn-in { 0%,5% { opacity:0; } 10%,100% { opacity:1; } }
+@keyframes nn-flow1 { 0%,10% { stroke-dashoffset:80; opacity:0; } 15% { opacity:0.8; } 30%,100% { stroke-dashoffset:0; opacity:0.8; } }
+@keyframes nn-h1 { 0%,30% { opacity:0; transform:scale(0.5); } 40%,100% { opacity:1; transform:scale(1); } }
+@keyframes nn-flow2 { 0%,40% { stroke-dashoffset:80; opacity:0; } 45% { opacity:0.8; } 60%,100% { stroke-dashoffset:0; opacity:0.8; } }
+@keyframes nn-out { 0%,60% { opacity:0; transform:scale(0.5); } 70%,100% { opacity:1; transform:scale(1); } }
+@keyframes nn-result { 0%,75% { opacity:0; } 85%,100% { opacity:1; } }
+.nn-in { animation: nn-in 5s ease-out infinite; }
+.nn-f1 { stroke-dasharray:80; animation: nn-flow1 5s ease-out infinite; }
+.nn-h { animation: nn-h1 5s ease-out infinite; transform-origin:center; }
+.nn-f2 { stroke-dasharray:80; animation: nn-flow2 5s ease-out infinite; }
+.nn-o { animation: nn-out 5s ease-out infinite; transform-origin:center; }
+.nn-r { animation: nn-result 5s ease-out infinite; }
+</style>
+
+<div style="text-align:center; margin: 24px 0;">
+<p style="font-size:0.85rem; color:#666; margin-bottom:8px;">👇 动画：数据从输入层 → 隐藏层（加权求和+ReLU）→ 输出层，逐层流动</p>
+<svg width="580" height="240" viewBox="0 0 580 240" style="background:#fafbfc; border-radius:12px; border:1px solid #e5e7eb;">
+  <!-- 层标签 -->
+  <text x="70" y="22" font-size="11" fill="#4361ee" text-anchor="middle" font-weight="600">输入层</text>
+  <text x="270" y="22" font-size="11" fill="#7c3aed" text-anchor="middle" font-weight="600">隐藏层 (ReLU)</text>
+  <text x="470" y="22" font-size="11" fill="#059669" text-anchor="middle" font-weight="600">输出层</text>
+
+  <!-- 输入节点 -->
+  <g class="nn-in">
+    <circle cx="70" cy="70" r="20" fill="#eef2ff" stroke="#4361ee" stroke-width="2"/>
+    <text x="70" y="75" font-size="12" fill="#4361ee" text-anchor="middle">x₁=2</text>
+    <circle cx="70" cy="140" r="20" fill="#eef2ff" stroke="#4361ee" stroke-width="2"/>
+    <text x="70" y="145" font-size="12" fill="#4361ee" text-anchor="middle">x₂=3</text>
+  </g>
+
+  <!-- 隐藏层节点 -->
+  <g class="nn-h">
+    <circle cx="270" cy="70" r="20" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+    <text x="270" y="66" font-size="10" fill="#7c3aed" text-anchor="middle">z₁=1×2</text>
+    <text x="270" y="80" font-size="10" fill="#7c3aed" text-anchor="middle">+0×3=2</text>
+    <circle cx="270" cy="140" r="20" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+    <text x="270" y="136" font-size="10" fill="#7c3aed" text-anchor="middle">z₂=0×2</text>
+    <text x="270" y="150" font-size="10" fill="#7c3aed" text-anchor="middle">+1×3=3</text>
+  </g>
+
+  <!-- 输出节点 -->
+  <g class="nn-o">
+    <circle cx="470" cy="105" r="22" fill="#ecfdf5" stroke="#059669" stroke-width="2.5"/>
+    <text x="470" y="101" font-size="10" fill="#059669" text-anchor="middle">1×2+1×3</text>
+    <text x="470" y="115" font-size="12" fill="#059669" text-anchor="middle" font-weight="bold">= 5</text>
+  </g>
+
+  <!-- 连接线：输入→隐藏 -->
+  <g class="nn-f1">
+    <line x1="90" y1="70" x2="248" y2="70" stroke="#4361ee" stroke-width="2"/>
+    <line x1="90" y1="70" x2="248" y2="140" stroke="#ccc" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="90" y1="140" x2="248" y2="140" stroke="#4361ee" stroke-width="2"/>
+    <line x1="90" y1="140" x2="248" y2="70" stroke="#ccc" stroke-width="1" stroke-dasharray="3,3"/>
+  </g>
+  <!-- 权重标注 -->
+  <g class="nn-h" font-size="9" fill="#d97706">
+    <text x="160" y="60">w=1</text>
+    <text x="160" y="120">w=0</text>
+    <text x="160" y="155">w=1</text>
+    <text x="160" y="95">w=0</text>
+  </g>
+
+  <!-- 连接线：隐藏→输出 -->
+  <g class="nn-f2">
+    <line x1="290" y1="70" x2="448" y2="105" stroke="#7c3aed" stroke-width="2"/>
+    <line x1="290" y1="140" x2="448" y2="105" stroke="#7c3aed" stroke-width="2"/>
+  </g>
+  <g class="nn-o" font-size="9" fill="#d97706">
+    <text x="370" y="78">w=1</text>
+    <text x="370" y="135">w=1</text>
+  </g>
+
+  <!-- 结果标注 -->
+  <g class="nn-r">
+    <rect x="420" y="155" width="100" height="30" rx="6" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+    <text x="470" y="175" font-size="12" fill="#059669" text-anchor="middle" font-weight="bold">输出 y = 5</text>
+  </g>
+
+  <!-- 步骤说明 -->
+  <text x="290" y="220" font-size="11" fill="#666" text-anchor="middle">每层：z = W×x + b → 激活函数 → 传给下一层</text>
+</svg>
+</div>
+
+<h2 id="s4">4.4 前向传播——手算一个完整网络</h2>
+
+<div class="example-box">
+<div class="label">✏️ 例题 4.2：手算前向传播</div>
+<p><strong>网络：</strong>输入2 → 隐藏2（ReLU）→ 输出1（无激活）</p>
+<p><strong>参数：</strong></p>
+<ul>
+<li>W₁ = [[1, 0], [0, 1]]，b₁ = [0, 0]（第1层）</li>
+<li>W₂ = [[1, 1]]，b₂ = [0]（第2层）</li>
+</ul>
+<p><strong>输入：</strong>x = (2, 3)</p>
+
+<h4>第1层计算：</h4>
+<div class="step">z₁ = W₁ × x + b₁ = [[1,0],[0,1]] × [2,3] + [0,0] = [2, 3]</div>
+<div class="step">h = ReLU(z₁) = ReLU([2, 3]) = [2, 3]（都是正数，不变）</div>
+
+<h4>第2层计算：</h4>
+<div class="step">z₂ = W₂ × h + b₂ = [[1,1]] × [2,3] + [0] = [5]</div>
+<div class="step">输出 y = 5（无激活函数，直接输出）</div>
+
+<p><strong>验证：</strong>这个网络计算的是 x₁ + x₂ = 2 + 3 = 5 ✓</p>
+</div>
+
+<div class="example-box">
+<div class="label">✏️ 例题 4.3：ReLU 的截断效果</div>
+<p><strong>同样的网络，输入 x = (-1, 3)：</strong></p>
+<div class="step">z₁ = [[1,0],[0,1]] × [-1,3] = [-1, 3]</div>
+<div class="step">h = ReLU([-1, 3]) = [<strong>0</strong>, 3] ← -1 被截断为 0！</div>
+<div class="step">z₂ = [[1,1]] × [0, 3] = [3]</div>
+<div class="step">输出 y = 3（而不是 -1+3=2）</div>
+<p>💡 ReLU 让网络变成了"分段线性"——不同输入区域有不同的行为。</p>
+</div>
+
+<!-- ============ 4.5 ============ -->
+<h2 id="s5">4.5 为什么需要多层？——XOR 问题</h2>
+
+<h3>单层网络的局限</h3>
+<p>XOR（异或）问题：两个输入相同时输出 0，不同时输出 1。</p>
+
+<svg width="300" height="220" viewBox="0 0 300 220">
+  <!-- 坐标轴 -->
+  <line x1="50" y1="180" x2="250" y2="180" stroke="#ccc" stroke-width="1.5"/>
+  <line x1="50" y1="180" x2="50" y2="30" stroke="#ccc" stroke-width="1.5"/>
+  <text x="255" y="185" font-size="11" fill="#999">x₁</text>
+  <text x="35" y="25" font-size="11" fill="#999">x₂</text>
+  
+  <!-- 数据点 -->
+  <circle cx="80" cy="150" r="10" fill="#059669" stroke="#059669"/>
+  <text x="70" y="170" font-size="10" fill="#059669">(0,0)→0</text>
+  
+  <circle cx="200" cy="60" r="10" fill="#059669" stroke="#059669"/>
+  <text x="190" y="50" font-size="10" fill="#059669">(1,1)→0</text>
+  
+  <circle cx="200" cy="150" r="10" fill="#dc2626" stroke="#dc2626"/>
+  <text x="190" y="170" font-size="10" fill="#dc2626">(1,0)→1</text>
+  
+  <circle cx="80" cy="60" r="10" fill="#dc2626" stroke="#dc2626"/>
+  <text x="70" y="50" font-size="10" fill="#dc2626">(0,1)→1</text>
+  
+  <!-- 说明 -->
+  <text x="60" y="210" font-size="11" fill="#666">绿=0，红=1，无法用一条直线分开！</text>
+</svg>
+
+<p><strong>单层感知机只能画一条直线</strong>（线性分类），无法解决 XOR。但两层网络可以：</p>
+
+<div class="concept-box">
+<div class="label">📌 万能近似定理</div>
+<p>一个有足够多隐藏神经元的<strong>单隐藏层</strong>网络，可以近似任意连续函数。</p>
+<p>但实践中，<strong>多层（深）网络</strong>比宽而浅的网络更高效——用更少的参数达到同样的效果。</p>
+<p>这就是"深度学习"中"深"的意义。</p>
+</div>
+
+<!-- ============ 4.6 ============ -->
+<h2 id="s6">4.6 用 Python 从零实现一个神经网络</h2>
+
+<pre><code>"""
+从零实现一个 2 层神经网络（不用任何 ML 框架）
+任务：学习 XOR 函数
+"""
+import numpy as np
+
+# ===== 数据 =====
+X = np.array([[0,0], [0,1], [1,0], [1,1]])  # 4个样本
+y = np.array([[0], [1], [1], [0]])            # XOR 标签
+
+# ===== 初始化参数 =====
+np.random.seed(42)
+# 第1层：2个输入 → 4个隐藏神经元
+W1 = np.random.randn(2, 4) * 0.5
+b1 = np.zeros((1, 4))
+# 第2层：4个隐藏 → 1个输出
+W2 = np.random.randn(4, 1) * 0.5
+b2 = np.zeros((1, 1))
+
+lr = 0.5  # 学习率
+
+# ===== 激活函数 =====
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+def sigmoid_derivative(x):
+    """sigmoid 的导数：σ(x)(1-σ(x))"""
+    s = sigmoid(x)
+    return s * (1 - s)
+
+# ===== 训练 =====
+for epoch in range(10000):
+    # --- 前向传播 ---
+    z1 = X @ W1 + b1          # 第1层线性变换
+    h1 = sigmoid(z1)           # 第1层激活
+    
+    z2 = h1 @ W2 + b2         # 第2层线性变换
+    y_pred = sigmoid(z2)       # 第2层激活（输出概率）
+    
+    # --- 计算损失 ---
+    loss = np.mean((y_pred - y) ** 2)
+    
+    # --- 反向传播（第5章会详细讲）---
+    # 输出层梯度
+    d_output = 2 * (y_pred - y) * sigmoid_derivative(z2)
+    
+    # 第2层参数梯度
+    dW2 = h1.T @ d_output
+    db2 = np.sum(d_output, axis=0, keepdims=True)
+    
+    # 隐藏层梯度
+    d_hidden = d_output @ W2.T * sigmoid_derivative(z1)
+    
+    # 第1层参数梯度
+    dW1 = X.T @ d_hidden
+    db1 = np.sum(d_hidden, axis=0, keepdims=True)
+    
+    # --- 更新参数 ---
+    W2 -= lr * dW2
+    b2 -= lr * db2
+    W1 -= lr * dW1
+    b1 -= lr * db1
+    
+    if (epoch + 1) % 2000 == 0:
+        print(f"Epoch {epoch+1}: loss = {loss:.4f}")
+
+# ===== 测试 =====
+print("\n预测结果：")
+z1 = X @ W1 + b1
+h1 = sigmoid(z1)
+z2 = h1 @ W2 + b2
+predictions = sigmoid(z2)
+for i in range(4):
+    print(f"  {X[i]} → {predictions[i][0]:.3f} (期望: {y[i][0]})")
+# [0,0] → 0.012 (期望: 0) ✓
+# [0,1] → 0.987 (期望: 1) ✓
+# [1,0] → 0.985 (期望: 1) ✓
+# [1,1] → 0.015 (期望: 0) ✓</code></pre>
+
+<!-- ============ 4.7 ============ -->
+<h2 id="s7">4.7 用 PyTorch 实现（工业标准）</h2>
+
+<pre><code>import torch
+import torch.nn as nn
+import torch.optim as optim
+
+# ===== 定义网络结构 =====
+class XORNet(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.layer1 = nn.Linear(2, 8)   # 输入2 → 隐藏8
+        self.layer2 = nn.Linear(8, 4)   # 隐藏8 → 隐藏4
+        self.layer3 = nn.Linear(4, 1)   # 隐藏4 → 输出1
+        self.relu = nn.ReLU()
+        self.sigmoid = nn.Sigmoid()
+    
+    def forward(self, x):
+        x = self.relu(self.layer1(x))   # 第1层 + ReLU
+        x = self.relu(self.layer2(x))   # 第2层 + ReLU
+        x = self.sigmoid(self.layer3(x)) # 输出层 + Sigmoid
+        return x
+
+# ===== 准备数据 =====
+X = torch.tensor([[0,0], [0,1], [1,0], [1,1]], dtype=torch.float32)
+y = torch.tensor([[0], [1], [1], [0]], dtype=torch.float32)
+
+# ===== 训练 =====
+model = XORNet()
+criterion = nn.MSELoss()
+optimizer = optim.Adam(model.parameters(), lr=0.01)
+
+for epoch in range(1000):
+    # 前向
+    y_pred = model(X)
+    loss = criterion(y_pred, y)
+    
+    # 反向 + 更新（PyTorch 自动处理！）
+    optimizer.zero_grad()
+    loss.backward()    # 自动计算所有梯度
+    optimizer.step()   # 自动更新所有参数
+    
+    if (epoch + 1) % 200 == 0:
+        print(f"Epoch {epoch+1}: loss = {loss.item():.4f}")
+
+# ===== 查看网络结构 =====
+print(model)
+print(f"总参数量: {sum(p.numel() for p in model.parameters())}")</code></pre>
+
+<div class="concept-box">
+<div class="label">📌 对比：从零实现 vs PyTorch</div>
+<table>
+<tr><th></th><th>从零实现</th><th>PyTorch</th></tr>
+<tr><td>前向传播</td><td>手动写矩阵乘法</td><td><code>model(x)</code> 一行搞定</td></tr>
+<tr><td>反向传播</td><td>手动推导每个梯度</td><td><code>loss.backward()</code> 自动计算</td></tr>
+<tr><td>参数更新</td><td>手动 w -= lr * dw</td><td><code>optimizer.step()</code> 自动更新</td></tr>
+<tr><td>适用场景</td><td>学习原理</td><td>实际开发</td></tr>
+</table>
+</div>
+
+<!-- ============ 4.8 ============ -->
+<h2 id="s8">4.8 网络设计的实践指南</h2>
+
+<h3>参数量计算</h3>
+<p>一个 Linear(in, out) 层的参数量 = in × out + out（权重 + 偏置）</p>
+
+<div class="example-box">
+<div class="label">✏️ 例题 4.4：计算参数量</div>
+<p>网络：输入 784 → 隐藏 256 → 隐藏 128 → 输出 10</p>
+<div class="step">第1层：784×256 + 256 = 200,960</div>
+<div class="step">第2层：256×128 + 128 = 32,896</div>
+<div class="step">第3层：128×10 + 10 = 1,290</div>
+<div class="step">总计：235,146 个参数（约 23.5 万）</div>
+<p>对比：GPT-3 有 1750 亿个参数，是这个网络的 74 万倍！</p>
+</div>
+
+<h3>设计建议</h3>
+<table>
+<tr><th>决策</th><th>建议</th></tr>
+<tr><td>层数</td><td>从 2-3 层隐藏层开始，不够再加</td></tr>
+<tr><td>每层宽度</td><td>逐层递减（如 256→128→64）或相同</td></tr>
+<tr><td>激活函数</td><td>隐藏层用 ReLU，输出层看任务</td></tr>
+<tr><td>过拟合了？</td><td>减少层数/宽度，加 Dropout，加数据</td></tr>
+<tr><td>欠拟合了？</td><td>增加层数/宽度，训练更久</td></tr>
+</table>
+
+<!-- ============ 4.9 ============ -->
+
+<style>
+.misconception-box {
+  background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px;
+  padding: 18px 20px; margin: 20px 0;
+}
+.misconception-box .mc-label {
+  font-weight: 700; color: #dc2626; font-size: 0.85rem; margin-bottom: 10px;
+}
+.misconception-box .mc-item { margin: 10px 0; font-size: 0.9rem; }
+.misconception-box .mc-wrong { color: #dc2626; font-weight: 600; }
+.misconception-box .mc-right { color: #059669; font-weight: 600; }
+</style>
+
+<div class="misconception-box">
+<div class="mc-label">⚠️ 常见误区</div>
+<div class="mc-item">
+  <span class="mc-wrong">✗ "神经网络是在模拟大脑"</span><br>
+  <span class="mc-right">✓ 神经网络只是受大脑启发的数学函数。</span>真正的神经元有复杂的生物化学过程。人工"神经元"就是一个加权求和+激活函数，和生物神经元差别极大。
+</div>
+<div class="mc-item">
+  <span class="mc-wrong">✗ "层数越多越好"</span><br>
+  <span class="mc-right">✓ 太深会导致梯度消失和过拟合。</span>实践中 2-5 层隐藏层对大多数任务就够了。ResNet 的残差连接才让 100+ 层成为可能。
+</div>
+<div class="mc-item">
+  <span class="mc-wrong">✗ "激活函数可选可不选"</span><br>
+  <span class="mc-right">✗ 没有激活函数，100 层网络 = 1 层！</span>多层线性变换还是线性的（矩阵乘法的结合律）。激活函数引入非线性，是网络能学习复杂模式的关键。
+</div>
+</div>
+
+
+<style>
+.checklist-box {
+  background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px;
+  padding: 18px 20px; margin: 24px 0;
+}
+.checklist-box .ck-label {
+  font-weight: 700; color: #2563eb; font-size: 0.9rem; margin-bottom: 10px;
+}
+.checklist-box label {
+  display: block; font-size: 0.88rem; margin: 7px 0; cursor: pointer; color: #334155;
+}
+.checklist-box input[type="checkbox"] { margin-right: 8px; accent-color: #2563eb; }
+</style>
+
+<div class="checklist-box">
+<div class="ck-label">✅ 学完本章，你应该能够：</div>
+<label><input type="checkbox"> 手算一个 2 层网络的前向传播</label>
+<label><input type="checkbox"> 解释为什么需要激活函数（没有会怎样）</label>
+<label><input type="checkbox"> 说出 ReLU、Sigmoid、Softmax 分别用在哪里</label>
+<label><input type="checkbox"> 用 PyTorch 搭建一个 MLP 并训练</label>
+<label><input type="checkbox"> 解释过拟合和欠拟合的区别</label>
+</div>
+
+<h2 id="s9">4.9 本章习题</h2>
+
+<div class="exercise-box">
+<div class="label">📝 概念理解题</div>
+<ol>
+<li>一个神经元做了哪两步计算？</li>
+<li>如果没有激活函数，一个 3 层网络等价于什么？</li>
+<li>ReLU(-5) = ? ReLU(3) = ? Sigmoid(0) = ?</li>
+<li>一个 Linear(100, 50) 层有多少个参数？</li>
+<li>为什么 XOR 问题需要多层网络？</li>
+</ol>
+<button class="show-answer" onclick="this.nextElementSibling.classList.toggle('show')">显示答案</button>
+<div class="answer-box">
+<div class="label">参考答案</div>
+<ol>
+<li>① 加权求和 z = W·x + b；② 激活 y = f(z)</li>
+<li>等价于一个单层线性变换（多层线性 = 一层线性）</li>
+<li>ReLU(-5) = 0；ReLU(3) = 3；Sigmoid(0) = 0.5</li>
+<li>100×50 + 50 = 5,050 个参数</li>
+<li>XOR 不是线性可分的，单层只能画一条直线。多层网络通过非线性激活可以学习曲线边界。</li>
+</ol>
+</div>
+</div>
+
+<div class="exercise-box">
+<div class="label">📝 手算题</div>
+<ol start="6">
+<li>网络：输入2→隐藏2(Sigmoid)→输出1。W₁=[[0.5, -0.5],[0.5, -0.5]]，b₁=[0,0]，W₂=[[1, 1]]，b₂=[-0.5]。输入 x=(1, 0)，求输出。</li>
+<li>上题中，如果输入改为 x=(1, 1)，输出是多少？</li>
+<li>计算网络 输入3→隐藏4→输出2 的总参数量。</li>
+</ol>
+<button class="show-answer" onclick="this.nextElementSibling.classList.toggle('show')">显示答案</button>
+<div class="answer-box">
+<div class="label">参考答案</div>
+<ol start="6">
+<li>z₁ = [0.5×1+(-0.5)×0, 0.5×1+(-0.5)×0] = [0.5, 0.5]<br>
+h = sigmoid([0.5, 0.5]) = [0.622, 0.622]<br>
+z₂ = 1×0.622 + 1×0.622 + (-0.5) = 0.744<br>
+输出 = sigmoid(0.744) ≈ <strong>0.678</strong></li>
+<li>z₁ = [0.5-0.5, 0.5-0.5] = [0, 0]，h = [0.5, 0.5]<br>
+z₂ = 0.5+0.5-0.5 = 0.5，输出 = sigmoid(0.5) ≈ <strong>0.622</strong></li>
+<li>第1层：3×4+4=16，第2层：4×2+2=10，总计 <strong>26</strong> 个参数</li>
+</ol>
+</div>
+</div>
+
+<div class="exercise-box">
+<div class="label">📝 编程实践题</div>
+<ol start="9">
+<li>修改本章的从零实现代码，把隐藏层从 4 个神经元改成 8 个，观察训练速度和最终效果的变化。</li>
+<li>用 PyTorch 构建一个网络：输入 1 → 隐藏 32 → 隐藏 32 → 输出 1，学习函数 y = sin(x)。生成 200 个 [-6, 6] 的数据点训练，画出拟合曲线。</li>
+<li>挑战：用 PyTorch 在 MNIST 手写数字数据集上训练一个 MLP（784→256→128→10），达到 97%+ 准确率。</li>
+</ol>
+<button class="show-answer" onclick="this.nextElementSibling.classList.toggle('show')">显示答案</button>
+<div class="answer-box">
+<div class="label">参考答案（题10）</div>
+<pre><code>import torch, torch.nn as nn, numpy as np
+import matplotlib.pyplot as plt
+
+# 数据
+x = np.linspace(-6, 6, 200).reshape(-1, 1).astype(np.float32)
+y = np.sin(x).astype(np.float32)
+X = torch.from_numpy(x)
+Y = torch.from_numpy(y)
+
+# 网络
+model = nn.Sequential(
+    nn.Linear(1, 32), nn.ReLU(),
+    nn.Linear(32, 32), nn.ReLU(),
+    nn.Linear(32, 1)
+)
+opt = torch.optim.Adam(model.parameters(), lr=0.005)
+loss_fn = nn.MSELoss()
+
+# 训练
+for i in range(2000):
+    pred = model(X)
+    loss = loss_fn(pred, Y)
+    opt.zero_grad(); loss.backward(); opt.step()
+
+# 画图
+plt.scatter(x, y, alpha=0.3, label='sin(x)')
+plt.plot(x, model(X).detach().numpy(), 'r-', label='网络拟合')
+plt.legend(); plt.show()</code></pre>
+</div>
+</div>
+
+<h2>本章小结</h2>
+<table>
+<tr><th>概念</th><th>一句话总结</th></tr>
+<tr><td>神经元</td><td>加权求和 + 激活函数</td></tr>
+<tr><td>激活函数</td><td>引入非线性（ReLU 是默认选择）</td></tr>
+<tr><td>多层网络</td><td>堆叠神经元，能学习任意复杂函数</td></tr>
+<tr><td>前向传播</td><td>输入 → 逐层计算 → 输出</td></tr>
+<tr><td>参数量</td><td>每层 = 输入×输出 + 输出（偏置）</td></tr>
+<tr><td>PyTorch</td><td>定义结构 → 前向 → backward → step</td></tr>
+</table>
+
+<div class="nav-footer">
+<a href="ch03-梯度下降.html">← 上一章：梯度下降</a>
+<a href="ch05-反向传播.html">下一章：反向传播——链式法则的应用 →</a>
+</div>
+
+
+<style>
+.quiz-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 20px 0; }
+.quiz-box .q-label { font-weight: 700; color: #7c3aed; font-size: 0.9rem; margin-bottom: 12px; }
+.quiz-q { margin: 16px 0; padding: 14px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; }
+.quiz-q p { font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; }
+.quiz-opt { display: block; padding: 8px 14px; margin: 4px 0; border-radius: 6px; cursor: pointer; font-size: 0.85rem; border: 1px solid #e5e7eb; transition: all 0.15s; }
+.quiz-opt:hover { background: #f0f9ff; border-color: #93c5fd; }
+.quiz-opt.correct { background: #dcfce7; border-color: #4ade80; color: #166534; }
+.quiz-opt.wrong { background: #fef2f2; border-color: #fca5a5; color: #991b1b; }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.7; }
+.quiz-feedback { margin-top: 8px; font-size: 0.82rem; padding: 8px 12px; border-radius: 6px; display: none; }
+.quiz-feedback.show { display: block; }
+.quiz-feedback.ok { background: #dcfce7; color: #166534; }
+.quiz-feedback.no { background: #fef2f2; color: #991b1b; }
+</style>
+<script src="quiz.js"></script>
+
+
+<!-- 神经元计算器 -->
+<h3>🔬 实验：神经元计算器</h3>
+<p>调整输入、权重和偏置，实时看到神经元的计算过程和输出：</p>
+
+<style>
+.neuron-calc { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 20px 0; }
+.nc-row { display: flex; align-items: center; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+.nc-row label { font-size: 0.85rem; font-weight: 600; min-width: 90px; }
+.nc-row input[type="number"] { width: 60px; padding: 6px 8px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.9rem; text-align: center; }
+.nc-row select { padding: 6px 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.85rem; }
+.nc-result { margin-top: 14px; padding: 14px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 0.9rem; line-height: 1.8; }
+.nc-result .val { font-weight: 700; color: #4361ee; font-size: 1.05rem; }
+.nc-result .step { color: #666; font-size: 0.82rem; }
+</style>
+
+<div class="neuron-calc">
+  <div class="nc-row">
+    <label>输入 x₁ =</label><input type="number" id="nx1" value="2" step="0.5" oninput="calcNeuron()">
+    <label>权重 w₁ =</label><input type="number" id="nw1" value="0.5" step="0.1" oninput="calcNeuron()">
+  </div>
+  <div class="nc-row">
+    <label>输入 x₂ =</label><input type="number" id="nx2" value="3" step="0.5" oninput="calcNeuron()">
+    <label>权重 w₂ =</label><input type="number" id="nw2" value="-1" step="0.1" oninput="calcNeuron()">
+  </div>
+  <div class="nc-row">
+    <label>偏置 b =</label><input type="number" id="nb" value="0.5" step="0.1" oninput="calcNeuron()">
+    <label>激活函数：</label>
+    <select id="nact" onchange="calcNeuron()">
+      <option value="relu">ReLU</option>
+      <option value="sigmoid">Sigmoid</option>
+      <option value="tanh">Tanh</option>
+      <option value="none">无（线性）</option>
+    </select>
+  </div>
+  <div class="nc-result" id="nc-result"></div>
+</div>
+
+<script>
+function calcNeuron() {
+  var x1=+document.getElementById('nx1').value||0, x2=+document.getElementById('nx2').value||0;
+  var w1=+document.getElementById('nw1').value||0, w2=+document.getElementById('nw2').value||0;
+  var b=+document.getElementById('nb').value||0;
+  var act=document.getElementById('nact').value;
+  var z = w1*x1 + w2*x2 + b;
+  var y, actName, actDesc;
+  if (act==='relu') { y=Math.max(0,z); actName='ReLU'; actDesc='max(0, z)'; }
+  else if (act==='sigmoid') { y=1/(1+Math.exp(-z)); actName='Sigmoid'; actDesc='1/(1+e⁻ᶻ)'; }
+  else if (act==='tanh') { y=Math.tanh(z); actName='Tanh'; actDesc='tanh(z)'; }
+  else { y=z; actName='无'; actDesc='直接输出 z'; }
+  var el = document.getElementById('nc-result');
+  el.innerHTML =
+    '<span class="step">第1步：加权求和</span><br>' +
+    'z = w₁×x₁ + w₂×x₂ + b = '+w1+'×'+x1+' + ('+w2+')×'+x2+' + '+b+' = <span class="val">'+z.toFixed(3)+'</span><br><br>' +
+    '<span class="step">第2步：激活函数 '+actName+' ('+actDesc+')</span><br>' +
+    'y = '+actName+'('+z.toFixed(3)+') = <span class="val">'+y.toFixed(4)+'</span><br><br>' +
+    (act==='relu' && z<0 ? '💡 z<0，被 ReLU 截断为 0（"死神经元"）' :
+     act==='sigmoid' ? '💡 输出在 (0,1) 之间，可解释为概率' :
+     act==='tanh' ? '💡 输出在 (-1,1) 之间，零中心' :
+     '💡 无激活函数，输出就是加权和本身');
+}
+calcNeuron();
+</script>
+
+<h2 id="s10">4.10 交互式测验</h2>
+<div class="quiz-box">
+<div class="q-label">🧪 即时测验</div>
+<div class="quiz-q" id="c4-q1">
+  <p>1. 如果没有激活函数，一个 10 层网络等价于：</p>
+  <span class="quiz-opt" onclick="checkQQ('c4','q1',this,false)">A. 10 个独立的线性变换</span>
+  <span class="quiz-opt" onclick="checkQQ('c4','q1',this,true)">B. 1 个线性变换（多层线性 = 一层线性）</span>
+  <span class="quiz-opt" onclick="checkQQ('c4','q1',this,false)">C. 一个非线性函数</span>
+  <span class="quiz-opt" onclick="checkQQ('c4','q1',this,false)">D. 无法计算</span>
+  <div class="quiz-feedback" id="c4-q1-fb"></div>
+</div>
+<div class="quiz-q" id="c4-q2">
+  <p>2. ReLU(-3) 的输出是：</p>
+  <span class="quiz-opt" onclick="checkQQ('c4','q2',this,true)">A. 0（负数被截断为0）</span>
+  <span class="quiz-opt" onclick="checkQQ('c4','q2',this,false)">B. -3</span>
+  <span class="quiz-opt" onclick="checkQQ('c4','q2',this,false)">C. 3</span>
+  <span class="quiz-opt" onclick="checkQQ('c4','q2',this,false)">D. 0.05</span>
+  <div class="quiz-feedback" id="c4-q2-fb"></div>
+</div>
+<div class="quiz-q" id="c4-q3">
+  <p>3. Sigmoid 函数的输出范围是：</p>
+  <span class="quiz-opt" onclick="checkQQ('c4','q3',this,false)">A. (-∞, +∞)</span>
+  <span class="quiz-opt" onclick="checkQQ('c4','q3',this,false)">B. [0, +∞)</span>
+  <span class="quiz-opt" onclick="checkQQ('c4','q3',this,true)">C. (0, 1)（可解释为概率）</span>
+  <span class="quiz-opt" onclick="checkQQ('c4','q3',this,false)">D. [-1, 1]</span>
+  <div class="quiz-feedback" id="c4-q3-fb"></div>
+</div>
+<div class="quiz-q" id="c4-q4">
+  <p>4. 训练集准确率 99%，测试集准确率 60%，这是：</p>
+  <span class="quiz-opt" onclick="checkQQ('c4','q4',this,false)">A. 欠拟合</span>
+  <span class="quiz-opt" onclick="checkQQ('c4','q4',this,true)">B. 过拟合（背答案了，泛化差）</span>
+  <span class="quiz-opt" onclick="checkQQ('c4','q4',this,false)">C. 正常现象</span>
+  <span class="quiz-opt" onclick="checkQQ('c4','q4',this,false)">D. 学习率太大</span>
+  <div class="quiz-feedback" id="c4-q4-fb"></div>
+</div>
+<div class="quiz-q" id="c4-q5">
+  <p>5. 多分类任务（如10类手写数字）的输出层应该用：</p>
+  <span class="quiz-opt" onclick="checkQQ('c4','q5',this,false)">A. ReLU</span>
+  <span class="quiz-opt" onclick="checkQQ('c4','q5',this,false)">B. Sigmoid</span>
+  <span class="quiz-opt" onclick="checkQQ('c4','q5',this,true)">C. Softmax（输出10个概率，和为1）</span>
+  <span class="quiz-opt" onclick="checkQQ('c4','q5',this,false)">D. 不用激活函数</span>
+  <div class="quiz-feedback" id="c4-q5-fb"></div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+import pw from '<本机用户目录>/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.js';
+import fs from 'node:fs/promises';
+import {pathToFileURL,fileURLToPath} from 'node:url';
+const root=fileURLToPath(new URL('../../',import.meta.url));
+const browser=await pw.chromium.launch({headless:true,executablePath:'/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge'});
+const context=await browser.newContext();const p=await context.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));
+await p.goto(pathToFileURL(root+'/index.html').href);await p.waitForFunction(()=>window.CourseApp);const out={home:await p.locator('main h1').textContent()};
+async function go(h){await p.evaluate(h=>{location.hash=h},h);await p.waitForFunction(h=>document.querySelector('main').dataset.route===h.slice(1),h)}
+await go('#lesson/CS102-U01');await p.locator('[data-action=review]').click();out.reviewBefore=await p.evaluate(()=>CourseApp.getState().reviews);await go('#records');await p.locator('[data-action=review-done]').click();out.stateAfterReview=await p.evaluate(()=>CourseApp.getState());
+out.backupMerge=await p.evaluate(()=>{let s=CourseApp.getState();const path='courses/CS102/exercises/01-propositional-logic.md';const actual=CourseApp.data.courses.find(c=>c.id==='CS102').units[0].exercise_path;let base={text:'same response',mode:'independent',at:'2026-10-29T01:00:00Z',attempts:[{text:'first older response',mode:'independent',at:'2026-10-28T01:00:00Z'}]};s.submissions[actual]=base;CourseApp.mergeImport(s);let incoming=CourseApp.getState();incoming.submissions[actual]={...base,mode:'assisted',attempts:[...base.attempts,{text:'additional evidence',mode:'assisted',at:'2026-10-28T03:00:00Z'}]};CourseApp.mergeImport(CourseApp.importValid({format:'cs-merged-backup',state:incoming}));return {incoming:incoming.submissions[actual],merged:CourseApp.getState().submissions[actual]}});
+out.counts=await p.evaluate(()=>({courses:CourseApp.data.courses.length,units:CourseApp.unitCount}));out.errors=errors;await fs.writeFile(new URL('browser-reproduction-rerun.json',import.meta.url),JSON.stringify(out,null,2));console.log(JSON.stringify(out,null,2));await browser.close();

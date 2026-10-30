@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>军事理论 · 关键词速查笔记</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#f5f5f5;color:#333;line-height:1.7}
+  .container{max-width:900px;margin:0 auto;padding:20px}
+  .header{background:linear-gradient(135deg,#1a3a2a 0%,#2d5a3f 100%);color:#fff;padding:30px;border-radius:12px;margin-bottom:24px;text-align:center}
+  .header h1{font-size:28px;margin-bottom:8px}
+  .header p{font-size:14px;opacity:.85}
+  .tips{background:#fff;border-left:4px solid #2d5a3f;padding:16px 20px;border-radius:6px;margin-bottom:20px;font-size:14px}
+  .tips strong{color:#2d5a3f}
+  .search-box{background:#fff;padding:16px;border-radius:8px;margin-bottom:20px;display:flex;gap:10px;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  .search-box input{flex:1;padding:10px 14px;border:1px solid #ddd;border-radius:6px;font-size:15px;outline:none}
+  .search-box input:focus{border-color:#2d5a3f}
+  .search-box button{background:#2d5a3f;color:#fff;border:0;padding:10px 20px;border-radius:6px;font-size:14px;cursor:pointer}
+  .search-box button:hover{background:#1a3a2a}
+  #noResult{display:none;color:#999;text-align:center;padding:20px;font-size:14px}
+  .part{margin-bottom:24px}
+  .part-title{background:#2d5a3f;color:#fff;padding:12px 20px;border-radius:8px 8px 0 0;font-size:18px;font-weight:700}
+  .chapters{background:#fff;border-radius:0 0 8px 8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  .chapter{border-bottom:1px solid #f0f0f0;padding:18px 20px}
+  .chapter:last-child{border-bottom:0}
+  .chapter-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .chapter-num{background:#e8f5e9;color:#2d5a3f;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex-shrink:0}
+  .chapter-info{flex:1}
+  .chapter-name{font-size:17px;font-weight:700;color:#1a3a2a}
+  .chapter-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:12px;white-space:nowrap}
+  .tag-green{background:#e8f5e9;color:#2d5a3f}
+  .tag-blue{background:#e3f2fd;color:#1565c0}
+  .tag-red{background:#ffebee;color:#c62828}
+  .tag-orange{background:#fff3e0;color:#e65100}
+  .tag-purple{background:#f3e5f5;color:#6a1b9a}
+  .chapter-detail{margin-top:8px;font-size:13px;color:#666;line-height:1.8}
+  .chapter-detail b{color:#333}
+  .keyword-index{background:#fff;border-radius:8px;padding:16px 20px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+  .keyword-index h3{font-size:15px;color:#2d5a3f;margin-bottom:10px}
+  .keyword-index .kw-list{display:flex;flex-wrap:wrap;gap:6px}
+  .keyword-index .kw{display:inline-block;padding:4px 10px;background:#f0f0f0;border-radius:4px;font-size:12px;color:#555;text-decoration:none}
+  .keyword-index .kw:hover{background:#e8f5e9;color:#2d5a3f}
+  .highlight{background:#ffeb3b;padding:1px 3px;border-radius:2px}
+  @media (max-width:600px){
+    .container{padding:12px}
+    .header{padding:20px}
+    .header h1{font-size:22px}
+    .chapter{padding:14px}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>🎖 军事理论 · 关键词速查笔记</h1>
+  <p>按智慧树教材目录 + 单元测试题整理 | 5篇 · 20章</p>
+</div>
+
+<div class="tips">
+  <strong>📌 考试速查方法：</strong>看到题目中的关键词 → 用 Ctrl+F 搜索本页 → 定位对应章节 → 翻开教材那一章找答案。<br>
+  <strong>💡 标签说明：</strong>🟢教材重点 / 🔵常考判断题 / 🔴易错点 / 🟠人名·著作 / 🟣数字·时间
+</div>
+
+<div class="search-box">
+  <input type="text" id="searchInput" placeholder="输入关键词快速定位章节…" oninput="searchChapter()">
+  <button onclick="searchChapter()">🔍 搜索</button>
+</div>
+<div id="noResult">😞 未找到匹配章节，试试换个关键词</div>
+
+<div class="keyword-index">
+  <h3>🏷 高频关键词索引（点击跳转）</h3>
+  <div class="kw-list">
+    <a class="kw" href="#ch1">国防</a>
+    <a class="kw" href="#ch2">兵役法</a>
+    <a class="kw" href="#ch2">国防教育日</a>
+    <a class="kw" href="#ch3">国防体制</a>
+    <a class="kw" href="#ch3">全国人大</a>
+    <a class="kw" href="#ch3">中央军委</a>
+    <a class="kw" href="#ch4">解放军</a>
+    <a class="kw" href="#ch4">火箭军</a>
+    <a class="kw" href="#ch4">武警</a>
+    <a class="kw" href="#ch5">国防动员</a>
+    <a class="kw" href="#ch5">国民经济动员</a>
+    <a class="kw" href="#ch6">国家安全</a>
+    <a class="kw" href="#ch6">总体国家安全观</a>
+    <a class="kw" href="#ch7">地缘安全</a>
+    <a class="kw" href="#ch7">钓鱼岛</a>
+    <a class="kw" href="#ch8">国际战略格局</a>
+    <a class="kw" href="#ch8">美国战区司令部</a>
+    <a class="kw" href="#ch9">军事思想</a>
+    <a class="kw" href="#ch10">克劳塞维茨</a>
+    <a class="kw" href="#ch10">战争论</a>
+    <a class="kw" href="#ch10">马汉</a>
+    <a class="kw" href="#ch11">孙子兵法</a>
+    <a class="kw" href="#ch11">以仁为本</a>
+    <a class="kw" href="#ch12">毛泽东军事思想</a>
+    <a class="kw" href="#ch12">习近平强军思想</a>
+    <a class="kw" href="#ch13">战争概述</a>
+    <a class="kw" href="#ch14">新军事革命</a>
+    <a class="kw" href="#ch14">海湾战争</a>
+    <a class="kw" href="#ch15">机械化战争</a>
+    <a class="kw" href="#ch15">富勒</a>
+    <a class="kw" href="#ch15">杜黑</a>
+    <a class="kw" href="#ch16">信息化战争</a>
+    <a class="kw" href="#ch17">信息化武器装备</a>
+    <a class="kw" href="#ch18">航母</a>
+    <a class="kw" href="#ch18">主战坦克</a>
+    <a class="kw" href="#ch19">北斗</a>
+    <a class="kw" href="#ch19">预警机</a>
+    <a class="kw" href="#ch19">GPS</a>
+    <a class="kw" href="#ch20">精确制导</a>
+    <a class="kw" href="#ch20">定向能武器</a>
+    <a class="kw" href="#ch20">核化生</a>
+  </div>
+</div>
+
+<!-- ========== 第一篇 ========== -->
+<div class="part">
+<div class="part-title">第一篇 · 中国国防（第1—5章）</div>
+<div class="chapters">
+
+<div class="chapter" id="ch1" data-keywords="国防 国防类型 国防手段 国防内涵 使命任务 国防历史 现代国防观 部落斗争 军事活动 自主中立 侵略扩张 自卫防御 先秦 秦汉 明清 反侵略 国防意识 政治昌明 经济强盛">
+  <div class="chapter-header">
+    <div class="chapter-num">1</div>
+    <div class="chapter-info">
+      <div class="chapter-name">国防概述</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P11-34</span>
+        <span class="tag tag-red">国防类型三选一</span>
+        <span class="tag tag-blue">古代成就常考</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第一章：</b><br>
+    • 国防内涵：国防产生（<b>部落斗争</b>萌芽→随<b>军事活动</b>发展）<br>
+    • 国防手段：<b>军事</b>活动为主，兼顾政治、经济、外交、科技、教育<br>
+    • 国防三大类型：<b>自主中立型 / 侵略扩张型 / 自卫防御型</b>（中国属于后者）<br>
+    • 国防使命：保卫主权、领土完整、国家统一、维护安全、保障发展、巩固地位<br>
+    • 中国古代国防成就（先秦、秦汉对外扩展、明清边疆治理与反侵略）<br>
+    • 国防历史启示五条：<b>政治昌明是根本 / 经济强盛是基础 / 国家统一民族团结是关键 / 先进科技是手段 / 国防意识是精神根基</b><br>
+    • 现代国防观三要素：政治要素、经济要素（总体设计/实力/潜力建设）、科技要素（推动武器装备/军队结构/作战样式/指挥效能）<br>
+    • 国防四大类型：自主中立型、侵略扩张型、自卫防御型、<b>互相联盟型</b><br>
+    • 中国古代国防四大成就：<b>古代兵书堪称世界之最、"富国强兵"思想、规模宏大的国防工程、完备的古代兵制</b><br>
+    • 🧠 <b>易错：</b>政治修明→国防<b>强盛</b>；政治腐败→国防<b>削弱</b>（题目常反着说"修明就削弱"→❌）<br>
+    • 🧠 鸦片战争拉开中国近代史序幕 → ✅ 对<br>
+    • 🧠 美国奉行<b>扩张性</b>政策、全球"前沿存在" → ✅ 对<br>
+    • 🧠 中国坚持自卫立场、<b>积极防御</b>战略方针 → ✅ 对<br>
+    • 🧠 强烈国防意识是<b>制止战争、威慑敌人</b>的重要精神力量 → ✅ 对
+  </div>
+</div>
+
+<div class="chapter" id="ch2" data-keywords="国防法规 兵役法 国防教育日 宪法 国防法 公民权利 公民义务 服兵役 国防建议权 制止检举权 补偿权 九月第三个星期六 全国人大常委会 战时动员 兵役登记 预备役 少数民族">
+  <div class="chapter-header">
+    <div class="chapter-num">2</div>
+    <div class="chapter-info">
+      <div class="chapter-name">国防法规</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P35-41</span>
+        <span class="tag tag-purple">国防教育日必考</span>
+        <span class="tag tag-red">权利vs义务辨析</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第二章：</b><br>
+    • 《兵役法》内容：<b>兵役登记、现役和预备役、军事院校招收学员、服役待遇和抚恤优待、战时兵员动员</b><br>
+    • 公民国防权利：<b>提出国防建议权、制止和检举权、取得补偿权</b>；<b>没有</b>"了解国防秘密的权利"<br>
+    • 🧠 <b>全民国防教育日</b>：每年<b>九月第三个星期六</b>（2001年设立）<br>
+    • 《宪法》是根本大法，宪法关于国防和军事制度的规定是<b>领率作用</b>的部分<br>
+    • 🧠 《国防法》规定了国防科研生产和军事订货 → ✅ 对（≠不包括）<br>
+    • 国防法规特征：<b>对象军事性、公开有限性、司法有限性、处罚严厉性</b><br>
+    • 🧠 <b>易错：</b>公民<b>有</b>权利制止危害国防行为；征用造成的损失<b>有权</b>取得补偿；少数民族<b>同样</b>有服兵役义务
+  </div>
+</div>
+
+<div class="chapter" id="ch3" data-keywords="国防体制 国防战略 国防政策 全国人大 中共中央 国家主席 国务院 中央军委 积极防御 永不称霸 永不扩张 永不谋求势力范围 十九大 军民融合 国防成就 战略方针 南海诸岛 钓鱼岛">
+  <div class="chapter-header">
+    <div class="chapter-num">3</div>
+    <div class="chapter-info">
+      <div class="chapter-name">国防建设</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P42-57</span>
+        <span class="tag tag-red">领导体制必考</span>
+        <span class="tag tag-blue">三个"永不"常考判断</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第三章：</b><br>
+    • 国防领导职权由五方行使：<b>中共中央、全国人大及其常委会、国家主席、国务院、中央军委</b><br>
+    • 全国人大是最<b>高权力机关</b>；全国人大常委会有权<b>决定全国总动员或局部动员、宣布战争状态</b><br>
+    • 国防战略：<b>积极防御</b>；特点：立足威慑、常规战争、长期竞争<br>
+    • 新时代中国国防：三个"<b>永不</b>"——永不称霸、永不扩张、永不谋求势力范围<br>
+    • 十九大报告：中国无论发展到什么程度，永远<b>不称霸、不搞扩张</b><br>
+    • 🧠 判断：南海诸岛、钓鱼岛及其附属岛屿是中国固有领土 → ✅ 对<br>
+    • 国防建设战略任务：建设同国际地位相称、同国家安全和发展利益相适应的<b>巩固国防和强大军队</b><br>
+    • 中国共产党领导是国防领导体制的<b>基本特征</b><br>
+    • 军民融合：内涵、历程、深度发展
+  </div>
+</div>
+
+<div class="chapter" id="ch4" data-keywords="武装力量 解放军 火箭军 第二炮兵 武警 民兵 军事训练 战斗力 北海舰队 东海舰队 南海舰队 海军 军种 陆军 联合作战 海外利益 2015年12月31日">
+  <div class="chapter-header">
+    <div class="chapter-num">4</div>
+    <div class="chapter-info">
+      <div class="chapter-name">武装力量</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P58-71</span>
+        <span class="tag tag-purple">火箭军成立时间</span>
+        <span class="tag tag-red">三大舰队</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第四章：</b><br>
+    • 中国武装力量构成：<b>解放军、武警、民兵</b><br>
+    • 解放军军种：陆军、海军、空军、<b>火箭军</b>（由<b>第二炮兵</b>更名，<b>2015年12月31日</b>正式成立）、战略支援部队<br>
+    • 海军三大舰队：<b>北海舰队、东海舰队、南海舰队</b>（没有黄海/渤海舰队）<br>
+    • 🧠 和平时期军队的基本实践活动：<b>军事训练</b><br>
+    • 军队战斗力标准：牢固树立<b>战斗力这个唯一的根本的标准</b>，提高实战化训练水平<br>
+    • 解放军使命：保卫人民和平劳动 / 参加国家建设事业<br>
+    • 🧠 判断：太空是国际战略竞争制高点 → ✅ 对<br>
+    • 🧠 判断：海外利益是中国国家利益的重要组成部分 → ✅ 对<br>
+    • 人民军队历程：三湾改编→五次反围剿→万里长征→抗日战争→解放战争→抗美援朝→新时代强军
+  </div>
+</div>
+
+<div class="chapter" id="ch5" data-keywords="国防动员 总动员 局部动员 国民经济动员 财政金融动员 商业贸易动员 工业动员 农业动员 医药卫生动员 人民防空 交通战备 平战结合 武警动员 公开动员 秘密动员 抗美援朝">
+  <div class="chapter-header">
+    <div class="chapter-num">5</div>
+    <div class="chapter-info">
+      <div class="chapter-name">国防动员</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P72-84</span>
+        <span class="tag tag-red">动员类型辨析</span>
+        <span class="tag tag-blue">方针原则常考</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第五章：</b><br>
+    • 国防动员行为主体：<b>国家</b><br>
+    • 动员类型：按范围分<b>总动员/局部动员</b>；按方式分<b>公开动员/秘密动员</b>（不是物力动员）<br>
+    • 动员方针：<b>平战结合、军民结合、寓军于民</b><br>
+    • <b>财政金融动员</b>：筹措和分配资金、维持财政金融秩序<br>
+    • <b>商业贸易动员</b>：统制商品流通方向、稳定市场供应<br>
+    • <b>医药卫生动员</b>：统一调度医药卫生人力、药品器材<br>
+    • 人民防空动员内容：<b>人防工程物资技术保障、人防专业队伍、群众防护、人防预警保障</b><br>
+    • 国民经济动员：工业、农业、商业贸易、财政金融、劳动力动员<br>
+    • 🧠 判断：国防动员具有<b>平战双重属性</b> → ✅ 对<br>
+    • 🧠 判断：抗美援朝是新中国成立后规模最大的对外战争 → ✅ 对
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ========== 第二篇 ========== -->
+<div class="part">
+<div class="part-title">第二篇 · 国家安全（第6—8章）</div>
+<div class="chapters">
+
+<div class="chapter" id="ch6" data-keywords="国家安全 总体国家安全观 人民安全 政治安全 国家利益至上 统筹发展安全 党的领导 制度安全 政权安全 外部安全 内部安全 13个领域 预防为主 标本兼治 共同安全">
+  <div class="chapter-header">
+    <div class="chapter-num">6</div>
+    <div class="chapter-info">
+      <div class="chapter-name">国家安全概述</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P85-91</span>
+        <span class="tag tag-red">安全vs发展关系</span>
+        <span class="tag tag-blue">五个"坚持"</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第六章：</b><br>
+    • 国家安全定义：国家政权、主权、统一和领土完整、人民福祉、经济社会可持续发展<b>相对处于没有危险和不受内外威胁的状态</b><br>
+    • 维护国家安全核心：<b>坚持预防为主+坚持共同安全+统筹各领域安全+遵守宪法法律+尊重保障人权</b><br>
+    • 维护国家安全工作基本原则：坚持<b>党对国家安全工作的领导</b>、坚持维护安全与发展相协调、坚持促进共同安全、坚持法治和保障人权、坚持预防为主标本兼治专群结合<br>
+    • 国家利益至上为准则：把国家利益作为制定国家安全战略的<b>出发点</b><br>
+    • 🧠 <b>安全是发展的条件，发展是安全的基础</b> → 判断题容易出反<br>
+    • 🧠 政治安全攸关党和国家安危，是<b>国家安全的根本</b><br>
+    • 把<b>制度安全、政权安全</b>放在首要位置<br>
+    • 统筹外部安全和内部安全：对内求发展求变革求稳定；对外求和平求合作求共赢<br>
+    • 总体国家安全观：构建<b>13个领域</b>安全体系<br>
+  </div>
+</div>
+
+<div class="chapter" id="ch7" data-keywords="地缘环境 地缘安全 锡金 印度 明治维新 美国影响 陆缓海紧 南沙群岛 海洋权益 领土争端 南海 钓鱼岛主权 韩国美国盟友 苏联 冷战 中美关系 台海">
+  <div class="chapter-header">
+    <div class="chapter-num">7</div>
+    <div class="chapter-info">
+      <div class="chapter-name">国家安全形势</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P92-101</span>
+        <span class="tag tag-purple">明治维新1868</span>
+        <span class="tag tag-red">周边国家关系</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第七章：</b><br>
+    • 已被印度吞并的国家：<b>锡金</b><br>
+    • 人口超10亿有强大军事动员能力：<b>印度</b>（还有孟加拉、巴基斯坦、印尼）<br>
+    • 日本<b>明治维新</b>始于<b>1868年</b><br>
+    • 中国位于世界<b>两大</b>地缘战略区交接处<br>
+    • 🧠 影响中国周边安全环境最主要外部因素：<b>美国</b><br>
+    • 冷战时期影响中国周边安全的两国：<b>苏联和美国</b><br>
+    • 中国周边安全态势：<b>陆缓海紧</b>（陆地缓和、海洋紧张）<br>
+    • 南沙群岛是南部海域前沿的<b>军事战略要冲</b><br>
+    • 🧠 韩国和美国是<b>军事盟友</b>关系 → ✅ 对<br>
+    • 🧠 日本<b>不承认</b>钓鱼岛有主权争议 → ✅ 对（日本不承认争议）<br>
+    • 新兴领域安全：太空安全、国际海底区域、极地领域、网络安全、外部安全
+  </div>
+</div>
+
+<div class="chapter" id="ch8" data-keywords="国际战略格局 多极化 美国海军 世界战略力量 五大力量中心 尼克松 中美关系 亚太转移 战区司令部 美军 一极独大 全能选手 六大军种 五角大楼 俄罗斯 日本 印度">
+  <div class="chapter-header">
+    <div class="chapter-num">8</div>
+    <div class="chapter-info">
+      <div class="chapter-name">国际战略形势</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P102-116</span>
+        <span class="tag tag-purple">五大力量中心</span>
+        <span class="tag tag-red">美国军事力量</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第八章：</b><br>
+    • 美国海军实力世界第<b>1</b><br>
+    • 当今世界主要战略力量：<b>5个</b>（美、西欧、苏/俄、中、日五大力量中心）<br>
+    • 🧠 <b>尼克松</b>（不是卡特）1971年提出五大力量中心论点<br>
+    • 🧠 中国是国际政治、经济、军事格局三位一体的"<b>全能选手</b>" → ✅ 对<br>
+    • 未来中美关系是国际战略格局中<b>最重要的一组大国关系</b><br>
+    • 世界经济和战略重心正加速向<b>亚太</b>转移<br>
+    • 🧠 美军有<b>6大</b>战区司令部（不是8大）<br>
+    • 🧠 美国现役部队由<b>五大</b>军种组成（不是六大军种）<br>
+    • 美国一极独大地位<b>中短期内将持续存在</b><br>
+    • 战略格局更替方式：战争方式实现 → 过渡期<b>相对较短</b><br>
+    • 世界主要国家军事动向：美国、俄罗斯、印度、日本、英国、韩国
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ========== 第三篇 ========== -->
+<div class="part">
+<div class="part-title">第三篇 · 军事思想（第9—12章）</div>
+<div class="chapters">
+
+<div class="chapter" id="ch9" data-keywords="军事思想 军事实践 理性认识 阶级性 时代性 继承性 实践性 对抗性 军事预测 战争 军队 国防 17世纪 西方 东方">
+  <div class="chapter-header">
+    <div class="chapter-num">9</div>
+    <div class="chapter-info">
+      <div class="chapter-name">军事思想概述</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P117-124</span>
+        <span class="tag tag-blue">特征辨析常考</span>
+        <span class="tag tag-red">形成后不可改变→错</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第九章：</b><br>
+    • 军事思想客观基础：<b>军事实践</b><br>
+    • 军事思想是关于<b>战争、军队和国防</b>基本问题的理性认识<br>
+    • 军事思想地位：为认识<b>军事问题</b>提供基本观点，为从事<b>实践</b>活动提供全局性指导<br>
+    • 军事思想四大特征：<b>阶级性、时代性、继承性、实践性</b>（注意：没有"对抗性"——判断题考过"具有对抗性"为❌）<br>
+    • 🧠 <b>易错：</b>军事思想来源于军事实践，一旦形成<b>很难改变</b> → ❌ 错（随实践发展而发展）<br>
+    • 军事思想发展动力：<b>军事实践</b><br>
+    • 17世纪中叶开始，东方社会停滞不前，西方走向资本主义，人类历史重心偏向<b>西方</b>
+  </div>
+</div>
+
+<div class="chapter" id="ch10" data-keywords="外国军事思想 克劳塞维茨 战争论 若米尼 战争艺术概论 马汉 海权论 海权对历史的影响 古希腊 古罗马 资产阶级革命 拿破仑战争 英国资产阶级革命 1640 空军制胜论 机械化战争 总体战 核武器制胜论 苏沃洛夫 比洛 制海权 高卢战记">
+  <div class="chapter-header">
+    <div class="chapter-num">10</div>
+    <div class="chapter-info">
+      <div class="chapter-name">外国军事思想</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P125-131</span>
+        <span class="tag tag-orange">人物著作必考</span>
+        <span class="tag tag-purple">1640英国革命</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第十章：</b><br>
+    • 欧洲封建社会结束标志：<b>1640年英国资产阶级革命</b><br>
+    • "战争无非是政治通过另一种手段的继续"→ <b>克劳塞维茨《战争论》</b><br>
+    • 外国古代军事思想典型代表：<b>古希腊和古罗马</b>军事思想<br>
+    • 资产阶级军事思想形成时期：17世纪英国革命→19世纪初<b>拿破仑战争</b><br>
+    • 古希腊军事思想散见于：<b>《希腊波斯战争史》《远征记》《伯罗奔尼撒战争史》</b><br>
+    • 人物-著作对应：<br>
+    &nbsp;&nbsp;• 普鲁士-<b>克劳塞维茨</b>《战争论》<br>
+    &nbsp;&nbsp;• 瑞士-<b>若米尼</b>《战争艺术概论》<br>
+    &nbsp;&nbsp;• 美国-<b>马汉</b>《海权对历史的影响》《海军战略》<br>
+    &nbsp;&nbsp;• 俄国-<b>苏沃洛夫</b>《制胜的科学》<br>
+    &nbsp;&nbsp;• 普鲁士-<b>比洛</b>《新战术》《最新战法要旨》<br>
+    • 🧠 <b>易错：</b>若米尼是<b>瑞士</b>人（不是法国）；马汉是<b>美国</b>人<br>
+    • 资产阶级军事理论：空军制胜论、机械化战争理论、总体战理论、核武器制胜论<br>
+    • 古罗马军事著作：<b>《高卢战记》《论军事》《谋略》</b><br>
+    • 🧠 马汉提出<b>制海权决定国运兴衰</b> → ✅ 对<br>
+    • 🧠 战争就是政治的继续（=战争是政治通过另一种手段的继续）
+  </div>
+</div>
+
+<div class="chapter" id="ch11" data-keywords="中国古代军事思想 孙子兵法 以仁为本 知行合一 不战而屈人之兵 八大指导思想 治军理论 选贤任能 夏商周 春秋战国 战车 铁器 宋朝 明朝 军政 军制 尚书 诗经 非攻 墨家 儒家 道家 兵家">
+  <div class="chapter-header">
+    <div class="chapter-num">11</div>
+    <div class="chapter-info">
+      <div class="chapter-name">中国古代军事思想</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P132-142</span>
+        <span class="tag tag-orange">孙子兵法必考</span>
+        <span class="tag tag-purple">体系化始于宋</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第十一章：</b><br>
+    • 萌芽时期散见文献：<b>《军政》《军制》《令典》《尚书》《诗经》</b><br>
+    • 主要内容：<b>以仁为本的战争观</b>、知己知彼百战不殆、不战而屈人之兵的全胜战略、选贤任能用将之道、不战则已战则必胜<br>
+    • 战争观上各家主张：兵家"自古知兵非好战"、儒家仁义安天下、墨家"<b>非攻</b>"、道家"虽有甲兵无所陈之"——主旨相同：<b>以仁为本</b><br>
+    • 🧠 <b>易错：</b>中国古代军事思想体系化发展始于<b>宋朝</b>（不是明朝）<br>
+    • 夏商周时期主要作战工具：<b>战车</b><br>
+    • 春秋战国：铁器出现促进军事变革；第一个社会大变革时期<br>
+    • 《孙子兵法》：最具代表性的军事理论著作，至今仍是现代军事理论和国防战略的<b>思想根基</b><br>
+    • 🧠 判断：古代军事思想对现代已无指导作用 → ❌ 错
+  </div>
+</div>
+
+<div class="chapter" id="ch12" data-keywords="毛泽东军事思想 邓小平军队建设 江泽民 胡锦涛 习近平强军思想 论持久战 井冈山 中国革命战争 政治合格 军事过硬 作风优良 纪律严明 保障有力 台海危机 三股势力 军民融合 强军目标 大国强军 政治建军">
+  <div class="chapter-header">
+    <div class="chapter-num">12</div>
+    <div class="chapter-info">
+      <div class="chapter-name">当代中国军事思想</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P143-188</span>
+        <span class="tag tag-orange">毛著必考</span>
+        <span class="tag tag-red">五代军事思想</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第十二章：</b><br>
+    • 毛泽东军事论著：<b>《井冈山的斗争》《中国革命战争的战略问题》《论持久战》《战争和战略问题》《抗日游击战争的战略问题》</b><br>
+    • 🧠 <b>易错：</b>毛泽东大革命期间抓住的基本问题是<b>农民问题</b>（不是工人问题）<br>
+    • 江泽民时期安全威胁：<b>霸权主义和强权政治威胁、经济制裁、文化渗透、"西化""分化"、台海危机、"三股势力"（恐怖主义、分裂主义、极端主义）</b><br>
+    • 🧠 十四大报告：新时期军队建设总要求——<b>"政治合格、军事过硬、作风优良、纪律严明、保障有力"</b><br>
+    • 十七大报告推进创新领域：<b>军事技术、军事理论、军事组织、军事管理</b><br>
+    • <b>习近平强军思想核心内容：</b><br>
+    &nbsp;&nbsp;①确立强军目标，把国防和军队建设提升到新高度<br>
+    &nbsp;&nbsp;②大力加强政治建军<br>
+    &nbsp;&nbsp;③整体谋划系统推进军队改革<br>
+    &nbsp;&nbsp;④把国防和军队建设作为系统工程<br>
+    &nbsp;&nbsp;⑤强力推进军民融合<br>
+    • 🧠 战争是<b>私有财产和阶级的产物</b> → ✅ 对<br>
+    • 🧠 战争形态的发展变化是引发新军事思想的<b>重要客观条件</b> → ✅ 对<br>
+    • 🧠 <b>政治信仰</b>是我党我军特有的精神支柱和力量之源 → ✅ 对
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ========== 第四篇 ========== -->
+<div class="part">
+<div class="part-title">第四篇 · 现代战争（第13—16章）</div>
+<div class="chapters">
+
+<div class="chapter" id="ch13" data-keywords="战争概述 克劳塞维茨 战争是政治的继续 信息化战争 七维空间 战争形态 自然兵器 冷兵器 热兵器 机械兵器 高技术兵器 信息化兵器 第二次世界大战 机械化巅峰 越南战争 伊拉克战争 以暴易暴 政治交往">
+  <div class="chapter-header">
+    <div class="chapter-num">13</div>
+    <div class="chapter-info">
+      <div class="chapter-name">战争概述</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P189-193</span>
+        <span class="tag tag-orange">战争定义必考</span>
+        <span class="tag tag-blue">六大兵器阶段</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第十三章：</b><br>
+    • 战争定义：敌对双方为一定政治、经济目的，有组织有计划使用武力进行的<b>军事</b>对抗活动<br>
+    • "战争无非是政治通过另一种手段的继续"→ <b>克劳塞维茨</b><br>
+    • 信息化战争在七维空间作战：<b>陆、海、空、天、信息、认知、心理</b>，运用信息化武器装备、信息系统<br>
+    • 推动战争形态转变的主要动因：<b>科学技术发展 + 社会变革催化 + 军事变革需求 + 战争实践验证 + 军队建设增强</b><br>
+    • 🧠 战争具有"以暴易暴"的<b>无限化暴烈性</b> → ❌ 错（战争暴烈性有限化）<br>
+    • 🧠 战争只不过是<b>政治交往的一部分</b> → ✅ 对<br>
+    • 六大兵器发展阶段：自然兵器→冷兵器→热兵器→机械兵器→高技术兵器→信息化兵器<br>
+    • 机械化战争的巅峰：<b>第二次世界大战</b><br>
+    • 高技术战争时期：<b>越南战争之后、伊拉克战争之前</b><br>
+    • 信息化战争是<b>信息时代的基本战争形态</b>
+  </div>
+</div>
+
+<div class="chapter" id="ch14" data-keywords="新军事革命 海湾战争 世界格局 第四次中东战争 三非作战 非对称 非接触 非线式 马岛海战 精确制导武器 信息化 机械化 军事组织革命 1973 分水岭 信息技术">
+  <div class="chapter-header">
+    <div class="chapter-num">14</div>
+    <div class="chapter-info">
+      <div class="chapter-name">新军事革命</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P194-200</span>
+        <span class="tag tag-purple">海湾战争=分水岭</span>
+        <span class="tag tag-red">三非作战</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第十四章：</b><br>
+    • 新军事革命形成：世界格局新变化是<b>主要动因</b>（不是外在动因/内在动因/核心因素）<br>
+    • 新军事革命另一动因：<b>高新技术的发展</b><br>
+    • <b>第四次中东战争</b>：<b>1973年</b><br>
+    • <b>海湾战争</b>：使大规模机械化作战发展到极致，信息化作战初露端倪 → 世界新军事变革的<b>分水岭</b><br>
+    • <b>三非作战观</b>：<b>非对称作战、非接触作战、非线式作战</b>（没有"非流血""非暴力"）<br>
+    • 🧠 <b>马岛海战</b>（英阿）：世界上第一次大规模使用精确制导武器的海空交战<br>
+    • 阿根廷"贝尔格拉诺将军"号巡洋舰是福克兰战役中第一艘被击沉的船只<br>
+    • 🧠 <b>军事组织革命</b>既是新军事革命的重点也是难点 → ✅ 对<br>
+    • 核心内容：军事系统高度信息化；基本内容：四个革新+一个转变<br>
+    • 中国特色新军事革命：忧患意识、科技强军、国力优势、优化结构、信息化改革
+  </div>
+</div>
+
+<div class="chapter" id="ch15" data-keywords="机械化战争 富勒 杜黑 闪击战 总体战 空地一体作战 凡尔登战役 库尔斯克会战 坦克 骑兵 炮兵 步兵 1916 美国 德国 拿破仑 鲁登道夫 武器制胜论">
+  <div class="chapter-header">
+    <div class="chapter-num">15</div>
+    <div class="chapter-info">
+      <div class="chapter-name">机械化战争</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P201-207</span>
+        <span class="tag tag-orange">富勒/杜黑必考</span>
+        <span class="tag tag-purple">凡尔登1916</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第十五章：</b><br>
+    • 机械化战争论创立者：<b>富勒</b>（英）<br>
+    • "空军制胜论"创立者：<b>杜黑</b>（意）<br>
+    • 德国<b>"闪击战"</b>理论 → 二战德军作战理论基础<br>
+    • "空地一体作战"理论：80年代<b>美国</b>提出<br>
+    • <b>凡尔登战役</b>：爆发于<b>1916年</b>，一战中破坏性最大、时间最长的战役<br>
+    • <b>库尔斯克会战</b>：二战中<b>最大的坦克会战</b>，最大规模的对攻战役<br>
+    • 富勒观点：<b>骑兵将退出战场、步兵降为辅助兵种、炮兵需提高机动能力、战场上坦克数量多的一方胜利机会亦多、战争胜负"百分之九十九在于武器"</b><br>
+    • 🧠 富勒认为坦克出现后，战争将是<b>纯粹的机械化活动</b> → ✅ 对<br>
+    • 🧠 机械化战争中保障人员<b>大量增加</b> → ✅ 对
+  </div>
+</div>
+
+<div class="chapter" id="ch16" data-keywords="信息化战争 信息技术 高技术的发展 战场超大多维 指挥网络化 信息资源 第五维战场 电磁战场 扁平网络化 科索沃战争 俄罗斯 信息 物质 能量 三大要素 俄罗斯东欧 战斗力核心 直接动力">
+  <div class="chapter-header">
+    <div class="chapter-num">16</div>
+    <div class="chapter-info">
+      <div class="chapter-name">信息化战争</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P208-228</span>
+        <span class="tag tag-blue">第五维战场</span>
+        <span class="tag tag-red">科索沃战争</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第十六章：</b><br>
+    • 信息化战争产生的直接动力：<b>高技术的发展</b><br>
+    • 🧠 军事理论的创新发展是信息化战争的<b>重要推动力量</b> → ✅ 对<br>
+    • 信息化战争基本特征：<b>战场空间超大多维、作战指挥网络化、信息资源升值主导、武器装备信息化、战争节奏迅疾快速</b><br>
+    • 🧠 信息和<b>物质、能量</b>并称为人类社会生存发展三大基本要素 → ✅ 对<br>
+    • 信息化战争中交战双方<b>至少一方是信息化军队</b> → ✅ 对<br>
+    • <b>电磁战场</b> = 继陆海空天之后的"<b>第五维战场</b>" → ✅ 对<br>
+    • 🧠 信息成为部队战斗力的<b>核心要素</b> → ✅ 对<br>
+    • 指挥体制趋向<b>"扁平网络化"结构</b><br>
+    • 🧠 科索沃战争后，俄罗斯彻底被<b>挤出东欧原有势力圈</b> → ✅ 对
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ========== 第五篇 ========== -->
+<div class="part">
+<div class="part-title">第五篇 · 信息化武器装备（第17—20章）</div>
+<div class="chapters">
+
+<div class="chapter" id="ch17" data-keywords="信息化武器装备 硬杀伤 软杀伤 计算机病毒 网络战 电子战 电磁波 四全一化 全方位 全天候 全天时 全频谱 数字化 兵贵神速 打击快 机动快 转移快 反应快 钻盖藏小跑 防护综合化 精确制导智能化 保存自己消灭敌人">
+  <div class="chapter-header">
+    <div class="chapter-num">17</div>
+    <div class="chapter-info">
+      <div class="chapter-name">信息化武器装备概述</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P229-233</span>
+        <span class="tag tag-red">硬杀伤vs软杀伤</span>
+        <span class="tag tag-blue">四全一化</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第十七章：</b><br>
+    • 软杀伤型信息化武器：以<b>计算机病毒</b>为攻击手段、以<b>电磁波</b>为杀伤方式<br>
+    • 硬杀伤型：<b>舰艇、战斗机</b>（注意：导弹防御系统、网络战武器、电子战武器也属硬杀伤类别）<br>
+    • 侦察立体化"四全一化"——<b>"四全"</b>：全方位、全天候、全天时、全频谱；<b>"一化"</b>：数字化<br>
+    • 信息化武器装备实现了<b>"兵贵神速"</b>：打击快、机动快、转移快、反应快（注意：没有"装备快"！）<br>
+    • 防护综合化措施："<b>钻、盖、藏、小、跑</b>"<br>
+    • 🧠 软杀伤型信息武器对目标<b>没有直接杀伤破坏作用</b> → ✅ 对<br>
+    • 🧠 未来战争新型武器使战场更透明，可实现<b>全球感知</b> → ✅ 对<br>
+    • 🧠 "<b>保存自己，消灭敌人</b>"是一切战争的共同原则 → ✅ 对<br>
+    • 🧠 <b>智能化</b>是精确制导武器的发展方向 → ✅ 对
+  </div>
+</div>
+
+<div class="chapter" id="ch18" data-keywords="信息化作战平台 主战坦克 阿布拉姆斯 勒克莱尔 辽宁号 山东号 航空母舰 图160 图95 B2 B52 轰6 阿利伯克级 相控阵雷达 弹道导弹核潜艇 三位一体 战略核力量 F35 舰载第五代 第四代主战坦克">
+  <div class="chapter-header">
+    <div class="chapter-num">18</div>
+    <div class="chapter-info">
+      <div class="chapter-name">信息化作战平台</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P234-271</span>
+        <span class="tag tag-orange">武器装备识别</span>
+        <span class="tag tag-purple">山东舰F35</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第十八章：</b><br>
+    • "阿布拉姆斯"系列主战坦克 → <b>美国</b>研制<br>
+    • "勒克莱尔"主战坦克 → 被誉为"全球第一种<b>第四代主战坦克</b>"<br>
+    • 俄罗斯轰炸机：<b>图-160轰炸机、图-95"熊"轰炸机</b><br>
+    • 中国航母：<b>"辽宁"号、"山东"号</b>（山东舰是首艘自主建造国产航母）<br>
+    • 🧠 阿利·伯克级导弹驱逐舰 → 世界上最先配备<b>四面相控阵雷达</b>的驱逐舰 → ✅ 对<br>
+    • 🧠 弹道导弹核潜艇 + 陆基弹道导弹 + 战略轰炸机 = 国家<b>三位一体战略核力量</b> → ✅ 对<br>
+    • 🧠 <b>F-35"闪电Ⅱ"</b>：世界上最大的单发单座舰载战斗机，唯一已服役的<b>舰载第五代战斗机</b> → ✅ 对<br>
+    • 信息化作战平台分类：地面、水面(下)、空中、太空四大类<br>
+    • 主战坦克是陆上主要战斗兵器，可完成多种作战任务
+  </div>
+</div>
+
+<div class="chapter" id="ch19" data-keywords="综合电子信息系统 指挥控制系统 人机系统 预警机 E2 E-2 A-50 空警-500 北斗 导航星 GPS 全球定位 伽利略 欧盟 空间段 地面段 用户段 情报 通信 指挥 预警 全天候">
+  <div class="chapter-header">
+    <div class="chapter-num">19</div>
+    <div class="chapter-info">
+      <div class="chapter-name">综合电子信息系统</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P272-290</span>
+        <span class="tag tag-orange">北斗/GPS对比</span>
+        <span class="tag tag-blue">预警机型号</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第十九章：</b><br>
+    • 军队指挥控制系统 = "<b>人-机</b>"系统（Computer Human/人机结合）<br>
+    • 预警机功能集合：<b>预警、指挥、控制、通信、情报</b>（五种一体）<br>
+    • "导航星"GPS特点：<b>全天候全天时全球覆盖、定位精度军民有别、接收机轻便实用、导航信息保密性好</b><br>
+    • 北斗系统三部分：<b>空间段 + 地面段 + 用户段</b>（没有网络段、信息段）<br>
+    • 🧠 数字化指挥控制系统改变了传统人工方式，实现<b>人与计算机有机结合</b> → ✅ 对<br>
+    • <b>E-2预警机</b> → 美国海军唯一使用的舰载空中预警机<br>
+    • <b>A-50预警机</b> → 可作空中雷达、空中引导站和空中指挥所<br>
+    • <b>空警-500</b> → 中国研制装备的<b>第三代</b>预警机<br>
+    • 🧠 GPS是受<b>美国军方控制</b>的军民两用系统 → ✅ 对<br>
+    • 🧠 <b>伽利略</b>卫星导航系统 → 由<b>欧盟</b>研制建立 → ✅ 对
+  </div>
+</div>
+
+<div class="chapter" id="ch20" data-keywords="新概念武器 定向能武器 激光武器 粒子束武器 高功率微波 电磁脉冲 次声波 次声武器 精确制导武器 核化生 毒剂 芥子气 沙林 光气 路易氏气 S-300 百舌鸟 响尾蛇 神剑 氢弹 朝鲜 2016">
+  <div class="chapter-header">
+    <div class="chapter-num">20</div>
+    <div class="chapter-info">
+      <div class="chapter-name">信息化杀伤武器</div>
+      <div class="chapter-tags">
+        <span class="tag tag-green">教材P291-314</span>
+        <span class="tag tag-red">武器类型辨析</span>
+        <span class="tag tag-purple">朝鲜氢弹2016</span>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-detail">
+    <b>🔑 看到这些词 → 查第二十章：</b><br>
+    • <b>次声波</b>：频率在<b>20赫兹</b>以下（不是200/2000/20000）<br>
+    • 定向能武器：<b>激光武器、粒子束武器、高功率微波武器、电磁脉冲武器</b><br>
+    • 毒剂包括：<b>芥子气、沙林、光气、路易氏气</b>（注意：亚当氏气也是）<br>
+    • 🧠 定向能武器可用于进攻，也可用于拦截导弹防御 → ✅ 对<br>
+    • 🧠 次声武器特点：传播<b>速度快、距离远、不易察觉、穿透力强</b> → ✅ 对<br>
+    • <b>S-300</b>：俄罗斯研制的全空域、多用途防空导弹系统<br>
+    • <b>AGM-45"百舌鸟"</b>：美军第一种投入实战的空地<b>反辐射导弹</b><br>
+    • <b>响尾蛇</b>短程空空导弹：全世界第一种实用化的<b>空对空导弹</b><br>
+    • <b>XM982"神剑"</b>式155mm增程炮弹：美军第一种全自主式<b>制导炮弹</b><br>
+    • 🧠 <b>2016年1月6日</b>，朝鲜宣布第一枚<b>氢弹</b>成功试验 → ✅ 对<br>
+    • 新概念武器：定向能、动能、非致命、环境武器等<br>
+    • 精确制导武器：导弹、制导炮弹、制导炸弹等
+  </div>
+</div>
+
+</div>
+</div>
+
+<div style="text-align:center;color:#999;font-size:12px;padding:20px">
+  整理自智慧树《军事理论》教材目录与20章单元测试 · 波士顿大龙虾 🦞
+</div>
+
+</div>
+
+<script>
+function searchChapter() {
+  var q = document.getElementById('searchInput').value.trim().toLowerCase();
+  var chapters = document.querySelectorAll('.chapter');
+  var found = false;
+  chapters.forEach(function(ch) {
+    var kw = ch.getAttribute('data-keywords') || '';
+    if (!q || kw.toLowerCase().indexOf(q) >= 0) {
+      ch.style.display = '';
+      found = true;
+    } else {
+      ch.style.display = 'none';
+    }
+  });
+  document.getElementById('noResult').style.display = (q && !found) ? 'block' : 'none';
+  // also hide empty parts
+  document.querySelectorAll('.part').forEach(function(part) {
+    var visible = part.querySelectorAll('.chapter[style*="display:"]');
+    // only hide if ALL chapters hidden
+    var allCh = part.querySelectorAll('.chapter');
+    var allHidden = true;
+    allCh.forEach(function(c){ if(c.style.display !== 'none') allHidden = false; });
+    part.style.display = (q && allHidden) ? 'none' : '';
+  });
+}
+</script>
+
+</body>
+</html>

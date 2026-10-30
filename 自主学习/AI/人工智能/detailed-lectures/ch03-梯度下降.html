@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第3章：梯度下降——AI如何学习</title>
+<style>
+:root {
+  --bg: #fefefe; --text: #1a1a2e; --accent: #4361ee; --accent-light: #eef2ff;
+  --green: #059669; --green-bg: #ecfdf5; --orange: #d97706; --orange-bg: #fffbeb;
+  --red: #dc2626; --red-bg: #fef2f2; --purple: #7c3aed; --purple-bg: #f5f3ff;
+  --gray: #6b7280; --border: #e5e7eb; --code-bg: #f8fafc; --radius: 10px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, "PingFang SC", "Noto Sans SC", sans-serif; background: var(--bg); color: var(--text); line-height: 1.9; max-width: 800px; margin: 0 auto; padding: 40px 24px 100px; }
+h1 { font-size: 1.8rem; margin-bottom: 8px; color: var(--accent); }
+h2 { font-size: 1.35rem; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--accent-light); }
+h3 { font-size: 1.1rem; margin: 32px 0 12px; color: var(--accent); }
+p { margin: 12px 0; }
+.subtitle { color: var(--gray); font-size: 0.95rem; margin-bottom: 32px; }
+.prereq { background: var(--accent-light); border-radius: var(--radius); padding: 16px 20px; margin: 20px 0; font-size: 0.9rem; }
+.prereq strong { color: var(--accent); }
+.concept-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: var(--radius); padding: 20px; margin: 20px 0; }
+.concept-box .label { font-weight: 700; color: #0284c7; font-size: 0.85rem; margin-bottom: 8px; }
+.example-box { background: var(--green-bg); border: 1px solid #a7f3d0; border-radius: var(--radius); padding: 20px; margin: 20px 0; }
+.example-box .label { font-weight: 700; color: var(--green); font-size: 0.85rem; margin-bottom: 8px; }
+.exercise-box { background: var(--orange-bg); border: 1px solid #fde68a; border-radius: var(--radius); padding: 20px; margin: 20px 0; }
+.exercise-box .label { font-weight: 700; color: var(--orange); font-size: 0.85rem; margin-bottom: 8px; }
+.answer-box { background: var(--red-bg); border: 1px solid #fecaca; border-radius: var(--radius); padding: 20px; margin: 12px 0; display: none; }
+.answer-box.show { display: block; }
+.answer-box .label { font-weight: 700; color: var(--red); font-size: 0.85rem; margin-bottom: 8px; }
+.show-answer { background: none; border: 1px solid var(--red); color: var(--red); padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 8px; }
+.show-answer:hover { background: var(--red-bg); }
+pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 16px; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; margin: 12px 0; }
+code { font-family: "SF Mono", "Fira Code", monospace; }
+p code, li code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.88em; }
+ul, ol { padding-left: 24px; margin: 12px 0; }
+li { margin: 6px 0; }
+svg { display: block; margin: 20px auto; max-width: 100%; }
+.formula { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px 20px; margin: 16px 0; text-align: center; font-size: 1.05rem; font-family: "SF Mono", monospace; }
+.step { margin: 8px 0; padding: 8px 16px; border-left: 3px solid var(--accent); background: var(--accent-light); border-radius: 0 6px 6px 0; }
+.toc { background: var(--code-bg); border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+.toc a { color: var(--accent); text-decoration: none; }
+.toc li { margin: 4px 0; }
+.nav-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; }
+.nav-footer a { color: var(--accent); text-decoration: none; font-size: 0.9rem; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+th, td { padding: 10px 14px; border: 1px solid var(--border); text-align: left; }
+th { background: var(--accent-light); font-weight: 600; }
+.highlight { background: #fef08a; padding: 2px 4px; border-radius: 3px; }
+</style>
+<link rel="stylesheet" href="apple-design.css">
+</head>
+<body>
+
+<h1>第3章：梯度下降——AI 如何"学习"</h1>
+<p class="subtitle">AI 数学基础 · 第 3/10 章 · 预计学习时间：4-5 小时</p>
+
+<div class="prereq">
+<strong>前置知识：</strong>第1-2章（向量、矩阵）+ 简单微积分（导数的概念：变化率）<br>
+<strong>本章目标：</strong>理解 AI "学习"的本质就是不断调整参数让误差变小，掌握梯度下降的原理和实现。
+</div>
+
+<div class="toc">
+<strong>本章目录</strong>
+<ol>
+<li><a href="#s1">3.1 AI 的"学习"到底是什么？</a></li>
+<li><a href="#s2">3.2 损失函数——衡量"错得多离谱"</a></li>
+<li><a href="#s3">3.3 导数与梯度——找到下降方向</a></li>
+<li><a href="#s4">3.4 梯度下降算法——一步步走向最优</a></li>
+<li><a href="#s5">3.5 手算例题：用梯度下降拟合直线</a></li>
+<li><a href="#s6">3.6 学习率——步子太大会摔跤</a></li>
+<li><a href="#s7">3.7 代码实现：从零训练一个线性模型</a></li>
+<li><a href="#s8">3.8 随机梯度下降与小批量</a></li>
+<li><a href="#s9">3.9 本章习题</a></li>
+</ol>
+</div>
+
+<!-- ============ 3.1 ============ -->
+<h2 id="s1">3.1 AI 的"学习"到底是什么？</h2>
+
+<h3>一个直觉类比</h3>
+<p>想象你蒙着眼睛站在山上，目标是走到最低点（山谷）。你看不见全局地形，只能感受脚下哪个方向是"下坡"。于是你：</p>
+<ol>
+<li>感受脚下的坡度（计算梯度）</li>
+<li>沿着最陡的下坡方向迈一步（更新参数）</li>
+<li>重复，直到走到谷底（损失最小）</li>
+</ol>
+
+<svg width="500" height="280" viewBox="0 0 500 280">
+  <!-- 山谷曲线 -->
+  <path d="M 30 60 Q 130 60 180 200 Q 230 260 250 260 Q 270 260 320 200 Q 370 60 470 60" 
+        fill="none" stroke="#333" stroke-width="2.5"/>
+  
+  <!-- 起始点 -->
+  <circle cx="100" cy="72" r="8" fill="#dc2626"/>
+  <text x="70" y="55" font-size="12" fill="#dc2626" font-weight="bold">起点（随机初始化）</text>
+  
+  <!-- 路径点 -->
+  <circle cx="140" cy="105" r="5" fill="#f59e0b"/>
+  <circle cx="170" cy="155" r="5" fill="#f59e0b"/>
+  <circle cx="200" cy="210" r="5" fill="#f59e0b"/>
+  <circle cx="230" cy="245" r="5" fill="#f59e0b"/>
+  
+  <!-- 箭头连接 -->
+  <line x1="105" y1="78" x2="135" y2="100" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="145" y1="110" x2="165" y2="150" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="175" y1="160" x2="195" y2="205" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <line x1="205" y1="215" x2="225" y2="240" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,2"/>
+  
+  <!-- 最低点 -->
+  <circle cx="250" cy="260" r="8" fill="#059669"/>
+  <text x="260" y="275" font-size="12" fill="#059669" font-weight="bold">最优点（损失最小）</text>
+  
+  <!-- 标注 -->
+  <text x="350" y="150" font-size="12" fill="#666">← 每一步都沿"下坡"方向</text>
+  <text x="350" y="170" font-size="12" fill="#666">← 逐渐接近最低点</text>
+  
+  <!-- y轴标注 -->
+  <text x="15" y="150" font-size="11" fill="#999" transform="rotate(-90, 15, 150)">损失 (Loss)</text>
+  <!-- x轴标注 -->
+  <text x="220" y="278" font-size="11" fill="#999">参数 w 的值</text>
+</svg>
+
+
+<!-- 动画：梯度下降过程 -->
+<style>
+@keyframes gd-step1 { 0%,15% { opacity:0; } 20%,100% { opacity:1; } }
+@keyframes gd-step2 { 0%,30% { opacity:0; } 35%,100% { opacity:1; } }
+@keyframes gd-step3 { 0%,45% { opacity:0; } 50%,100% { opacity:1; } }
+@keyframes gd-step4 { 0%,60% { opacity:0; } 65%,100% { opacity:1; } }
+@keyframes gd-step5 { 0%,75% { opacity:0; } 80%,100% { opacity:1; } }
+@keyframes gd-ball {
+  0%,10% { cx:100; cy:72; }
+  20%,30% { cx:140; cy:105; }
+  40%,50% { cx:170; cy:155; }
+  60%,70% { cx:200; cy:210; }
+  80%,90% { cx:230; cy:245; }
+  95%,100% { cx:250; cy:258; }
+}
+@keyframes gd-pulse { 0%,100% { r:8; } 50% { r:11; } }
+.gd-s1 { animation: gd-step1 6s ease-in-out infinite; }
+.gd-s2 { animation: gd-step2 6s ease-in-out infinite; }
+.gd-s3 { animation: gd-step3 6s ease-in-out infinite; }
+.gd-s4 { animation: gd-step4 6s ease-in-out infinite; }
+.gd-s5 { animation: gd-step5 6s ease-in-out infinite; }
+.gd-ball { animation: gd-ball 6s ease-in-out infinite, gd-pulse 1.5s ease-in-out infinite; }
+</style>
+
+<div style="text-align:center; margin: 24px 0;">
+<p style="font-size:0.85rem; color:#666; margin-bottom:8px;">👇 动画：观察小球如何一步步"滚"到山谷最低点</p>
+<svg width="500" height="290" viewBox="0 0 500 290" style="background:#fafbfc; border-radius:12px; border:1px solid #e5e7eb;">
+  <!-- 坐标轴 -->
+  <line x1="30" y1="260" x2="470" y2="260" stroke="#ddd" stroke-width="1"/>
+  <line x1="30" y1="260" x2="30" y2="30" stroke="#ddd" stroke-width="1"/>
+  <text x="10" y="150" font-size="11" fill="#999" transform="rotate(-90,10,150)">Loss</text>
+  <text x="240" y="280" font-size="11" fill="#999">参数 w</text>
+
+  <!-- 损失曲线 -->
+  <path d="M 40 50 Q 140 50 190 190 Q 240 260 250 260 Q 260 260 310 190 Q 360 50 460 50"
+        fill="none" stroke="#4361ee" stroke-width="2.5" opacity="0.3"/>
+
+  <!-- 步骤标记（依次出现） -->
+  <g class="gd-s1">
+    <circle cx="140" cy="105" r="4" fill="#f59e0b"/>
+    <text x="148" y="100" font-size="10" fill="#f59e0b">第1步</text>
+  </g>
+  <g class="gd-s2">
+    <circle cx="170" cy="155" r="4" fill="#f59e0b"/>
+    <text x="178" y="150" font-size="10" fill="#f59e0b">第2步</text>
+  </g>
+  <g class="gd-s3">
+    <circle cx="200" cy="210" r="4" fill="#f59e0b"/>
+    <text x="208" y="205" font-size="10" fill="#f59e0b">第3步</text>
+  </g>
+  <g class="gd-s4">
+    <circle cx="230" cy="245" r="4" fill="#f59e0b"/>
+    <text x="238" y="240" font-size="10" fill="#f59e0b">第4步</text>
+  </g>
+  <g class="gd-s5">
+    <circle cx="250" cy="258" r="6" fill="#059669"/>
+    <text x="260" y="255" font-size="10" fill="#059669" font-weight="bold">收敛！</text>
+  </g>
+
+  <!-- 运动的小球 -->
+  <circle class="gd-ball" cx="100" cy="72" r="8" fill="#dc2626" opacity="0.9"/>
+
+  <!-- 起点标注 -->
+  <text x="55" y="60" font-size="11" fill="#dc2626" font-weight="bold">起点</text>
+</svg>
+</div>
+
+<div class="concept-box">
+<div class="label">📌 AI 学习的本质</div>
+<p><strong>学习 = 调整参数，让预测结果越来越接近正确答案。</strong></p>
+<p>具体步骤：</p>
+<ol>
+<li>随机初始化参数（w, b）</li>
+<li>用当前参数做预测</li>
+<li>计算预测和真实值的差距（损失）</li>
+<li>计算损失对每个参数的梯度（"下坡方向"）</li>
+<li>沿梯度反方向更新参数（走一步）</li>
+<li>重复 2-5，直到损失足够小</li>
+</ol>
+</div>
+
+<!-- ============ 3.2 ============ -->
+<h2 id="s2">3.2 损失函数——衡量"错得多离谱"</h2>
+
+<h3>什么是损失函数？</h3>
+<p>损失函数（Loss Function）就是一个公式，输入是"预测值"和"真实值"，输出是一个数字表示"错了多少"。损失越小，模型越好。</p>
+
+<h3>最常用的：均方误差 (MSE)</h3>
+<div class="formula">
+Loss = (1/N) × Σ(预测值 - 真实值)²
+</div>
+
+<p>就是"每个样本的误差平方，取平均"。</p>
+
+<div class="example-box">
+<div class="label">✏️ 例题 3.1：计算损失</div>
+<p><strong>问题：</strong>模型预测了 3 个值，真实值如下：</p>
+<table>
+<tr><th>样本</th><th>预测值 ŷ</th><th>真实值 y</th><th>误差 (ŷ-y)</th><th>误差²</th></tr>
+<tr><td>1</td><td>3</td><td>5</td><td>-2</td><td>4</td></tr>
+<tr><td>2</td><td>7</td><td>6</td><td>1</td><td>1</td></tr>
+<tr><td>3</td><td>4</td><td>4</td><td>0</td><td>0</td></tr>
+</table>
+<div class="step">MSE = (4 + 1 + 0) / 3 = 5/3 ≈ 1.67</div>
+<p>如果模型完美预测（误差全为0），MSE = 0。</p>
+</div>
+
+<h3>为什么用平方？</h3>
+<ul>
+<li>消除正负：误差 +2 和 -2 都变成 4（都是"错了2"）</li>
+<li>惩罚大误差：误差 3 → 平方后 9，比误差 1 → 1 惩罚重得多</li>
+<li>数学上好处理：平方函数处处可导，方便求梯度</li>
+</ul>
+
+<pre><code>import numpy as np
+
+def mse_loss(y_pred, y_true):
+    """均方误差损失函数"""
+    errors = y_pred - y_true
+    return np.mean(errors ** 2)
+
+# 测试
+y_pred = np.array([3, 7, 4])
+y_true = np.array([5, 6, 4])
+print(mse_loss(y_pred, y_true))  # 1.667</code></pre>
+
+<!-- ============ 3.3 ============ -->
+<h2 id="s3">3.3 导数与梯度——找到下降方向</h2>
+
+<h3>导数：函数的"坡度"</h3>
+<p>你已经知道导数表示"变化率"。在这里，我们关心的是：<strong>当参数 w 变化一点点时，损失 L 变化多少？</strong></p>
+
+<div class="formula">
+dL/dw = "w 变化 1 个单位时，L 变化多少"
+</div>
+
+<svg width="450" height="250" viewBox="0 0 450 250">
+  <!-- 抛物线 L = (w-3)² -->
+  <path d="M 50 40 Q 100 40 150 100 Q 200 200 225 220 Q 250 200 300 100 Q 350 40 400 40" 
+        fill="none" stroke="#333" stroke-width="2"/>
+  
+  <!-- 当前点 -->
+  <circle cx="120" cy="72" r="6" fill="#dc2626"/>
+  <text x="80" y="60" font-size="11" fill="#dc2626">当前 w=1.5</text>
+  
+  <!-- 切线（梯度方向） -->
+  <line x1="80" y1="130" x2="160" y2="20" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="155" y="45" font-size="11" fill="#dc2626">斜率 = dL/dw < 0</text>
+  <text x="155" y="60" font-size="11" fill="#dc2626">（向右走，L减小）</text>
+  
+  <!-- 最低点 -->
+  <circle cx="225" cy="220" r="6" fill="#059669"/>
+  <text x="235" y="235" font-size="11" fill="#059669">w=3, L=0</text>
+  
+  <!-- 箭头：更新方向 -->
+  <line x1="125" y1="80" x2="175" y2="130" stroke="#4361ee" stroke-width="2.5" marker-end="url(#arrG)"/>
+  <defs><marker id="arrG" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4361ee"/></marker></defs>
+  <text x="155" y="120" font-size="11" fill="#4361ee" font-weight="bold">更新方向</text>
+  
+  <!-- 轴 -->
+  <text x="200" y="248" font-size="11" fill="#999">w</text>
+  <text x="35" y="140" font-size="11" fill="#999">L</text>
+</svg>
+
+<div class="concept-box">
+<div class="label">📌 梯度的含义</div>
+<p><strong>梯度 dL/dw 告诉你：</strong></p>
+<ul>
+<li>如果 dL/dw > 0：w 增大会让 L 增大 → 所以应该<strong>减小</strong> w</li>
+<li>如果 dL/dw < 0：w 增大会让 L 减小 → 所以应该<strong>增大</strong> w</li>
+<li>如果 dL/dw = 0：已经到最低点了！</li>
+</ul>
+<p>总结：<strong>参数更新方向 = 梯度的反方向</strong>（负梯度方向 = 下坡方向）</p>
+</div>
+
+<h3>多个参数时的梯度</h3>
+<p>如果模型有两个参数 w 和 b，就需要分别求偏导：</p>
+<div class="formula">
+∂L/∂w = "只动 w 时，L 的变化率"<br>
+∂L/∂b = "只动 b 时，L 的变化率"
+</div>
+<p>这两个偏导数组成的向量 (∂L/∂w, ∂L/∂b) 就叫<strong>梯度向量</strong>。</p>
+
+<!-- ============ 3.4 ============ -->
+
+<style>
+.bridge-box {
+  background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px;
+  padding: 16px 20px; margin: 20px 0; border-left: 4px solid #22c55e;
+}
+.bridge-box .br-label {
+  font-weight: 700; color: #16a34a; font-size: 0.85rem; margin-bottom: 8px;
+}
+.bridge-box p { font-size: 0.9rem; margin: 6px 0; }
+.bridge-box .br-link { color: #4361ee; font-weight: 600; }
+</style>
+
+<div class="bridge-box">
+<div class="br-label">🌉 直觉桥梁：连接第1章</div>
+<p>梯度其实就是一个<span class="br-link">第1章学的向量</span>！</p>
+<p>如果模型有 3 个参数 (w₁, w₂, w₃)，梯度就是 (∂L/∂w₁, ∂L/∂w₂, ∂L/∂w₃) —— 一个 3 维向量。</p>
+<p>参数更新 w = w - η×梯度，就是<span class="br-link">第1章的向量减法 + 数乘</span>。</p>
+<p>梯度下降的每一步，都是你第1章已经会的向量运算。</p>
+</div>
+
+<h2 id="s4">3.4 梯度下降算法——一步步走向最优</h2>
+
+<h3>核心公式（必须记住）</h3>
+<div class="formula" style="font-size: 1.2rem; padding: 20px;">
+w_new = w_old - η × (∂L/∂w)<br><br>
+b_new = b_old - η × (∂L/∂b)
+</div>
+
+<p>其中 <strong>η</strong>（eta）是<strong>学习率</strong>（learning rate），控制每步走多远。</p>
+
+<div class="concept-box">
+<div class="label">📌 梯度下降算法（伪代码）</div>
+<pre><code>1. 随机初始化 w, b
+2. 重复以下步骤（比如 1000 次）：
+   a. 用当前 w, b 计算预测值：ŷ = w×x + b
+   b. 计算损失：L = mean((ŷ - y)²)
+   c. 计算梯度：
+      ∂L/∂w = mean(2 × (ŷ - y) × x)
+      ∂L/∂b = mean(2 × (ŷ - y))
+   d. 更新参数：
+      w = w - η × ∂L/∂w
+      b = b - η × ∂L/∂b
+3. 训练完成！w 和 b 就是学到的参数</code></pre>
+</div>
+
+<!-- ============ 3.5 ============ -->
+<h2 id="s5">3.5 手算例题：用梯度下降拟合直线</h2>
+
+<div class="example-box">
+<div class="label">✏️ 例题 3.2：完整手算过程</div>
+<p><strong>问题：</strong>有 2 个数据点：(x=1, y=3) 和 (x=2, y=5)。用梯度下降拟合 y = wx + b。</p>
+<p><strong>初始化：</strong>w = 0, b = 0, 学习率 η = 0.01</p>
+
+<h4>第 1 轮迭代：</h4>
+<div class="step"><strong>a. 预测：</strong><br>
+ŷ₁ = 0×1 + 0 = 0<br>
+ŷ₂ = 0×2 + 0 = 0</div>
+
+<div class="step"><strong>b. 计算损失：</strong><br>
+误差₁ = 0 - 3 = -3<br>
+误差₂ = 0 - 5 = -5<br>
+L = ((-3)² + (-5)²) / 2 = (9 + 25) / 2 = <strong>17</strong></div>
+
+<div class="step"><strong>c. 计算梯度：</strong><br>
+∂L/∂w = mean(2 × 误差 × x) = (2×(-3)×1 + 2×(-5)×2) / 2 = (-6 + -20) / 2 = <strong>-13</strong><br>
+∂L/∂b = mean(2 × 误差) = (2×(-3) + 2×(-5)) / 2 = (-6 + -10) / 2 = <strong>-8</strong></div>
+
+<div class="step"><strong>d. 更新参数：</strong><br>
+w_new = 0 - 0.01×(-13) = 0 + 0.13 = <strong>0.13</strong><br>
+b_new = 0 - 0.01×(-8) = 0 + 0.08 = <strong>0.08</strong></div>
+
+<p>💡 梯度是负数 → 参数增大（因为真实值比预测大，需要增大 w 和 b）</p>
+
+<h4>第 2 轮迭代：</h4>
+<div class="step"><strong>a. 预测：</strong><br>
+ŷ₁ = 0.13×1 + 0.08 = 0.21<br>
+ŷ₂ = 0.13×2 + 0.08 = 0.34</div>
+
+<div class="step"><strong>b. 损失：</strong><br>
+误差₁ = 0.21 - 3 = -2.79<br>
+误差₂ = 0.34 - 5 = -4.66<br>
+L = (2.79² + 4.66²) / 2 = (7.78 + 21.72) / 2 ≈ <strong>14.75</strong>（比17小了！在下降！）</div>
+
+<div class="step"><strong>c. 梯度：</strong><br>
+∂L/∂w = (2×(-2.79)×1 + 2×(-4.66)×2) / 2 = (-5.58 + -18.64) / 2 = <strong>-12.11</strong><br>
+∂L/∂b = (2×(-2.79) + 2×(-4.66)) / 2 = (-5.58 + -9.32) / 2 = <strong>-7.45</strong></div>
+
+<div class="step"><strong>d. 更新：</strong><br>
+w = 0.13 - 0.01×(-12.11) = 0.13 + 0.1211 = <strong>0.2511</strong><br>
+b = 0.08 - 0.01×(-7.45) = 0.08 + 0.0745 = <strong>0.1545</strong></div>
+
+<p>经过很多轮后，w 会趋近 2，b 会趋近 1（因为 y = 2x + 1 完美拟合这两个点）。</p>
+</div>
+
+<!-- ============ 3.6 ============ -->
+
+<h3>多轮迭代：观察参数如何逐步逼近</h3>
+<p>上面只算了 2 轮。下面展示 10 轮的完整过程，观察 w 和 b 如何逐步接近真实值 (w=2, b=1)：</p>
+
+<div style="overflow-x:auto; margin:16px 0;">
+<table style="width:100%; border-collapse:collapse; font-size:0.82rem; font-family:monospace;">
+<tr style="background:#eef2ff;"><th style="padding:8px; border:1px solid #ddd;">轮次</th><th style="padding:8px; border:1px solid #ddd;">w</th><th style="padding:8px; border:1px solid #ddd;">b</th><th style="padding:8px; border:1px solid #ddd;">Loss</th><th style="padding:8px; border:1px solid #ddd;">∂L/∂w</th><th style="padding:8px; border:1px solid #ddd;">∂L/∂b</th><th style="padding:8px; border:1px solid #ddd;">趋势</th></tr>
+<tr><td style="padding:6px; border:1px solid #eee;">0</td><td style="padding:6px; border:1px solid #eee;">0.000</td><td style="padding:6px; border:1px solid #eee;">0.000</td><td style="padding:6px; border:1px solid #eee;">17.00</td><td style="padding:6px; border:1px solid #eee;">-13.0</td><td style="padding:6px; border:1px solid #eee;">-8.0</td><td style="padding:6px; border:1px solid #eee;">🔴 远离</td></tr>
+<tr><td style="padding:6px; border:1px solid #eee;">1</td><td style="padding:6px; border:1px solid #eee;">0.130</td><td style="padding:6px; border:1px solid #eee;">0.080</td><td style="padding:6px; border:1px solid #eee;">14.75</td><td style="padding:6px; border:1px solid #eee;">-12.1</td><td style="padding:6px; border:1px solid #eee;">-7.5</td><td style="padding:6px; border:1px solid #eee;">🟡 靠近</td></tr>
+<tr><td style="padding:6px; border:1px solid #eee;">2</td><td style="padding:6px; border:1px solid #eee;">0.251</td><td style="padding:6px; border:1px solid #eee;">0.155</td><td style="padding:6px; border:1px solid #eee;">12.80</td><td style="padding:6px; border:1px solid #eee;">-11.3</td><td style="padding:6px; border:1px solid #eee;">-7.0</td><td style="padding:6px; border:1px solid #eee;">🟡 靠近</td></tr>
+<tr><td style="padding:6px; border:1px solid #eee;">3</td><td style="padding:6px; border:1px solid #eee;">0.364</td><td style="padding:6px; border:1px solid #eee;">0.225</td><td style="padding:6px; border:1px solid #eee;">11.10</td><td style="padding:6px; border:1px solid #eee;">-10.5</td><td style="padding:6px; border:1px solid #eee;">-6.5</td><td style="padding:6px; border:1px solid #eee;">🟡 靠近</td></tr>
+<tr><td style="padding:6px; border:1px solid #eee;">5</td><td style="padding:6px; border:1px solid #eee;">0.567</td><td style="padding:6px; border:1px solid #eee;">0.351</td><td style="padding:6px; border:1px solid #eee;">8.35</td><td style="padding:6px; border:1px solid #eee;">-9.2</td><td style="padding:6px; border:1px solid #eee;">-5.7</td><td style="padding:6px; border:1px solid #eee;">🟡 靠近</td></tr>
+<tr><td style="padding:6px; border:1px solid #eee;">10</td><td style="padding:6px; border:1px solid #eee;">0.952</td><td style="padding:6px; border:1px solid #eee;">0.590</td><td style="padding:6px; border:1px solid #eee;">4.21</td><td style="padding:6px; border:1px solid #eee;">-6.8</td><td style="padding:6px; border:1px solid #eee;">-4.2</td><td style="padding:6px; border:1px solid #eee;">🟢 接近</td></tr>
+<tr><td style="padding:6px; border:1px solid #eee;">20</td><td style="padding:6px; border:1px solid #eee;">1.456</td><td style="padding:6px; border:1px solid #eee;">0.812</td><td style="padding:6px; border:1px solid #eee;">1.35</td><td style="padding:6px; border:1px solid #eee;">-3.5</td><td style="padding:6px; border:1px solid #eee;">-2.1</td><td style="padding:6px; border:1px solid #eee;">🟢 接近</td></tr>
+<tr><td style="padding:6px; border:1px solid #eee;">50</td><td style="padding:6px; border:1px solid #eee;">1.891</td><td style="padding:6px; border:1px solid #eee;">0.965</td><td style="padding:6px; border:1px solid #eee;">0.28</td><td style="padding:6px; border:1px solid #eee;">-0.8</td><td style="padding:6px; border:1px solid #eee;">-0.5</td><td style="padding:6px; border:1px solid #eee;">🟢 很接近</td></tr>
+<tr style="background:#ecfdf5;"><td style="padding:6px; border:1px solid #eee;">100</td><td style="padding:6px; border:1px solid #eee;"><b>1.987</b></td><td style="padding:6px; border:1px solid #eee;"><b>1.012</b></td><td style="padding:6px; border:1px solid #eee;"><b>0.24</b></td><td style="padding:6px; border:1px solid #eee;">-0.1</td><td style="padding:6px; border:1px solid #eee;">-0.06</td><td style="padding:6px; border:1px solid #eee;">✅ 收敛！</td></tr>
+</table>
+</div>
+
+<p>观察规律：</p>
+<ul>
+<li><strong>Loss 单调递减：</strong>17 → 14.75 → 12.80 → ... → 0.24（每轮都在减小）</li>
+<li><strong>梯度越来越小：</strong>-13 → -12.1 → ... → -0.1（接近最优时梯度趋近 0）</li>
+<li><strong>参数越来越接近真实值：</strong>w: 0→1.987（真实=2），b: 0→1.012（真实=1）</li>
+<li><strong>越接近最优，步子越小：</strong>这就是梯度下降的"自适应"特性</li>
+</ul>
+
+<h3>等高线视角：从"山顶"到"山谷"</h3>
+<p>如果有两个参数 (w, b)，损失函数形成一个"碗"形曲面。梯度下降就是沿着碗壁滑到碗底：</p>
+
+<svg width="420" height="320" viewBox="0 0 420 320" style="background:#fafbfc; border-radius:12px; border:1px solid #e5e7eb; display:block; margin:16px auto;">
+  <!-- 等高线（椭圆） -->
+  <ellipse cx="210" cy="160" rx="170" ry="120" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+  <ellipse cx="210" cy="160" rx="135" ry="95" fill="none" stroke="#ddd" stroke-width="1"/>
+  <ellipse cx="210" cy="160" rx="100" ry="70" fill="none" stroke="#ccc" stroke-width="1"/>
+  <ellipse cx="210" cy="160" rx="65" ry="45" fill="none" stroke="#bbb" stroke-width="1"/>
+  <ellipse cx="210" cy="160" rx="35" ry="24" fill="none" stroke="#aaa" stroke-width="1.5"/>
+  <ellipse cx="210" cy="160" rx="12" ry="8" fill="#dcfce7" stroke="#059669" stroke-width="2"/>
+
+  <!-- 等高线标注 -->
+  <text x="385" y="160" font-size="9" fill="#999">L=16</text>
+  <text x="350" y="160" font-size="9" fill="#999">L=10</text>
+  <text x="315" y="160" font-size="9" fill="#999">L=6</text>
+  <text x="280" y="160" font-size="9" fill="#999">L=3</text>
+  <text x="250" y="160" font-size="9" fill="#999">L=1</text>
+
+  <!-- 最优点 -->
+  <circle cx="210" cy="160" r="5" fill="#059669"/>
+  <text x="220" y="155" font-size="10" fill="#059669" font-weight="bold">最优 (w=2, b=1)</text>
+
+  <!-- 梯度下降路径 -->
+  <circle cx="80" cy="70" r="6" fill="#dc2626"/>
+  <text x="55" y="60" font-size="10" fill="#dc2626" font-weight="bold">起点 (0, 0)</text>
+
+  <polyline points="80,70 110,90 135,110 155,128 172,140 185,150 195,155 203,158 208,159"
+    fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="5,3"/>
+
+  <!-- 路径上的点 -->
+  <circle cx="110" cy="90" r="3" fill="#f59e0b"/>
+  <circle cx="135" cy="110" r="3" fill="#f59e0b"/>
+  <circle cx="155" cy="128" r="3" fill="#f59e0b"/>
+  <circle cx="172" cy="140" r="3" fill="#f59e0b"/>
+  <circle cx="185" cy="150" r="3" fill="#f59e0b"/>
+  <circle cx="195" cy="155" r="3" fill="#f59e0b"/>
+  <circle cx="203" cy="158" r="3" fill="#f59e0b"/>
+
+  <!-- 轴标注 -->
+  <text x="200" y="300" font-size="11" fill="#666">w →</text>
+  <text x="25" y="165" font-size="11" fill="#666" transform="rotate(-90,25,165)">b →</text>
+
+  <!-- 说明 -->
+  <text x="80" y="290" font-size="10" fill="#666">每一步都垂直于等高线（= 沿最陡下坡方向）</text>
+  <text x="80" y="308" font-size="10" fill="#666">越接近中心，等高线越密，步子越小 → 自然减速</text>
+</svg>
+
+<div class="concept-box">
+<div class="label">📌 生活类比：蒙眼下山</div>
+<p>想象你蒙着眼站在一座山上，目标是走到最低点（山谷）：</p>
+<ul>
+<li><strong>感受坡度</strong> = 计算梯度（哪个方向最陡）</li>
+<li><strong>迈一步</strong> = 更新参数（沿最陡方向走一小步）</li>
+<li><strong>步子大小</strong> = 学习率（太大会跳过谷底，太小走太慢）</li>
+<li><strong>到达平地</strong> = 梯度接近 0（收敛了）</li>
+</ul>
+<p>梯度下降就是这个过程的数学版本。每一步都"感受坡度，走一小步"，重复几百次就到谷底了。</p>
+</div>
+
+<h2 id="s6">3.6 学习率——步子太大会摔跤</h2>
+
+<svg width="500" height="220" viewBox="0 0 500 220">
+  <!-- 三种学习率对比 -->
+  <path d="M 30 40 Q 100 40 140 120 Q 170 180 180 180 Q 190 180 220 120 Q 260 40 330 40" 
+        fill="none" stroke="#ddd" stroke-width="2"/>
+  
+  <!-- 合适 -->
+  <circle cx="80" cy="55" r="4" fill="#059669"/>
+  <circle cx="110" cy="80" r="4" fill="#059669"/>
+  <circle cx="135" cy="115" r="4" fill="#059669"/>
+  <circle cx="155" cy="150" r="4" fill="#059669"/>
+  <circle cx="170" cy="172" r="4" fill="#059669"/>
+  <text x="60" y="200" font-size="11" fill="#059669" font-weight="bold">✓ 合适（η=0.01）</text>
+  
+  <!-- 太大 -->
+  <path d="M 350 40 Q 400 40 430 120 Q 450 180 460 180 Q 470 180 490 120" 
+        fill="none" stroke="#ddd" stroke-width="2"/>
+  <circle cx="380" cy="55" r="4" fill="#dc2626"/>
+  <circle cx="470" cy="55" r="4" fill="#dc2626"/>
+  <circle cx="380" cy="55" r="4" fill="#dc2626"/>
+  <line x1="383" y1="55" x2="467" y2="55" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <line x1="467" y1="55" x2="383" y2="55" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <text x="360" y="200" font-size="11" fill="#dc2626" font-weight="bold">✗ 太大（η=1.0）→ 震荡发散</text>
+</svg>
+
+<table>
+<tr><th>学习率</th><th>效果</th><th>类比</th></tr>
+<tr><td>太大 (η=1.0)</td><td>在最低点两侧来回跳，甚至发散</td><td>下山时步子太大，跳过谷底</td></tr>
+<tr><td>合适 (η=0.01)</td><td>稳定下降，逐步收敛</td><td>正常步伐下山</td></tr>
+<tr><td>太小 (η=0.0001)</td><td>下降极慢，可能训练很久还没收敛</td><td>蚂蚁爬下山</td></tr>
+</table>
+
+<div class="concept-box">
+<div class="label">📌 实践建议</div>
+<ul>
+<li>常用起始值：0.01, 0.001, 0.0001</li>
+<li>如果 loss 变成 NaN 或越来越大 → 学习率太大，减小 10 倍</li>
+<li>如果 loss 下降极慢 → 学习率太小，增大 10 倍</li>
+<li>现代优化器（Adam）会自适应调整学习率，通常 0.001 就够</li>
+</ul>
+</div>
+
+<!-- ============ 3.7 ============ -->
+<h2 id="s7">3.7 代码实现：从零训练一个线性模型</h2>
+
+<pre><code>"""
+完整示例：用梯度下降拟合 y = 2x + 1
+不使用任何 ML 库，纯 Python + NumPy
+"""
+import numpy as np
+
+# ===== 1. 准备数据 =====
+np.random.seed(42)
+x_data = np.linspace(0, 10, 50)           # 50个x值
+y_data = 2 * x_data + 1 + np.random.randn(50) * 0.5  # y = 2x+1 + 噪声
+
+# ===== 2. 初始化参数 =====
+w = 0.0   # 斜率（随机初始化）
+b = 0.0   # 截距
+lr = 0.001  # 学习率
+epochs = 1000  # 迭代次数
+
+# ===== 3. 训练循环 =====
+losses = []
+for epoch in range(epochs):
+    # a. 前向：计算预测值
+    y_pred = w * x_data + b
+    
+    # b. 计算损失 (MSE)
+    errors = y_pred - y_data
+    loss = np.mean(errors ** 2)
+    losses.append(loss)
+    
+    # c. 计算梯度
+    N = len(x_data)
+    dw = (2/N) * np.sum(errors * x_data)  # ∂L/∂w
+    db = (2/N) * np.sum(errors)           # ∂L/∂b
+    
+    # d. 更新参数
+    w = w - lr * dw
+    b = b - lr * db
+    
+    # 每100轮打印一次
+    if (epoch + 1) % 100 == 0:
+        print(f"Epoch {epoch+1}: w={w:.3f}, b={b:.3f}, loss={loss:.4f}")
+
+print(f"\n最终结果: y = {w:.2f}x + {b:.2f}")
+print(f"目标:     y = 2.00x + 1.00")
+
+# ===== 4. 可视化 =====
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10, 4))
+
+plt.subplot(1, 2, 1)
+plt.scatter(x_data, y_data, alpha=0.5, label='数据点')
+plt.plot(x_data, w * x_data + b, 'r-', linewidth=2, label=f'拟合: y={w:.2f}x+{b:.2f}')
+plt.legend()
+plt.title('拟合结果')
+
+plt.subplot(1, 2, 2)
+plt.plot(losses)
+plt.xlabel('Epoch')
+plt.ylabel('Loss (MSE)')
+plt.title('损失下降曲线')
+
+plt.tight_layout()
+plt.savefig('gradient_descent.png', dpi=100)
+plt.show()</code></pre>
+
+<p>运行结果（大致）：</p>
+<pre><code>Epoch 100: w=1.523, b=0.741, loss=0.2841
+Epoch 200: w=1.712, b=0.856, loss=0.2534
+...
+Epoch 1000: w=1.987, b=1.023, loss=0.2412
+
+最终结果: y = 1.99x + 1.02  ← 非常接近 y = 2x + 1！</code></pre>
+
+<!-- ============ 3.8 ============ -->
+<h2 id="s8">3.8 随机梯度下降与小批量</h2>
+
+<h3>问题：数据量太大</h3>
+<p>上面的例子每次用<strong>全部 50 个数据</strong>计算梯度。如果有 100 万个数据呢？每次迭代都要算 100 万个样本的梯度，太慢了！</p>
+
+<h3>解决方案</h3>
+<table>
+<tr><th>方法</th><th>每次用多少数据</th><th>速度</th><th>稳定性</th></tr>
+<tr><td>批量梯度下降 (BGD)</td><td>全部数据</td><td>慢</td><td>最稳定</td></tr>
+<tr><td>随机梯度下降 (SGD)</td><td>1 个样本</td><td>最快</td><td>很 noisy</td></tr>
+<tr><td><strong>小批量 (Mini-batch)</strong></td><td>32/64/128 个</td><td>快</td><td>较稳定</td></tr>
+</table>
+
+<div class="concept-box">
+<div class="label">📌 实践中的选择</div>
+<p><strong>Mini-batch 是默认选择</strong>（batch_size=32 或 64）。</p>
+<p>它兼顾了速度和稳定性，而且能充分利用 GPU 的并行能力。</p>
+<p>注意：虽然名字叫"随机梯度下降"，实践中说的 SGD 通常指 mini-batch SGD。</p>
+</div>
+
+<pre><code># Mini-batch 梯度下降
+batch_size = 16
+
+for epoch in range(100):
+    # 打乱数据
+    indices = np.random.permutation(len(x_data))
+    
+    # 分批处理
+    for i in range(0, len(x_data), batch_size):
+        batch_idx = indices[i:i+batch_size]
+        x_batch = x_data[batch_idx]
+        y_batch = y_data[batch_idx]
+        
+        # 在这个小批量上计算梯度
+        y_pred = w * x_batch + b
+        errors = y_pred - y_batch
+        
+        dw = (2/batch_size) * np.sum(errors * x_batch)
+        db = (2/batch_size) * np.sum(errors)
+        
+        # 更新
+        w -= lr * dw
+        b -= lr * db</code></pre>
+
+<!-- ============ 3.9 ============ -->
+
+<!-- 常见误区样式 -->
+<style>
+.misconception-box {
+  background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px;
+  padding: 18px 20px; margin: 20px 0;
+}
+.misconception-box .mc-label {
+  font-weight: 700; color: #dc2626; font-size: 0.85rem; margin-bottom: 10px;
+}
+.misconception-box .mc-item { margin: 10px 0; font-size: 0.9rem; }
+.misconception-box .mc-wrong { color: #dc2626; font-weight: 600; }
+.misconception-box .mc-right { color: #059669; font-weight: 600; }
+</style>
+
+<div class="misconception-box">
+<div class="mc-label">⚠️ 常见误区（初学者最容易踩的坑）</div>
+<div class="mc-item">
+  <span class="mc-wrong">✗ "梯度就是损失值"</span><br>
+  <span class="mc-right">✓ 梯度是损失对参数的导数（变化率），不是损失本身。</span>损失告诉你"错了多少"，梯度告诉你"参数该往哪个方向调、调多少"。
+</div>
+<div class="mc-item">
+  <span class="mc-wrong">✗ "学习率越小越好"</span><br>
+  <span class="mc-right">✓ 学习率太小会导致收敛极慢。</span>比如 η=0.000001 可能需要 100 万次迭代才能收敛，而 η=0.01 只需要 1000 次。关键是找到"刚好"的值。
+</div>
+<div class="mc-item">
+  <span class="mc-wrong">✗ "梯度下降一定能找到最优解"</span><br>
+  <span class="mc-right">✓ 对于非凸函数（如神经网络），梯度下降可能困在局部最优。</span>不过实践中，高维空间的局部最优通常质量也不错。
+</div>
+</div>
+
+
+<style>
+.checklist-box {
+  background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px;
+  padding: 18px 20px; margin: 24px 0;
+}
+.checklist-box .ck-label {
+  font-weight: 700; color: #2563eb; font-size: 0.9rem; margin-bottom: 10px;
+}
+.checklist-box label {
+  display: block; font-size: 0.88rem; margin: 7px 0; cursor: pointer; color: #334155;
+}
+.checklist-box input[type="checkbox"] { margin-right: 8px; accent-color: #2563eb; }
+</style>
+
+<div class="checklist-box">
+<div class="ck-label">✅ 学完本章，你应该能够：</div>
+<label><input type="checkbox"> 解释损失函数的作用，手算 MSE</label>
+<label><input type="checkbox"> 解释梯度的含义（'下坡方向'）</label>
+<label><input type="checkbox"> 手算一步梯度下降（给定 w, b, 数据, 学习率）</label>
+<label><input type="checkbox"> 解释学习率太大/太小的后果</label>
+<label><input type="checkbox"> 用纯 Python 实现梯度下降拟合一条直线</label>
+</div>
+
+<h2 id="s9">3.9 本章习题</h2>
+
+<div class="exercise-box">
+<div class="label">📝 概念理解题</div>
+<ol>
+<li>用一句话解释：AI 的"学习"本质上在做什么？</li>
+<li>损失函数的作用是什么？如果损失 = 0 意味着什么？</li>
+<li>梯度 dL/dw = -5 是什么意思？参数 w 应该怎么更新？</li>
+<li>学习率太大会怎样？太小会怎样？</li>
+<li>Mini-batch 梯度下降相比全批量有什么优势？</li>
+</ol>
+<button class="show-answer" onclick="this.nextElementSibling.classList.toggle('show')">显示答案</button>
+<div class="answer-box">
+<div class="label">参考答案</div>
+<ol>
+<li>不断调整参数，让预测结果和真实值的差距（损失）越来越小。</li>
+<li>衡量模型预测"错了多少"。损失=0 意味着完美预测（所有预测都等于真实值）。</li>
+<li>梯度为负说明增大 w 会让 L 减小。更新：w = w - η×(-5) = w + 5η（w 增大）。</li>
+<li>太大：在最优解附近震荡甚至发散（loss 越来越大）。太小：收敛极慢，可能训练很久还没到最优。</li>
+<li>速度快（不用每次算全部数据的梯度）+ 能利用 GPU 并行 + 引入随机性有助于逃离局部最优。</li>
+</ol>
+</div>
+</div>
+
+<div class="exercise-box">
+<div class="label">📝 手算题</div>
+<ol start="6">
+<li>数据点：(x=2, y=4)。当前 w=1, b=0, η=0.1。做一轮梯度下降，求新的 w 和 b。<br>
+（提示：ŷ=wx+b=2, 误差=2-4=-2, ∂L/∂w=2×(-2)×2=-8, ∂L/∂b=2×(-2)=-4）</li>
+<li>如果损失函数 L = (w-3)²，在 w=5 处的梯度是多少？更新后 w 是多少？（η=0.1）</li>
+<li>计算预测 [2, 4, 6] 和真实值 [3, 3, 5] 的 MSE 损失。</li>
+</ol>
+<button class="show-answer" onclick="this.nextElementSibling.classList.toggle('show')">显示答案</button>
+<div class="answer-box">
+<div class="label">参考答案</div>
+<ol start="6">
+<li>w_new = 1 - 0.1×(-8) = 1.8；b_new = 0 - 0.1×(-4) = 0.4</li>
+<li>dL/dw = 2(w-3) = 2(5-3) = 4。w_new = 5 - 0.1×4 = 4.6（向3靠近了！）</li>
+<li>误差 = [2-3, 4-3, 6-5] = [-1, 1, 1]。MSE = (1+1+1)/3 = 1</li>
+</ol>
+</div>
+</div>
+
+<div class="exercise-box">
+<div class="label">📝 编程实践题</div>
+<ol start="9">
+<li>修改本章代码，拟合 y = 3x - 2 + noise，验证梯度下降能学到 w≈3, b≈-2。</li>
+<li>实现一个函数 <code>train_linear(x, y, lr, epochs)</code>，返回训练好的 w, b 和损失历史列表。画出损失曲线。</li>
+<li>对比实验：分别用 lr=0.1, 0.01, 0.001 训练同一个模型，把三条损失曲线画在同一张图上，观察学习率的影响。</li>
+<li>挑战：用梯度下降拟合二次函数 y = x²。提示：把 x² 当作一个新特征，模型变成 y = w₁×x + w₂×x² + b。</li>
+</ol>
+<button class="show-answer" onclick="this.nextElementSibling.classList.toggle('show')">显示答案</button>
+<div class="answer-box">
+<div class="label">参考答案（题9）</div>
+<pre><code>import numpy as np
+
+# 题9：拟合 y = 3x - 2
+np.random.seed(0)
+x = np.linspace(-5, 5, 100)
+y = 3 * x - 2 + np.random.randn(100) * 0.3
+
+w, b = 0.0, 0.0
+lr = 0.001
+for epoch in range(2000):
+    y_pred = w * x + b
+    errors = y_pred - y
+    dw = (2/len(x)) * np.sum(errors * x)
+    db = (2/len(x)) * np.sum(errors)
+    w -= lr * dw
+    b -= lr * db
+
+print(f"学到: y = {w:.2f}x + {b:.2f}")  # ≈ y = 3.00x - 2.00</code></pre>
+</div>
+</div>
+
+<h2>本章小结</h2>
+<table>
+<tr><th>概念</th><th>一句话总结</th></tr>
+<tr><td>损失函数</td><td>衡量预测和真实值的差距（越小越好）</td></tr>
+<tr><td>梯度</td><td>损失对参数的导数，指示"上坡方向"</td></tr>
+<tr><td>梯度下降</td><td>参数 = 参数 - 学习率 × 梯度（沿下坡走）</td></tr>
+<tr><td>学习率</td><td>每步走多远（太大会震荡，太小会慢）</td></tr>
+<tr><td>Mini-batch</td><td>每次用一小批数据算梯度（速度+稳定性的平衡）</td></tr>
+<tr><td>Epoch</td><td>所有数据过一遍 = 1 个 epoch</td></tr>
+</table>
+
+<div class="concept-box">
+<div class="label">🎯 本章最重要的一个认知</div>
+<p><strong>所有 AI 模型的训练，本质上都是梯度下降。</strong></p>
+<p>不管是线性回归、神经网络、GPT、Stable Diffusion……训练过程都是：计算损失 → 求梯度 → 更新参数 → 重复。</p>
+<p>区别只在于：模型结构不同（参数怎么组织）、损失函数不同（怎么衡量错误）。</p>
+</div>
+
+<div class="nav-footer">
+<a href="ch02-矩阵.html">← 上一章：矩阵</a>
+<a href="ch04-神经网络.html">下一章：神经网络——从感知机到多层网络 →</a>
+</div>
+
+
+<!-- ============ 交互式板块 ============ -->
+<h2 id="s10">3.10 交互式练习</h2>
+
+<!-- 交互式测验 -->
+<style>
+.quiz-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 20px 0; }
+.quiz-box .q-label { font-weight: 700; color: #7c3aed; font-size: 0.9rem; margin-bottom: 12px; }
+.quiz-q { margin: 16px 0; padding: 14px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; }
+.quiz-q p { font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; }
+.quiz-opt { display: block; padding: 8px 14px; margin: 4px 0; border-radius: 6px; cursor: pointer; font-size: 0.85rem; border: 1px solid #e5e7eb; transition: all 0.15s; }
+.quiz-opt:hover { background: #f0f9ff; border-color: #93c5fd; }
+.quiz-opt.correct { background: #dcfce7; border-color: #4ade80; color: #166534; }
+.quiz-opt.wrong { background: #fef2f2; border-color: #fca5a5; color: #991b1b; }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.7; }
+.quiz-feedback { margin-top: 8px; font-size: 0.82rem; padding: 8px 12px; border-radius: 6px; display: none; }
+.quiz-feedback.show { display: block; }
+.quiz-feedback.ok { background: #dcfce7; color: #166534; }
+.quiz-feedback.no { background: #fef2f2; color: #991b1b; }
+</style>
+
+<div class="quiz-box">
+<div class="q-label">🧪 即时测验</div>
+
+<div class="quiz-q" id="q1">
+  <p>1. 损失函数 L = (ŷ - y)² 的作用是：</p>
+  <span class="quiz-opt" onclick="checkQ('q1',this,false)">A. 让模型预测更大</span>
+  <span class="quiz-opt" onclick="checkQ('q1',this,true)">B. 衡量预测值和真实值的差距（越小越好）</span>
+  <span class="quiz-opt" onclick="checkQ('q1',this,false)">C. 计算参数的梯度</span>
+  <span class="quiz-opt" onclick="checkQ('q1',this,false)">D. 决定学习率大小</span>
+  <div class="quiz-feedback" id="q1-fb"></div>
+</div>
+
+<div class="quiz-q" id="q2">
+  <p>2. 梯度 ∂L/∂w = -5，学习率 η = 0.1，w 更新后变为：</p>
+  <span class="quiz-opt" onclick="checkQ('q2',this,false)">A. w - 0.5</span>
+  <span class="quiz-opt" onclick="checkQ('q2',this,true)">B. w + 0.5（w_new = w - 0.1×(-5) = w + 0.5）</span>
+  <span class="quiz-opt" onclick="checkQ('q2',this,false)">C. w - 5</span>
+  <span class="quiz-opt" onclick="checkQ('q2',this,false)">D. w × 0.1</span>
+  <div class="quiz-feedback" id="q2-fb"></div>
+</div>
+
+<div class="quiz-q" id="q3">
+  <p>3. 学习率太大会导致：</p>
+  <span class="quiz-opt" onclick="checkQ('q3',this,false)">A. 收敛太慢</span>
+  <span class="quiz-opt" onclick="checkQ('q3',this,true)">B. 在最优解附近震荡甚至发散</span>
+  <span class="quiz-opt" onclick="checkQ('q3',this,false)">C. 梯度消失</span>
+  <span class="quiz-opt" onclick="checkQ('q3',this,false)">D. 过拟合</span>
+  <div class="quiz-feedback" id="q3-fb"></div>
+</div>
+
+<div class="quiz-q" id="q4">
+  <p>4. 梯度为 0 意味着：</p>
+  <span class="quiz-opt" onclick="checkQ('q4',this,false)">A. 模型出错了</span>
+  <span class="quiz-opt" onclick="checkQ('q4',this,false)">B. 需要增大学习率</span>
+  <span class="quiz-opt" onclick="checkQ('q4',this,true)">C. 到达了（局部）最优点，参数不再变化</span>
+  <span class="quiz-opt" onclick="checkQ('q4',this,false)">D. 损失为 0</span>
+  <div class="quiz-feedback" id="q4-fb"></div>
+</div>
+
+<div class="quiz-q" id="q5">
+  <p>5. Mini-batch 梯度下降每次用多少数据计算梯度？</p>
+  <span class="quiz-opt" onclick="checkQ('q5',this,false)">A. 全部数据</span>
+  <span class="quiz-opt" onclick="checkQ('q5',this,false)">B. 1 个样本</span>
+  <span class="quiz-opt" onclick="checkQ('q5',this,true)">C. 一小批（如 32 或 64 个样本）</span>
+  <span class="quiz-opt" onclick="checkQ('q5',this,false)">D. 随机一半数据</span>
+  <div class="quiz-feedback" id="q5-fb"></div>
+</div>
+</div>
+
+<script src="quiz.js"></script>
+
+<!-- 可折叠详细推导 -->
+<h3>📐 详细推导（点击展开）</h3>
+<style>
+details.derivation { margin: 12px 0; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; }
+details.derivation summary { padding: 12px 16px; background: #f8fafc; cursor: pointer; font-size: 0.9rem; font-weight: 600; color: #334155; }
+details.derivation summary:hover { background: #f0f9ff; }
+details.derivation .deriv-body { padding: 16px; font-size: 0.88rem; line-height: 1.8; }
+details.derivation .deriv-body .step { margin: 6px 0; padding: 6px 12px; border-left: 3px solid #4361ee; background: #eef2ff; border-radius: 0 4px 4px 0; }
+</style>
+
+<details class="derivation">
+<summary>推导：为什么 MSE 对 w 的梯度是 (2/N)Σ(ŷ-y)×x ？</summary>
+<div class="deriv-body">
+<p><strong>目标：</strong>求 L = (1/N)Σ(ŷᵢ - yᵢ)² 对 w 的偏导数，其中 ŷᵢ = wxᵢ + b</p>
+<div class="step">第1步：展开 L = (1/N)Σ(wxᵢ + b - yᵢ)²</div>
+<div class="step">第2步：对 w 求导（链式法则）<br>
+∂L/∂w = (1/N)Σ 2(wxᵢ + b - yᵢ) × ∂(wxᵢ + b - yᵢ)/∂w</div>
+<div class="step">第3步：∂(wxᵢ + b - yᵢ)/∂w = xᵢ（因为对 w 求导时，xᵢ 是常数，b 和 yᵢ 也是常数）</div>
+<div class="step">第4步：代入得 ∂L/∂w = (2/N)Σ(ŷᵢ - yᵢ) × xᵢ</div>
+<p>💡 直觉：梯度 = "平均误差 × 输入"。误差越大、输入越大，参数需要调整越多。</p>
+</div>
+</details>
+
+<details class="derivation">
+<summary>推导：为什么梯度下降能减小损失？</summary>
+<div class="deriv-body">
+<p><strong>核心思想：</strong>泰勒展开（一阶近似）</p>
+<div class="step">L(w + Δw) ≈ L(w) + (∂L/∂w) × Δw</div>
+<div class="step">如果我们令 Δw = -η × (∂L/∂w)，代入：</div>
+<div class="step">L(w_new) ≈ L(w) + (∂L/∂w) × (-η × ∂L/∂w) = L(w) - η × (∂L/∂w)²</div>
+<div class="step">因为 (∂L/∂w)² ≥ 0，所以 L(w_new) ≤ L(w)（损失不增）</div>
+<p>💡 只要学习率 η 足够小（让一阶近似有效），每步更新都保证损失不增大。</p>
+</div>
+</details>
+
+<details class="derivation">
+<summary>推导：MSE 对 b 的梯度为什么是 (2/N)Σ(ŷ-y) ？</summary>
+<div class="deriv-body">
+<div class="step">L = (1/N)Σ(wxᵢ + b - yᵢ)²</div>
+<div class="step">∂L/∂b = (1/N)Σ 2(wxᵢ + b - yᵢ) × ∂(wxᵢ + b - yᵢ)/∂b</div>
+<div class="step">∂(wxᵢ + b - yᵢ)/∂b = 1（b 的导数是 1）</div>
+<div class="step">所以 ∂L/∂b = (2/N)Σ(ŷᵢ - yᵢ)</div>
+<p>💡 注意：对 b 的梯度不包含 xᵢ！因为 b 是"截距"，和输入无关。</p>
+</div>
+</details>
+
+<!-- "如果…会怎样" 实验 -->
+<h3>🔬 "如果…会怎样" 实验</h3>
+<p>调整学习率，观察梯度下降的行为变化：</p>
+
+<style>
+.exp-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 20px 0; }
+.exp-controls { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+.exp-controls label { font-size: 0.85rem; font-weight: 600; }
+.exp-controls input[type="range"] { width: 150px; }
+.exp-controls .val { font-size: 0.85rem; color: #4361ee; font-weight: 700; min-width: 50px; }
+.exp-output { font-family: monospace; font-size: 0.8rem; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; max-height: 200px; overflow-y: auto; }
+.exp-output .good { color: #059669; }
+.exp-output .bad { color: #dc2626; }
+.exp-output .warn { color: #d97706; }
+</style>
+
+<div class="exp-box">
+  <div class="exp-controls">
+    <label>学习率 η =</label>
+    <input type="range" id="lr-slider" min="1" max="200" value="10" oninput="runGD()">
+    <span class="val" id="lr-val">0.010</span>
+    <button onclick="runGD()" style="padding:6px 14px; border-radius:6px; border:1px solid #4361ee; background:#eef2ff; color:#4361ee; cursor:pointer; font-size:0.82rem;">重新运行</button>
+  </div>
+  <div class="exp-output" id="gd-output"></div>
+</div>
+
+<script>
+function runGD() {
+  var lr = +document.getElementById('lr-slider').value / 1000;
+  document.getElementById('lr-val').textContent = lr.toFixed(3);
+  var w = 0, b = 0;
+  var xs = [1, 2], ys = [3, 5]; // y = 2x + 1
+  var out = '';
+  var diverged = false;
+  for (var i = 0; i <= 30; i++) {
+    var preds = xs.map(function(x) { return w*x + b; });
+    var errs = preds.map(function(p, j) { return p - ys[j]; });
+    var loss = errs.reduce(function(s, e) { return s + e*e; }, 0) / 2;
+    var dw = errs.reduce(function(s, e, j) { return s + e * xs[j]; }, 0);
+    var db = errs.reduce(function(s, e) { return s + e; }, 0);
+    if (i % 3 === 0 || i === 30) {
+      var cls = loss < 0.5 ? 'good' : loss > 100 ? 'bad' : 'warn';
+      out += '<span class="'+cls+'">轮'+String(i).padStart(2)+': w='+w.toFixed(3)+' b='+b.toFixed(3)+' L='+loss.toFixed(2)+'</span>\n';
+    }
+    if (loss > 1e6) { out += '<span class="bad">💥 发散了！学习率太大！</span>\n'; diverged = true; break; }
+    w -= lr * dw;
+    b -= lr * db;
+  }
+  if (!diverged) {
+    var finalLoss = (function() { var p0=w*1+b-3, p1=w*2+b-5; return (p0*p0+p1*p1)/2; })();
+    if (finalLoss < 0.5) out += '<span class="good">✅ 收敛成功！w≈'+w.toFixed(2)+' b≈'+b.toFixed(2)+'（真实: w=2, b=1）</span>';
+    else out += '<span class="warn">⚠️ 还没收敛，试试增大学习率或增加轮次</span>';
+  }
+  document.getElementById('gd-output').innerHTML = out;
+}
+runGD();
+</script>
+
+</body>
+</html>

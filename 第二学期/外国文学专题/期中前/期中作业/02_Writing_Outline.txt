@@ -1,0 +1,129 @@
+# 写作大纲（中文版）
+
+## 论文题目
+**Satire and Social Critique: Analyzing Maggie Trinkle's "I (Don't) Want A Wife" in Dialogue with Judy Brady**
+
+---
+
+## 一、引言 (Introduction) — 约 40 词
+
+### 核心论点 (Thesis Statement)
+Maggie Trinkle 的《我（不）想要一个妻子》(2020) 通过讽刺手法批评疫情时代社会的失职，同时与 Judy Brady 的原文形成跨时代对话，揭示 50 年来性别不平等的持续存在。
+
+### 引言要点
+- Trinkle 文章是对 Brady 1971 年经典讽刺文章的致敬与更新
+- 两篇文章都使用"I want..."重复句式作为核心修辞
+- Trinkle 将讽刺对象从"丈夫"转向"社会系统"
+
+---
+
+## 二、主体段落 1：Trinkle 文章中的讽刺元素 (Satire Elements in Trinkle) — 约 100 词
+
+### 分论点 1：目的的 Irony (Irony of Purpose)
+- **表面**：声称"想要一个正常运作的社会"
+- **实际**：揭露社会已经失职，女性被迫承担不可能的任务
+- **例子**："I want a society that just gives women a rest already"——疲惫的讽刺
+
+### 分论点 2：语气 (Tone) 的讽刺效果
+- Brady：冷静、超然、幽默
+- Trinkle：愤怒、直接、无奈（"goddamn functioning society"）
+- 语气转变反映 50 年来女性挫折感的积累
+
+### 分论点 3：疫情特定情境的讽刺
+- 居家教学、消毒杂货、缝制口罩
+- 女性在疫情期间承担"第四班"工作
+- 暴露社会基础设施的缺失
+
+---
+
+## 三、主体段落 2：两篇文章的比较分析 (Comparison) — 约 120 词
+
+### 相似点 (Similarities)
+
+| 相似点 | Brady (1971) | Trinkle (2020) |
+|--------|--------------|----------------|
+| **核心主题** | 性别角色不平等 | 性别角色不平等 |
+| **修辞手法** | "I want..."重复 | "I want a society..."重复 |
+| **结构呼应** | "My God, who wouldn't want a wife?" | "My God—what divorcee...wouldn't want a functioning society?" |
+| **根本目的** | 唤起对性别不平等的认识 | 唤起对社会失职的认识 |
+
+### 不同点 (Differences)
+
+| 维度 | Brady (1971) | Trinkle (2020) |
+|------|--------------|----------------|
+| **讽刺对象** | 丈夫/男性对妻子的期望 | 整个社会系统/政府 |
+| **诉求范围** | 家庭内部的性别平等 | 社会制度的系统性改革 |
+| **语气** | 幽默、含蓄、反讽 | 愤怒、直接、疲惫 |
+| **身份定位** | 妻子/母亲 | 离婚单亲妈妈 |
+| **时代背景** | 女权运动初期 | 疫情危机 + 女权运动 50 年后 |
+| **解决方案暗示** | 角色互换的荒谬性 | 明确要求社会改革 |
+
+### 关键洞见
+- Trinkle 的标题"I (Don't) Want A Wife"本身就是讽刺：她不再想要一个"妻子"（承担所有家务的人），而是想要一个公平的社会
+- 这反映了女权主义从"个人关系平等"到"社会系统改革"的演进
+
+---
+
+## 四、结论 (Conclusion) — 约 40 词
+
+### 总结要点
+- Trinkle 成功更新了 Brady 的讽刺传统，将批评从个人转向系统
+- 两篇文章共同证明：50 年后，性别平等的斗争仍在继续
+- 讽刺作为一种修辞工具，仍然有效地揭露社会不公
+
+### 结尾思考
+Trinkle 的文章不仅是对 Brady 的致敬，更是一个警示：如果社会继续失职，女性将永远在等待"一个正常运作的社会"。
+
+---
+
+## 五、关键词汇与术语 (Key Terms to Use)
+
+| 术语 | 英文 | 使用场景 |
+|------|------|----------|
+| 讽刺 | Satire | 全文核心概念 |
+| 目的的 irony | Irony of Purpose | 分析 Trinkle 的表面诉求 vs 实际批评 |
+| 语气 | Tone | 比较两篇文章的情感色彩 |
+| 修辞情境 | Rhetorical Situation | 分析写作背景和受众 |
+| 写作契机 | Exigence | Brady：女权运动；Trinkle：疫情 |
+| 互文性 | Intertextuality | Trinkle 与 Brady 的对话关系 |
+| 双重标准 | Double Standard | 性别角色期望的差异 |
+| 第二班 | Second Shift | 女性工作后的家务劳动 |
+
+---
+
+## 六、写作注意事项
+
+### 字数分配建议
+```
+引言：40 词
+主体 1（讽刺分析）：100 词
+主体 2（比较分析）：120 词
+结论：40 词
+总计：300 词
+```
+
+### 句子精简技巧
+- 使用主动语态而非被动语态
+- 避免冗长的从句嵌套
+- 用具体例子代替抽象描述
+- 合并相似观点
+
+### 过渡词建议
+- **比较相似点**：Similarly, Likewise, In the same way, Both essays...
+- **比较不同点**：However, In contrast, Unlike Brady, Trinkle...
+- **举例**：For example, Specifically, Notably...
+- **总结**：In conclusion, Ultimately, Together...
+
+---
+
+## 七、草稿检查清单
+
+完成初稿后检查：
+- [ ] 字数在 280-320 词之间
+- [ ] 有清晰的论点句 (thesis statement)
+- [ ] 分析了至少 2 个讽刺元素
+- [ ] 比较了 2+ 相似点和 2+ 不同点
+- [ ] 使用了具体文本引用（简短）
+- [ ] 使用了课堂术语（satire, irony, tone 等）
+- [ ] 结论呼应引言
+- [ ] 没有语法和拼写错误

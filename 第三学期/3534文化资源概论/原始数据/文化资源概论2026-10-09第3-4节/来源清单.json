@@ -1,0 +1,15 @@
+{
+  "course_title": "文化资源概论",
+  "session_title": "2026-10-09 第3-4节",
+  "duration_seconds": 5987.091958,
+  "video_bytes": 605963339,
+  "time_note": "时间范围表示输入音频分段边界，不是逐句对齐时间。",
+  "asr_model": "stepaudio-2.5-asr",
+  "transcript_time_resolution_seconds": 120,
+  "video_sha256": "f8514bc07cb2228cde2ad52408ad8ae8cb022c5b908f5ebde08372d33a4c6a7b",
+  "source_type": "local_recording",
+  "screenshots": 34,
+  "transcript_storage": "inline_html",
+  "transcript_segments": 50,
+  "transcript_files_removed_after_verification": true
+}

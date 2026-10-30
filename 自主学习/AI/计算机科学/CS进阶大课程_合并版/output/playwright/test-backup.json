@@ -1,0 +1,72 @@
+{
+  "format": "cs-merged-backup",
+  "edition": "2026.10.30",
+  "exported_at": "2026-10-30T03:17:41.043Z",
+  "state": {
+    "version": 1,
+    "read": {
+      "CS102-U01": "2026-10-30T03:17:39.377Z"
+    },
+    "bookmarks": {
+      "CS102": "2026-10-30T03:17:31.115Z"
+    },
+    "notes": {
+      "CS102-U01": "测试笔记：命题有语境；问题与命令不能直接赋真值。"
+    },
+    "drafts": {
+      "courses/CS102/exercises/01-propositional-logic.md": "测试作答：先确定语境，再构造公式结构与反例；此记录仅用于界面验收。"
+    },
+    "submissions": {
+      "courses/CS102/exercises/01-propositional-logic.md": {
+        "id": "51f801f8-e8bb-4268-a3ab-78a5c0013d96",
+        "text": "测试作答：先确定语境，再构造公式结构与反例；此记录仅用于界面验收。",
+        "mode": "assisted",
+        "at": "2026-10-30T03:17:40.228Z",
+        "unit": "CS102-U01",
+        "task_revision": null,
+        "origins": [
+          "本机记录"
+        ],
+        "mode_conflict": false,
+        "attempts": [
+          {
+            "id": "012507b2-6b5f-4de4-b154-a17412fca5e8",
+            "text": "测试作答：先确定语境，再构造公式结构与反例；此记录仅用于界面验收。",
+            "mode": "independent",
+            "at": "2026-10-30T03:17:40.178Z",
+            "unit": "CS102-U01",
+            "task_revision": null,
+            "origins": [
+              "本机记录"
+            ]
+          },
+          {
+            "id": "51f801f8-e8bb-4268-a3ab-78a5c0013d96",
+            "text": "测试作答：先确定语境，再构造公式结构与反例；此记录仅用于界面验收。",
+            "mode": "assisted",
+            "at": "2026-10-30T03:17:40.228Z",
+            "unit": "CS102-U01",
+            "task_revision": null,
+            "origins": [
+              "本机记录"
+            ]
+          }
+        ]
+      }
+    },
+    "referenceSeen": {
+      "courses/CS102/exercises/01-propositional-logic.md": "2026-10-30T03:17:40.180Z"
+    },
+    "reviews": {
+      "CS102-U01": {
+        "id": "f9c6db80-bfec-4eda-bf64-962e08798418",
+        "type": "recall",
+        "due": "2026-10-31",
+        "created": "2026-10-30T03:17:39.416Z"
+      }
+    },
+    "reviewHistory": [],
+    "last": "AI401-U03",
+    "theme": "light"
+  }
+}

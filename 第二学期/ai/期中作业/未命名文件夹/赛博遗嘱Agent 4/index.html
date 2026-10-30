@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>赛博遗嘱Agent</title>
+<style>
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+    background: #fff;
+    color: #1e293b;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-break { page-break-before: always; }
+
+  /* ══════ Page 1: Cover ══════ */
+  .cover {
+    background: linear-gradient(175deg, #faf9f7 0%, #f5f3f0 30%, #f0edea 70%, #f8f6f4 100%);
+    color: #1e293b;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -60px;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(167,139,250,0.06) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -30px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .cover-content {
+    position: relative; z-index: 1;
+    padding: 44px 52px 48px; text-align: center;
+  }
+
+  .hero-image { margin-bottom: 28px; }
+  .hero-image img {
+    width: 100%; max-width: 540px; height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
+  }
+
+  .title {
+    font-size: 40px; font-weight: 800; letter-spacing: 3px;
+    margin-bottom: 6px; color: #1e1b4b;
+  }
+  .subtitle {
+    font-size: 16px; color: #6d28d9; letter-spacing: 1px; margin-bottom: 4px;
+  }
+  .tagline {
+    font-size: 13px; color: #78716c; margin-bottom: 32px;
+  }
+
+  /* compare block */
+  .compare {
+    display: flex; justify-content: center; align-items: stretch;
+    margin-bottom: 32px; max-width: 500px;
+    margin-left: auto; margin-right: auto;
+  }
+  .compare-col { flex: 1; padding: 0 24px; }
+  .compare-col.left  { text-align: right; }
+  .compare-col.right { text-align: left; }
+  .compare-item { font-size: 14px; line-height: 2.4; }
+  .compare-col.left  .compare-item { color: #dc2626; }
+  .compare-col.right .compare-item { color: #059669; }
+  .compare-divider {
+    width: 1px; flex-shrink: 0;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,0.08) 25%, rgba(0,0,0,0.08) 75%, transparent);
+  }
+
+  .section-label {
+    font-size: 12px; color: #a8a29e; text-transform: uppercase;
+    letter-spacing: 2px; margin-bottom: 10px;
+  }
+
+  .what-grid {
+    display: flex; justify-content: center; gap: 16px;
+    max-width: 560px; margin: 0 auto 28px;
+  }
+  .what-item {
+    flex: 1; text-align: center;
+    background: rgba(255,255,255,0.6);
+    border-radius: 12px; padding: 16px 12px;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .what-item-icon { font-size: 22px; margin-bottom: 6px; }
+  .what-item-title { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 4px; }
+  .what-item-desc { font-size: 12px; color: #78716c; line-height: 1.6; }
+
+  .quote-block {
+    display: inline-block;
+    border-top: 1px solid rgba(139,92,246,0.2);
+    padding-top: 20px; margin-bottom: 12px;
+  }
+  .quote {
+    font-size: 15px; color: #6d28d9; letter-spacing: 0.5px;
+    line-height: 1.7; font-style: italic;
+  }
+  .ai-badge { font-size: 11px; color: #a8a29e; margin-top: 18px; letter-spacing: 1px; }
+
+  /* ══════ Page 2: What It Does ══════ */
+  .page-what {
+    background: #fff;
+    padding: 48px 52px 52px;
+  }
+
+  .page-title {
+    font-size: 26px; font-weight: 700; color: #1e293b;
+    display: flex; align-items: center; margin-bottom: 28px;
+  }
+  .page-title .accent {
+    display: inline-block; width: 5px; height: 20px;
+    border-radius: 3px; margin-right: 12px; flex-shrink: 0;
+  }
+  .accent-purple { background: #7c3aed; }
+  .accent-teal  { background: #0d9488; }
+
+  .cards {
+    display: flex; gap: 14px; margin-bottom: 28px;
+  }
+  .card {
+    flex: 1; background: #fff; border-radius: 16px; overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.05); border: 1px solid #f1f5f9;
+  }
+  .card-img { padding: 14px 12px 4px; text-align: center; }
+  .card-img img { width: 100%; height: auto; border-radius: 10px; }
+  .card-title {
+    text-align: center; font-size: 15px; font-weight: 700;
+    color: #1e293b; padding: 0 10px 2px;
+  }
+  .card-desc {
+    text-align: center; font-size: 12px; color: #64748b;
+    line-height: 1.6; padding: 0 10px 12px;
+  }
+
+  .scenarios { margin-bottom: 20px; }
+  .scenario {
+    background: #f8fafc; border-radius: 12px; padding: 14px 20px;
+    margin-bottom: 8px; border-left: 3px solid #e2e8f0;
+  }
+  .scenario.s1 { border-left-color: #a78bfa; }
+  .scenario.s2 { border-left-color: #60a5fa; }
+  .scenario.s3 { border-left-color: #34d399; }
+  .scenario-label { font-weight: 700; font-size: 13px; margin-bottom: 3px; }
+  .scenario.s1 .scenario-label { color: #7c3aed; }
+  .scenario.s2 .scenario-label { color: #2563eb; }
+  .scenario.s3 .scenario-label { color: #059669; }
+  .scenario-text { font-size: 13px; color: #64748b; line-height: 1.7; }
+
+  .tags { text-align: center; margin-bottom: 20px; }
+  .tag {
+    display: inline-block; font-size: 11px; padding: 3px 12px;
+    border-radius: 20px; margin: 0 3px;
+  }
+  .tag.t1 { background: #ede9fe; color: #7c3aed; }
+  .tag.t2 { background: #dbeafe; color: #2563eb; }
+  .tag.t3 { background: #d1fae5; color: #059669; }
+
+  .how-understand {
+    max-width: 480px; margin: 0 auto;
+    text-align: center;
+  }
+  .how-understand p {
+    font-size: 13px; color: #78716c; line-height: 2;
+  }
+
+  /* ══════ Page 3: How It Works (tech) ══════ */
+  .page-how {
+    background: #fafafa;
+    padding: 44px 52px 48px;
+  }
+
+  .process-image { text-align: center; margin-bottom: 20px; }
+  .process-image img {
+    width: 100%; max-width: 560px; height: auto;
+    border-radius: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+
+  /* Pipeline */
+  .pipeline { margin-bottom: 16px; }
+  .pipeline-step {
+    display: flex; align-items: flex-start; margin-bottom: 10px;
+    background: #fff; border-radius: 10px; padding: 12px 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03); border: 1px solid #f1f5f9;
+  }
+  .pipeline-num {
+    flex-shrink: 0; width: 30px; height: 30px; border-radius: 8px;
+    color: #fff; font-size: 12px; font-weight: 700;
+    text-align: center; line-height: 30px; margin-right: 12px;
+  }
+  .pipeline-step:nth-child(1) .pipeline-num { background: #8b5cf6; }
+  .pipeline-step:nth-child(2) .pipeline-num { background: #3b82f6; }
+  .pipeline-step:nth-child(3) .pipeline-num { background: #f59e0b; }
+  .pipeline-step:nth-child(4) .pipeline-num { background: #10b981; }
+
+  .pipeline-body { flex: 1; }
+  .pipeline-name { font-size: 14px; font-weight: 700; color: #1e293b; margin-bottom: 2px; }
+  .pipeline-desc { font-size: 12px; color: #64748b; line-height: 1.5; margin-bottom: 2px; }
+  .pipeline-tech {
+    font-size: 11px; color: #a8a29e;
+    font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+  }
+
+  /* Tech cards compact */
+  .tech-section-title {
+    font-size: 13px; font-weight: 700; color: #1e293b;
+    margin-bottom: 10px; display: flex; align-items: center;
+  }
+  .tech-section-title::before {
+    content: ''; display: inline-block; width: 4px; height: 12px;
+    border-radius: 2px; margin-right: 8px; flex-shrink: 0;
+  }
+  .tech-section-title.ts-input::before  { background: #a78bfa; }
+  .tech-section-title.ts-model::before  { background: #3b82f6; }
+  .tech-section-title.ts-output::before { background: #10b981; }
+
+  .tech-grid {
+    display: flex; gap: 10px; margin-bottom: 16px;
+  }
+  .tech-card {
+    flex: 1; background: #fff; border-radius: 10px; padding: 12px 14px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.03); border: 1px solid #f1f5f9;
+  }
+  .tech-card-icon { font-size: 18px; margin-bottom: 4px; }
+  .tech-card-name { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 2px; }
+  .tech-card-desc { font-size: 11px; color: #64748b; line-height: 1.5; }
+  .tech-card-stack {
+    font-size: 10px; color: #94a3b8; margin-top: 4px;
+    font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+  }
+
+  .tech-summary {
+    background: #fff; border-radius: 10px; padding: 14px 20px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.03); border: 1px solid #f1f5f9;
+  }
+  .tech-summary-title { font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 6px; }
+  .tech-summary-list { font-size: 11px; color: #64748b; line-height: 1.8; }
+
+  .ai-badge-bottom { text-align: center; font-size: 11px; color: #94a3b8; margin-top: 14px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ 第1页 · 封面 ═══════════════ -->
+<div class="page cover">
+  <div class="cover-content">
+    <div class="hero-image">
+      <img src="images/图A.png" alt="">
+    </div>
+
+    <h1 class="title">赛博遗嘱Agent</h1>
+    <p class="subtitle">让缺席不再是沉默</p>
+    <p class="tagline">一个替你继续说话的小东西</p>
+
+    <div class="compare">
+      <div class="compare-col left">
+        <p class="compare-item">冷冰冰的法律遗嘱</p>
+        <p class="compare-item">简单的定时发送</p>
+        <p class="compare-item">AI在模仿人类</p>
+      </div>
+      <div class="compare-divider"></div>
+      <div class="compare-col right">
+        <p class="compare-item">写给世界的温情长信</p>
+        <p class="compare-item">学会了你怎么说话的人</p>
+        <p class="compare-item">你，用AI继续表达</p>
+      </div>
+    </div>
+
+    <p class="section-label">它到底是什么</p>
+    <div class="what-grid">
+      <div class="what-item">
+        <div class="what-item-icon">📦</div>
+        <div class="what-item-title">记忆寄存</div>
+        <div class="what-item-desc">你不想被忘掉的东西，它帮你记着</div>
+      </div>
+      <div class="what-item">
+        <div class="what-item-icon">🎁</div>
+        <div class="what-item-title">亲友留念</div>
+        <div class="what-item-desc">你想对谁说的话，到了时间它帮你说</div>
+      </div>
+      <div class="what-item">
+        <div class="what-item-icon">🗣️</div>
+        <div class="what-item-title">替你表达</div>
+        <div class="what-item-desc">你平时怎么说话，它就怎么替你说话</div>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      <p class="quote">我们终将离开，但想说的话，不该被一起带走。</p>
+    </div>
+
+    <p class="ai-badge">内容使用AI辅助生成</p>
+  </div>
+</div>
+
+<!-- ═══════════════ 第2页 · 做什么 ═══════════════ -->
+<div class="page page-break page-what">
+  <h2 class="page-title">
+    <span class="accent accent-purple"></span>
+    它能做什么
+  </h2>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-img"><img src="images/图B.png" alt=""></div>
+      <p class="card-title">预知信</p>
+      <p class="card-desc">录一段话，在孩子18岁生日那天，用你的语气发出去</p>
+    </div>
+    <div class="card">
+      <div class="card-img"><img src="images/图C.png" alt=""></div>
+      <p class="card-title">告别与回复</p>
+      <p class="card-desc">最后一条动态下的朋友留言，它替你一条一条地回</p>
+    </div>
+    <div class="card">
+      <div class="card-img"><img src="images/图D.png" alt=""></div>
+      <p class="card-title">日常幽灵</p>
+      <p class="card-desc">路过以前常去的店，弹出一条提醒——上次在这儿的故事</p>
+    </div>
+  </div>
+
+  <div class="scenarios">
+    <div class="scenario s1">
+      <p class="scenario-label">场景一</p>
+      <p class="scenario-text">你录了一段话，想在孩子18岁生日那天给他。到了那天，它会用你的语气发出去——不是一条冷冰冰的定时消息。</p>
+    </div>
+    <div class="scenario s2">
+      <p class="scenario-label">场景二</p>
+      <p class="scenario-text">你在社交平台发了最后一条动态，朋友在底下留言。它会用你说话的方式，替你回复那些比较亲近的人。不是群发，是一条一条回的。</p>
+    </div>
+    <div class="scenario s3">
+      <p class="scenario-label">场景三</p>
+      <p class="scenario-text">你爱人路过你们以前常去的店，手机可能弹出一条提醒——是你之前留下的，说上次在这儿点了什么，发生了什么小故事。</p>
+    </div>
+  </div>
+
+  <div class="tags">
+    <span class="tag t1">日期触发</span>
+    <span class="tag t2">多平台</span>
+    <span class="tag t3">地理触发</span>
+  </div>
+
+  <div class="how-understand">
+    <p>你平时怎么说话，它就怎么替你说话</p>
+    <p>你想对谁说的话，到了时间它帮你说</p>
+    <p>你不想被忘掉的东西，它帮你记着</p>
+  </div>
+</div>
+
+<!-- ═══════════════ 第3页 · 怎么做 ═══════════════ -->
+<div class="page page-break page-how">
+  <h2 class="page-title">
+    <span class="accent accent-teal"></span>
+    它怎么做到的
+  </h2>
+
+  <div class="process-image">
+    <img src="images/图E.png" alt="采集 → 蒸馏 → 封存 → 斟满">
+  </div>
+
+  <!-- 四步 pipeline -->
+  <div class="pipeline">
+    <div class="pipeline-step">
+      <div class="pipeline-num">①</div>
+      <div class="pipeline-body">
+        <p class="pipeline-name">采集原料</p>
+        <p class="pipeline-desc">多渠道接入聊天记录、语音、图文内容，数据清洗后构建个人语料库</p>
+        <p class="pipeline-tech">Whisper ASR · 数据清洗管道 · 向量存储 · 端到端加密</p>
+      </div>
+    </div>
+    <div class="pipeline-step">
+      <div class="pipeline-num">②</div>
+      <div class="pipeline-body">
+        <p class="pipeline-name">蒸馏风味</p>
+        <p class="pipeline-desc">DeepSeek 大模型在个人语料上做风格对齐——提取用词偏好、句式节奏、语气温度</p>
+        <p class="pipeline-tech">DeepSeek 大模型 · LoRA 微调 · RLHF 偏好对齐</p>
+      </div>
+    </div>
+    <div class="pipeline-step">
+      <div class="pipeline-num">③</div>
+      <div class="pipeline-body">
+        <p class="pipeline-name">设定触发</p>
+        <p class="pipeline-desc">自定义触发规则——特定日期、地理围栏、社交平台事件，多条件组合</p>
+        <p class="pipeline-tech">日期 Cron · 地理围栏 · 社交平台 Webhook · 事件驱动架构</p>
+      </div>
+    </div>
+    <div class="pipeline-step">
+      <div class="pipeline-num">④</div>
+      <div class="pipeline-body">
+        <p class="pipeline-name">斟满交付</p>
+        <p class="pipeline-desc">模型生成语境匹配的文字，可叠加 TTS 合成语音，通过各平台推送给指定接收人</p>
+        <p class="pipeline-tech">豆包 TTS 合成 · 声纹还原 · 微信 / 短信 / 社交平台 API 分发</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 技术架构三块 -->
+  <p class="tech-section-title ts-input">输入端</p>
+  <div class="tech-grid">
+    <div class="tech-card">
+      <div class="tech-card-icon">💬</div>
+      <div class="tech-card-name">文本语料</div>
+      <div class="tech-card-desc">聊天记录、朋友圈、日记等私人文案</div>
+      <div class="tech-card-stack">API 接入 · 导出解析</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-card-icon">🎙️</div>
+      <div class="tech-card-name">语音样本</div>
+      <div class="tech-card-desc">日常语音消息，用于音色建模</div>
+      <div class="tech-card-stack">Whisper · ASR 转写</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-card-icon">🖼️</div>
+      <div class="tech-card-name">多模态线索</div>
+      <div class="tech-card-desc">照片、定位、社交行为，构建情境记忆</div>
+      <div class="tech-card-stack">CLIP · OCR · GPS</div>
+    </div>
+  </div>
+
+  <p class="tech-section-title ts-model">模型层</p>
+  <div class="tech-grid">
+    <div class="tech-card">
+      <div class="tech-card-icon">🧠</div>
+      <div class="tech-card-name">风格建模</div>
+      <div class="tech-card-desc">分析用词、句式、语气，建立表达向量</div>
+      <div class="tech-card-stack">DeepSeek · LoRA</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-card-icon">🔊</div>
+      <div class="tech-card-name">音色克隆</div>
+      <div class="tech-card-desc">合成自然人声，保留声纹与情感韵律</div>
+      <div class="tech-card-stack">豆包 TTS · 声纹嵌入</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-card-icon">⚡</div>
+      <div class="tech-card-name">触发引擎</div>
+      <div class="tech-card-desc">日期、位置、社交事件多条件组合触发</div>
+      <div class="tech-card-stack">Cron + Webhook</div>
+    </div>
+  </div>
+
+  <div class="tech-summary">
+    <p class="tech-summary-title">技术栈</p>
+    <p class="tech-summary-list">
+      <strong>大模型</strong> DeepSeek（推理+风格对齐）&nbsp;·&nbsp;
+      <strong>语音</strong> Whisper ASR + 豆包 TTS（声纹嵌入）&nbsp;·&nbsp;
+      <strong>多模态</strong> CLIP / OCR / GPS 情境标注 &nbsp;·&nbsp;
+      <strong>微调</strong> LoRA 低秩适配 + RLHF 偏好对齐 &nbsp;·&nbsp;
+      <strong>触发</strong> 事件驱动架构 &nbsp;·&nbsp;
+      <strong>分发</strong> 微信 / 短信 / 社交平台 API &nbsp;·&nbsp;
+      <strong>存储</strong> 向量数据库 + 端到端加密
+    </p>
+  </div>
+
+  <p class="ai-badge-bottom">内容使用AI辅助生成</p>
+</div>
+
+</body>
+</html>

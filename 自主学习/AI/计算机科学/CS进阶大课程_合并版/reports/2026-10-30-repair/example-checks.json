@@ -1,0 +1,279 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "AI401 I1 forward: two hidden units and output bias",
+      "pass": true
+    },
+    {
+      "name": "AI401 I1 finite difference W(0, 0)",
+      "pass": true
+    },
+    {
+      "name": "AI401 I1 finite difference W(0, 1)",
+      "pass": true
+    },
+    {
+      "name": "AI401 I1 finite difference W(1, 0)",
+      "pass": true
+    },
+    {
+      "name": "AI401 I1 finite difference W(1, 1)",
+      "pass": true
+    },
+    {
+      "name": "AI401 I1 finite difference b(0,)",
+      "pass": true
+    },
+    {
+      "name": "AI401 I1 finite difference b(1,)",
+      "pass": true
+    },
+    {
+      "name": "AI401 I1 finite difference v(0,)",
+      "pass": true
+    },
+    {
+      "name": "AI401 I1 finite difference v(1,)",
+      "pass": true
+    },
+    {
+      "name": "AI401 I1 finite difference c()",
+      "pass": true
+    },
+    {
+      "name": "AI401 I2 saved perturbation losses",
+      "pass": true
+    },
+    {
+      "name": "AI401 I2 inconsistent log difference = 0.2",
+      "pass": true
+    },
+    {
+      "name": "AI401 T1 complete shared path 1",
+      "pass": true
+    },
+    {
+      "name": "AI401 T1 independent theta difference 1",
+      "pass": true
+    },
+    {
+      "name": "AI401 T1 complete shared path 2",
+      "pass": true
+    },
+    {
+      "name": "AI401 T1 independent theta difference 2",
+      "pass": true
+    },
+    {
+      "name": "AI401 D1 new forward",
+      "pass": true
+    },
+    {
+      "name": "AI401 D1 all four gradients",
+      "pass": true
+    },
+    {
+      "name": "Rejected A* counterexample actually returns 5",
+      "pass": true
+    },
+    {
+      "name": "True inadmissible-heuristic counterexample returns 5 instead of 2",
+      "pass": true
+    },
+    {
+      "name": "Corrected lecture UCS chronological order",
+      "pass": true
+    },
+    {
+      "name": "Corrected lecture A* complete frontier order",
+      "pass": true
+    },
+    {
+      "name": "CS303 U02 I1 fixed alphabetical tie rule",
+      "pass": true
+    },
+    {
+      "name": "CS303 U02 T1 admissible inconsistent h still succeeds on this graph",
+      "pass": true
+    },
+    {
+      "name": "CS303 U02 T1 inconsistency specifically on B to C",
+      "pass": true
+    },
+    {
+      "name": "CS303 U02 I2 strict better-g update",
+      "pass": true
+    },
+    {
+      "name": "CS303 U01 permanent permit model cost 5",
+      "pass": true
+    },
+    {
+      "name": "CS303 U01 expiring permit model cost 8",
+      "pass": true
+    },
+    {
+      "name": "AI403 fixed F1/lecture numerator = 4",
+      "pass": true
+    },
+    {
+      "name": "AI403 F2 fixed rounded-idf arithmetic",
+      "pass": true
+    },
+    {
+      "name": "AI403 I1 both corrected document scores",
+      "pass": true
+    },
+    {
+      "name": "AI403 D1 genuinely new input",
+      "pass": true
+    },
+    {
+      "name": "AI404 corrected neural scoring forward",
+      "pass": true
+    },
+    {
+      "name": "AI404 corrected neural scoring gradient",
+      "pass": true
+    },
+    {
+      "name": "AI404 delayed MF joint error/regularization update",
+      "pass": true
+    },
+    {
+      "name": "AI404 delayed pre-update objective",
+      "pass": true
+    },
+    {
+      "name": "CS303 U09 unseen group denominators and rates",
+      "pass": true
+    },
+    {
+      "name": "CS303 U09 corrected sample standard deviation",
+      "pass": true
+    },
+    {
+      "name": "CT434 U04 unseen bilinear weights and colors",
+      "pass": true
+    },
+    {
+      "name": "CS104 U06 new I1 null standard error and two-sided p",
+      "pass": true
+    },
+    {
+      "name": "CS104 U06 new I2 power and attrition rounding",
+      "pass": true
+    },
+    {
+      "name": "Two-sided absolute normal tail is not doubled twice",
+      "pass": true
+    },
+    {
+      "name": "Configured source roots resolve baseline entries",
+      "pass": true
+    },
+    {
+      "name": "Hash change differs from missing path",
+      "pass": true
+    },
+    {
+      "name": "Missing file does not masquerade as changed hash",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/AI401/answers/AI401-U03-answers.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/AI401/exercises/AI401-U03-exercises.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/AI401/lessons/AI401-U03.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/AI403/answers/AI403-U02-answers.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/AI403/exercises/AI403-U02-exercises.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/AI403/lessons/AI403-U02.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/AI404/answers/AI404-U03-answers.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/AI404/exercises/AI404-U03-exercises.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/AI404/lessons/AI404-U03.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/CS104/answers/CS104-U06-answers.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/CS104/exercises/CS104-U06-exercises.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/CS104/lessons/CS104-U06.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/CS303/answers/CS303-U01-answers.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/CS303/exercises/CS303-U01-exercises.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/CS303/lessons/CS303-U01.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/CS303/answers/CS303-U02-answers.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/CS303/exercises/CS303-U02-exercises.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/CS303/lessons/CS303-U02.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/CS303/answers/CS303-U09-answers.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/CS303/exercises/CS303-U09-exercises.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/CT434/answers/CT434-U04-answers.md",
+      "pass": true
+    },
+    {
+      "name": "Published override matches file courses/CT434/exercises/CT434-U04-exercises.md",
+      "pass": true
+    },
+    {
+      "name": "Changed task carries assessment revision",
+      "pass": true
+    }
+  ],
+  "html_sha256": "d9266603d479df84c29f9060ea94fa7037724b15961dd0d29f3fc4f2034c7024",
+  "limits": "Finite computations and exact delivery checks; not a theorem-by-theorem audit."
+}

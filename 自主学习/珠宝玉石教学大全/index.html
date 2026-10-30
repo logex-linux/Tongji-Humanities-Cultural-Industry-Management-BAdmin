@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>珠宝玉石教学大全 · 宝石学 / 宝石鉴定学 / 宝石鉴赏学 —— 入门到进阶</title>
+<meta name="description" content="面向宝石学、宝石鉴定学、宝石鉴赏学学生的系统教学资料：宝石概论、地质与晶体学基础、物理性质、鉴定仪器与方法、优化处理鉴别、30余种宝石与玉石个论、有机宝石、鉴赏评价与实训指南。">
+<style>
+:root{
+  --ink:#2a2520;
+  --ink-soft:#5c554b;
+  --paper:#faf7f1;
+  --paper-2:#f3eee4;
+  --card:#ffffff;
+  --jade:#14532d;
+  --jade-2:#1e6b46;
+  --jade-soft:#e7f0ea;
+  --gold:#b8860b;
+  --gold-2:#d4a017;
+  --gold-soft:#faf3e0;
+  --blue:#1d4ed8;
+  --blue-soft:#e8eefc;
+  --red:#b3261e;
+  --red-soft:#fdecea;
+  --line:#e4dccd;
+  --shadow:0 1px 3px rgba(42,37,32,.07),0 8px 24px rgba(42,37,32,.06);
+  --radius:14px;
+  --serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+  --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--serif);background:var(--paper);color:var(--ink);line-height:1.85;font-size:16px}
+::selection{background:var(--gold-soft)}
+
+/* ---------- 布局 ---------- */
+.layout{display:flex;min-height:100vh}
+aside{
+  position:fixed;top:0;left:0;bottom:0;width:288px;background:linear-gradient(180deg,#123527 0%,#14532d 55%,#0f3d24 100%);
+  color:#e8e2d4;overflow-y:auto;padding:26px 14px 60px;z-index:50;
+}
+aside .brand{padding:0 10px 18px;border-bottom:1px solid rgba(232,226,212,.18);margin-bottom:14px}
+aside .brand .logo{font-size:26px;line-height:1;display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.12em}
+aside .brand .sub{font-size:12px;color:#b9c9bd;margin-top:8px;letter-spacing:.06em}
+.toc-search{width:100%;padding:8px 12px;border-radius:9px;border:1px solid rgba(232,226,212,.25);background:rgba(255,255,255,.08);color:#fff;font-size:13px;font-family:var(--sans);margin-bottom:14px;outline:none}
+.toc-search::placeholder{color:#9fb5a6}
+.toc-search:focus{border-color:var(--gold-2);background:rgba(255,255,255,.14)}
+nav.toc a{display:block;padding:7px 12px;border-radius:8px;color:#cfdccf;text-decoration:none;font-size:13.5px;font-family:var(--sans);line-height:1.5;transition:all .15s}
+nav.toc a:hover{background:rgba(255,255,255,.10);color:#fff}
+nav.toc a.active{background:var(--gold);color:#1a1408;font-weight:600}
+nav.toc .grp{font-size:11.5px;color:#8fae97;letter-spacing:.18em;padding:14px 12px 5px;font-family:var(--sans)}
+main{flex:1;margin-left:288px;min-width:0}
+.wrap{max-width:920px;margin:0 auto;padding:0 34px 120px}
+
+/* ---------- 封面 ---------- */
+.cover{
+  background:
+    radial-gradient(1200px 500px at 85% -10%,rgba(212,160,23,.14),transparent 60%),
+    radial-gradient(900px 420px at -10% 110%,rgba(30,107,70,.16),transparent 60%),
+    linear-gradient(180deg,#123527 0%,#175232 100%);
+  color:#f2ecdd;padding:74px 34px 66px;position:relative;overflow:hidden;
+}
+.cover::after{content:"";position:absolute;inset:0;background:
+  repeating-linear-gradient(45deg,transparent 0 26px,rgba(255,255,255,.014) 26px 52px);pointer-events:none}
+.cover .kicker{font-family:var(--sans);font-size:13px;letter-spacing:.42em;color:var(--gold-2);margin-bottom:18px}
+.cover h1{font-size:clamp(34px,5.2vw,54px);font-weight:700;letter-spacing:.06em;line-height:1.25}
+.cover h1 small{display:block;font-size:.42em;font-weight:400;letter-spacing:.28em;color:#b9c9bd;margin-top:14px}
+.cover .lead{max-width:760px;margin-top:26px;color:#d8e0d5;font-size:16.5px}
+.cover .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.cover .chip{border:1px solid rgba(212,160,23,.5);color:var(--gold-2);border-radius:999px;padding:5px 16px;font-size:13px;font-family:var(--sans);background:rgba(212,160,23,.08)}
+.cover .note{margin-top:30px;font-size:13px;color:#9fb5a6;font-family:var(--sans)}
+
+/* ---------- 章节 ---------- */
+section.chapter{margin-top:64px;scroll-margin-top:24px}
+.sec-head{display:flex;align-items:baseline;gap:16px;border-bottom:3px double var(--line);padding-bottom:14px;margin-bottom:8px}
+.sec-head .no{font-family:var(--sans);font-size:13px;color:var(--gold);letter-spacing:.2em;white-space:nowrap}
+.sec-head h2{font-size:30px;letter-spacing:.04em;color:var(--jade)}
+.sec-head .en{font-family:var(--sans);font-size:12px;color:var(--ink-soft);letter-spacing:.14em;margin-left:auto;white-space:nowrap}
+h3{font-size:21px;margin:38px 0 12px;color:var(--ink);padding-left:14px;border-left:4px solid var(--gold)}
+h4{font-size:17.5px;margin:26px 0 8px;color:var(--jade-2)}
+p{margin:10px 0}
+ul,ol{margin:10px 0 10px 1.6em}
+li{margin:5px 0}
+strong{color:#111}
+a{color:var(--jade-2)}
+code,.mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.92em;background:var(--paper-2);padding:1px 6px;border-radius:5px}
+
+/* ---------- 组件 ---------- */
+.callout{border-radius:var(--radius);padding:16px 20px;margin:18px 0;font-size:15px;border:1px solid var(--line);background:var(--card);box-shadow:var(--shadow)}
+.callout .tag{font-family:var(--sans);font-weight:700;font-size:12.5px;letter-spacing:.14em;display:inline-block;margin-bottom:6px}
+.callout.tip{background:var(--jade-soft);border-color:#cfe2d4}
+.callout.tip .tag{color:var(--jade)}
+.callout.warn{background:var(--gold-soft);border-color:#eed9a8}
+.callout.warn .tag{color:#8a6508}
+.callout.danger{background:var(--red-soft);border-color:#f2c4c0}
+.callout.danger .tag{color:var(--red)}
+.callout.exam{background:var(--blue-soft);border-color:#c9d6f5}
+.callout.exam .tag{color:var(--blue)}
+.callout.mnemonic{background:linear-gradient(135deg,#fff 0%,var(--gold-soft));border-color:#e8cf9a}
+.callout.mnemonic .tag{color:#8a6508}
+
+.badge{display:inline-block;font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.08em;border-radius:999px;padding:2px 10px;vertical-align:2px;margin-right:8px}
+.badge.lv1{background:var(--jade-soft);color:var(--jade);border:1px solid #bfd8c6}
+.badge.lv2{background:var(--blue-soft);color:var(--blue);border:1px solid #c4d3f2}
+.badge.lv3{background:var(--gold-soft);color:#8a6508;border:1px solid #ecd9a6}
+
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14.5px;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+th{background:var(--jade);color:#f2ecdd;font-family:var(--sans);font-size:13px;letter-spacing:.05em;padding:10px 12px;text-align:left;font-weight:600}
+td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:#fbf9f4}
+tr:last-child td{border-bottom:none}
+table.compact td,table.compact th{padding:6px 10px;font-size:13.5px}
+
+.gem-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:22px 0;overflow:hidden}
+.gem-card .head{padding:18px 24px 14px;background:linear-gradient(120deg,var(--paper-2),#fff);border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.gem-card .head h4{margin:0;font-size:20px;color:var(--jade)}
+.gem-card .head .alias{font-size:13px;color:var(--ink-soft)}
+.gem-card .body{padding:6px 24px 20px}
+.data-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px 22px;margin:14px 0;font-size:14.5px}
+.data-grid .k{color:var(--ink-soft);font-family:var(--sans);font-size:12.5px;letter-spacing:.06em}
+.data-grid .v{font-weight:600}
+
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){.cols2{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;box-shadow:var(--shadow)}
+.panel h5{font-family:var(--sans);font-size:13px;color:var(--gold);letter-spacing:.12em;margin-bottom:8px}
+
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0;font-family:var(--sans);font-size:13.5px}
+.flow .step{background:var(--jade);color:#fff;border-radius:8px;padding:6px 14px;font-weight:600}
+.flow .arr{color:var(--gold);font-weight:700}
+.flow .step.alt{background:var(--gold);color:#241a05}
+.flow .step.ghost{background:var(--paper-2);color:var(--ink);border:1px solid var(--line)}
+
+details{margin:12px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 16px;box-shadow:var(--shadow)}
+details summary{cursor:pointer;font-weight:600;color:var(--jade-2);font-family:var(--sans);font-size:14.5px}
+details[open] summary{border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:8px}
+
+.kv-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.kv-strip .cell{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-align:center;box-shadow:var(--shadow)}
+.kv-strip .num{font-size:24px;font-weight:700;color:var(--jade);font-family:var(--sans)}
+.kv-strip .lbl{font-size:12.5px;color:var(--ink-soft);font-family:var(--sans);margin-top:2px}
+
+.toc-mini{background:var(--card);border:1px dashed var(--gold-2);border-radius:12px;padding:14px 22px;margin:20px 0;font-family:var(--sans);font-size:14px}
+.toc-mini b{color:var(--jade)}
+
+.footer{margin-top:80px;padding:36px 0 10px;border-top:3px double var(--line);color:var(--ink-soft);font-size:13.5px;font-family:var(--sans)}
+.top-btn{position:fixed;right:26px;bottom:26px;width:44px;height:44px;border-radius:50%;background:var(--jade);color:#fff;border:none;font-size:18px;cursor:pointer;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
+.top-btn.show{opacity:.92;pointer-events:auto}
+.menu-btn{display:none;position:fixed;top:14px;left:14px;z-index:70;background:var(--jade);color:#fff;border:none;border-radius:9px;padding:9px 13px;font-size:15px;cursor:pointer;box-shadow:var(--shadow)}
+
+@media(max-width:1024px){
+  aside{transform:translateX(-100%);transition:transform .25s}
+  aside.open{transform:none}
+  main{margin-left:0}
+  .menu-btn{display:block}
+  .wrap{padding:0 20px 100px}
+  .cover{padding:84px 20px 54px}
+}
+@media print{
+  aside,.top-btn,.menu-btn,.toc-search{display:none}
+  main{margin-left:0}
+  body{background:#fff;font-size:12.5px}
+  .cover{background:#123527 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  section.chapter{break-inside:avoid-page}
+  .gem-card{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<button class="menu-btn" id="menuBtn" aria-label="目录">☰ 目录</button>
+<div class="layout">
+<aside id="sidebar">
+  <div class="brand">
+    <div class="logo">💎 珠宝玉石教学大全</div>
+    <div class="sub">宝石学 · 宝石鉴定学 · 宝石鉴赏学<br>入门 → 进阶 系统教程</div>
+  </div>
+  <input class="toc-search" id="tocSearch" type="search" placeholder="🔍 检索章节 / 宝石名…">
+  <nav class="toc" id="toc">
+    <div class="grp">导读</div>
+    <a href="#guide">使用指南与学习地图</a>
+    <a href="#ch1">第一章 · 宝石概论与文化</a>
+    <a href="#ch2">第二章 · 地质与晶体学基础</a>
+    <div class="grp">宝石学核心</div>
+    <a href="#ch3">第三章 · 宝石的物理性质</a>
+    <a href="#ch4">第四章 · 宝石鉴定学：方法与仪器</a>
+    <a href="#ch5">第五章 · 优化处理与合成鉴别</a>
+    <div class="grp">宝石个论</div>
+    <a href="#ch6">第六章 · 珍贵宝石个论（上）</a>
+    <a href="#ch7">第七章 · 常见宝石个论（下）</a>
+    <a href="#ch8">第八章 · 玉石篇</a>
+    <div class="grp">鉴赏与实训</div>
+    <a href="#ch9">第九章 · 有机宝石</a>
+    <a href="#ch10">第十章 · 质量评价与鉴赏</a>
+    <a href="#ch11">第十一章 · 商贸、证书与收藏</a>
+    <a href="#ch12">第十二章 · 实验实训指南</a>
+    <div class="grp">附录</div>
+    <a href="#appendix">附录 · 数据总表 / 术语表 / 资料来源</a>
+  </nav>
+</aside>
+<main>
+<div class="cover">
+  <div class="kicker">GEMOLOGY · 教学大全</div>
+  <h1>珠宝玉石教学大全
+    <small>宝石学 · 宝石鉴定学 · 宝石鉴赏学｜从入门到进阶</small>
+  </h1>
+  <p class="lead">
+    本教程面向宝石学、宝石鉴定学、宝石鉴赏学专业学生与爱好者，依托网络公开资料系统整理而成。
+    内容从「什么是宝石」出发，依次讲透矿物与晶体学基础、宝石各项物理性质、十种常规鉴定仪器与
+    大型仪器方法、优化处理与合成品的鉴别思路，再逐一颗剖 30 余种重要宝石与玉石的物性、产地、
+    鉴定要点与鉴赏要素，最后给出质量评价、商贸实务与实验室实训方案，形成一条完整的
+    「认知 → 鉴定 → 评价 → 鉴赏」学习闭环。
+  </p>
+  <div class="meta">
+    <span class="chip">12 章正文 + 附录</span>
+    <span class="chip">30+ 宝石玉石个论</span>
+    <span class="chip">65 个网络资料来源</span>
+    <span class="chip">鉴定流程图解</span>
+    <span class="chip">实训项目 12 项</span>
+  </div>
+  <div class="note">适用对象：宝石专业本科生 / 珠宝首饰高职学生 / FGA·GIG·NGTC 备考者 / 珠宝爱好者｜建议学习周期 12–16 周</div>
+</div>
+<div class="wrap">
+<!-- ============ 导读 + 第一章 + 第二章 ============ -->
+<section class="chapter" id="guide">
+  <div class="sec-head"><span class="no">导读</span><h2>使用指南与学习地图</h2><span class="en">HOW TO USE</span></div>
+  <p>本大全按「<b>认知 → 鉴定 → 评价 → 鉴赏</b>」的学科逻辑组织为三大学程、十一章正文与一个附录。三个子学科的分工如下：</p>
+  <table>
+    <tr><th style="width:150px">子学科</th><th>核心问题</th><th>对应章节</th></tr>
+    <tr><td><b>宝石学</b><br><span style="font-size:12.5px;color:var(--ink-soft)">Gemology</span></td><td>宝石「是什么」——化学成分、晶体结构、物理性质、成因产地</td><td>第一、二、三章</td></tr>
+    <tr><td><b>宝石鉴定学</b><br><span style="font-size:12.5px;color:var(--ink-soft)">Gem Identification</span></td><td>宝石「是不是、真不真」——肉眼观察、常规仪器、大型仪器、处理与合成鉴别</td><td>第四、五章</td></tr>
+    <tr><td><b>宝石鉴赏学</b><br><span style="font-size:12.5px;color:var(--ink-soft)">Gem Appreciation</span></td><td>宝石「美不美、值多少」——质量评价要素、设计与镶嵌、商贸与收藏</td><td>第六至十二章</td></tr>
+  </table>
+
+  <h3>三阶段学习路线</h3>
+  <div class="kv-strip">
+    <div class="cell"><div class="num">① 入门</div><div class="lbl">第1–3章｜认识宝石家族<br>建立物性知识框架</div></div>
+    <div class="cell"><div class="num">② 进阶</div><div class="lbl">第4–8章｜掌握鉴定方法<br>逐种学透个论</div></div>
+    <div class="cell"><div class="num">③ 精通</div><div class="lbl">第9–11章｜评价鉴赏实训<br>形成执业能力</div></div>
+  </div>
+
+  <div class="callout tip"><span class="tag">阅读提示</span>
+    正文中的难度标记：<span class="badge lv1">入门</span>基础必读；<span class="badge lv2">进阶</span>专业核心；<span class="badge lv3">精通</span>拓展深化。
+    <b>蓝色「考试要点」</b>框为常见考点与易混淆概念，<b>金色「速记口诀」</b>框为记忆锚点，<b>红色「陷阱警示」</b>框为常见错误与市场风险。
+  </div>
+
+  <div class="toc-mini"><b>一分钟速览全书：</b>
+  宝石三大价值要素＝美丽＋耐久＋稀少｜七大晶系｜莫氏硬度十级标准｜折射仪读数「一轴/二轴、单/双折射率」是鉴定灵魂｜
+  钻石 4C｜翡翠 A/B/C 货｜和田玉「油、细、润」｜珍珠「光泽为王」｜红外光谱是处理鉴别的金标准。
+  </div>
+</section>
+
+<section class="chapter" id="ch1">
+  <div class="sec-head"><span class="no">第一章</span><h2>宝石概论与文化简史</h2><span class="en">INTRODUCTION TO GEMSTONES</span></div>
+
+  <h3><span class="badge lv1">入门</span>1.1 什么是宝石</h3>
+  <p>宝石学上，<b>宝石（gemstone）</b>是指自然界产出的、具有美观、耐久、稀少三大特性，可加工成装饰品的矿物或有机物质。三大特性是判定「宝石」的黄金标准，缺一不可：</p>
+  <ul>
+    <li><b>美丽（Beauty）</b>：鲜艳柔和的颜色、明亮的光泽（金刚光泽、玻璃光泽、油脂光泽、珍珠光泽）、特殊的 optical effect（猫眼、星光、变彩、月光、变色效应）与透明度；</li>
+    <li><b>耐久（Durability）</b>：硬度高（摩氏硬度一般 ≥6 才适合作首饰）、韧性强、化学性质稳定、耐磨损耐腐蚀；</li>
+    <li><b>稀少（Rarity）</b>：产量稀少、「物以稀为贵」是宝石价值的重要来源——红宝石中的鸽血红、翡翠中的帝王绿皆因稀有而价高。</li>
+  </ul>
+  <p>广义的「珠宝」还包括<b>玉石</b>（矿物集合体或岩石，如翡翠、和田玉、岫岩玉）与<b>有机宝石</b>（珍珠、珊瑚、琥珀、象牙、砗磲等生物成因材料）。狭义宝石则专指矿物单晶体，如钻石、红宝石等。</p>
+
+  <div class="callout exam"><span class="tag">考试要点</span>
+    「宝石三要素」= 美丽、耐久、稀少；贵宝石（五大名宝石）通常指 <b>钻石、红宝石、蓝宝石、祖母绿、金绿宝石（猫眼/变石）</b>；
+    玉石与宝石的区别在于：宝石多为<b>矿物单晶体</b>，玉石多为<b>矿物集合体/岩石</b>，玉石以「质地细腻、温润、坚韧」取胜而非以晶莹的单晶体取胜。
+  </div>
+
+  <h3><span class="badge lv1">入门</span>1.2 宝石分类体系</h3>
+  <p>按<b>成因与真实性</b>分类，是鉴定学与商贸的根基：</p>
+  <table>
+    <tr><th>类别</th><th>定义</th><th>典型例子</th></tr>
+    <tr><td><b>天然宝石</b></td><td>自然界产出，未经或仅经传统优化处理</td><td>天然红宝石、天然翡翠（A货）</td></tr>
+    <tr><td><b>优化宝石</b></td><td>经热处理、浸油、染色、充填、覆膜、扩散、辐照等处理</td><td>热处理蓝宝石、浸油祖母绿、注胶翡翠（B货）</td></tr>
+    <tr><td><b>合成宝石</b></td><td>人工制造，与天然品<b>化学成分、晶体结构、物理性质基本相同</b></td><td>合成红宝石、合成钻石、合成祖母绿</td></tr>
+    <tr><td><b>仿制宝石（仿品）</b></td><td>外观模仿但成分结构完全不同</td><td>玻璃仿祖母绿、合成立方氧化锆仿钻、莫桑石</td></tr>
+    <tr><td><b>拼合宝石</b></td><td>由二片或以上材料粘合而成</td><td>石榴石+玻璃二层石、欧泊拼合石</td></tr>
+  </table>
+  <p>按<b>市场价值</b>可分为：高档宝石（钻石、红宝石、蓝宝石、祖母绿、变石、猫眼、优质翡翠、和田籽玉）、中档宝石（碧玺、尖晶石、海蓝宝石、坦桑石、沙弗莱石等）与常见宝石（水晶、玛瑙、石榴石普通品种等）。</p>
+
+  <h3><span class="badge lv2">进阶</span>1.3 世界宝石文化简史</h3>
+  <ul>
+    <li><b>远古起源</b>：旧石器时代晚期人类已使用贝壳、牙齿、砾石装饰；古埃及盛产绿松石、青金石与祖母绿（克利奥帕特拉矿）；两河流域苏美尔人推崇青金石「帝王之石」；印度是最早的钻石产地（德干高原），公元 4 世纪已有钻石贸易记载。</li>
+    <li><b>玉石之路与中华玉文化</b>：中国用玉逾八千年，形成「君子比德于玉」的独特玉文化。殷墟妇好墓出土大量和田玉器；汉代「金缕玉衣」；清代乾隆时期玉器工艺达到巅峰。软玉（和田玉）与硬玉（翡翠）构成中国玉石两大主干。</li>
+    <li><b>近代变革</b>：19 世纪南非发现大规模钻石矿；1867 年一个叫 Erasmus Jacobs 的孩童在奥兰治河畔捡到「尤里卡」钻石，随后金伯利岩筒被发现；20 世纪「A Diamond is Forever」的营销将钻石与婚约牢牢绑定；1950 年代起合成宝石技术成熟，推动了宝石鉴定学的独立发展。</li>
+  </ul>
+
+  <h3><span class="badge lv1">入门</span>1.4 中国四大名玉与玉石文化</h3>
+  <table class="compact">
+    <tr><th>玉种</th><th>产地</th><th>主要组成</th><th>特点</th></tr>
+    <tr><td><b>和田玉</b></td><td>新疆和田（及俄罗斯、韩国、青海）</td><td>透闪石–阳起石（软玉）</td><td>油脂光泽、韧性极佳，羊脂白玉为珍品</td></tr>
+    <tr><td><b>独山玉</b></td><td>河南南阳独山</td><td>基性斜长岩（黝帘石化）</td><td>色彩丰富、多色并存，「独玉」</td></tr>
+    <tr><td><b>岫岩玉</b></td><td>辽宁岫岩</td><td>蛇纹石</td><td>产量大、应用广，史前红山文化玉器主料</td></tr>
+    <tr><td><b>蓝田玉</b></td><td>陕西蓝田</td><td>蛇纹石化大理岩/方解石</td><td>李商隐「蓝田日暖玉生烟」，开发历史悠久</td></tr>
+  </table>
+  <p>此外，<b>翡翠</b>（硬玉）自清代中后期大量输入中国后，迅速成为「玉石之王」，与和田玉并称；绿松石、青金石在藏文化与伊斯兰文化中地位崇高；寿山石、田黄则是中国「印石文化」的代表。</p>
+
+  <h3><span class="badge lv1">入门</span>1.5 诞生石与文化寓意</h3>
+  <p>诞生石（Birthstone）文化源于欧美，将宝石与出生月份对应，常见对应为：一月石榴石、二月紫水晶、三月海蓝宝石、四月钻石、五月祖母绿、六月珍珠/月光石、七月红宝石、八月橄榄石/尖晶石、九月蓝宝石、十月欧泊/碧玺、十一月托帕石/黄水晶、十二月坦桑石/锆石。在中国文化中，玉象征仁德与君子品格，珍珠象征圆满与健康，红宝石象征热情与权力，蓝宝石象征智慧与忠诚。</p>
+</section>
+
+<section class="chapter" id="ch2">
+  <div class="sec-head"><span class="no">第二章</span><h2>地质与晶体学基础</h2><span class="en">GEOLOGY &amp; CRYSTALLOGRAPHY</span></div>
+  <p>宝石学是矿物学的分支。要真正「看懂」一颗宝石，必须先理解它的来处——矿物、晶体与矿床。</p>
+
+  <h3><span class="badge lv2">进阶</span>2.1 矿物与宝石的关系</h3>
+  <p><b>矿物</b>是地质作用形成的天然结晶态单质或化合物，可用化学式表达；地壳中已知矿物超过 5300 种，其中仅约 200 种可作宝石原料，而具备商业价值的不足百种。矿物是组成岩石的基本单元。宝石矿物按化学成分分为：</p>
+  <table class="compact">
+    <tr><th>大类</th><th>成分特征</th><th>代表宝石</th></tr>
+    <tr><td>自然元素</td><td>金刚石 C</td><td>钻石</td></tr>
+    <tr><td>氧化物</td><td>刚玉 Al₂O₃、石英 SiO₂</td><td>红宝石、蓝宝石、水晶、欧泊</td></tr>
+    <tr><td>硅酸盐</td><td>岛状/链状/层状/架状硅酸盐</td><td>祖母绿、碧玺、石榴石、橄榄石、翡翠、和田玉、月光石、锆石</td></tr>
+    <tr><td>磷酸盐</td><td>含 PO₄³⁻</td><td>绿松石</td></tr>
+    <tr><td>碳酸盐</td><td>含 CO₃²⁻</td><td>珍珠、珊瑚、孔雀石、汉白玉</td></tr>
+    <tr><td>其他</td><td>硫化物、硫酸盐、卤化物等</td><td>青金石、萤石</td></tr>
+  </table>
+
+  <h3><span class="badge lv2">进阶</span>2.2 晶体结构与七大晶系</h3>
+  <p>晶体是内部质点（原子、离子）在三维空间<b>周期性规则排列</b>的固体。受内部格子约束，晶体只能具有 1、2、3、4、6 重对称轴（不可能有 5 重轴），三维空间中共有 <b>230 种空间群</b>，归入 <b>7 个晶系</b>。晶系决定宝石的琢型选择、解理方向与光学对称性，是鉴定学的地基：</p>
+  <table class="compact">
+    <tr><th>晶系</th><th>晶格参数</th><th>代表宝石</th></tr>
+    <tr><td><b>等轴（立方）晶系</b></td><td>a=b=c，α=β=γ=90°</td><td>钻石、尖晶石、石榴石、青金石</td></tr>
+    <tr><td><b>四方晶系</b></td><td>a=b≠c，α=β=γ=90°</td><td>锆石、金红石</td></tr>
+    <tr><td><b>六方晶系</b></td><td>a=b≠c，α=β=90°，γ=120°</td><td>祖母绿（绿柱石）、磷灰石</td></tr>
+    <tr><td><b>三方晶系</b></td><td>a=b=c，α=β=90°，γ=120°</td><td>红宝石、蓝宝石、水晶、碧玺</td></tr>
+    <tr><td><b>斜方（正交）晶系</b></td><td>a≠b≠c，α=β=γ=90°</td><td>橄榄石、金绿宝石、托帕石、坦桑石</td></tr>
+    <tr><td><b>单斜晶系</b></td><td>a≠b≠c，α=γ=90°，β≠90°</td><td>翡翠（硬玉）、和田玉（软玉）、月光石、孔雀石</td></tr>
+    <tr><td><b>三斜晶系</b></td><td>a≠b≠c，α≠β≠γ≠90°</td><td>绿松石、拉长石、蔷薇辉石</td></tr>
+  </table>
+  <div class="callout mnemonic"><span class="tag">速记口诀</span>
+    「等四六三斜单单三」——等轴、四方、六方、三方、斜方、单斜、三斜。宝石学最重要的判断：
+    <b>等轴晶系宝石各向同性</b>（无双折射、无多色性，如钻石、尖晶石、石榴石），其余晶系各向异性。
+  </div>
+
+  <h3><span class="badge lv2">进阶</span>2.3 晶体惯态、双晶与包裹体</h3>
+  <ul>
+    <li><b>晶体惯态</b>：钻石常见八面体、菱形十二面体；刚玉常见桶状/板状六方柱；祖母绿为六方柱；碧玺为三方柱带纵纹；尖晶石为八面体。习性本身就是肉眼鉴定线索。</li>
+    <li><b>双晶</b>：两个或以上同种晶体按对称关系连生。如尖晶石常见双晶（接触双晶），刚玉可见双晶，金绿宝石可见三连晶。双晶在显微镜下是重要产地证据。</li>
+    <li><b>包裹体（内含物）</b>：天然宝石的「身份证」。按相态分气、液、固三相；按成因分原生（先于主晶）、同生、后生。典型者：哥伦比亚祖母绿的三相包裹体（气+液+立方体食盐）、缅甸抹谷红宝石的「金红石针状包裹体 + 锆石晕」、克什米尔蓝宝石的「云雾状」、合成红宝石中的弧形生长纹与气泡、助熔剂法合成祖母绿的「助熔剂残余」（窗纱状、黄色羽状物）。</li>
+  </ul>
+
+  <h3><span class="badge lv2">进阶</span>2.4 宝石矿床成因类型</h3>
+  <table class="compact">
+    <tr><th>成因类型</th><th>形成环境</th><th>代表宝石</th></tr>
+    <tr><td>岩浆型（结晶分异）</td><td>基性–超基性岩浆冷却结晶</td><td>橄榄石、部分金刚石（金伯利岩筒）</td></tr>
+    <tr><td>伟晶岩型</td><td>岩浆晚期富挥发分残余熔浆</td><td>碧玺、托帕石、海蓝宝石、祖母绿</td></tr>
+    <tr><td>热液型</td><td>高温热液沿裂隙充填结晶</td><td>紫水晶、祖母绿（部分产地）、玛瑙</td></tr>
+    <tr><td>变质型</td><td>区域变质/接触变质</td><td>红宝石（大理岩型）、蓝晶石类、铁铝榴石</td></tr>
+    <tr><td>砂矿（次生）型</td><td>原生矿风化、河流搬运富集</td><td>斯里兰卡蓝宝石、缅甸抹谷红宝石、钻石砂矿</td></tr>
+    <tr><td>生物成因/沉积</td><td>生物作用或表生沉积</td><td>珍珠、珊瑚、琥珀、绿松石（淋滤沉积）</td></tr>
+  </table>
+
+  <h3><span class="badge lv3">精通</span>2.5 致色机理与致色离子</h3>
+  <p>宝石颜色来源于对可见光的选择性吸收，机制有四类：<b>过渡金属离子致色</b>（晶体场理论）、<b>电荷转移</b>（如蓝宝石 Fe²⁺–Ti⁴⁺ 电荷转移）、<b>色心致色</b>（辐照形成，如辐照黄水晶、蓝色托帕石）与<b>物理光学致色</b>（欧泊变彩、拉长石晕彩、珍珠光泽）。</p>
+  <table class="compact">
+    <tr><th>致色离子</th><th>常见颜色</th><th>代表宝石</th></tr>
+    <tr><td>Cr³⁺（铬）</td><td>红、绿</td><td>红宝石、祖母绿、变石、沙弗莱石、翠榴石</td></tr>
+    <tr><td>Fe²⁺ / Fe³⁺（铁）</td><td>蓝、黄、褐、绿</td><td>蓝宝石、海蓝宝石、橄榄石、金绿宝石</td></tr>
+    <tr><td>V³⁺（钒）</td><td>绿</td><td>部分祖母绿（赞比亚）、沙弗莱石、坦桑石</td></tr>
+    <tr><td>Mn²⁺（锰）</td><td>粉、橙、红</td><td>锰铝榴石、蔷薇辉石、摩根石、粉碧玺</td></tr>
+    <tr><td>Cu²⁺（铜）</td><td>蓝、绿</td><td>绿松石、孔雀石、蓝铜矿（青金石成分之一）</td></tr>
+    <tr><td>Ti⁴⁺（钛）</td><td>蓝</td><td>蓝宝石（与 Fe 共同致色）</td></tr>
+  </table>
+
+  <h3><span class="badge lv3">精通</span>2.6 同质多象与类质同象</h3>
+  <p><b>同质多象</b>：化学成分相同、晶体结构不同的现象。最经典的是碳的两种同质多象——<b>金刚石（等轴，sp³ 杂化，最硬）与石墨（六方，层状，最软）</b>；以及 SiO₂ 的石英、鳞石英、方石英三种同质多象；CaCO₃ 的方解石与文石。这也解释了「成分相同、价值天壤之别」的原因。<b>类质同象</b>：晶体结构中某种离子被性质相近的离子替代（如橄榄石中 Mg²⁺↔Fe²⁺、石榴石中 Mg/Fe/Mn/Ca 的替换），是同一宝石家族色彩与物性渐变的根源。</p>
+</section>
+<!-- ============ 第三章 宝石的物理性质 ============ -->
+<section class="chapter" id="ch3">
+  <div class="sec-head"><span class="no">第三章</span><h2>宝石的物理性质</h2><span class="en">PHYSICAL PROPERTIES</span></div>
+  <p>物理性质是宝石鉴定的「指纹」。一颗未知宝石的鉴定，本质上是把它的一系列物理性质与标准数据比对。本章按光学、力学、其他三类系统梳理。</p>
+
+  <h3><span class="badge lv1">入门</span>3.1 光学性质（一）：颜色、透明度与光泽</h3>
+  <h4>颜色与透明度</h4>
+  <p>颜色三要素为<b>色调</b>（红黄绿蓝等，如正红、微黄红）、<b>明度</b>（明暗程度）与<b>饱和度</b>（鲜艳纯净程度）。评价宝石颜色时追求「色调纯正、饱和度高、明度适中」。透明度按能否透光及成像清晰度分为透明、亚透明、半透明、微透明、不透明五级。</p>
+  <h4>光泽</h4>
+  <table class="compact">
+    <tr><th>光泽类型</th><th>特征</th><th>代表</th></tr>
+    <tr><td>金刚光泽</td><td>如钻石般耀眼明亮</td><td>钻石、锆石（高型）</td></tr>
+    <tr><td>玻璃光泽</td><td>如玻璃表面反光</td><td>大多数宝石：碧玺、水晶、祖母绿</td></tr>
+    <tr><td>油脂光泽</td><td>如油脂般温润反光</td><td>和田玉（籽料）、高品质翡翠</td></tr>
+    <tr><td>蜡状光泽</td><td>如蜡烛表面</td><td>绿松石、玉髓、玛瑙</td></tr>
+    <tr><td>珍珠光泽</td><td>珍珠表面特有的晕彩</td><td>珍珠</td></tr>
+    <tr><td>丝绢光泽</td><td>纤维状集合体反光</td><td>虎睛石、孔雀石纤维状者</td></tr>
+    <tr><td>树脂光泽</td><td>如树脂</td><td>琥珀</td></tr>
+  </table>
+
+  <h3><span class="badge lv2">进阶</span>3.2 光学性质（二）：折射率与双折射</h3>
+  <p><b>折射率（RI）</b>是光在真空与介质中速度之比，是宝石鉴定<b>最重要</b>的常数之一。用折射仪测定，读数精确到小数点后三位。</p>
+  <ul>
+    <li><b>各向同性体</b>（等轴晶系与非晶质）：只有一个折射率。如钻石 2.417、尖晶石 1.712–1.762、石榴石 1.71–1.89、琥珀 1.540、玻璃约 1.5–1.7。</li>
+    <li><b>各向异性体</b>：一轴晶有两个主折射率（No、Ne），二轴晶有三个（Ng、Nm、Np）。<b>双折射率（DR）＝最大与最小折射率之差</b>，是区分外观相似宝石的关键。</li>
+  </ul>
+  <table class="compact">
+    <tr><th>宝石</th><th>折射率</th><th>双折射率</th><th>光性</th></tr>
+    <tr><td>钻石</td><td>2.417（单值）</td><td>—</td><td>各向同性</td></tr>
+    <tr><td>刚玉（红/蓝宝石）</td><td>1.762–1.778（通常 1.76–1.77）</td><td>0.008–0.010</td><td>一轴负</td></tr>
+    <tr><td>祖母绿</td><td>1.577–1.583（通常 1.58）</td><td>0.005–0.009</td><td>一轴负</td></tr>
+    <tr><td>碧玺</td><td>1.624–1.644</td><td>0.014–0.021</td><td>一轴负</td></tr>
+    <tr><td>锆石（高型）</td><td>1.925–1.984</td><td>约 0.059</td><td>一轴正</td></tr>
+    <tr><td>坦桑石</td><td>1.691–1.700</td><td>0.006–0.018</td><td>二轴正</td></tr>
+    <tr><td>金绿宝石</td><td>1.744–1.758</td><td>约 0.009</td><td>二轴正</td></tr>
+    <tr><td>托帕石</td><td>1.609–1.637</td><td>0.008–0.010</td><td>二轴正</td></tr>
+    <tr><td>橄榄石</td><td>1.654–1.690</td><td>0.035–0.038</td><td>二轴正</td></tr>
+    <tr><td>石英（水晶）</td><td>1.544–1.553</td><td>0.009</td><td>一轴正</td></tr>
+  </table>
+  <div class="callout exam"><span class="tag">考试要点</span>
+    折射仪的使用限制：样品需具<b>抛光刻面</b>；折射率大于接触液（约 1.81）时无法读数（钻石 2.417 即超出范围，改用「反射/亮域」法或热导仪）；
+    双折射率大者在放大镜下可见刻面棱<b>重影</b>（如锆石、碧玺、橄榄石）——这是肉眼即可运用的强鉴定特征。
+  </div>
+
+  <h3><span class="badge lv2">进阶</span>3.3 光学性质（三）：色散、多色性与特殊光学效应</h3>
+  <p><b>色散</b>指材料对不同波长光的折射率差异，表现为白光分解为彩色光谱的能力，以 0.043 为参照（钻石 0.044 为「高色散」，火彩强的根本原因；锆石 0.039、翠榴石 0.057、合成金红石 0.28–0.33 极高，故仿钻火彩「过分艳丽」）。</p>
+  <p><b>多色性</b>：各向异性有色宝石在不同振动方向观察呈现不同颜色的现象。一轴晶为二色性，二轴晶为三色性。强多色性是红宝石（红/橙红）、蓝宝石（蓝/蓝绿）、碧玺（深浅双色）、坦桑石（紫/蓝/黄褐三色）、变石的典型鉴定特征，可用二色镜观察。</p>
+  <h4>特殊光学效应（价值倍增器）</h4>
+  <table class="compact">
+    <tr><th>效应</th><th>机理</th><th>代表宝石</th></tr>
+    <tr><td><b>猫眼效应</b></td><td>大量平行排列的针状/管状包裹体对光反射形成一条随宝石转动的亮带</td><td>金绿宝石猫眼（最名贵）、碧玺猫眼、磷灰石猫眼</td></tr>
+    <tr><td><b>星光效应</b></td><td>三组或六组针状包裹体按 120°/60° 排列，形成六射或四射星光</td><td>星光红宝石、星光蓝宝石</td></tr>
+    <tr><td><b>变彩效应</b></td><td>内部规则排列的 SiO₂ 球体对光衍射干涉</td><td>欧泊（贵欧泊）</td></tr>
+    <tr><td><b>变色效应</b></td><td>对不同波长光源吸收比不同（日光绿/灯光红）</td><td>变石（金绿宝石）、变色蓝宝石、变色石榴石</td></tr>
+    <tr><td><b>月光效应</b></td><td>两种长石层状交生对光散射形成的浮光</td><td>月光石（正长石/钠长石交生）</td></tr>
+    <tr><td><b>晕彩/砂金效应</b></td><td>页片状包裹体反光；包裹体反光闪烁</td><td>拉长石（晕彩）、日光石（砂金）</td></tr>
+  </table>
+
+  <h3><span class="badge lv2">进阶</span>3.4 力学性质：硬度、解理、断口、比重与韧性</h3>
+  <h4>硬度</h4>
+  <p><b>摩氏硬度</b>由 Friedrich Mohs 于 1812 年提出，是十种标准矿物的相对刻划序列：1 滑石 → 2 石膏 → 3 方解石 → 4 萤石 → 5 磷灰石 → 6 正长石 → 7 石英 → 8 黄玉（托帕石）→ 9 刚玉 → 10 金刚石。级间为<b>相对</b>序列，绝对硬度间隔并不均匀（刚玉到钻石的实际硬度跃升巨大）。生活参照：指甲约 2.5、铜币 3–4、钢刀 5.5、玻璃 6.5。</p>
+  <div class="callout warn"><span class="tag">注意</span>硬度测试属有损检测，仅限原石、不显眼处或已证实非宝石的样品上谨慎使用，成品首饰禁用。</div>
+  <h4>解理、断口与裂理</h4>
+  <ul>
+    <li><b>解理</b>：晶体沿内部格子弱面定向裂开的光滑平面。钻石 {111} 完全解理（八面体方向劈开，切磨时沿解理打小口「劈钻」）；托帕石 {001} 完全解理（一方向擦不掉的「珍珠光泽」解理面是鉴定特征）；祖母绿「花园」式的裂隙与其不完全解理相关。解理发育的宝石需防磕碰。</li>
+    <li><b>断口</b>：非定向破裂的断面形状。贝壳状断口见于钻石、石英、玻璃（玻璃仿品鉴定的关键之一）；参差状断口见于多数玉石。</li>
+    <li><b>裂理（parting）</b>：沿双晶面或内含物面产生的裂开，非所有晶体都有。</li>
+  </ul>
+  <h4>比重（相对密度）</h4>
+  <p>比重（SG）是 4 ℃ 时物质密度与水的密度之比，用静水力学法（天平水中称重）或比重液测定。<b>手感掂重</b>是快速筛查手段：同等体积下，钻石（3.52）明显重于托帕石（3.5 左右但折射率低）；锆石（4.6–4.7）手感沉重；琥珀（1.05–1.10）在饱和盐水中上浮，是最经典的琥珀鉴定法之一。常见参照：水晶 2.65、翡翠 3.34、红宝石 4.00、合成立方氧化锆 5.6–5.9、玻璃 2.3–4.5。</p>
+  <h4>韧性与脆性</h4>
+  <p>韧性指材料抵抗碎裂的能力，与硬度不相关。<b>和田玉韧性极高</b>（可雕极精细工艺），<b>翡翠韧性中高</b>，而祖母绿、钻石虽硬却较脆（解理发育），受撞击易裂。玉石界「韧」与宝石界「硬」是两个概念。</p>
+
+  <h3><span class="badge lv2">进阶</span>3.5 其他物理性质</h3>
+  <table class="compact">
+    <tr><th>性质</th><th>内容</th><th>鉴定应用</th></tr>
+    <tr><td>发光性</td><td>紫外荧光（LW/SW）、X 射线荧光、磷光</td><td>钻石荧光分级（蓝/黄/绿）；红宝石强红色荧光（与红色尖晶石区分）；某些处理品荧光异常</td></tr>
+    <tr><td>吸收光谱</td><td>连续光谱中因致色元素产生的吸收线/带</td><td>铬致色宝石（红宝石 694/693nm 双线）几乎全谱吸收；祖母绿 Cr 谱＋Fe 谱；锆石 653.5nm 特征线</td></tr>
+    <tr><td>导热性</td><td>钻石导热极快</td><td>热导仪区分钻石与仿钻（莫桑石需配合电导仪）</td></tr>
+    <tr><td>磁性/电学</td><td>少数含铁矿物具弱磁性；碧玺热电与压电性</td><td>磁性辅助鉴定；碧玺摩擦生电可吸附小纸屑（趣味演示）</td></tr>
+    <tr><td>熔点/化学稳定性</td><td>钻石 3550 ℃；碳酸盐类遇盐酸起泡</td><td>珍珠、珊瑚、孔雀石遇酸反应可鉴别</td></tr>
+    <tr><td>触感</td><td>导热快慢造成「凉感」差异</td><td>玉石温润、玻璃与钻石「抢凉」，辅助初判</td></tr>
+  </table>
+</section>
+<!-- ============ 第四章 宝石鉴定学 ============ -->
+<section class="chapter" id="ch4">
+  <div class="sec-head"><span class="no">第四章</span><h2>宝石鉴定学：方法与仪器</h2><span class="en">GEM IDENTIFICATION</span></div>
+  <p>宝石鉴定学是宝石学的应用核心：用一系列物理、化学与光学手段，确定宝石的<b>品种、是否天然、是否经过处理、是否合成或仿制</b>，并给出定名。鉴定必须遵循「<b>无损优先、先易后难、多点印证、综合判断</b>」十六字原则。</p>
+
+  <h3><span class="badge lv1">入门</span>4.1 标准鉴定流程</h3>
+  <div class="flow">
+    <span class="step">① 收样登记</span><span class="arr">→</span>
+    <span class="step">② 肉眼观察</span><span class="arr">→</span>
+    <span class="step">③ 放大检查</span><span class="arr">→</span>
+    <span class="step">④ 常规仪器</span><span class="arr">→</span>
+    <span class="step alt">⑤ 大型仪器确证</span><span class="arr">→</span>
+    <span class="step ghost">⑥ 出具结论</span>
+  </div>
+  <table class="compact">
+    <tr><th>环节</th><th>主要工具</th><th>目标信息</th></tr>
+    <tr><td>肉眼观察</td><td>肉眼、台灯、镊子</td><td>颜色、光泽、透明度、琢型、大小、明显瑕疵、拼合线</td></tr>
+    <tr><td>放大检查</td><td>10× 放大镜、宝石显微镜</td><td>外部特征（刻面质量、腰棱、抛光痕）与内部特征（包裹体、气泡、裂隙、双晶、生长纹）</td></tr>
+    <tr><td>常规仪器</td><td>折射仪、偏光镜、二色镜、分光镜、查氏镜、紫外灯、热导仪、天平/比重液、硬度笔</td><td>折射率、双折射、光性符号、多色性、吸收光谱、荧光、导热性、比重、硬度</td></tr>
+    <tr><td>大型仪器</td><td>红外光谱、拉曼光谱、XRF、LA-ICP-MS、阴极发光等</td><td>化学成分、结构、微量元素、处理与合成确证</td></tr>
+  </table>
+
+  <h3><span class="badge lv1">入门</span>4.2 肉眼观察与放大检查</h3>
+  <p><b>肉眼观察</b>：在自然光/白光灯下观察颜色是否自然均匀（染色品常见颜色富集于裂隙与孔洞）、光泽强弱（玻璃光泽→可能仿品）、琢型比例与对称性、腰棱处是否有粘合缝或涂层光泽差异。</p>
+  <p><b>放大检查</b>是鉴定的灵魂环节，宝石学家 80% 的判断来自显微镜观察：</p>
+  <ul>
+    <li><b>天然包裹体</b>：固态（金红石针、锆石晕、磷灰石、黄铁矿）、液态/气液态两相/三相包裹体，形态圆滑、分布随机；</li>
+    <li><b>生长结构</b>：焰熔法合成红宝石的<b>弧形生长纹与气泡</b>、水热法合成水晶的「面包屑状」包体、CVD 合成钻石的层状纹理；</li>
+    <li><b>处理痕迹</b>：祖母绿浸油后的「油晕」与闪炼效应、充填处理钻石的「闪光效应」（flash effect）、注胶翡翠表面的酸蚀网纹（「橘皮效应」与胶质感光泽）；</li>
+    <li><b>外部特征</b>：腰棱原始晶面、烧痕、抛光痕、双晶纹、镀膜脱落。</li>
+  </ul>
+
+  <h3><span class="badge lv2">进阶</span>4.3 折射仪</h3>
+  <p>原理基于全内反射：样品置于高折射率接触液（通常 1.81）上的半球形高铅玻璃测台，光线以临界角入射，在目镜中形成亮暗「阴影边界」，读出边界对应的折射率值。</p>
+  <ul>
+    <li><b>均质体</b>（钻石、尖晶石、石榴石、玻璃）：只有一条阴影边界，转动样品不变；</li>
+    <li><b>非均质体</b>：两条边界，大折射率与小折射率之差即双折射率；转动 360° 出现「一上一下」现象时可判断光性符号（Ne＞No 为一轴正）；</li>
+    <li><b>远视技术（点测法）</b>：适用于弧面型或小刻面，读数为近似值（如玛瑙 1.54 ±）；</li>
+    <li><b>局限</b>：折射率大于接触液的宝石（钻石 2.417、锆石 1.93–2.01）超出测量范围；多孔材料（欧泊、绿松石）会被液体污染。</li>
+  </ul>
+
+  <h3><span class="badge lv2">进阶</span>4.4 偏光镜与二色镜</h3>
+  <p><b>偏光镜</b>：正交偏光下转动样品，均质体全消光（钻石、尖晶石、石榴石、玻璃、琥珀），非均质体四明四暗（水晶、刚玉、碧玺）；异常消光（非均质体在某些方向全消光）提示应力或双晶，如「异常消光」的玻璃仿制品。锥光下可观察干涉图判断一轴/二轴晶。</p>
+  <p><b>二色镜</b>：利用方解石棱镜的双折射将两束偏振光分开并排显示，有颜色差异即存在多色性。红色刚玉呈红与橙红二色，是区分红宝石与红色尖晶石/石榴石（无多色性）的快捷手段。</p>
+
+  <h3><span class="badge lv2">进阶</span>4.5 分光镜与查尔斯滤色镜</h3>
+  <p><b>分光镜</b>观察吸收光谱：铬致色宝石（红宝石、祖母绿、变石、红尖晶石）在可见光区有特征的 Cr 吸收线（红宝石 694.2/692.8nm 荧光双线、紫区吸收带）；钴致色的蓝色玻璃/合成尖晶石显示三条典型吸收带（Co 谱），是「钴玻璃」的死刑证据；锆石 653.5nm 吸收线几乎见于所有锆石。</p>
+  <p><b>查尔斯滤色镜</b>：滤除大部分可见光仅通过深红与黄绿光。<b>经典应用</b>：某些含铬绿色宝石（祖母绿、部分合成祖母绿、染色绿玉髓）在其下呈红色，而多数天然绿色玉石不变色——注意它只是「筛查」工具而非判决工具（产地不同表现不一，需结合其他证据）。</p>
+
+  <h3><span class="badge lv2">进阶</span>4.6 紫外荧光灯与热导仪</h3>
+  <ul>
+    <li><b>紫外荧光灯</b>（长波 LW 365nm / 短波 SW 254nm）：钻石荧光呈蓝、黄、绿、橙等色（强度分级 None/Faint/Medium/Strong/Very Strong，GIA 证书亦载明）；红宝石与红色尖晶石常显强红色荧光，红色石榴石则荧光弱——三者由此可初步区分；某些充填物（环氧树脂）呈强蓝白色或黄绿色荧光，暴露处理痕迹。</li>
+    <li><b>热导仪</b>（钻石确认仪）：钻石导热率极高（≈1000–2000 W/m·K，仿品 10–400），接触即鸣叫。注意：<b>合成立方氧化锆导热率低</b>，而<b>莫桑石（碳化硅）导热率接近钻石</b>，需用电导仪（莫桑石具导电性）或反射仪进一步区分。</li>
+  </ul>
+
+  <h3><span class="badge lv3">精通</span>4.7 比重测定</h3>
+  <p><b>静水力学法（单盘/双盘天平法）</b>：空气中称重得 W，水中称重得 W′，则 SG = W / (W − W′)×ρ<sub>水</sub>。精度可达 0.01，是区分红宝石（4.00）与红色尖晶石（3.60）、玻璃仿品（3.15–4.2）的关键定量手段。<b>重液法</b>（二碘甲烷稀释液、克列里奇液）可快速圈定比重范围，仅用于原石或不显眼处。</p>
+  <p>经验性「手感掂重」可作初筛：同尺寸下钻石（3.52）＞水晶（2.65）；锆石（4.6–4.7）沉重压手；琥珀（1.05–1.10）轻若鸿毛，饱和盐水中上浮。</p>
+
+  <h3><span class="badge lv3">精通</span>4.8 大型仪器</h3>
+  <table class="compact">
+    <tr><th>仪器</th><th>原理</th><th>解决什么问题</th></tr>
+    <tr><td><b>傅里叶红外光谱 FTIR</b></td><td>分子键对红外光的特征吸收</td><td>处理鉴别的金标准：祖母绿浸油（2900cm⁻¹ 附近有机吸收峰）、充填钻石（2850/2920cm⁻¹ 环氧树脂峰）、翡翠 A/B 货（注胶的 2870/2960cm⁻¹ 峰；A 货仅 3370/3460 结构水峰）</td></tr>
+    <tr><td><b>拉曼光谱</b></td><td>非弹性散射</td><td>无损微区分析包裹体成分（判别「天然/合成」、识别充填物种类）</td></tr>
+    <tr><td><b>X 射线荧光 XRF</b></td><td>元素特征 X 射线</td><td>无损测主量/微量元素：判别 Be 扩散处理蓝宝石（Be 信号）、部分铅玻璃充填</td></tr>
+    <tr><td><b>LA-ICP-MS</b></td><td>激光剥蚀等离子体质谱</td><td>痕量元素指纹，用于<b>产地溯源</b>（红宝石、蓝宝石、祖母绿）</td></tr>
+    <tr><td><b>阴极发光 CL</b></td><td>电子束激发发光</td><td>区分天然与 HPHT 合成钻石的生长分区、辐照处理痕迹</td></tr>
+    <tr><td><b>UV-Vis 光谱</b></td><td>紫外–可见吸收</td><td>致色机理研究、辐照处理检测</td></tr>
+  </table>
+
+  <div class="callout exam"><span class="tag">考试要点</span>「快速鉴别三兄弟」：<b>红宝石 vs 红色尖晶石 vs 红色石榴石</b>——尖晶石等轴晶系无多色性、紫外下常发红色荧光；石榴石比重更高、常含针状包体。<b>钻石 vs 莫桑石 vs 合成立方氧化锆</b>——看腰部「重影」（莫桑石明显双折射刻面棱重影）、测电导（莫桑石导电）、掂重（合成立方氧化锆密度约为钻石 1.7 倍）。</div>
+</section>
+
+<!-- ============ 第五章 优化处理与合成鉴别 ============ -->
+<section class="chapter" id="ch5">
+  <div class="sec-head"><span class="no">第五章</span><h2>优化处理与合成宝石鉴别</h2><span class="en">TREATMENTS &amp; SYNTHETICS</span></div>
+  <p>市场上绝大多数彩色宝石都经过某种优化处理。鉴定学的当代使命，主要就是回答「天然还是处理」「天然还是合成」两大问题。</p>
+
+  <h3><span class="badge lv2">进阶</span>5.1 优化与处理的界定</h3>
+  <p>国际珠宝界（CIBJO/实验室指南）习惯将改善外观的方法分为：<b>优化（Enhancement）</b>——传统、广泛接受、稳定无害（如祖母绿浸油、玉石煮蜡、琥珀热处理）；<b>处理（Treatment）</b>——需明确披露（如染色、充填、覆膜、扩散、辐照、拼合）。我国国标（GB/T 16552《珠宝玉石 名称》）规定：经过优化处理的珠宝玉石应在名称后加注处理方法，如「红宝石（处理）」「翡翠（充填、染色）」。</p>
+
+  <h3><span class="badge lv2">进阶</span>5.2 常见处理方法与鉴别特征</h3>
+  <table>
+    <tr><th style="width:130px">处理方法</th><th>作用</th><th>鉴别特征</th></tr>
+    <tr><td><b>热处理</b></td><td>改善颜色与透明度（斯里兰卡蓝宝石「烧色」、坦桑石去褐增蓝、红宝石减丝增艳）</td><td>高温导致：包裹体熔融（浑圆状金红石、应力晕）、色带模糊/重结晶、硼酸钠熔剂包裹体、晶格畸变（异常消光）；FTIR 无有机物峰</td></tr>
+    <tr><td><b>浸油 / 充填</b></td><td>祖母绿裂隙浸有色/无色油改善净度；裂隙充填树脂、玻璃、铅玻璃</td><td>裂隙「闪光效应」、紫外下油/树脂的荧光（充填环氧树脂 2800–3000cm⁻¹ FTIR 峰）、铅玻璃充填的红宝石有「疣状」表面与铅元素 XRF 信号</td></tr>
+    <tr><td><b>染色</b></td><td>染料渗入裂隙（翡翠 C 货、大理岩染绿、蓝珀疑云、玛瑙染色）</td><td>颜色沿裂隙与颗粒间隙富集（查氏镜/放大可见「丝瓜瓤」状色形）、滤色镜变红、光谱出现染料宽吸收带、红外出现有机染料峰</td></tr>
+    <tr><td><b>覆膜</b></td><td>表面镀膜改色增亮（镀膜水晶、覆膜玻璃）</td><td>膜层异常光泽、棱线处颜色加深、脱落起皮、折射率异常、侧光可见干涉色</td></tr>
+    <tr><td><b>扩散处理</b></td><td>高温下致色元素渗入表层（Ti 扩散蓝宝石、Be 扩散蓝宝石/红宝石）</td><td>颜色仅分布于表层（浸油观察色层、二色镜异常）、Be 扩散使整体着色（需 XRF/LA-ICP-MS 检测铍元素）、棱线颜色富集</td></tr>
+    <tr><td><b>辐照</b></td><td>辐照改色（蓝色托帕石、辐照水晶、钻石改色）</td><td>色心不稳定（日光/加热部分褪色）、吸收光谱特征、热释光检测；GIA 对辐照钻石需披露</td></tr>
+    <tr><td><b>拼合</b></td><td>上下两片粘合，上部真材下部低价材料，或夹层染色</td><td>接合缝（放大可见胶层、气泡）、平行接合面的扁平气泡、上下部光性/折射率不一致、荧光分层</td></tr>
+  </table>
+
+  <h3><span class="badge lv3">精通</span>5.3 合成宝石的方法与识别</h3>
+  <table>
+    <tr><th>合成方法</th><th>原理</th><th>主要产品</th><th>典型内部特征</th></tr>
+    <tr><td><b>焰熔法（维尔纳叶法）</b></td><td>氢氧焰熔融粉末滴于种晶棒上提拉</td><td>合成红宝石、合成蓝宝石、合成尖晶石、合成金红石</td><td>弧形生长纹（弯曲色带）、球形气泡、未熔粉末</td></tr>
+    <tr><td><b>助熔剂法</b></td><td>助熔剂高温溶液中缓冷结晶</td><td>合成祖母绿（查塔姆、吉尔森）、合成红宝石</td><td>助熔剂残余（窗纱状、黄色羽状、六边形铂片）、籽晶片、两相包裹体</td></tr>
+    <tr><td><b>水热法</b></td><td>高压釜内过饱和热水溶液中结晶</td><td>合成水晶、合成祖母绿、合成红宝石</td><td>种晶片、「面包屑」状包体、平直生长带、平行管状气泡</td></tr>
+    <tr><td><b>CVD 法</b></td><td>化学气相沉积碳源生长</td><td>合成钻石（首饰级以 CVD 为主流之一）</td><td>层状生长纹、偏光下异常应力图案、无氮（IIa 型特征）、含石墨包裹体</td></tr>
+    <tr><td><b>HPHT 法</b></td><td>高温高压石墨+金属触媒转变</td><td>合成钻石、HPHT 处理褐色钻石改色</td><td>金属触媒包体（铁镍合金）、强磷光（HPHT 处理）、阴极发光生长分区平直</td></tr>
+  </table>
+  <div class="callout mnemonic"><span class="tag">速记口诀</span>
+    合成看三点：<b>「弧纹（焰熔）、熔剂（助熔剂）、种晶（水热/CVD）」</b>；处理看四点：
+    <b>「色沿裂隙走、光泽不自然、荧光露破绽、红外现原形」</b>。
+  </div>
+
+  <h3><span class="badge lv2">进阶</span>5.4 仿制宝石鉴别</h3>
+  <table class="compact">
+    <tr><th>仿品</th><th>关键鉴别点</th></tr>
+    <tr><td><b>玻璃</b></td><td>非晶质（偏光全消光）、内部气泡与旋涡纹、贝壳状断口、模压痕迹、导热差、RI 单一值约 1.48–1.70</td></tr>
+    <tr><td><b>合成立方氧化锆（CZ）</b></td><td>等轴、RI 2.16（超出折射仪范围）、SG 5.6–5.9（明显压手）、色散 0.060（火彩过分）、热导仪无反应</td></tr>
+    <tr><td><b>莫桑石（合成碳化硅）</b></td><td>RI 2.65–2.69、双折射 0.43（刻面棱重影极明显）、导热接近钻石但<b>导电</b>、色散 0.104 火彩强</td></tr>
+    <tr><td><b>钇铝榴石 YAG / 钆镓榴石 GGG</b></td><td>等轴高折射率、比重大（GGG 7.02 极压手）、硬度低（YAG 8.25 / GGG 6.5）易磨损、色散极高</td></tr>
+  </table>
+
+  <h3><span class="badge lv2">进阶</span>5.5 翡翠 A/B/C 货鉴别</h3>
+  <table class="compact">
+    <tr><th>类别</th><th>定义</th><th>鉴定要点</th></tr>
+    <tr><td><b>A 货</b></td><td>天然翡翠，未注胶、未染色（可含天然杂质与「棉」）</td><td>红外光谱仅见 3370/3460/3610cm⁻¹ 附近羟基结构水峰；颜色自然有色根；结构为天然交织结构</td></tr>
+    <tr><td><b>B 货</b></td><td>强酸浸泡去杂后注胶的「漂白充填」翡翠</td><td>表面酸蚀网纹（放大镜下「橘皮」粗糙感）、胶质感光泽、底色发黄发闷、紫外荧光（蓝白色）、FTIR 2870/2930cm⁻¹ 有机胶峰</td></tr>
+    <tr><td><b>C 货</b></td><td>人工染色翡翠</td><td>颜色浮于表面与裂隙、查氏镜下变红、吸收光谱染料宽带、FTIR 有机染料峰</td></tr>
+    <tr><td><b>B+C 货</b></td><td>既酸蚀充填又染色</td><td>兼具上述两类特征</td></tr>
+  </table>
+  <div class="callout danger"><span class="tag">陷阱警示</span>
+    「老坑」「新坑」指料子成因与产状，不代表处理与否；「高 B 货」「仿 A 货」是商家对强处理翡翠的淡化说法，本质仍是处理品。认准权威证书（NGTC、GIA、GRS 等）注明「翡翠 A 货 / 未经处理」方可安心。
+  </div>
+</section>
+<!-- ============ 第六章 珍贵宝石个论（上） ============ -->
+<section class="chapter" id="ch6">
+  <div class="sec-head"><span class="no">第六章</span><h2>珍贵宝石个论（上）</h2><span class="en">PRECIOUS GEMSTONES I</span></div>
+  <p>每颗宝石按「基本性质 → 品种与产地 → 优化处理 → 鉴定要点 → 鉴赏与市场」五段式展开。性质数据为常见范围，具体数值以检测为准。</p>
+
+  <!-- 钻石 -->
+  <div class="gem-card" id="diamond">
+    <div class="head"><h4>💎 钻石 Diamond</h4><span class="alias">金刚石 · 四月诞生石 · 宝石之王</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">C（碳）</div></div>
+        <div><div class="k">晶系</div><div class="v">等轴晶系</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">10（最硬）</div></div>
+        <div><div class="k">比重</div><div class="v">3.52（±0.01）</div></div>
+        <div><div class="k">折射率</div><div class="v">2.4175–2.4178</div></div>
+        <div><div class="k">色散</div><div class="v">0.044（高）</div></div>
+        <div><div class="k">解理</div><div class="v">{111} 完全解理</div></div>
+        <div><div class="k">光泽</div><div class="v">金刚光泽</div></div>
+      </div>
+      <p><b>基本性质</b>：钻石是碳在高温高压下形成的等轴晶系矿物，世界上最硬的天然物质。其高折射率（2.417）与高色散（0.044）赋予无与伦比的「火彩」；{111} 完全解理意味着「硬而脆」——切磨时沿解理劈开，佩戴时忌磕碰。钻石按含氮量分为 I a、I b（含氮）、II a（不含氮，极纯净，著名如「库利南」系列）、II b（含硼，具半导体导电性，常呈蓝色）。</p>
+      <p><b>4C 评价体系</b>（GIA 创立，全球通用）：</p>
+      <ul>
+        <li><b>克拉重量 Carat</b>：1 ct = 0.2 g = 100 分；同品质下价格随重量超平方级增长（「克拉溢价」）。</li>
+        <li><b>颜色 Color</b>：D–Z 分级，D 最白、Z 明显黄；&lt;1ct 可用比色石目视比色。</li>
+        <li><b>净度 Clarity</b>：FL/IF（无瑕/内无瑕）→ VVS1/VVS2 → VS1/VS2 → SI1/SI2 → I1/I2/I3；用 10× 放大镜评定。</li>
+        <li><b>切工 Cut</b>：唯一人工可控的因素，决定火彩；等级 Excellent→Poor，关注台宽比、冠角、亭深比、「八心八箭」等。</li>
+      </ul>
+      <p><b>优化处理与合成鉴别</b>：常见处理包括<b>激光钻孔</b>去包体、<b>裂隙充填</b>（flash effect 与 FTIR 2870/2930cm⁻¹ 峰）、<b>辐照/HPHT 改色</b>（需披露）。合成钻石分 HPHT 与 CVD 两类：HPHT 常见金属触媒包体、强磷光、平直生长分区；CVD 具层状生长纹、无氮型特征。实验室鉴定依赖<b>红外光谱 + 阴极发光 + 光致发光光谱（DiamondView/DiamondSure）</b>综合判断。仿品鉴别见 5.4 节。</p>
+      <div class="callout exam"><span class="tag">考试要点</span>钻石「四不」：不用折射仪直接读数（RI 2.417 超出接触液范围）｜不畏火烧（3550 ℃ 熔点，但含包裹体者会「烧伤」）｜不怕划刻（唯一能划伤它的只有另一颗钻石）｜不怕水洗（但忌油污与猛烈撞击。</div>
+    </div>
+  </div>
+
+  <!-- 红宝石 -->
+  <div class="gem-card" id="ruby">
+    <div class="head"><h4>❤️ 红宝石 Ruby</h4><span class="alias">刚玉变种 · 七月诞生石 · 宝石之王接班人</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">Al₂O₃ + Cr³⁺</div></div>
+        <div><div class="k">晶系</div><div class="v">三方晶系</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">9</div></div>
+        <div><div class="k">比重</div><div class="v">约 4.00</div></div>
+        <div><div class="k">折射率</div><div class="v">1.768–1.772 / 1.760–1.763</div></div>
+        <div><div class="k">双折射率</div><div class="v">0.008–0.010</div></div>
+        <div><div class="k">光性</div><div class="v">一轴负</div></div>
+        <div><div class="k">荧光</div><div class="v">强红色（LW 下尤显）</div></div>
+      </div>
+      <p><b>基本性质</b>：红宝石是含铬的红色刚玉（Cr³⁺ 致色），「鸽血红（Pigeon's Blood）」为顶级颜色——正红略带紫、饱和度高、荧光强。铬同时带来荧光与吸收光谱，也带来较多裂隙与包体，「十宝九裂」是常态，净度极高的红宝石反而稀有。</p>
+      <p><b>主要产地与特征</b>：缅甸抹谷（Mogok，鸽血红标杆，金红石针「丝状」包体、短而强荧光）、莫谷（Mong Hsu，1990 年代主力矿，常见蓝色核部与热历史）、莫桑比克（Montepuez，新世纪最大产区，颜色浓郁）、泰国/柬埔寨（加热处理历史久，颜色偏深褐红）、斯里兰卡（浅樱花红）、坦桑尼亚（Winza，2008 年后知名）、格陵兰等。不同产地微量元素指纹（LA-ICP-MS）是实验室产地溯源依据。</p>
+      <p><b>优化处理</b>：<b>热处理</b>极为普遍（减丝、增色、增净度），属「优化」；<b>铅玻璃充填</b>（裂缝多的莫桑比克料常见，需披露，查「闪光效应」与 XRF 铅信号）；<b>扩散处理</b>（表层着色）；<b>拼合</b>（少见）。合成红宝石自 1902 年维尔纳叶法起大量生产（弧形生长纹、球形气泡是铁证）。</p>
+      <p><b>鉴定要点</b>：与<b>红色尖晶石</b>（等轴、无多色性、RI 1.72、荧光亦强红）与<b>红色石榴石</b>（RI 1.74–1.78、含针状包体、荧光弱）区分——<b>二色镜看多色性、折射仪测双折射率</b>两步即可定性。</p>
+    </div>
+  </div>
+
+  <!-- 蓝宝石 -->
+  <div class="gem-card" id="sapphire">
+    <div class="head"><h4>💙 蓝宝石 Sapphire</h4><span class="alias">刚玉除红色外的所有颜色 · 九月诞生石</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">Al₂O₃ + Fe/Ti（蓝色）</div></div>
+        <div><div class="k">晶系</div><div class="v">三方晶系</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">9</div></div>
+        <div><div class="k">比重</div><div class="v">3.95–4.03</div></div>
+        <div><div class="k">折射率</div><div class="v">1.762–1.778</div></div>
+        <div><div class="k">多色性</div><div class="v">强（蓝/蓝绿）</div></div>
+        <div><div class="k">硬度/地位</div><div class="v">仅次于钻石的天然宝石</div></div>
+        <div><div class="k">特殊品种</div><div class="v">帕帕拉恰（粉橙）、黄色、紫色、绿色、变色蓝宝石</div></div>
+      </div>
+      <p><b>基本性质</b>：宝石级刚玉除红色外统称蓝宝石。最珍贵的蓝色由 Fe²⁺–Ti⁴⁺ <b>电荷转移</b>致色（矢车菊蓝 Cornflower Blue、皇家蓝 Royal Blue 为顶级色）。「帕帕拉恰（Padparadscha）」是斯里兰卡语的莲花色（粉橙至橙粉），产量稀少、价格可比肩优质红宝石。</p>
+      <p><b>主要产地</b>：克什米尔（1881 年起开采近 20 年，「矢车菊蓝」带丝绒感，绝矿传奇）、缅甸抹谷、斯里兰卡（鸽蓝与帕帕拉恰之乡）、马达加斯加（新世纪最大供应国之一）、泰国、澳大利亚（深蓝绿、产量大）、美国蒙大拿等。</p>
+      <p><b>优化处理与鉴别</b>：热处理（约 90% 市场蓝宝石经过，属优化）；<b>Ti 扩散</b>（表层蓝色，浸油可见色层）；<b>Be 扩散</b>（2010 年代起，可致整体黄/橙/粉红色，必须 XRF/LA-ICP-MS 检测）；铅玻璃充填（裂隙充填）。星光蓝宝石需六组针状包体定向排列，评价看星线是否明亮、居中、完整。</p>
+    </div>
+  </div>
+
+  <!-- 祖母绿 -->
+  <div class="gem-card" id="emerald">
+    <div class="head"><h4>💚 祖母绿 Emerald</h4><span class="alias">绿柱石之王 · 五月诞生石 · 绿色宝石之王</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">Be₃Al₂(SiO₃)₆，Cr/V 致色</div></div>
+        <div><div class="k">晶系</div><div class="v">六方晶系</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">7.5–8</div></div>
+        <div><div class="k">比重</div><div class="v">2.67–2.78</div></div>
+        <div><div class="k">折射率</div><div class="v">1.577–1.583</div></div>
+        <div><div class="k">双折射率</div><div class="v">0.005–0.009</div></div>
+        <div><div class="k">解理</div><div class="v">不完全（性脆多裂）</div></div>
+        <div><div class="k">紫外荧光</div><div class="v">多数弱–无</div></div>
+      </div>
+      <p><b>基本性质</b>：祖母绿是含铬（或钒）的绿色绿柱石，颜色从蓝绿到浓绿，「木佐绿（Muzo Green）」代表哥伦比亚顶级色。它「天生多裂多包体」——几乎不存在内部洁净的大颗祖母绿，因此行业对其净度极为宽容，裂隙中浸油（无色或有色）是<b>千年传统优化</b>。主要产地：哥伦比亚（Muzo、Chivor、Coscuez，三相包体为产地铁证）、赞比亚（Kafubu，颜色偏蓝绿、净度较高）、巴西、阿富汗（Panjsher，颜色极佳）、津巴布韦、俄罗斯等。</p>
+      <p><b>优化处理与鉴别</b>：浸油（雪松油/合成油/有色油， discloses 程度分 none/minor/moderate/significant，GIA 等证书会注明；FTIR 2900cm⁻¹ 附近有机峰判别）、树脂充填（强蓝白荧光）、拼合（双层石：上真下绿胶/浅绿绿柱石）。合成祖母绿（助熔剂法、水热法）需看助熔剂残余、籽晶片与生长带。仿品：绿色玻璃（气泡、旋涡纹）、铬钒钙铝榴石（沙弗莱，等轴无多色性、RI 1.74）、绿碧玺（DR 大、多色性强）、绿色萤石（硬度 4）。</p>
+      <div class="callout exam"><span class="tag">考试要点</span>祖母绿「三多」：多裂隙（浸油优化的传统根源）、多包体（三相包体辨哥伦比亚）、多优化（证书必读注油等级）。</div>
+    </div>
+  </div>
+
+  <!-- 金绿宝石 -->
+  <div class="gem-card" id="chrysoberyl">
+    <div class="head"><h4>🐱 金绿宝石 Chrysoberyl</h4><span class="alias">猫眼与变石之家 · 硬度 8.5 位列天然宝石第三</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">BeAl₂O₄</div></div>
+        <div><div class="k">晶系</div><div class="v">斜方晶系</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">8.5</div></div>
+        <div><div class="k">比重</div><div class="v">3.70–3.73</div></div>
+        <div><div class="k">折射率</div><div class="v">1.744–1.758</div></div>
+        <div><div class="k">双折射率</div><div class="v">约 0.009</div></div>
+        <div><div class="k">多色性</div><div class="v">三色性（红/黄橙/绿）</div></div>
+        <div><div class="k">解理</div><div class="v">{110} 明显</div></div>
+      </div>
+      <p><b>基本性质</b>：金绿宝石是铍铝氧化物，常见黄、黄绿、褐色，透明者有三色性。它拥有两大传奇品种：</p>
+      <ul>
+        <li><b>变石（Alexandrite）</b>：含 Cr，日光下呈绿色、白炽灯下呈紫红色——「白天的祖母绿、夜晚的红宝石」。1830 年发现于俄国乌拉尔（沙皇亚历山大二世命名）。优质大颗粒极为稀有，价格常超同重量优质红宝石。鉴别要点：变色效应 + Cr 吸收光谱（580/678nm 吸收带与 680nm 线）+ RI/SG。</li>
+        <li><b>猫眼（Cat's Eye）</b>：宝石内大量平行排列的针状/管状包裹体经弧面切割后，在点光源下呈现一条随石转动的活光带（猫眼效应）。优质猫眼要求：亮带细窄清晰、居中、随石灵活「开合」，颜色以蜜黄色（Honey）为贵。<b>只有金绿宝石猫眼可直称「猫眼石」</b>，其他具猫眼效应的宝石须在「猫眼」前冠以宝石名（如碧玺猫眼、磷灰石猫眼）。</li>
+      </ul>
+      <p>主要产地：斯里兰卡（猫眼与变石的传奇产地）、巴西米纳斯吉拉斯、俄罗斯乌拉尔（变石历史名坑）、印度、赞比亚、坦桑尼亚等。</p>
+    </div>
+  </div>
+
+  <!-- 尖晶石 -->
+  <div class="gem-card" id="spinel">
+    <div class="head"><h4>🧿 尖晶石 Spinel</h4><span class="alias">历史误认千年的「红色宝石」 · 绝地武士之名</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">MgAl₂O₄</div></div>
+        <div><div class="k">晶系</div><div class="v">等轴晶系</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">7.5–8</div></div>
+        <div><div class="k">比重</div><div class="v">3.54–3.63</div></div>
+        <div><div class="k">折射率</div><div class="v">1.712–1.762（单值）</div></div>
+        <div><div class="k">光泽</div><div class="v">明亮玻璃光泽</div></div>
+        <div><div class="k">解理</div><div class="v">不明显（八面体裂理）</div></div>
+        <div><div class="k">断口</div><div class="v">贝壳状</div></div>
+      </div>
+      <p><b>基本性质</b>：历史上著名的「黑王子红宝石」（英国王冠）与「铁木尔红宝石」实为红色尖晶石，可见其与红宝石的「千年误会」。尖晶石颜色丰富：绝地武士霓虹粉（缅甸纳米亚，「Jedi Spinel」）、热粉、钴蓝（Co 致色，与钴蓝玻璃谱不同）、灰蓝、紫、橙、黑。它<b>无解理、净度常高、光泽明亮、价格相对亲民</b>，是近年上升最快的收藏品类。</p>
+      <p><b>主要产地</b>：缅甸抹谷与纳米亚、塔吉克斯坦（Kul-i-Lal，历史著名大颗粒产地）、斯里兰卡、越南、坦桑尼亚（马亨盖热粉色尖晶石，2010 年代爆红）。<b>鉴别要点</b>：等轴晶系→无双折射、无多色性、偏光镜下全消光；内部常见八面体负晶与细针状包体；红色尖晶石在紫外下常发强红色荧光（可助与红宝石区分：红宝石荧光常更强且具 Cr 谱线）。</p>
+    </div>
+  </div>
+
+  <!-- 碧玺 -->
+  <div class="gem-card" id="tourmaline">
+    <div class="head"><h4>🌈 碧玺 Tourmaline</h4><span class="alias">电气石 · 十月诞生石 · 颜色最丰富的宝石</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">含硼铝硅酸盐（环状硅酸盐）</div></div>
+        <div><div class="k">晶系</div><div class="v">三方晶系</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">7–7.5</div></div>
+        <div><div class="k">比重</div><div class="v">3.06（+0.20/−0.06）</div></div>
+        <div><div class="k">折射率</div><div class="v">1.635–1.675 / 1.610–1.650</div></div>
+        <div><div class="k">双折射率</div><div class="v">0.014–0.021（可见重影）</div></div>
+        <div><div class="k">多色性</div><div class="v">强二色性</div></div>
+        <div><div class="k">热电/压电性</div><div class="v">摩擦生电（名称由来）</div></div>
+      </div>
+      <p><b>基本性质</b>：碧玺是成分复杂的硼铝硅酸盐族，色带覆盖整个可见光谱，同一晶体可出现多色甚至内红外绿的「西瓜碧玺」。名贵品种：<b>帕拉伊巴（Paraíba）</b>——1989 年巴西帕拉伊巴州发现，因 Cu+Mn 致色的霓虹蓝绿色（「霓虹蓝」），价格一克逾万元人民币；<b>卢比来（Rubellite）</b>——红色至粉红色碧玺，需与红宝石区分（折射率低得多、DR 大、二色性强）；铬碧玺（浓绿，Cr 致色）。</p>
+      <p><b>主要产地</b>：巴西（帕拉伊巴、各种彩色碧玺的主产地）、阿富汗（努里斯坦、Pechar 的帕拉伊巴色）、尼日利亚、莫桑比克（玫瑰色/帕拉伊巴色）、美国加州、缅甸、斯里兰卡。</p>
+      <p><b>鉴定要点</b>：DR 0.014–0.021 造成<b>刻面棱重影</b>（肉眼可辨）；平行 C 轴的管状/线状包体；强二色性（如绿色碧玺浅绿/深绿）；加热处理常见（浅色帕拉伊巴/卢比来常经热处理，属优化，FTIR 与包体变化辅助判别）；充填处理（裂隙注胶）需披露。</p>
+    </div>
+  </div>
+</section>
+<!-- ============ 第七章 常见宝石个论（下） ============ -->
+<section class="chapter" id="ch7">
+  <div class="sec-head"><span class="no">第七章</span><h2>常见宝石个论（下）</h2><span class="en">GEMSTONES II</span></div>
+
+  <!-- 石榴石 -->
+  <div class="gem-card" id="garnet">
+    <div class="head"><h4>🔴 石榴石 Garnet</h4><span class="alias">一月诞生石 · 一族六兄弟 · 沙弗莱与翠榴石之名</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">X₃Y₂(SiO₄)₃（类质同象族）</div></div>
+        <div><div class="k">晶系</div><div class="v">等轴晶系</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">6–7.5（依种而异）</div></div>
+        <div><div class="k">折射率</div><div class="v">1.71–1.94（依种而异）</div></div>
+        <div><div class="k">比重</div><div class="v">3.1–4.3（依种而异）</div></div>
+        <div><div class="k">光泽</div><div class="v">玻璃至树脂光泽</div></div>
+        <div><div class="k">解理</div><div class="v">无</div></div>
+        <div><div class="k">多色性</div><div class="v">无（等轴）</div></div>
+      </div>
+      <p><b>族内六大主力种</b>（成分不同导致物性梯度，正是鉴定与评价的依据）：</p>
+      <table class="compact">
+        <tr><th>品种</th><th>成分端元</th><th>颜色</th><th>RI</th><th>SG</th></tr>
+        <tr><td>镁铝榴石（Pyrope）</td><td>Mg₃Al₂</td><td>紫红、玫红</td><td>约 1.74</td><td>3.6–3.8</td></tr>
+        <tr><td>铁铝榴石（Almandine）</td><td>Fe₃Al₂</td><td>红、褐红</td><td>约 1.79</td><td>3.8–4.2</td></tr>
+        <tr><td>锰铝榴石（Spessartine）</td><td>Mn₃Al₂</td><td>橙、橙红、蜜糖色</td><td>约 1.81</td><td>4.12–4.20</td></tr>
+        <tr><td>钙铝榴石（Grossular）</td><td>Ca₃Al₂</td><td>绿（沙弗莱）、橙（芬达）、黄、无色</td><td>1.73–1.76</td><td>3.57–3.73</td></tr>
+        <tr><td>钙铁榴石（Andradite）</td><td>Ca₃Fe₂</td><td>绿（翠榴石）、黄、黑（黄榴石）</td><td>1.89（极高）</td><td>3.7–3.9</td></tr>
+        <tr><td>钙铬榴石（Uvarovite）</td><td>Ca₃Cr₂</td><td>浓绿（晶体极小）</td><td>约 1.86</td><td>3.7–3.9</td></tr>
+      </table>
+      <p><b>名品</b>：<b>沙弗莱石（Tsavorite）</b>——钙铝榴石含 Cr/V 的浓绿品种，1960 年代发现于肯尼亚察沃（Tsavo），1974 年由 Tiffany 命名，色艳、洁净、稀少，近年涨幅可观；<b>翠榴石（Demantoid）</b>——钙铁榴石，色散 0.057 火彩强过钻石，俄罗斯乌拉尔产者具标志性「马尾状（Horsetail）」包体；<b>锰铝榴石「芬达石（Mandarin Garnet）」</b>。</p>
+      <p><b>鉴定要点</b>：等轴晶系→无双折射、无多色性；RI 随种变化极大，测 RI 可区分「红色石榴石 vs 红宝石 vs 尖晶石」；常见针状、浑圆状包体（铁铝榴石）；与玻璃区别：石榴石内部干净无气泡、导热低于玻璃。</p>
+    </div>
+  </div>
+
+  <!-- 坦桑石 -->
+  <div class="gem-card" id="tanzanite">
+    <div class="head"><h4>🔮 坦桑石 Tanzanite</h4><span class="alias">黝帘石变种 · 十二月诞生石 · 非洲独有的蓝紫精灵</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">Ca₂Al₃(SiO₄)(Si₂O₇)O(OH)（含 Cr/Sr）</div></div>
+        <div><div class="k">晶系</div><div class="v">斜方晶系</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">6.5–7</div></div>
+        <div><div class="k">比重</div><div class="v">3.35</div></div>
+        <div><div class="k">折射率</div><div class="v">1.691–1.700</div></div>
+        <div><div class="k">双折射率</div><div class="v">0.006–0.018</div></div>
+        <div><div class="k">多色性</div><div class="v">强三色性（紫/蓝/黄褐）</div></div>
+        <div><div class="k">解理</div><div class="v">{010} 完全，{100} 不完全</div></div>
+      </div>
+      <p><b>基本性质</b>：1967 年由 Manuel de Souza 发现于坦桑尼亚阿鲁沙马里兰尼矿山，Tiffany 命名为「Tanzanite」并推向世界，成为二十世纪最著名的新宝石之一。原石常带褐色调，需<b>热处理</b>去褐增蓝（属优化），处理后呈诱人的蓝紫色。三色性显著——转动宝石可见紫、蓝、黄褐交替，是肉眼级鉴定特征。具 {010} 完全解理，加工镶嵌需防磕碰。全球<b>唯一产地</b>为坦桑尼亚（Manyara 区），矿区仅约 20 km²，资源趋于枯竭，价格逐年上行。</p>
+      <p><b>鉴别要点</b>：RI 1.69–1.70 介于蓝宝石（1.76+）与堇青石（1.54）之间；三色性；与<b>蓝宝石</b>区别看 RI 与多色性颜色组合；与<b>堇青石</b>（Iolite，RI 1.54）区别明显；与<b>蓝色玻璃</b>区别：玻璃无三色性、有气泡。注意：常见以蓝色玻璃或蓝色合成立方氧化锆仿坦桑石。</p>
+    </div>
+  </div>
+
+  <!-- 欧泊 -->
+  <div class="gem-card" id="opal">
+    <div class="head"><h4>🎆 欧泊 Opal</h4><span class="alias">蛋白石 · 十月诞生石 · 凝固的彩虹</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">SiO₂·nH₂O（含 3–10% 水）</div></div>
+        <div><div class="k">晶系</div><div class="v">非晶质体</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">5.5–6.5</div></div>
+        <div><div class="k">比重</div><div class="v">2.15（+0.08/−0.09）</div></div>
+        <div><div class="k">折射率</div><div class="v">1.450（+0.020/−0.080）</div></div>
+        <div><div class="k">光泽</div><div class="v">玻璃至蜡状</div></div>
+        <div><div class="k">多色性</div><div class="v">无</div></div>
+        <div><div class="k">特殊效应</div><div class="v">变彩（贵欧泊）</div></div>
+      </div>
+      <p><b>基本性质</b>：欧泊的美来自内部规则排列的 SiO₂ 球体对白光的<b>衍射与干涉</b>（变彩效应），球体大小决定彩斑色调（小球偏蓝、大球偏红）。品种按体色与透明度分：白欧泊（Lightning Ridge 以外澳洲产地多见）、黑欧泊（闪电岭 Lightning Ridge 最名贵，黑底衬托变彩最艳丽）、砾石欧泊（带母岩）、水晶欧泊（透明）。「贵欧泊」以变彩面积大、色彩齐全（红越多越贵）、转动时彩斑流动为佳。</p>
+      <p><b>主要产地</b>：澳大利亚（占世界产量 95% 以上，闪电岭黑欧泊、库伯佩地白欧泊）、埃塞俄比亚（Welo，近年兴盛，部分亲水易裂）、墨西哥（火欧泊，透明橙红色）。</p>
+      <div class="callout danger"><span class="tag">陷阱警示</span>
+        欧泊<b>怕干怕热</b>：失水会产生「裂隙化（crazing）」，避免暴晒、暖气与超声波清洗；黑欧泊与火欧泊仿品有玻璃、塑料与拼合欧泊（二层石/三层石，接合缝可见气泡层）。埃塞俄比亚某些「水欧泊」吸水后变彩消失，需谨慎。
+      </div>
+    </div>
+  </div>
+
+  <!-- 锆石 -->
+  <div class="gem-card" id="zircon">
+    <div class="head"><h4>💠 锆石 Zircon</h4><span class="alias">十二月诞生石 · 高型锆的钻石平替</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">ZrSiO₄（硅酸锆）</div></div>
+        <div><div class="k">晶系</div><div class="v">四方晶系</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">6–7.5</div></div>
+        <div><div class="k">比重</div><div class="v">4.6–4.7</div></div>
+        <div><div class="k">折射率</div><div class="v">高型 1.925–1.984 / 低型 1.78–1.815</div></div>
+        <div><div class="k">双折射率</div><div class="v">高型约 0.059（重影显著）</div></div>
+        <div><div class="k">色散</div><div class="v">0.039（强）</div></div>
+        <div><div class="k">吸收光谱</div><div class="v">653.5nm 特征线（几乎所有锆石）</div></div>
+      </div>
+      <p><b>基本性质</b>：锆石按辐射损伤程度分为高型（High，结晶好、RI 高、火彩强）、中型（Medium）、低型（Low，近非晶质、RI 低、不透明）。蓝色锆石多为<b>热处理</b>柬埔寨/斯里兰卡褐色锆石所得。高型锆石火彩接近钻石、色散 0.039，是经典仿钻之一，但硬度仅 6–7.5，棱线易磨损「起毛」，且 DR 0.059 造成的<b>刻面棱双影</b>一眼可辨。</p>
+      <p><b>主要产地</b>：柬埔寨–越南交界（Ratanakiri，蓝色热处理中心）、斯里兰卡、缅甸、澳大利亚（最古老锆石，44 亿年，Jack Hills）。</p>
+      <p><b>鉴定要点</b>：RI 1.93–2.01（高型）超出普通接触液上限，用「大折射率估读」或反射法；653.5nm 吸收线 + 双影 + 手感沉重（SG 4.7）组合几乎不会误判；与钻石区分：钻石硬度 10、无重影、SG 3.52。</p>
+    </div>
+  </div>
+
+  <!-- 橄榄石 -->
+  <div class="gem-card" id="peridot">
+    <div class="head"><h4>🫒 橄榄石 Peridot</h4><span class="alias">八月诞生石 · 太阳宝石 · 地幔来客</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">(Mg,Fe)₂SiO₄</div></div>
+        <div><div class="k">晶系</div><div class="v">斜方晶系</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">6.5–7</div></div>
+        <div><div class="k">比重</div><div class="v">3.32–3.37</div></div>
+        <div><div class="k">折射率</div><div class="v">1.654–1.690</div></div>
+        <div><div class="k">双折射率</div><div class="v">0.035–0.038（大）</div></div>
+        <div><div class="k">多色性</div><div class="v">弱</div></div>
+        <div><div class="k">内部特征</div><div class="v">「睡莲叶（水百合叶）」状包体</div></div>
+      </div>
+      <p><b>基本性质</b>：橄榄石是镁铁硅酸盐，颜色为特征的黄绿至草绿色（Fe²⁺ 致色，铁含量越高颜色越深）。最著名特征为<b>双折射率大（0.036–0.038）</b>，放大镜下常见刻面棱<b>重影</b>与包裹体周围「水百合叶」状应力纹。它形成于地幔深处，随玄武岩喷发带到地表，也见于陨石中（宇宙来源的浪漫卖点）。</p>
+      <p><b>主要产地</b>：埃及扎巴贾德岛（红海，古称「托帕石」之源，3000 余年开采史）、缅甸抹谷（大颗粒优质料）、美国亚利桑那（San Carlos，世界最大供应）、巴基斯坦（Kashmir 高山料）、中国河北张家口、吉林蛟河。</p>
+      <p><b>鉴定要点</b>：DR 大 + 睡莲叶包体 + 典型黄绿色；仿品少见，偶见玻璃（有气泡）与绿色碧玺（DR 与多色性不同）。橄榄石遇酸缓慢反应，忌酸性与超声波清洗。</p>
+    </div>
+  </div>
+
+  <!-- 托帕石 -->
+  <div class="gem-card" id="topaz">
+    <div class="head"><h4>🧡 托帕石 Topaz</h4><span class="alias">黄玉 · 十一月诞生石 · 巴西特产 · 「帝国蓝」之名</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">Al₂SiO₄(F,OH)₂</div></div>
+        <div><div class="k">晶系</div><div class="v">斜方晶系</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">8</div></div>
+        <div><div class="k">比重</div><div class="v">3.49–3.57</div></div>
+        <div><div class="k">折射率</div><div class="v">1.609–1.637</div></div>
+        <div><div class="k">双折射率</div><div class="v">0.008–0.010</div></div>
+        <div><div class="k">解理</div><div class="v">{001} 完全解理（一方向）</div></div>
+        <div><div class="k">光泽</div><div class="v">玻璃光泽</div></div>
+      </div>
+      <p><b>基本性质</b>：托帕石（topaz，旧称「黄玉」——注意与「黄色玉石」完全不是一回事）颜色以无色、蓝色（辐照+热处理「伦敦蓝/瑞士蓝/帝国蓝」）、黄色（雪莉色，最珍贵）、橙粉（帝王托帕石，最稀有）、褐色为主。<b>{001} 一组完全解理</b>是其软肋：加工时台面必须与解理面成 5° 以上夹角，否则镶嵌压力可致裂开；佩戴时忌磕碰。巴西米纳斯吉拉斯是帝王托帕石的几乎唯一来源。</p>
+      <p><b>主要产地</b>：巴西（紫罗兰色/蓝色/帝王托帕石）、俄罗斯乌拉尔（历史名坑，粉红/雪莉色）、巴基斯坦、斯里兰卡、尼日利亚、美国犹他（州宝石）、墨西哥。</p>
+      <p><b>鉴定要点</b>：RI 1.61–1.64 与 SG 3.5 的组合、单一方向完全解理面（擦痕状、珍珠光泽）、蓝色托帕石在查氏镜下常呈灰绿、紫外下蓝色者无荧光（辐照蓝色者加热褪色）；与海蓝宝石区别看 RI（海蓝宝 1.58）与 SG（2.7）。</p>
+    </div>
+  </div>
+
+  <!-- 水晶/石英族 -->
+  <div class="gem-card" id="quartz">
+    <div class="head"><h4>🔮 水晶（石英族）Quartz</h4><span class="alias">SiO₂ · 地壳第二多矿物 · 水晶家族人丁兴旺</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">SiO₂</div></div>
+        <div><div class="k">晶系</div><div class="v">三方晶系（α-石英）</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">7</div></div>
+        <div><div class="k">比重</div><div class="v">2.65</div></div>
+        <div><div class="k">折射率</div><div class="v">1.544–1.553</div></div>
+        <div><div class="k">双折射率</div><div class="v">0.009</div></div>
+        <div><div class="k">光性</div><div class="v">一轴正</div></div>
+        <div><div class="k">断口</div><div class="v">贝壳状</div></div>
+      </div>
+      <p><b>品种谱系</b>（按颜色与结构）：</p>
+      <ul>
+        <li><b>水晶（Rock Crystal）</b>：无色透明，古称「水玉」「水精」；</li>
+        <li><b>紫水晶（Amethyst）</b>：Fe³⁺ 空穴心致色，加热至约 450–500 ℃ 可转变为黄水晶（商业上常见的「热处理黄水晶」来源）；</li>
+        <li><b>黄水晶（Citrine）</b>：天然稀少，多为紫晶热处理；</li>
+        <li><b>烟晶/茶晶（Smoky）</b>：辐照色心致色，加热褪色；<b>墨晶</b>近黑；</li>
+        <li><b>发晶/水晶簇</b>：含针状金红石、阳起石、电气石等「发丝」；</li>
+        <li><b>芙蓉石（蔷薇石英）</b>：粉红色，半透明，部分含星彩；</li>
+        <li><b>石英猫眼/星光石英</b>：纤维状石英的猫眼与星光；</li>
+        <li><b>玉髓与玛瑙（Chalcedony &amp; Agate）</b>：隐晶质石英集合体，玛瑙具条带纹；绿玉髓（Chrysoprase，镍致色）、红玉髓、血滴石（Bloodstone）等；<b>染色玛瑙与玉髓极常见</b>（色沿裂隙与条带富集，需披露）。</li>
+      </ul>
+      <p><b>鉴定要点</b>：RI 1.544–1.553、SG 2.65、一轴正、贝壳状断口、常见「气液两相」包体与负晶；<b>合成水晶（水热法）</b>可见种晶片、「面包屑」包体与平直生长带；玻璃仿品凭气泡与旋涡纹区分。</p>
+    </div>
+  </div>
+
+  <!-- 长石族 -->
+  <div class="gem-card" id="feldspar">
+    <div class="head"><h4>🌙 月光石 / 日光石 / 拉长石（长石族）</h4><span class="alias">Feldspar · 月光效应的故乡</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">钾/钠/钙铝硅酸盐</div></div>
+        <div><div class="k">晶系</div><div class="v">单斜（正长石）或三斜（斜长石）</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">6–6.5</div></div>
+        <div><div class="k">比重</div><div class="v">2.55–2.72</div></div>
+        <div><div class="k">折射率</div><div class="v">月光石 1.518–1.526；拉长石 1.559–1.573</div></div>
+        <div><div class="k">解理</div><div class="v">两组近直交完全解理</div></div>
+        <div><div class="k">特殊效应</div><div class="v">月光效应 / 砂金效应 / 晕彩</div></div>
+      </div>
+      <ul>
+        <li><b>月光石（Moonstone）</b>：正长石（KAlSi₃O₈）与钠长石（NaAlSi₃O₈）层状交生，对光散射形成浮动的蓝白色「月光」。以斯里兰卡（Gala）最著名，要求月光明亮、居中、体色透明少瑕。印度的「彩虹月光石」为长石与石英的交生岩。</li>
+        <li><b>日光石（Sunstone）</b>：含片状赤铁矿/针铁矿包体，产生金黄色闪烁的<b>砂金效应</b>，俄勒冈（美国州宝石）与挪威、印度产著名。</li>
+        <li><b>拉长石（Labradorite）</b>：斜长石（An 50–70%），转动时可见蓝、绿、金等<b>晕彩</b>（光谱色源于内部层状结构对光的干涉），芬兰、加拿大拉布拉多、马达加斯加产。</li>
+        <li><b>天河石（Amazonite）</b>：蓝绿色微斜长石，俄罗斯、美国科罗拉多、巴西产。</li>
+      </ul>
+      <p><b>鉴定要点</b>：长石族硬度低（6–6.5）且两组解理发育，需防撞击；月光石仿品少见，偶见塑料与玻璃仿「彩月光」（放大可见气泡与完全平坦的色带）。</p>
+    </div>
+  </div>
+
+  <!-- 其他流行宝石 -->
+  <div class="gem-card" id="popular">
+    <div class="head"><h4>✨ 其他流行彩色宝石速览</h4><span class="alias">市场热点宝石速查</span></div>
+    <div class="body">
+      <table class="compact">
+        <tr><th>宝石</th><th>要点</th><th>速记</th></tr>
+        <tr><td><b>海蓝宝石</b>（Aquamarine，绿柱石）</td><td>Fe²⁺ 致色，天蓝至海蓝；H7.5–8，SG 2.68–2.74，RI 1.577–1.583；常净度极高、颗粒大；巴西圣玛丽亚（Santa Maria）色最贵；常见热处理（优化）</td><td>绿柱石家族的老三，「圣玛丽亚蓝」是顶色</td></tr>
+        <tr><td><b>摩根石</b>（Morganite，绿柱石）</td><td>Mn 致粉橙至粉色，2010 年代走红；大颗粒常见；常经热处理优化</td><td>粉色绿柱石，Tiffany 以摩根命名</td></tr>
+        <tr><td><b>帕拉伊巴碧玺</b></td><td>Cu/Mn 致色的霓虹蓝绿；1989 年巴西 Paraíba 发现；尼日利亚、莫桑比克亦产同色系；价格碧玺之首</td><td>「碧玺中的霓虹灯」</td></tr>
+        <tr><td><b>沙弗莱石</b>（详见石榴石节）</td><td>钙铝榴石，Cr/V 致浓绿；高折射率、火彩强；颗粒多＜3ct</td><td>「绿宝石界后起之秀」</td></tr>
+        <tr><td><b>亚历山大变石猫眼</b></td><td>兼具变色与猫眼，产量极稀</td><td>金绿宝石家族的双料传奇</td></tr>
+        <tr><td><b>蓝色磷灰石 / 帕拉伊巴磷灰石</b></td><td>H5，软；霓虹蓝绿色酷似帕拉伊巴碧玺但便宜得多</td><td>硬度低是硬伤，只宜吊坠</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+<!-- ============ 第八章 玉石篇 ============ -->
+<section class="chapter" id="ch8">
+  <div class="sec-head"><span class="no">第八章</span><h2>玉石篇：翡翠与软玉</h2><span class="en">JADE &amp; ORNAMENTAL STONES</span></div>
+  <p>玉石是矿物集合体或岩石，以<b>质地细腻、坚韧、温润</b>为核心审美，与单晶宝石的审美体系并行。中国玉石文化以「和田玉（软玉）」与「翡翠（硬玉）」为双璧，另有「四大名玉」及绿松石、青金石等。</p>
+
+  <!-- 翡翠 -->
+  <div class="gem-card" id="jadeite">
+    <div class="head"><h4>🟢 翡翠 Jadeite</h4><span class="alias">硬玉 · 玉石之王 · 「东方之宝」</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">NaAlSi₂O₆（硬玉，辉石族）</div></div>
+        <div><div class="k">晶系</div><div class="v">单斜晶系（显微晶质集合体）</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">6.5–7</div></div>
+        <div><div class="k">比重</div><div class="v">3.30–3.36（通常 3.34）</div></div>
+        <div><div class="k">折射率</div><div class="v">1.666–1.680（点测约 1.66）</div></div>
+        <div><div class="k">光泽</div><div class="v">玻璃至油脂光泽</div></div>
+        <div><div class="k">解理</div><div class="v">{110} 完全（显微）</div></div>
+        <div><div class="k">结构</div><div class="v">纤维交织结构</div></div>
+      </div>
+      <h4>颜色与「种水地」</h4>
+      <p>翡翠颜色分<b>绿色</b>（Cr³⁺ 致色，帝王绿、正阳绿、苹果绿、油青）、<b>紫色（春）</b>（Mn，紫罗兰）、<b>红色（翡）</b>、<b>黄色（翡）</b>（次生氧化铁浸染）、<b>白色（无色）</b>、<b>黑色</b>（墨翠，绿辉石质）等。评价行话体系：</p>
+      <ul>
+        <li><b>种</b>：晶体粗细与致密程度——玻璃种＞冰种＞冰糯（糯冰）＞糯种＞豆种＞瓷种；</li>
+        <li><b>水（水头）</b>：透明度，一分水至十分水；</li>
+        <li><b>地（底）</b>：质地的干净、均匀与细腻程度（「底子」）；</li>
+        <li><b>工</b>：雕刻设计与工艺；「好料不工」指顶级料以素面示人。</li>
+      </ul>
+      <h4>主要产地</h4>
+      <p>缅甸帕敢（Hpakant）等场口是商业翡翠几乎唯一来源（危地马拉 Malacates 亦产「危料」，颜色偏蓝灰、多棉，价值通常低于缅料；日本、俄罗斯、哈萨克斯坦有少量产出）。「老坑料」指河床沉积、风化充分、水头好的料；「新坑料」多指原生矿脉料。著名场口：帕敢、后江、莫西沙、木那（雪花棉）、会卡、南奇等。</p>
+      <h4>处理与鉴别（A/B/C 货）</h4>
+      <p>见 5.5 节。天然翡翠（A 货）的 FTIR 只有结构水峰，放大可见天然交织结构、色根、苍蝇翅（硬玉解理面的片状闪光）；B 货表面酸蚀网纹、胶感光泽、树脂荧光；C 货颜色沿粒隙与裂隙呈丝网状分布。近年还有<b>「危料」冒充缅料</b>、<b>「薄水料」广片</b>（薄片封底增绿）与<b>拼合薄片翡翠</b>等新陷阱。</p>
+      <div class="callout mnemonic"><span class="tag">速记口诀</span>翡翠评价十六字：<b>「色正、种老、水足、地净、工精、形好、瑕少、稀有」</b>；鉴定抓三点：<b>色根（天然色有形）、结构（交织）、光谱（无胶峰）</b>。</div>
+    </div>
+  </div>
+
+  <!-- 和田玉 -->
+  <div class="gem-card" id="nephrite">
+    <div class="head"><h4>⚪ 和田玉 Nephrite（软玉）</h4><span class="alias">国玉 · 透闪石玉 · 羊脂白玉之乡</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">Ca₂(Mg,Fe)₅Si₈O₂₂(OH)₂（透闪石–阳起石）</div></div>
+        <div><div class="k">晶系</div><div class="v">单斜晶系（纤维状集合体）</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">6–6.5</div></div>
+        <div><div class="k">比重</div><div class="v">2.95–3.17</div></div>
+        <div><div class="k">折射率</div><div class="v">约 1.606–1.632</div></div>
+        <div><div class="k">光泽</div><div class="v">油脂光泽（标志性）</div></div>
+        <div><div class="k">韧性</div><div class="v">极高（玉石之最）</div></div>
+        <div><div class="k">结构</div><div class="v">纤维交织（毛毡状）</div></div>
+      </div>
+      <p><b>基本性质</b>：和田玉是透闪石（Ca₂Mg₅Si₈O₂₂(OH)₂）为主、含少量阳起石的纤维交织集合体。其「温润如油脂」的光泽源于极细的纤维交织结构对光的漫反射。韧性极高，可琢极细工艺，「玉不琢不成器」正言其可工性。</p>
+      <p><b>产状与品种</b>：<b>籽料</b>（河床中经千万年冲刷，带汗毛孔与皮色，最珍贵）、<b>山流水</b>（残坡积/短距离搬运）、<b>山料</b>（原生矿，俄罗斯、青海、韩国、加拿大均有产出，价值通常籽料＞山流水＞山料）、<b>戈壁料</b>（风蚀表面）。颜色品种：羊脂白（顶级）、白玉、青白玉、青玉、碧玉（Cr/V 致色，俄罗斯七号坑菠菜绿著名）、墨玉、黄玉/黄口、糖玉（褐铁矿浸染）、翠青（青海特色）。</p>
+      <p><b>主要产地</b>：新疆和田（玉龙喀什河、喀拉喀什河籽料；且末、若羌、于田山料）、俄罗斯（俄料白而「僵」）、青海（昆仑玉，水头足、常偏灰）、韩国（春川）、加拿大（碧玉）、新西兰（毛利玉）。</p>
+      <p><b>优化处理与鉴别</b>：<b>煮蜡</b>（浸蜡，传统优化）；<b>染色</b>（假皮、假沁色，颜色浮于表面）；<b>滚筒磨料+染色仿籽料</b>（「籽料」批量伪造：滚圆磨光＋人工皮色，查汗毛孔是否自然、皮色是否「浮」、表面是否有机械滚磨痕）；<b>广义「冒充玉」</b>：石英岩玉（京白玉、阿富汗玉＝方解石玉、岫玉）、玻璃仿玉（气泡、旋涡纹）。鉴别核心是<b>油脂光泽、纤维结构（打灯看「毛毡」）、油脂感掂重、折射率 1.61 ±</b>。</p>
+      <div class="callout warn"><span class="tag">注意</span>「和田玉」现为国标意义上的<b>产地概念泛化</b>名称——只要成分为透闪石的软玉，无论产于新疆、俄罗斯、青海、韩国或加拿大，均可出具「和田玉」证书；市场语境中的「和田玉」多特指新疆料，交易时务必问清具体产地与证书。</div>
+    </div>
+  </div>
+
+  <!-- 其他玉石 -->
+  <div class="gem-card" id="other-jades">
+    <div class="head"><h4>🟤 其他重要玉石与图章石</h4><span class="alias">四大名玉 · 绿松石 · 青金石 · 寿山石</span></div>
+    <div class="body">
+      <table>
+        <tr><th style="width:120px">玉种</th><th>成分与基本性质</th><th>要点</th></tr>
+        <tr><td><b>岫岩玉</b></td><td>蛇纹石（Mg₃Si₂O₅(OH)₄）；H 2.5–6，SG 2.44–2.62，RI 1.55–1.57，蜡状–油脂光泽</td><td>辽宁岫岩特产，红山文化玉器主料；产量大、价格亲民；硬度低易磨损，忌酸</td></tr>
+        <tr><td><b>独山玉</b></td><td>基性斜长岩（黝帘石化斜长岩）；H 6–7，SG 2.7–3.09</td><td>河南南阳独山；「一天紫、一天蓝」多色并存；中国四大名玉之一</td></tr>
+        <tr><td><b>蓝田玉</b></td><td>蛇纹石化大理岩/方解石；H 3–4.5，SG 2.6–2.9</td><td>陕西蓝田，李商隐「蓝田日暖玉生烟」；开发史逾四千年</td></tr>
+        <tr><td><b>绿松石</b><br>Turquoise</td><td>CuAl₆(PO₄)₄(OH)₈·4H₂O；三斜晶系；H 5–6，SG 2.6–2.9，RI 1.61–1.65；蜡状光泽</td><td>「瓷松」为上品；湖北十堰（云盖寺、丫角山）为国产名坑，波斯（伊朗）为历史名产地；优化处理极多：浸胶（扎克里 Zacher 处理）、染色（颜色沿裂隙）、注塑；忌高温酸性</td></tr>
+        <tr><td><b>青金石</b><br>Lapis Lazuli</td><td>(Na,Ca)₈[(S,Cl,SO₄,OH)₂|(Al₆Si₆O₂₄)]（青金石+方解石+黄铁矿）；H 5–5.5，SG 2.38–2.45，RI 1.50</td><td>阿富汗巴达赫尚为唯一优质历史产地；「帝王石」、敦煌壁画颜料来源；黄铁矿星点与白色方解石脉为天然特征；染色与塑料仿品看色形与热针</td></tr>
+        <tr><td><b>石英质玉</b></td><td>玉髓/玛瑙（隐晶 SiO₂）：H 6.5–7，SG 2.58–2.64，RI 1.53–1.54</td><td>玛瑙条带纹；南红玛瑙（云南保山、四川凉山，含赤铁矿致色）与战国红为名品；染色玛瑙普遍需披露；金丝玉（新疆戈壁石英岩）为新兴热点</td></tr>
+        <tr><td><b>寿山石 / 田黄</b></td><td>叶蜡石型/地开石型粘土矿物；H 2–3，SG 2.5–2.7，RI 1.55–1.60，油脂–蜡状光泽</td><td>福建福州寿山乡；「田黄」产于溪田，具萝卜纹、红筋、石皮，「石帝」之称，一两田黄三两金；鉴赏重「温润细腻、凝脂感」</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+<!-- ============ 第九章 有机宝石 ============ -->
+<section class="chapter" id="ch9">
+  <div class="sec-head"><span class="no">第九章</span><h2>有机宝石</h2><span class="en">ORGANIC GEMS</span></div>
+  <p>由生物作用形成或生物残体构成的宝石材料，受《濒危野生动植物种国际贸易公约》（CITES）与各国保护法规约束，部分品种（象牙、部分珊瑚、砗磲）贸易受限——学习与从业必须同步建立<b>合规意识</b>。</p>
+
+  <div class="gem-card" id="pearl">
+    <div class="head"><h4>🦪 珍珠 Pearl</h4><span class="alias">六月诞生石 · 宝石皇后 · 唯一无需切磨的宝石</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">CaCO₃（文石）+ 贝壳硬蛋白（conchiolin）</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">2.5–4.5</div></div>
+        <div><div class="k">比重</div><div class="v">海水 2.61–2.69 / 淡水 2.66–2.78</div></div>
+        <div><div class="k">折射率</div><div class="v">1.53–1.685</div></div>
+        <div><div class="k">光泽</div><div class="v">珍珠光泽（评价之王）</div></div>
+        <div><div class="k">遇酸</div><div class="v">强烈起泡、腐蚀</div></div>
+        <div><div class="k">加热</div><div class="v">约 150 ℃ 以上变性、爆皮</div></div>
+      </div>
+      <p><b>成因与分类</b>：珍珠是贝类软体动物受异物（或人工植入的珠核与外套膜小片）刺激分泌珍珠质层层包裹而成。按成因分天然珍珠（罕见）与养殖珍珠（主流）；按水域分海水养殖珍珠（Akoya 日本/中国、南洋珠——澳白与金珠、大溪地黑珍珠）与淡水养殖珍珠（中国诸暨为代表的无核珍珠）。</p>
+      <p><b>质量评价六要素</b>：<b>光泽</b>（最重要，光泽越强层越薄越多）、<b>形状</b>（正圆最贵，水滴形、巴洛克形各有用途）、<b>颜色</b>（体色与伴色，大溪地孔雀绿、南洋金、Akoya 粉红伴色）、<b>表皮质量</b>（瑕疵越少越好，「微瑕」常见）、<b>大小</b>（南洋珠越大越贵）、<b>珠层厚度</b>（Akoya ≥0.4mm 为上，薄皮珠耐久差）。</p>
+      <p><b>处理与鉴别</b>：<b>染色</b>（黑珍珠染色极常见：颜色浮于表面、打孔处可见色环、天然黑珍珠实为黑体色带绿/紫伴色）、<b>漂白</b>（常规优化）、<b>覆膜处理</b>（「增光」）。仿品：贝壳粉压制珠、塑料珠、玻璃涂层珠（钻孔、放大、比重、化学反应可辨）。珍珠<b>怕酸、怕热、怕化妆品、怕长时间干燥</b>，「人养玉、玉养人」式的贴身佩戴其实最养珍珠——人体油脂是其天然保养品。</p>
+    </div>
+  </div>
+
+  <div class="gem-card" id="coral">
+    <div class="head"><h4>🪸 珊瑚 Coral</h4><span class="alias">红色宝石三贵之一 · 海洋森林</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">CaCO₃（方解石/文石）+ 有机质</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">3.5–4</div></div>
+        <div><div class="k">比重</div><div class="v">红珊瑚 2.6–2.7（黑珊瑚约 1.34）</div></div>
+        <div><div class="k">折射率</div><div class="v">1.486–1.658</div></div>
+        <div><div class="k">光泽</div><div class="v">蜡状至玻璃光泽</div></div>
+        <div><div class="k">遇酸</div><div class="v">剧烈起泡</div></div>
+      </div>
+      <p><b>分类</b>：钙质珊瑚（红珊瑚/宝石珊瑚 Corallium，「阿卡 AKA」「沙丁 MOMO」「深水 AKA」为日式分级；白珊瑚、粉珊瑚「天使之肤」）与角质珊瑚（黑珊瑚、金珊瑚 Gorgonian，硬度更低、比重轻）。红珊瑚在清代为中国官帽顶珠与朝珠用材，与珍珠、琉璃并称「东珠三宝」。</p>
+      <p><b>产地</b>：中国台湾海域与日本海域为宝石珊瑚传统两大产区（台湾曾占世界产量约六成），地中海（意大利沙丁珊瑚）、夏威夷（深水粉/红）、非洲与美洲部分海域。</p>
+      <p><b>处理与鉴别</b>：<b>漂白</b>（普遍，属优化）、<b>染色</b>（「海竹」染色仿红珊瑚：颜色浮于表面、无自然纹理）、<b>充填</b>（裂隙注蜡/胶）、<b>拼合</b>与<b>压制再生珊瑚</b>（碎料压制，具「粒状」结构）。天然红珊瑚具平行纵向纹理与虫穴「蛀洞」，截面可见同心圆与放射纹——「牛血纹」。</p>
+      <div class="callout danger"><span class="tag">合规提示</span>红珊瑚（所有 Corallium 物种）列入 CITES 附录 III，国际贸易需合法证明；国内购买应认准检测机构出具的合规证书。</div>
+    </div>
+  </div>
+
+  <div class="gem-card" id="amber">
+    <div class="head"><h4>🍯 琥珀 Amber</h4><span class="alias">树脂化石 · 时间的眼泪 · 含虫之美</span></div>
+    <div class="body">
+      <div class="data-grid">
+        <div><div class="k">化学成分</div><div class="v">C₁₀H₁₆O（碳氢化合物，非晶质）</div></div>
+        <div><div class="k">摩氏硬度</div><div class="v">2–2.5</div></div>
+        <div><div class="k">比重</div><div class="v">1.05–1.10（饱和盐水上浮）</div></div>
+        <div><div class="k">折射率</div><div class="v">约 1.540</div></div>
+        <div><div class="k">光泽</div><div class="v">树脂光泽</div></div>
+        <div><div class="k">热性能</div><div class="v">150–180 ℃ 软化，可热针「松香味」</div></div>
+        <div><div class="k">荧光</div><div class="v">常见蓝白/蓝绿色荧光</div></div>
+      </div>
+      <p><b>品种</b>：蜜蜡（不透明）、血珀、金珀、蓝珀（多米尼加，日光下金黄、暗处泛蓝光）、虫珀（含昆虫/植物，科研价值高）、植物珀。多米尼加与缅甸北部（琥珀之乡 Hukawng Valley，约 1 亿年）、波罗的海（约 4000 万年，占全球产量大半）、墨西哥（恰帕斯，蓝珀）、中国辽宁抚顺（约 5000 万年，亚洲著名矿，已近枯竭）。</p>
+      <p><b>处理与鉴别</b>：<b>热处理</b>（净化「 cloudiness」、烤色「老蜜蜡」色泽，属优化，需披露程度）、<b>压合再造琥珀（Karbation/压制蜜蜡）</b>（碎料热压，具「搅拌纹」与扁平气泡，价值远低）、<b>覆膜</b>、<b>染色</b>。仿品：柯巴脂（Copal，半石化，遇溶剂发黏）、塑料（聚苯乙烯，密度可调至接近、热针塑料味刺鼻）、玻璃。经典四招：<b>盐水上浮（1:4 盐水中琥珀浮、多数塑料沉）、热针松香味、紫外荧光、摩擦起电</b>。</p>
+    </div>
+  </div>
+
+  <div class="gem-card" id="shell-ivory">
+    <div class="head"><h4>🐚 其他有机宝石：砗磲、贝壳、煤玉与象牙（合规提示）</h4></div>
+    <div class="body">
+      <table class="compact">
+        <tr><th>材料</th><th>性质要点</th><th>说明</th></tr>
+        <tr><td><b>砗磲 Tridacna</b></td><td>文石质贝壳，H 3–4，SG 约 2.7，遇酸起泡，具平行层状结构与异旋彩</td><td>列入 CITES 附录 II，活体采捕受严格限制；市场以历史留存与合规渠道为主</td></tr>
+        <tr><td><b>鲍鱼贝（珍珠母）</b></td><td>晕彩珍珠层，H 3–4，不可雕琢仅作镶嵌</td><td>用于首饰镶嵌与纽扣，注意与覆膜塑料区分</td></tr>
+        <tr><td><b>煤玉 Jet</b></td><td>褐煤化石，H 2.5–4，SG 1.1–1.4，黑色、树脂光泽，热针有煤烟味</td><td>维多利亚时期 Mourning Jewelry 用料</td></tr>
+        <tr><td><b>象牙 Ivory</b></td><td>牙本质，H 2.5，SG 1.7–2.0，具「勒兹纹理（交叉弧线）」</td><td><b>国际象牙贸易被全面禁止（CITES 附录 I/II 保护物种）</b>。我国法律禁止象牙制品商业性加工销售。学习目的在于识别与保护，而非流通</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第十章 质量评价与鉴赏 ============ -->
+<section class="chapter" id="ch10">
+  <div class="sec-head"><span class="no">第十章</span><h2>质量评价与鉴赏</h2><span class="en">QUALITY &amp; APPRECIATION</span></div>
+
+  <h3><span class="badge lv2">进阶</span>10.1 有色宝石的质量评价要素</h3>
+  <p>与钻石的 4C 不同，有色宝石按<b>颜色（Color）、净度（Clarity）、切工（Cut）、克拉重量（Carat）＋特殊效应（Phenomenon）＋产地（Origin）</b>六大要素评价，且<b>颜色权重最高</b>（通常占 50% 以上）：</p>
+  <ol>
+    <li><b>颜色</b>：色调纯正、饱和度高、明度适中的颜色最贵。顶级色的市场溢价可达数倍——缅甸鸽血红、克什米尔矢车菊蓝、哥伦比亚木佐绿、帕帕拉恰、帕拉伊巴蓝、帝王玉绿。</li>
+    <li><b>净度</b>：有色宝石内含物容忍度高于钻石（祖母绿「花园」式包体被行业接受），但肉眼无瑕者显著增值；与颜色两难时「色优先」。</li>
+    <li><b>切工</b>：明亮度、火彩、比例、对称、抛光质量；特殊效应宝石（猫眼、星光、欧泊）还看「光学图案」的完美程度。</li>
+    <li><b>克拉重量</b>：大颗粒稀有几何级增长；有色宝石常见 1–5ct 精品，10ct 以上优质者罕见。</li>
+    <li><b>特殊效应</b>：猫眼亮带居中细窄、星光六线完整清晰、变彩丰富——强效应显著增值。</li>
+    <li><b>产地</b>：顶级产地溢价明显（克什米尔、抹谷、莫谷、Muzo、闪电岭、帕拉伊巴……），但须依赖<b>权威实验室产地报告</b>，而非商家口头。</li>
+  </ol>
+
+  <h3><span class="badge lv2">进阶</span>10.2 玉石鉴赏要点</h3>
+  <ul>
+    <li><b>翡翠</b>：种（老种新种）→ 水（透明度）→ 色（浓、阳、正、匀）→ 地（底子干净）→ 工（因材施艺）→ 器型（镯、牌、珠链、蛋面、摆件，以料定价）。「外行看色、内行看种」——老坑玻璃种无色者可价值连城。</li>
+    <li><b>和田玉</b>：油性（油脂光泽的强弱是灵魂）、细度（结构细腻无结构为佳）、糯性（如煮糯米汤的浑厚感）、白度（羊脂白 ≠ 死白，而是暖白微黄、「白度够、油度够」）、老熟度、皮色与沁色的天然度、雕工（苏工、海派、扬州工各有千秋）。「白、油、细、糯、熟」五字诀。</li>
+    <li><b>珍珠</b>：光泽为王，珠层厚度定耐久，大小与形状配合器型；海水珠看「伴色」与皮光，Akoya 的「极光」与南洋珠的「缎光」各有审美。</li>
+  </ul>
+
+  <h3><span class="badge lv2">进阶</span>10.3 设计与镶嵌基础</h3>
+  <p><b>琢型</b>：弧面型（突出颜色与特殊效应，玉石、猫眼、星光宝石常用）、刻面型（明亮式/阶梯式，突出火彩与色散——圆钻型 57/58 刻面为经典）、珠型与雕件。镶嵌方式：爪镶（透光好、显大，经典四爪/六爪）、包镶（保护性好，适于软宝石与日常佩戴）、轨道镶（排镶碎钻显整体）、微镶（密集小爪显璀璨）、隐秘镶（Van Cleef &amp; Arpels 式的无金属缝隙镶嵌，工艺极高）、包镶与钉镶等。设计逻辑：颜色深的宝石宜薄琢型减色、浅色者加深亭部增色；多色性强的宝石（碧玺、坦桑石）台面定向以呈现最佳颜色。</p>
+</section>
+<!-- ============ 第十一章 商贸、证书与收藏 ============ -->
+<section class="chapter" id="ch11">
+  <div class="sec-head"><span class="no">第十一章</span><h2>商贸、证书与收藏</h2><span class="en">TRADE, CERTIFICATION &amp; COLLECTING</span></div>
+
+  <h3><span class="badge lv2">进阶</span>11.1 权威检测机构与证书阅读</h3>
+  <table class="compact">
+    <tr><th>机构</th><th>全称/背景</th><th>特点</th></tr>
+    <tr><td><b>GIA</b></td><td>美国宝石研究院（Gemological Institute of America）</td><td>4C 分级鼻祖；钻石证书全球通行；有色证书近年普及</td></tr>
+    <tr><td><b>NGTC</b></td><td>国家珠宝玉石首饰检验集团有限公司（原国家珠宝玉石质量监督检验中心）</td><td>中国最权威，国标体系；翡翠 A 货认定市场公信力最高</td></tr>
+    <tr><td><b>GRS</b></td><td>GemResearch Swisslab</td><td>彩色宝石强项，以「鸽血红」「皇家蓝」「帕帕拉恰」等商业命名闻名；产地意见有影响力</td></tr>
+    <tr><td><b>SSEF / Gubelin / GIT</b></td><td>瑞士与泰国实验室</td><td>彩色宝石高端鉴定，产地与处理研究深厚</td></tr>
+    <tr><td><b>AGL / AIGS / CGL</b></td><td>美国/亚洲宝石学院</td><td>亚洲市场流通广</td></tr>
+  </table>
+  <p><b>证书必读项</b>：① 鉴定结论（定名，如「红宝石」或「红宝石（处理）」）；② 优化处理注释；③ 尺寸与重量；④ 颜色分级或颜色描述；⑤ 净度；⑥ 折射率/比重等物性数据；⑦ 光谱与放大检查描述；⑧ 证书编号与官网验证入口。<b>证书只对送检样品负责</b>——注意「同名不同货」，高价值品应做到「一物一证一号」。</p>
+
+  <h3><span class="badge lv2">进阶</span>11.2 价格逻辑与市场风险</h3>
+  <ul>
+    <li><b>价格形成</b>： rarity（稀有度）× quality（品质）× certification（权威背书）× market（渠道与行情）。拍卖行（苏富比、佳士得、中国嘉德）创造标杆价，零售市场按件议价空间大。</li>
+    <li><b>常见陷阱</b>：以处理充天然（B 货翡翠、铅玻璃充填红宝石）；以合成充天然（合成祖母绿、合成钻「天然证书」造假）；以仿品充宝石（CZ 仿钻）；产地虚标（「斯里兰卡蓝宝石」实为澳洲）；「故事溢价」（夸张的传奇证书与故事）。</li>
+    <li><b>理性收藏</b>：先学后藏、先小后大、认准复检渠道；保留购买凭证与证书；不追泡沫（如某些短期暴涨的网红宝石）；关注「可传承、可流通、可复检」三可原则。</li>
+  </ul>
+
+  <h3><span class="badge lv1">入门</span>11.3 佩戴与保养通则</h3>
+  <table class="compact">
+    <tr><th>类别</th><th>禁忌</th></tr>
+    <tr><td>硬度低者（珍珠 2.5–4.5、琥珀 2–2.5、珊瑚 3.5–4、绿松石 5–6）</td><td>避免刮擦、化学品（香水、汗液、清洁剂）、高温；珍珠「最后戴、最先摘」</td></tr>
+    <tr><td>解理发育者（托帕石、长石、坦桑石）</td><td>防撞击与压力，避免超声波清洗</td></tr>
+    <tr><td>多孔/怕水者（欧泊、绿松石）</td><td>避免失水（欧泊防干裂）与吸水变色，远离超声波</td></tr>
+    <tr><td>碳酸盐类（珍珠、珊瑚、孔雀石、大理石）</td><td>遇酸溶解，远离醋、柠檬汁等</td></tr>
+    <tr><td>通用</td><td>单独存放防刮；定期用软布擦拭；每年检查镶口；贵重品每年送检复检</td></tr>
+  </table>
+</section>
+
+<!-- ============ 第十二章 实验实训指南 ============ -->
+<section class="chapter" id="ch12">
+  <div class="sec-head"><span class="no">第十二章</span><h2>实验实训指南</h2><span class="en">LAB PRACTICE</span></div>
+  <p>以下 12 个实训项目按「由浅入深」编排，适合作为一学期实验课教案；每项含目标、器材、步骤要点与报告要求。实验室须遵守安全规范：接触液与重液远离火源、通风操作；重液（二碘甲烷、克列里奇液）有毒，避免皮肤接触。</p>
+
+  <h3><span class="badge lv1">入门</span>12.1 基础项目（1–4）</h3>
+  <table class="compact">
+    <tr><th>项目</th><th>目标</th><th>要点</th></tr>
+    <tr><td><b>1. 肉眼观察与描述</b></td><td>建立「看宝」基本功</td><td>记录颜色（色调/明度/饱和度）、光泽、透明度、琢型；画出包体素描</td></tr>
+    <tr><td><b>2. 10× 放大镜使用</b></td><td>内外特征系统观察</td><td>一手持镜一手持镊子，先外部后内部；区分气泡/针状/指纹状包体</td></tr>
+    <tr><td><b>3. 摩氏硬度比对（谨慎）</b></td><td>理解硬度序列与测试边界</td><td>仅在标准矿物片与废料上操作；体会「硬度≠耐磨」</td></tr>
+    <tr><td><b>4. 手感与掂重初筛</b></td><td>建立密度直觉</td><td>同尺寸对比水晶/琥珀/锆石/CZ/玻璃的手感差异</td></tr>
+  </table>
+
+  <h3><span class="badge lv2">进阶</span>12.2 仪器项目（5–9）</h3>
+  <table class="compact">
+    <tr><th>项目</th><th>目标</th><th>要点</th></tr>
+    <tr><td><b>5. 折射仪操作与读数</b></td><td>掌握 RI 与 DR 测定</td><td>接触液用量控制；均质/非均质判定；远视点测法</td></tr>
+    <tr><td><b>6. 偏光镜</b></td><td>均质/非均质/异常消光判定</td><td>四明四暗观察；锥光干涉图；拼合石的分层消光</td></tr>
+    <tr><td><b>7. 二色镜与查氏镜</b></td><td>多色性与筛查染色</td><td>红宝石、碧玺、坦桑石多色性对比；查氏镜下祖母绿与染绿材料</td></tr>
+    <tr><td><b>8. 分光镜</b></td><td>吸收光谱识别致色元素</td><td>铬谱（红宝石 694nm 双线）、钴谱三条带、锆石 653.5nm</td></tr>
+    <tr><td><b>9. 静水力学法测比重</b></td><td>定量密度测定</td><td>天平校零、气泡排除、温度修正；红宝石 vs 尖晶石区分</td></tr>
+  </table>
+
+  <h3><span class="badge lv3">精通</span>12.3 综合项目（10–12）</h3>
+  <table class="compact">
+    <tr><th>项目</th><th>目标</th><th>要点</th></tr>
+    <tr><td><b>10. 未知宝石鉴定挑战</b></td><td>完整鉴定流程实战</td><td>对 20 粒未知样品独立完成鉴定报告（定名+依据+置信度）</td></tr>
+    <tr><td><b>11. 处理与合成专项</b></td><td>FTIR/紫外荧光综合判别</td><td>B 货翡翠、充填钻石、助熔剂法祖母绿、焰熔法红宝石各一组对照</td></tr>
+    <tr><td><b>12. 鉴赏与估价演练</b></td><td>从鉴定走向鉴赏</td><td>对一件成品（戒指/吊坠）完成：描述→鉴定→品质分级→估价→销售话术</td></tr>
+  </table>
+
+  <div class="callout exam"><span class="tag">报告规范</span>一份合格的宝石鉴定报告包含：样品编号/照片、尺寸重量、颜色净度描述、定名结论、检测方法与数据、备注（优化处理、产地意见）、检测者与日期。结论分三档：<b>确证 / 高度可能 / 无法确定</b>——诚实标注「无法确定」比硬下结论更专业。</div>
+</section>
+
+<!-- ============ 附录 ============ -->
+<section class="chapter" id="appendix">
+  <div class="sec-head"><span class="no">附录</span><h2>数据总表 · 术语表 · 资料来源</h2><span class="en">APPENDIX</span></div>
+
+  <h3>附表 1 · 常见宝石玉石物理常数总表</h3>
+  <table class="compact">
+    <tr><th>名称</th><th>化学成分</th><th>晶系</th><th>硬度</th><th>比重</th><th>折射率</th><th>双折射率</th></tr>
+    <tr><td>钻石</td><td>C</td><td>等轴</td><td>10</td><td>3.52</td><td>2.417</td><td>—</td></tr>
+    <tr><td>红宝石</td><td>Al₂O₃·Cr</td><td>三方</td><td>9</td><td>4.00</td><td>1.76–1.77</td><td>0.008–0.010</td></tr>
+    <tr><td>蓝宝石</td><td>Al₂O₃·Fe,Ti</td><td>三方</td><td>9</td><td>3.95–4.03</td><td>1.76–1.77</td><td>0.008–0.010</td></tr>
+    <tr><td>祖母绿</td><td>Be₃Al₂(SiO₃)₆·Cr,V</td><td>六方</td><td>7.5–8</td><td>2.67–2.78</td><td>1.577–1.583</td><td>0.005–0.009</td></tr>
+    <tr><td>金绿宝石</td><td>BeAl₂O₄</td><td>斜方</td><td>8.5</td><td>3.70–3.73</td><td>1.744–1.758</td><td>约0.009</td></tr>
+    <tr><td>尖晶石</td><td>MgAl₂O₄</td><td>等轴</td><td>7.5–8</td><td>3.54–3.63</td><td>1.712–1.762</td><td>—</td></tr>
+    <tr><td>碧玺</td><td>硼铝硅酸盐</td><td>三方</td><td>7–7.5</td><td>3.06</td><td>1.624–1.644</td><td>0.014–0.021</td></tr>
+    <tr><td>石榴石</td><td>X₃Y₂(SiO₄)₃</td><td>等轴</td><td>6–7.5</td><td>3.1–4.3</td><td>1.71–1.94</td><td>—</td></tr>
+    <tr><td>坦桑石</td><td>Ca₂Al₃(SiO₄)(Si₂O₇)O(OH)</td><td>斜方</td><td>6.5–7</td><td>3.35</td><td>1.691–1.700</td><td>0.006–0.018</td></tr>
+    <tr><td>欧泊</td><td>SiO₂·nH₂O</td><td>非晶质</td><td>5.5–6.5</td><td>2.15</td><td>1.450</td><td>—</td></tr>
+    <tr><td>锆石</td><td>ZrSiO₄</td><td>四方</td><td>6–7.5</td><td>4.6–4.7</td><td>1.93–2.01</td><td>约0.059</td></tr>
+    <tr><td>橄榄石</td><td>(Mg,Fe)₂SiO₄</td><td>斜方</td><td>6.5–7</td><td>3.32–3.37</td><td>1.654–1.690</td><td>0.035–0.038</td></tr>
+    <tr><td>托帕石</td><td>Al₂SiO₄(F,OH)₂</td><td>斜方</td><td>8</td><td>3.49–3.57</td><td>1.609–1.637</td><td>0.008–0.010</td></tr>
+    <tr><td>石英/水晶</td><td>SiO₂</td><td>三方</td><td>7</td><td>2.65</td><td>1.544–1.553</td><td>0.009</td></tr>
+    <tr><td>月光石</td><td>KAlSi₃O₈–NaAlSi₃O₈</td><td>单斜</td><td>6–6.5</td><td>2.55–2.61</td><td>1.518–1.526</td><td>0.005–0.008</td></tr>
+    <tr><td>海蓝宝石</td><td>Be₃Al₂(SiO₃)₆·Fe</td><td>六方</td><td>7.5–8</td><td>2.68–2.74</td><td>1.577–1.583</td><td>0.005–0.009</td></tr>
+    <tr><td>翡翠</td><td>NaAlSi₂O₆</td><td>单斜</td><td>6.5–7</td><td>3.30–3.36</td><td>1.666–1.680</td><td>集合体</td></tr>
+    <tr><td>和田玉</td><td>Ca₂(Mg,Fe)₅Si₈O₂₂(OH)₂</td><td>单斜</td><td>6–6.5</td><td>2.95–3.17</td><td>约1.606–1.632</td><td>集合体</td></tr>
+    <tr><td>绿松石</td><td>CuAl₆(PO₄)₄(OH)₈·4H₂O</td><td>三斜</td><td>5–6</td><td>2.6–2.9</td><td>1.61–1.65</td><td>集合体</td></tr>
+    <tr><td>青金石</td><td>(Na,Ca)₈[(S,Cl,SO₄,OH)₂|(Al₆Si₆O₂₄)]</td><td>等轴</td><td>5–5.5</td><td>2.38–2.45</td><td>1.50</td><td>—</td></tr>
+    <tr><td>玛瑙/玉髓</td><td>SiO₂（隐晶）</td><td>三方</td><td>6.5–7</td><td>2.58–2.64</td><td>1.530–1.540</td><td>—</td></tr>
+    <tr><td>孔雀石</td><td>Cu₂CO₃(OH)₂</td><td>单斜</td><td>3.5–4</td><td>3.6–4.0</td><td>1.655–1.909</td><td>大</td></tr>
+    <tr><td>珍珠</td><td>CaCO₃+壳角蛋白</td><td>—（文石板片）</td><td>2.5–4.5</td><td>2.60–2.85</td><td>1.53–1.685</td><td>—</td></tr>
+    <tr><td>珊瑚</td><td>CaCO₃+有机质</td><td>—（方解石/文石）</td><td>3.5–4</td><td>2.6–2.7</td><td>1.486–1.658</td><td>—</td></tr>
+    <tr><td>琥珀</td><td>C₁₀H₁₆O</td><td>非晶质</td><td>2–2.5</td><td>1.05–1.10</td><td>1.540</td><td>—</td></tr>
+  </table>
+
+  <h3>附表 2 · 核心术语表</h3>
+  <details><summary>展开术语表（点击查看 40+ 条核心术语）</summary>
+    <table class="compact">
+      <tr><th>术语</th><th>释义</th></tr>
+      <tr><td>包裹体 / 内含物</td><td>宝石内部或表面的固态、液态、气态物质，天然宝石的「身份证」</td></tr>
+      <tr><td>色散（火彩）</td><td>白光分解为光谱色的能力，以对蓝光与红光折射率之差度量</td></tr>
+      <tr><td>双折射率（DR）</td><td>各向异性宝石最大与最小折射率之差，导致刻面棱重影</td></tr>
+      <tr><td>多色性</td><td>各向异性有色宝石在不同方向呈现不同颜色（二色/三色性）</td></tr>
+      <tr><td>猫眼效应</td><td>平行针状包体反射形成随石转动的亮带</td></tr>
+      <tr><td>星光效应</td><td>三组以上定向包体形成四射或六射星光</td></tr>
+      <tr><td>变彩</td><td>欧泊中 SiO₂ 球体衍射干涉产生的彩色闪光</td></tr>
+      <tr><td>变色效应</td><td>不同光源下颜色显著变化（变石为代表）</td></tr>
+      <tr><td>月光效应</td><td>长石交生层散射形成的浮动蓝白浮光</td></tr>
+      <tr><td>解理 / 断口 / 裂理</td><td>沿格子弱面定向裂开 / 非定向破裂 / 沿双晶面裂开</td></tr>
+      <tr><td>优化 / 处理</td><td>传统可接受的外观改善 / 需披露的人工干预</td></tr>
+      <tr><td>焰熔法 / 助熔剂法 / 水热法 / CVD / HPHT</td><td>五大合成方法（见 5.3 节）</td></tr>
+      <tr><td>种水地工</td><td>翡翠评价体系：种老、水足、地净、工精</td></tr>
+      <tr><td>油细糯熟白</td><td>和田玉评价五字诀</td></tr>
+      <tr><td>毛毡状结构</td><td>软玉典型的纤维交织结构</td></tr>
+      <tr><td>色根</td><td>天然翡翠颜色的「根」——由内向外渐变的色源</td></tr>
+      <tr><td>酸蚀网纹</td><td>B 货翡翠表面的网状酸蚀痕迹</td></tr>
+      <tr><td>三相包裹体</td><td>气+液+固（盐/石盐晶体）同存，哥伦比亚祖母绿产地铁证</td></tr>
+      <tr><td>马尾状包体</td><td>翠榴石标志性纤维状包体</td></tr>
+      <tr><td>水百合叶</td><td>橄榄石中盘状应力裂隙包体</td></tr>
+      <tr><td>弧形生长纹</td><td>焰熔法合成宝石的标志性弯曲色带</td></tr>
+      <tr><td>闪光效应</td><td>充填裂隙在转动时呈现的橙–蓝紫色闪光</td></tr>
+      <tr><td>接触液</td><td>折射仪用高折射率液体，RI 上限约 1.81</td></tr>
+    </table>
+  </details>
+
+  <h3>附表 3 · 资料来源（网络检索整理）</h3>
+  <p>本教程的全部事实性数据与素材均通过 Crawl4AI 网络检索自公开资料整理而成，主要来源如下（共 65 个词条/页面，存于本目录 <code>资料/</code> 文件夹）：</p>
+  <table class="compact">
+    <tr><th>来源</th><th>覆盖内容</th></tr>
+    <tr><td>中文维基百科（zh.wikipedia.org）</td><td>宝石、宝石学、玉石、矿物、晶体、折射、双折射、莫氏硬度、解理、断口、比重、硬度、荧光、光谱学、色散、合成宝石、合成钻石、碳化硅（莫桑石）、珠宝、诞生石；钻石、刚玉、红宝石、蓝宝石、祖母绿、金绿宝石、变石、猫眼、尖晶石、碧玺、石榴石、坦桑石、蛋白石（欧泊）、锆石、橄榄石、黄玉（托帕石）、水晶、月光石、日光石、拉长石、玉髓、海蓝宝石、沙弗莱石、星光红宝石；翡翠、和田玉、岫岩玉、独山玉、蓝田玉、绿松石、青金石、玛瑙、孔雀石、寿山石、田黄、玉、玉石、珍珠、珊瑚、琥珀、象牙、砗磲等词条</td></tr>
+    <tr><td>GIA / IGS / Britannica（gem-encyclopedia、gemstone-identification、ruby、jade、gemstone 词条）</td><td>国际宝石学百科框架（受站点反爬限制，仅获取部分导航与摘要内容，正文数据以维基百科与经典教材为准）</td></tr>
+  </table>
+  <p style="font-size:13px;color:var(--ink-soft)">说明：物性数据为各来源常见范围的归纳，具体检测值以实验室报告为准；优化处理与商贸规则以最新国标（GB/T 16552《珠宝玉石 名称》、GB/T 16553《珠宝玉石 鉴定》）及 CIBJO 指南为准。</p>
+</section>
+
+<footer class="footer">
+  <p><b>珠宝玉石教学大全</b> · 宝石学 / 宝石鉴定学 / 宝石鉴赏学 入门到进阶</p>
+  <p>资料来源：通过 Crawl4AI 检索自维基百科等公开网络资源（66 个词条），整理于本目录「资料/」文件夹。本教程仅供教学与学习交流使用。</p>
+</footer>
+</div><!-- /wrap -->
+</main>
+</div><!-- /layout -->
+
+<button class="top-btn" id="topBtn" title="回到顶部">↑</button>
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav.toc a'));
+  var secs = links.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  function onScroll(){
+    var y = window.scrollY + 120, cur = secs[0];
+    secs.forEach(function(s){ if(s.offsetTop <= y) cur = s; });
+    links.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#'+cur.id); });
+    var t = document.getElementById('topBtn');
+    t.classList.toggle('show', window.scrollY > 600);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  document.getElementById('topBtn').onclick = function(){ window.scrollTo({top:0, behavior:'smooth'}); };
+  var mb = document.getElementById('menuBtn'), sb = document.getElementById('sidebar');
+  mb.onclick = function(){ sb.classList.toggle('open'); };
+  document.querySelectorAll('nav.toc a').forEach(function(a){
+    a.addEventListener('click', function(){ if(window.innerWidth<=1024) sb.classList.remove('open'); });
+  });
+  var search = document.getElementById('tocSearch');
+  search.addEventListener('input', function(){
+    var q = search.value.trim().toLowerCase();
+    document.querySelectorAll('nav.toc a').forEach(function(a){
+      var hit = !q || a.textContent.toLowerCase().indexOf(q) > -1;
+      a.style.display = hit ? '' : 'none';
+    });
+    document.querySelectorAll('nav.toc .grp').forEach(function(g){
+      var nxt = g.nextElementSibling, any = false;
+      while(nxt && nxt.tagName === 'A'){ if(nxt.style.display !== 'none') any = true; nxt = nxt.nextElementSibling; }
+      g.style.display = any ? '' : 'none';
+    });
+  });
+})();
+</script>
+</body>
+</html>

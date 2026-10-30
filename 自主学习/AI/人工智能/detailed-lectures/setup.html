@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 全栈教程 · 环境准备</title>
+<link rel="stylesheet" href="apple-design.css">
+<style>
+/* setup 专属（apple-design 浅色主题） */
+.page-wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 90px; }
+.setup-hero { margin-bottom: 32px; }
+.setup-hero .kicker { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 12px; }
+.setup-hero h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); margin: 0 0 10px; }
+.setup-hero p { color: var(--text-2); margin: 0 0 16px; }
+.setup-hero .back { font-size: 0.85rem; font-weight: 600; }
+.step-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+  padding: 20px 22px; margin: 14px 0; box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--dur) var(--spring), transform var(--dur) var(--spring);
+}
+.step-card:hover { box-shadow: var(--shadow-md); }
+.step-card .step-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%; font-size: 0.82rem; font-weight: 700;
+  background: var(--accent); color: #fff; margin-right: 10px; font-family: var(--font-mono);
+  vertical-align: middle;
+}
+.step-card h4 { display: inline; font-size: 1rem; font-weight: 700; vertical-align: middle; }
+.os-tabs { display: flex; gap: 8px; margin: 20px 0 14px; }
+.os-tab {
+  padding: 9px 20px; border-radius: 980px; border: 1px solid var(--border-strong);
+  background: var(--surface); color: var(--text-2); cursor: pointer; font-size: 0.88rem; font-weight: 600;
+  transition: all 0.2s var(--spring); font-family: var(--font-body);
+}
+.os-tab:hover { background: var(--surface-2); transform: translateY(-1px); }
+.os-tab:active { transform: scale(0.96); }
+.os-tab.active { background: var(--text); border-color: var(--text); color: var(--bg); }
+.os-panel { display: none; }
+.os-panel.active { display: block; animation: panel-in 0.4s var(--spring); }
+@keyframes panel-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.warn {
+  background: var(--orange-soft); border: 1px solid rgba(178,80,0,0.25); border-left: 4px solid var(--orange);
+  border-radius: var(--r-sm); padding: 14px 18px; margin: 14px 0; font-size: 0.86rem; color: var(--orange);
+}
+.tip {
+  background: var(--green-soft); border: 1px solid rgba(36,138,61,0.25); border-left: 4px solid var(--green);
+  border-radius: var(--r-sm); padding: 14px 18px; margin: 14px 0; font-size: 0.86rem; color: var(--green);
+}
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+<div class="setup-hero">
+  <div class="kicker">Environment Setup</div>
+  <h1>环境准备指南</h1>
+  <p>10 分钟搭好 AI 学习环境 · macOS / Windows / Linux</p>
+  <a class="back" href="index.html">← 返回教程目录</a>
+</div>
+
+
+<h2>你需要什么？</h2>
+<p>本教程的所有代码只需要以下工具：</p>
+<div class="step-card">
+  <span class="step-num">1</span><h4>Python 3.10+</h4>
+  <p style="margin-top:8px; color:var(--text-muted); font-size:0.85rem;">编程语言。第1-5章的代码用 Python + NumPy 就能跑。</p>
+</div>
+<div class="step-card">
+  <span class="step-num">2</span><h4>NumPy</h4>
+  <p style="margin-top:8px; color:var(--text-muted); font-size:0.85rem;">数值计算库。向量、矩阵运算全靠它。</p>
+</div>
+<div class="step-card">
+  <span class="step-num">3</span><h4>PyTorch（第4章开始需要）</h4>
+  <p style="margin-top:8px; color:var(--text-muted); font-size:0.85rem;">深度学习框架。搭建和训练神经网络。</p>
+</div>
+<div class="step-card">
+  <span class="step-num">4</span><h4>Jupyter Notebook（推荐）</h4>
+  <p style="margin-top:8px; color:var(--text-muted); font-size:0.85rem;">交互式编程环境。边写代码边看结果，非常适合学习。</p>
+</div>
+
+<h2>安装步骤</h2>
+
+<div class="os-tabs">
+  <div class="os-tab active" onclick="switchOS('mac')">🍎 macOS</div>
+  <div class="os-tab" onclick="switchOS('win')">🪟 Windows</div>
+  <div class="os-tab" onclick="switchOS('linux')">🐧 Linux</div>
+</div>
+
+<div id="os-mac" class="os-panel active">
+<div class="step-card">
+  <span class="step-num">1</span><h4>安装 Homebrew（如果没有）</h4>
+  <pre><span class="comment"># 打开"终端"应用，粘贴以下命令</span>
+<span class="cmd">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</span></pre>
+</div>
+<div class="step-card">
+  <span class="step-num">2</span><h4>安装 Python</h4>
+  <pre><span class="cmd">brew install python@3.12</span>
+
+<span class="comment"># 验证安装</span>
+<span class="cmd">python3 --version</span>  <span class="comment"># 应显示 Python 3.12.x</span></pre>
+</div>
+<div class="step-card">
+  <span class="step-num">3</span><h4>创建虚拟环境 + 安装库</h4>
+  <pre><span class="comment"># 创建项目文件夹</span>
+<span class="cmd">mkdir ~/ai-tutorial && cd ~/ai-tutorial</span>
+
+<span class="comment"># 创建虚拟环境（隔离依赖，不污染系统）</span>
+<span class="cmd">python3 -m venv venv</span>
+<span class="cmd">source venv/bin/activate</span>  <span class="comment"># 激活后命令行前面会出现 (venv)</span>
+
+<span class="comment"># 安装所有需要的库（一条命令搞定）</span>
+<span class="cmd">pip install numpy matplotlib torch torchvision jupyter</span></pre>
+  <div class="tip">💡 Apple Silicon (M1/M2/M3/M4) 用户：PyTorch 自动支持 MPS 加速，无需额外配置。</div>
+</div>
+</div>
+
+<div id="os-win" class="os-panel">
+<div class="step-card">
+  <span class="step-num">1</span><h4>安装 Python</h4>
+  <pre><span class="comment"># 方法1：从官网下载安装包</span>
+<span class="comment"># 访问 https://python.org → Downloads → 下载 Python 3.12</span>
+<span class="comment"># ⚠️ 安装时勾选 "Add Python to PATH"！</span>
+
+<span class="comment"># 方法2：用 winget（Windows 11 自带）</span>
+<span class="cmd">winget install Python.Python.3.12</span></pre>
+</div>
+<div class="step-card">
+  <span class="step-num">2</span><h4>创建虚拟环境 + 安装库</h4>
+  <pre><span class="comment"># 打开 PowerShell 或 CMD</span>
+<span class="cmd">mkdir ai-tutorial</span>
+<span class="cmd">cd ai-tutorial</span>
+
+<span class="cmd">python -m venv venv</span>
+<span class="cmd">venv\Scripts\activate</span>  <span class="comment"># 激活虚拟环境</span>
+
+<span class="cmd">pip install numpy matplotlib torch torchvision jupyter</span></pre>
+  <div class="warn">⚠️ 如果有 NVIDIA 显卡，安装 GPU 版 PyTorch 会更快：<br>
+  <code>pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121</code></div>
+</div>
+</div>
+
+<div id="os-linux" class="os-panel">
+<div class="step-card">
+  <span class="step-num">1</span><h4>安装 Python + 依赖</h4>
+  <pre><span class="comment"># Ubuntu / Debian</span>
+<span class="cmd">sudo apt update && sudo apt install python3 python3-venv python3-pip</span>
+
+<span class="comment"># 创建虚拟环境</span>
+<span class="cmd">mkdir ~/ai-tutorial && cd ~/ai-tutorial</span>
+<span class="cmd">python3 -m venv venv</span>
+<span class="cmd">source venv/bin/activate</span>
+
+<span class="cmd">pip install numpy matplotlib torch torchvision jupyter</span></pre>
+</div>
+</div>
+
+<h2>验证安装</h2>
+<div class="step-card">
+  <p>在 Python 中运行以下代码，全部通过就说明环境没问题：</p>
+  <pre><span class="comment"># 启动 Python</span>
+<span class="cmd">python3</span>  <span class="comment"># 或 python</span>
+
+<span class="comment"># 测试 NumPy</span>
+>>> <span class="cmd">import numpy as np</span>
+>>> <span class="cmd">a = np.array([1, 2, 3])</span>
+>>> <span class="cmd">print(a * 2)</span>  <span class="comment"># [2 4 6] ✓</span>
+
+<span class="comment"># 测试 PyTorch</span>
+>>> <span class="cmd">import torch</span>
+>>> <span class="cmd">print(torch.__version__)</span>  <span class="comment"># 2.x.x ✓</span>
+>>> <span class="cmd">x = torch.randn(3, 3)</span>
+>>> <span class="cmd">print(x @ x.T)</span>  <span class="comment"># 矩阵乘法 ✓</span>
+
+<span class="comment"># 测试 GPU（可选）</span>
+>>> <span class="cmd">print(torch.backends.mps.is_available())</span>  <span class="comment"># Mac: True</span>
+>>> <span class="cmd">print(torch.cuda.is_available())</span>  <span class="comment"># NVIDIA: True</span></pre>
+</div>
+
+<h2>启动 Jupyter Notebook</h2>
+<div class="step-card">
+  <pre><span class="comment"># 确保虚拟环境已激活</span>
+<span class="cmd">jupyter notebook</span>
+
+<span class="comment"># 浏览器会自动打开 http://localhost:8888</span>
+<span class="comment"># 点 "New" → "Python 3" 创建新笔记本</span>
+<span class="comment"># 在单元格中写代码，按 Shift+Enter 运行</span></pre>
+  <div class="tip">💡 推荐用 VS Code 打开 .ipynb 文件，体验更好（自带代码补全和变量查看）。</div>
+</div>
+
+<h2>常见问题</h2>
+<div class="step-card">
+  <h4>Q: pip install 很慢怎么办？</h4>
+  <p style="color:var(--text-muted); font-size:0.85rem;">使用国内镜像源：</p>
+  <pre><span class="cmd">pip install numpy -i https://pypi.tuna.tsinghua.edu.cn/simple</span></pre>
+</div>
+<div class="step-card">
+  <h4>Q: 没有 GPU 能学吗？</h4>
+  <p style="color:var(--text-muted); font-size:0.85rem;">完全可以！第1-7章的代码在 CPU 上几秒就能跑完。第8章调用 API 不需要本地 GPU。只有训练大模型才需要 GPU。</p>
+</div>
+<div class="step-card">
+  <h4>Q: 虚拟环境怎么退出和重新进入？</h4>
+  <pre><span class="cmd">deactivate</span>  <span class="comment"># 退出虚拟环境</span>
+<span class="cmd">source venv/bin/activate</span>  <span class="comment"># Mac/Linux 重新进入</span>
+<span class="cmd">venv\Scripts\activate</span>  <span class="comment"># Windows 重新进入</span></pre>
+</div>
+
+</div>
+
+<script>
+function switchOS(os) {
+  document.querySelectorAll('.os-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.os-panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('os-' + os).classList.add('active');
+}
+</script>
+
+</body>
+</html>

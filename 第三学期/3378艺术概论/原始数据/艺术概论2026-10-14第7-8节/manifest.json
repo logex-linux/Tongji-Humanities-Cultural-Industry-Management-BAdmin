@@ -1,0 +1,19 @@
+{
+  "course_id": "99437",
+  "sub_id": "1970857",
+  "course_title": "艺术概论",
+  "session_title": "2026-10-14第7-8节",
+  "base_name": "艺术概论2026-10-14第7-8节",
+  "duration_seconds": 5987.266944,
+  "artifacts": {
+    "screenshots": "<本地学习目录>/第三学期/3378艺术概论/原始数据/艺术概论2026-10-14第7-8节/课堂截图",
+    "notes": "<本地学习目录>/第三学期/3378艺术概论/原始数据/艺术概论2026-10-14第7-8节/课程笔记.md",
+    "timeline": "<本地学习目录>/第三学期/3378艺术概论/原始数据/艺术概论2026-10-14第7-8节/课程时间线.txt",
+    "slides": "",
+    "transcript_html": "../../艺术概论2026-10-14第7-8节.html#full-transcript"
+  },
+  "notes_master": "课程笔记.md",
+  "transcript_storage": "inline_html",
+  "transcript_segments": 50,
+  "transcript_files_removed_after_verification": true
+}

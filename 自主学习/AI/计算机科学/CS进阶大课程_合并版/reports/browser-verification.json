@@ -1,0 +1,5843 @@
+{
+  "status": "PASS",
+  "html_sha256": "d9266603d479df84c29f9060ea94fa7037724b15961dd0d29f3fc4f2034c7024",
+  "checks": [
+    {
+      "name": "Landing renders actual curriculum",
+      "pass": true
+    },
+    {
+      "name": "29 courses, 14 required, 15 elective",
+      "pass": true
+    },
+    {
+      "name": "269 main units, 372 aligned readings",
+      "pass": true
+    },
+    {
+      "name": "Catalog shows 29 courses",
+      "pass": true
+    },
+    {
+      "name": "Filter required",
+      "pass": true
+    },
+    {
+      "name": "Filter elective",
+      "pass": true
+    },
+    {
+      "name": "Filter all",
+      "pass": true
+    },
+    {
+      "name": "Catalog topic search",
+      "pass": true
+    },
+    {
+      "name": "Catalog empty state",
+      "pass": true
+    },
+    {
+      "name": "Bookmark filter",
+      "pass": true
+    },
+    {
+      "name": "Course units AI401",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction AI401",
+      "pass": true
+    },
+    {
+      "name": "Course units AI402",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction AI402",
+      "pass": true
+    },
+    {
+      "name": "Course units AI403",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction AI403",
+      "pass": true
+    },
+    {
+      "name": "Course units AI404",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction AI404",
+      "pass": true
+    },
+    {
+      "name": "Course units CS101",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction CS101",
+      "pass": true
+    },
+    {
+      "name": "Course units CS102",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction CS102",
+      "pass": true
+    },
+    {
+      "name": "Course units CS103",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction CS103",
+      "pass": true
+    },
+    {
+      "name": "Course units CS104",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction CS104",
+      "pass": true
+    },
+    {
+      "name": "Course units CS201",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction CS201",
+      "pass": true
+    },
+    {
+      "name": "Course units CS202",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction CS202",
+      "pass": true
+    },
+    {
+      "name": "Course units CS203",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction CS203",
+      "pass": true
+    },
+    {
+      "name": "Course units CS204",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction CS204",
+      "pass": true
+    },
+    {
+      "name": "Course units CS205",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction CS205",
+      "pass": true
+    },
+    {
+      "name": "Course units CS206",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction CS206",
+      "pass": true
+    },
+    {
+      "name": "Course units CS301",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction CS301",
+      "pass": true
+    },
+    {
+      "name": "Course units CS302",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction CS302",
+      "pass": true
+    },
+    {
+      "name": "Course units CS303",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction CS303",
+      "pass": true
+    },
+    {
+      "name": "Course units CS399",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction CS399",
+      "pass": true
+    },
+    {
+      "name": "Course units CT434",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction CT434",
+      "pass": true
+    },
+    {
+      "name": "Course units DA432",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction DA432",
+      "pass": true
+    },
+    {
+      "name": "Course units DA433",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction DA433",
+      "pass": true
+    },
+    {
+      "name": "Course units HCI431",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction HCI431",
+      "pass": true
+    },
+    {
+      "name": "Course units SE411",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction SE411",
+      "pass": true
+    },
+    {
+      "name": "Course units SE412",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction SE412",
+      "pass": true
+    },
+    {
+      "name": "Course units SE413",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction SE413",
+      "pass": true
+    },
+    {
+      "name": "Course units SE414",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction SE414",
+      "pass": true
+    },
+    {
+      "name": "Course units SE415",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction SE415",
+      "pass": true
+    },
+    {
+      "name": "Course units TH421",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction TH421",
+      "pass": true
+    },
+    {
+      "name": "Course units TH422",
+      "pass": true
+    },
+    {
+      "name": "Editorial introduction TH422",
+      "pass": true
+    },
+    {
+      "name": "Tests precede refactoring",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI401-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI401-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI401-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI401-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI401-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI401-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI401-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI401-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI401-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI401-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI401-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI401-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI401-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI401-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI401-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI401-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI401-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI401-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI401-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI401-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI401-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI401-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI401-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI401-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI401-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI401-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI401-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI401-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI401-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI401-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI401-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI401-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI401-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI401-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI401-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI401-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI401-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI401-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI401-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI401-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI401-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI401-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI401-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI401-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI401-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI402-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI402-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI402-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI402-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI402-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI402-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI402-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI402-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI402-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI402-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI402-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI402-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI402-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI402-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI402-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI402-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI402-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI402-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI402-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI402-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI402-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI402-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI402-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI402-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI402-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI402-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI402-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI402-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI402-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI402-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI402-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI402-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI402-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI402-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI402-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI402-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI402-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI402-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI402-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI402-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI402-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI402-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI402-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI402-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI402-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI403-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI403-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI403-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI403-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI403-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI403-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI403-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI403-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI403-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI403-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI403-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI403-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI403-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI403-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI403-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI403-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI403-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI403-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI403-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI403-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI403-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI403-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI403-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI403-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI403-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI403-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI403-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI403-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI403-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI403-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI403-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI403-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI403-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI403-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI403-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI403-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI403-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI403-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI403-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI403-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI403-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI403-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI403-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI403-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI403-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI404-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI404-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI404-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI404-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI404-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI404-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI404-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI404-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI404-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI404-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI404-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI404-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI404-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI404-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI404-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI404-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI404-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI404-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI404-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI404-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI404-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI404-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI404-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI404-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI404-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI404-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI404-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI404-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI404-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI404-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI404-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI404-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI404-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI404-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI404-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI404-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI404-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI404-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI404-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI404-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route AI404-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings AI404-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content AI404-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace AI404-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected AI404-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS101-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS101-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS101-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS101-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS101-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS101-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS101-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS101-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS101-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS101-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS101-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS101-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS101-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS101-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS101-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS101-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS101-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS101-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS101-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS101-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS101-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS101-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS101-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS101-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS101-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS101-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS101-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS101-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS101-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS101-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS101-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS101-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS101-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS101-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS101-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS101-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS101-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS101-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS101-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS101-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS102-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS102-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS102-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS102-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS102-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS102-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS102-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS102-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS102-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS102-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS102-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS102-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS102-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS102-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS102-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS102-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS102-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS102-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS102-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS102-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS102-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS102-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS102-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS102-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS102-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS102-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS102-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS102-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS102-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS102-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS102-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS102-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS102-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS102-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS102-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS102-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS102-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS102-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS102-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS102-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS102-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS102-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS102-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS102-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS102-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS102-U10",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS102-U10",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS102-U10",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS102-U10",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS102-U10",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS102-U11",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS102-U11",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS102-U11",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS102-U11",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS102-U11",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS102-U12",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS102-U12",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS102-U12",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS102-U12",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS102-U12",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS103-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS103-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS103-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS103-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS103-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS103-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS103-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS103-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS103-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS103-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS103-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS103-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS103-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS103-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS103-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS103-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS103-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS103-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS103-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS103-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS103-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS103-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS103-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS103-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS103-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS103-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS103-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS103-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS103-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS103-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS103-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS103-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS103-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS103-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS103-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS103-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS103-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS103-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS103-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS103-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS103-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS103-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS103-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS103-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS103-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS103-U10",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS103-U10",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS103-U10",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS103-U10",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS103-U10",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS104-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS104-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS104-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS104-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS104-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS104-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS104-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS104-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS104-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS104-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS104-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS104-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS104-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS104-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS104-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS104-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS104-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS104-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS104-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS104-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS104-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS104-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS104-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS104-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS104-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS104-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS104-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS104-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS104-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS104-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS104-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS104-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS104-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS104-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS104-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS104-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS104-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS104-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS104-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS104-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS104-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS104-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS104-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS104-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS104-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS104-U10",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS104-U10",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS104-U10",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS104-U10",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS104-U10",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS201-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS201-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS201-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS201-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS201-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS201-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS201-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS201-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS201-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS201-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS201-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS201-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS201-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS201-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS201-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS201-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS201-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS201-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS201-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS201-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS201-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS201-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS201-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS201-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS201-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS201-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS201-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS201-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS201-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS201-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS201-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS201-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS201-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS201-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS201-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS201-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS201-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS201-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS201-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS201-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS201-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS201-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS201-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS201-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS201-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS201-U10",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS201-U10",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS201-U10",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS201-U10",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS201-U10",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS202-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS202-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS202-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS202-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS202-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS202-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS202-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS202-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS202-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS202-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS202-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS202-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS202-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS202-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS202-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS202-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS202-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS202-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS202-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS202-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS202-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS202-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS202-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS202-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS202-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS202-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS202-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS202-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS202-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS202-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS202-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS202-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS202-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS202-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS202-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS202-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS202-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS202-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS202-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS202-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS202-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS202-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS202-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS202-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS202-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS202-U10",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS202-U10",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS202-U10",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS202-U10",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS202-U10",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS203-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS203-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS203-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS203-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS203-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS203-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS203-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS203-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS203-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS203-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS203-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS203-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS203-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS203-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS203-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS203-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS203-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS203-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS203-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS203-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS203-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS203-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS203-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS203-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS203-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS203-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS203-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS203-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS203-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS203-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS203-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS203-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS203-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS203-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS203-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS203-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS203-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS203-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS203-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS203-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS203-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS203-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS203-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS203-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS203-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS203-U10",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS203-U10",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS203-U10",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS203-U10",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS203-U10",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS204-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS204-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS204-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS204-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS204-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS204-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS204-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS204-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS204-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS204-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS204-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS204-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS204-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS204-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS204-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS204-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS204-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS204-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS204-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS204-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS204-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS204-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS204-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS204-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS204-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS204-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS204-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS204-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS204-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS204-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS204-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS204-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS204-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS204-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS204-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS204-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS204-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS204-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS204-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS204-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS204-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS204-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS204-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS204-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS204-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS205-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS205-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS205-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS205-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS205-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS205-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS205-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS205-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS205-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS205-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS205-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS205-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS205-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS205-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS205-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS205-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS205-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS205-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS205-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS205-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS205-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS205-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS205-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS205-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS205-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS205-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS205-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS205-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS205-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS205-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS205-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS205-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS205-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS205-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS205-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS205-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS205-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS205-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS205-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS205-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS205-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS205-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS205-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS205-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS205-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS206-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS206-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS206-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS206-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS206-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS206-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS206-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS206-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS206-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS206-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS206-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS206-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS206-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS206-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS206-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS206-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS206-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS206-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS206-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS206-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS206-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS206-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS206-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS206-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS206-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS206-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS206-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS206-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS206-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS206-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS206-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS206-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS206-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS206-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS206-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS206-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS206-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS206-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS206-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS206-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS206-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS206-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS206-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS206-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS206-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS206-U10",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS206-U10",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS206-U10",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS206-U10",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS206-U10",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS301-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS301-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS301-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS301-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS301-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS301-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS301-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS301-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS301-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS301-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS301-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS301-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS301-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS301-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS301-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS301-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS301-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS301-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS301-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS301-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS301-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS301-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS301-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS301-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS301-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS301-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS301-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS301-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS301-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS301-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS301-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS301-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS301-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS301-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS301-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS301-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS301-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS301-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS301-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS301-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS301-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS301-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS301-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS301-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS301-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS302-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS302-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS302-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS302-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS302-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS302-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS302-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS302-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS302-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS302-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS302-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS302-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS302-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS302-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS302-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS302-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS302-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS302-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS302-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS302-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS302-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS302-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS302-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS302-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS302-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS302-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS302-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS302-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS302-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS302-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS302-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS302-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS302-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS302-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS302-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS302-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS302-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS302-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS302-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS302-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS302-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS302-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS302-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS302-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS302-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS303-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS303-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS303-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS303-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS303-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS303-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS303-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS303-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS303-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS303-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS303-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS303-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS303-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS303-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS303-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS303-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS303-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS303-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS303-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS303-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS303-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS303-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS303-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS303-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS303-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS303-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS303-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS303-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS303-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS303-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS303-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS303-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS303-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS303-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS303-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS303-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS303-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS303-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS303-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS303-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS303-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS303-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS303-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS303-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS303-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS303-U10",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS303-U10",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS303-U10",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS303-U10",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS303-U10",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS399-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS399-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS399-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS399-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS399-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS399-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS399-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS399-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS399-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS399-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS399-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS399-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS399-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS399-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS399-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS399-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS399-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS399-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS399-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS399-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS399-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS399-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS399-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS399-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS399-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS399-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS399-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS399-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS399-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS399-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS399-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS399-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS399-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS399-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS399-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CS399-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CS399-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CS399-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CS399-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CS399-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CT434-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CT434-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CT434-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CT434-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CT434-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CT434-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CT434-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CT434-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CT434-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CT434-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CT434-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CT434-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CT434-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CT434-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CT434-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CT434-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CT434-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CT434-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CT434-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CT434-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CT434-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CT434-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CT434-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CT434-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CT434-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CT434-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CT434-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CT434-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CT434-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CT434-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CT434-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CT434-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CT434-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CT434-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CT434-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CT434-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CT434-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CT434-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CT434-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CT434-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route CT434-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings CT434-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content CT434-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace CT434-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected CT434-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route DA432-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings DA432-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content DA432-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace DA432-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected DA432-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route DA432-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings DA432-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content DA432-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace DA432-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected DA432-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route DA432-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings DA432-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content DA432-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace DA432-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected DA432-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route DA432-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings DA432-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content DA432-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace DA432-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected DA432-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route DA432-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings DA432-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content DA432-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace DA432-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected DA432-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route DA432-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings DA432-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content DA432-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace DA432-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected DA432-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route DA432-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings DA432-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content DA432-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace DA432-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected DA432-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route DA432-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings DA432-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content DA432-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace DA432-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected DA432-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route DA432-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings DA432-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content DA432-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace DA432-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected DA432-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route DA433-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings DA433-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content DA433-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace DA433-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected DA433-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route DA433-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings DA433-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content DA433-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace DA433-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected DA433-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route DA433-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings DA433-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content DA433-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace DA433-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected DA433-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route DA433-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings DA433-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content DA433-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace DA433-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected DA433-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route DA433-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings DA433-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content DA433-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace DA433-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected DA433-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route DA433-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings DA433-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content DA433-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace DA433-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected DA433-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route DA433-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings DA433-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content DA433-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace DA433-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected DA433-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route DA433-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings DA433-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content DA433-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace DA433-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected DA433-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route DA433-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings DA433-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content DA433-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace DA433-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected DA433-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route HCI431-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings HCI431-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content HCI431-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace HCI431-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected HCI431-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route HCI431-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings HCI431-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content HCI431-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace HCI431-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected HCI431-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route HCI431-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings HCI431-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content HCI431-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace HCI431-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected HCI431-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route HCI431-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings HCI431-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content HCI431-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace HCI431-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected HCI431-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route HCI431-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings HCI431-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content HCI431-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace HCI431-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected HCI431-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route HCI431-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings HCI431-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content HCI431-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace HCI431-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected HCI431-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route HCI431-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings HCI431-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content HCI431-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace HCI431-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected HCI431-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route HCI431-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings HCI431-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content HCI431-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace HCI431-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected HCI431-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route HCI431-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings HCI431-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content HCI431-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace HCI431-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected HCI431-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE411-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE411-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE411-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE411-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE411-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE411-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE411-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE411-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE411-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE411-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE411-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE411-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE411-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE411-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE411-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE411-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE411-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE411-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE411-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE411-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE411-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE411-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE411-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE411-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE411-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE411-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE411-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE411-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE411-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE411-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE411-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE411-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE411-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE411-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE411-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE411-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE411-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE411-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE411-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE411-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE411-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE411-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE411-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE411-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE411-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE412-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE412-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE412-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE412-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE412-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE412-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE412-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE412-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE412-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE412-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE412-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE412-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE412-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE412-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE412-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE412-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE412-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE412-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE412-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE412-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE412-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE412-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE412-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE412-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE412-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE412-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE412-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE412-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE412-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE412-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE412-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE412-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE412-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE412-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE412-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE412-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE412-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE412-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE412-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE412-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE412-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE412-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE412-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE412-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE412-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE413-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE413-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE413-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE413-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE413-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE413-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE413-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE413-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE413-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE413-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE413-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE413-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE413-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE413-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE413-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE413-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE413-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE413-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE413-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE413-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE413-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE413-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE413-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE413-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE413-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE413-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE413-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE413-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE413-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE413-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE413-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE413-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE413-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE413-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE413-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE413-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE413-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE413-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE413-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE413-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE413-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE413-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE413-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE413-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE413-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE414-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE414-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE414-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE414-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE414-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE414-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE414-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE414-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE414-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE414-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE414-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE414-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE414-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE414-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE414-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE414-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE414-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE414-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE414-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE414-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE414-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE414-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE414-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE414-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE414-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE414-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE414-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE414-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE414-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE414-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE414-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE414-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE414-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE414-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE414-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE414-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE414-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE414-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE414-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE414-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE414-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE414-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE414-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE414-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE414-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE415-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE415-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE415-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE415-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE415-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE415-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE415-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE415-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE415-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE415-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE415-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE415-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE415-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE415-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE415-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE415-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE415-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE415-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE415-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE415-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE415-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE415-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE415-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE415-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE415-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE415-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE415-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE415-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE415-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE415-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE415-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE415-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE415-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE415-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE415-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE415-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE415-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE415-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE415-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE415-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route SE415-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings SE415-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content SE415-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace SE415-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected SE415-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route TH421-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings TH421-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content TH421-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace TH421-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected TH421-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route TH421-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings TH421-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content TH421-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace TH421-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected TH421-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route TH421-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings TH421-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content TH421-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace TH421-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected TH421-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route TH421-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings TH421-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content TH421-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace TH421-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected TH421-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route TH421-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings TH421-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content TH421-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace TH421-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected TH421-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route TH421-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings TH421-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content TH421-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace TH421-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected TH421-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route TH421-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings TH421-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content TH421-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace TH421-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected TH421-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route TH421-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings TH421-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content TH421-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace TH421-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected TH421-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route TH421-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings TH421-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content TH421-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace TH421-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected TH421-U09",
+      "pass": true
+    },
+    {
+      "name": "Lesson route TH422-U01",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings TH422-U01",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content TH422-U01",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace TH422-U01",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected TH422-U01",
+      "pass": true
+    },
+    {
+      "name": "Lesson route TH422-U02",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings TH422-U02",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content TH422-U02",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace TH422-U02",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected TH422-U02",
+      "pass": true
+    },
+    {
+      "name": "Lesson route TH422-U03",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings TH422-U03",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content TH422-U03",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace TH422-U03",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected TH422-U03",
+      "pass": true
+    },
+    {
+      "name": "Lesson route TH422-U04",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings TH422-U04",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content TH422-U04",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace TH422-U04",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected TH422-U04",
+      "pass": true
+    },
+    {
+      "name": "Lesson route TH422-U05",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings TH422-U05",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content TH422-U05",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace TH422-U05",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected TH422-U05",
+      "pass": true
+    },
+    {
+      "name": "Lesson route TH422-U06",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings TH422-U06",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content TH422-U06",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace TH422-U06",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected TH422-U06",
+      "pass": true
+    },
+    {
+      "name": "Lesson route TH422-U07",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings TH422-U07",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content TH422-U07",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace TH422-U07",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected TH422-U07",
+      "pass": true
+    },
+    {
+      "name": "Lesson route TH422-U08",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings TH422-U08",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content TH422-U08",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace TH422-U08",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected TH422-U08",
+      "pass": true
+    },
+    {
+      "name": "Lesson route TH422-U09",
+      "pass": true
+    },
+    {
+      "name": "Aligned deep readings TH422-U09",
+      "pass": true
+    },
+    {
+      "name": "Substantive primary content TH422-U09",
+      "pass": true
+    },
+    {
+      "name": "Exercise workspace TH422-U09",
+      "pass": true
+    },
+    {
+      "name": "Own answer initially protected TH422-U09",
+      "pass": true
+    },
+    {
+      "name": "First logic unit does not absorb later truth-table content",
+      "pass": true
+    },
+    {
+      "name": "Notes survive reload",
+      "pass": true
+    },
+    {
+      "name": "Reading is recorded separately",
+      "pass": true
+    },
+    {
+      "name": "Draft survives reload",
+      "pass": true
+    },
+    {
+      "name": "Submission creates evidence feedback",
+      "pass": true
+    },
+    {
+      "name": "Only submitted answer unlocks",
+      "pass": true
+    },
+    {
+      "name": "Other unit answer stays locked",
+      "pass": true
+    },
+    {
+      "name": "Reference reading taints later claimed independence",
+      "pass": true
+    },
+    {
+      "name": "Global topic search",
+      "pass": true
+    },
+    {
+      "name": "Search excludes protected answers",
+      "pass": true
+    },
+    {
+      "name": "Search text escapes HTML",
+      "pass": true
+    },
+    {
+      "name": "Six core learning phases",
+      "pass": true
+    },
+    {
+      "name": "Rewritten logarithm proof included",
+      "pass": true
+    },
+    {
+      "name": "New operation-count example included",
+      "pass": true
+    },
+    {
+      "name": "Matrix backprop derivation integrated",
+      "pass": true
+    },
+    {
+      "name": "Readable external resource entries preserved",
+      "pass": true
+    },
+    {
+      "name": "All integrated TeX formulas parse",
+      "pass": true,
+      "detail": "0"
+    },
+    {
+      "name": "All embedded document links have targets",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "name": "Study records display own evidence",
+      "pass": true
+    },
+    {
+      "name": "Backup export is valid JSON",
+      "pass": true
+    },
+    {
+      "name": "Invalid import leaves state unchanged",
+      "pass": true
+    },
+    {
+      "name": "Backup import works",
+      "pass": true
+    },
+    {
+      "name": "Dark theme persists",
+      "pass": true
+    },
+    {
+      "name": "No page overflow home 390",
+      "pass": true,
+      "detail": "{\"viewport\":390,\"width\":390}"
+    },
+    {
+      "name": "No page overflow catalog 390",
+      "pass": true,
+      "detail": "{\"viewport\":390,\"width\":390}"
+    },
+    {
+      "name": "No page overflow course 390",
+      "pass": true,
+      "detail": "{\"viewport\":390,\"width\":390}"
+    },
+    {
+      "name": "No page overflow causal-reader 390",
+      "pass": true,
+      "detail": "{\"viewport\":390,\"width\":390}"
+    },
+    {
+      "name": "Mobile navigation opens 390",
+      "pass": true
+    },
+    {
+      "name": "Escape closes navigation 390",
+      "pass": true
+    },
+    {
+      "name": "No page overflow home 320",
+      "pass": true,
+      "detail": "{\"viewport\":320,\"width\":320}"
+    },
+    {
+      "name": "No page overflow catalog 320",
+      "pass": true,
+      "detail": "{\"viewport\":320,\"width\":320}"
+    },
+    {
+      "name": "No page overflow course 320",
+      "pass": true,
+      "detail": "{\"viewport\":320,\"width\":320}"
+    },
+    {
+      "name": "No page overflow causal-reader 320",
+      "pass": true,
+      "detail": "{\"viewport\":320,\"width\":320}"
+    },
+    {
+      "name": "Mobile navigation opens 320",
+      "pass": true
+    },
+    {
+      "name": "Escape closes navigation 320",
+      "pass": true
+    },
+    {
+      "name": "No JavaScript errors",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "name": "No external resource requests",
+      "pass": true,
+      "detail": "[]"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "screenshots": [
+    "output/playwright/home-1440.png",
+    "output/playwright/path-1440.png",
+    "output/playwright/algorithm-reader-1440.png",
+    "output/playwright/backprop-1440.png",
+    "output/playwright/records-dark-1440.png",
+    "output/playwright/home-390.png",
+    "output/playwright/catalog-390.png",
+    "output/playwright/course-390.png",
+    "output/playwright/causal-reader-390.png",
+    "output/playwright/home-320.png",
+    "output/playwright/catalog-320.png",
+    "output/playwright/course-320.png",
+    "output/playwright/causal-reader-320.png"
+  ],
+  "formulas": {
+    "total": 3407,
+    "errors": []
+  }
+}

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>赛博遗嘱Agent</title>
+<style>
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+    background: #fff;
+    color: #1e293b;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Page separator for PDF */
+  .page-break {
+    page-break-before: always;
+  }
+
+  /* ── Page 1: Cover ── */
+  .cover {
+    background: linear-gradient(170deg, #0f0f1a 0%, #1a1830 30%, #1f1d3a 55%, #252245 100%);
+    color: #e2e8f0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -120px;
+    right: -80px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    left: -40px;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .cover-content {
+    position: relative;
+    z-index: 1;
+    padding: 40px 48px 48px;
+    text-align: center;
+  }
+
+  .hero-image {
+    margin-bottom: 28px;
+  }
+
+  .hero-image img {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 80px rgba(139,92,246,0.08);
+  }
+
+  .title {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #c4b5fd 0%, #93c5fd 40%, #86efac 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    color: #a5b4fc;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  .tagline {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 32px;
+  }
+
+  .compare {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: 32px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .compare-col {
+    flex: 1;
+    padding: 0 20px;
+    text-align: left;
+  }
+
+  .compare-col.left {
+    text-align: right;
+  }
+
+  .compare-col.right {
+    text-align: left;
+  }
+
+  .compare-item {
+    font-size: 14px;
+    line-height: 2.2;
+    color: #94a3b8;
+  }
+
+  .compare-col.left .compare-item { color: #f87171; }
+  .compare-col.right .compare-item { color: #6ee7b7; }
+
+  .compare-divider {
+    width: 1px;
+    background: linear-gradient(180deg, transparent 0%, rgba(148,163,184,0.25) 30%, rgba(148,163,184,0.25) 70%, transparent 100%);
+    align-self: stretch;
+    flex-shrink: 0;
+  }
+
+  .what-is {
+    margin-bottom: 28px;
+  }
+
+  .what-is-label {
+    font-size: 13px;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .what-is-text {
+    font-size: 14px;
+    color: #94a3b8;
+    line-height: 1.8;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .quote-block {
+    display: inline-block;
+    border-top: 1px solid rgba(167,139,250,0.25);
+    padding-top: 20px;
+    margin-bottom: 12px;
+  }
+
+  .quote {
+    font-size: 15px;
+    color: #c4b5fd;
+    letter-spacing: 1px;
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  .ai-badge {
+    font-size: 11px;
+    color: #475569;
+    letter-spacing: 1px;
+  }
+
+  /* ── Page 2: What It Does ── */
+  .page-what {
+    background: #fff;
+    padding: 48px 48px 56px;
+  }
+
+  .page-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+
+  .page-title .accent {
+    display: inline-block;
+    width: 5px;
+    height: 22px;
+    border-radius: 3px;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+
+  .accent-purple { background: linear-gradient(180deg, #a78bfa, #7c3aed); }
+  .accent-amber  { background: linear-gradient(180deg, #f59e0b, #d97706); }
+
+  .cards {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .card {
+    flex: 1;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+    border: 1px solid #f1f5f9;
+    transition: none;
+  }
+
+  .card-img {
+    padding: 16px 14px 6px;
+    text-align: center;
+  }
+
+  .card-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  .card-title {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+    padding: 0 12px 2px;
+  }
+
+  .card-desc {
+    text-align: center;
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.7;
+    padding: 0 12px 14px;
+  }
+
+  .scenarios {
+    margin-bottom: 24px;
+  }
+
+  .scenario {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    border-left: 3px solid #e2e8f0;
+  }
+
+  .scenario.s1 { border-left-color: #a78bfa; }
+  .scenario.s2 { border-left-color: #60a5fa; }
+  .scenario.s3 { border-left-color: #34d399; }
+
+  .scenario-label {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .scenario.s1 .scenario-label { color: #7c3aed; }
+  .scenario.s2 .scenario-label { color: #2563eb; }
+  .scenario.s3 .scenario-label { color: #059669; }
+
+  .scenario-text {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.7;
+  }
+
+  .tags {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin: 0 4px;
+  }
+  .tag.t1 { background: #ede9fe; color: #7c3aed; }
+  .tag.t2 { background: #dbeafe; color: #2563eb; }
+  .tag.t3 { background: #d1fae5; color: #059669; }
+
+  .page-footer-note {
+    text-align: center;
+    font-size: 13px;
+    color: #94a3b8;
+  }
+
+  /* ── Page 3: How It Works ── */
+  .page-how {
+    background: linear-gradient(180deg, #fafafa 0%, #f5f5f5 100%);
+    padding: 48px 48px 56px;
+  }
+
+  .process-image {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .process-image img {
+    width: 100%;
+    max-width: 620px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+
+  .steps {
+    margin-bottom: 24px;
+  }
+
+  .step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .step-num {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 38px;
+    margin-right: 14px;
+  }
+
+  .step:nth-child(1) .step-num { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+  .step:nth-child(2) .step-num { background: linear-gradient(135deg, #60a5fa, #2563eb); }
+  .step:nth-child(3) .step-num { background: linear-gradient(135deg, #f59e0b, #d97706); }
+  .step:nth-child(4) .step-num { background: linear-gradient(135deg, #34d399, #059669); }
+
+  .step-content {}
+  .step-name { font-size: 15px; font-weight: 700; color: #1e293b; margin-bottom: 2px; }
+  .step-desc { font-size: 13px; color: #64748b; line-height: 1.6; }
+
+  .tech-stack {
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    margin-bottom: 20px;
+  }
+
+  .tech-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 6px;
+  }
+
+  .tech-main {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.7;
+  }
+
+  .tech-sub {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 4px;
+  }
+
+  .ai-badge-bottom {
+    text-align: center;
+    font-size: 11px;
+    color: #94a3b8;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════ 第1页 · 封面 ══════ -->
+<div class="page cover">
+  <div class="cover-content">
+    <div class="hero-image">
+      <img src="images/图A.png" alt="">
+    </div>
+
+    <h1 class="title">赛博遗嘱Agent</h1>
+    <p class="subtitle">让缺席不再是沉默</p>
+    <p class="tagline">一个替你继续说话的小东西</p>
+
+    <div class="compare">
+      <div class="compare-col left">
+        <div class="compare-item">冷冰冰的法律遗嘱</div>
+        <div class="compare-item">简单的定时发送</div>
+        <div class="compare-item">AI在模仿人类</div>
+      </div>
+      <div class="compare-divider"></div>
+      <div class="compare-col right">
+        <div class="compare-item">写给世界的温情长信</div>
+        <div class="compare-item">学会了你怎么说话的人</div>
+        <div class="compare-item">你，用AI继续表达</div>
+      </div>
+    </div>
+
+    <div class="what-is">
+      <p class="what-is-label">它是什么</p>
+      <p class="what-is-text">一个记忆寄存 · 一个亲友的留念 · 一个学会了你怎么说话、替你表达的工具</p>
+    </div>
+
+    <div class="quote-block">
+      <p class="quote">我们终将离开，但想说的话，不该被一起带走。</p>
+    </div>
+
+    <p class="ai-badge">内容使用AI辅助生成</p>
+  </div>
+</div>
+
+<!-- ══════ 第2页 · 做什么 ══════ -->
+<div class="page page-break page-what">
+  <h2 class="page-title">
+    <span class="accent accent-purple"></span>
+    它能做什么
+  </h2>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-img"><img src="images/图B.png" alt=""></div>
+      <p class="card-title">预知信</p>
+      <p class="card-desc">录一段话，在孩子18岁生日那天，用你的语气发出去</p>
+    </div>
+    <div class="card">
+      <div class="card-img"><img src="images/图C.png" alt=""></div>
+      <p class="card-title">告别与回复</p>
+      <p class="card-desc">最后一条动态下的朋友留言，它替你一条一条地回</p>
+    </div>
+    <div class="card">
+      <div class="card-img"><img src="images/图D.png" alt=""></div>
+      <p class="card-title">日常幽灵</p>
+      <p class="card-desc">路过以前常去的店，弹出一条提醒——上次在这儿的故事</p>
+    </div>
+  </div>
+
+  <div class="scenarios">
+    <div class="scenario s1">
+      <p class="scenario-label">场景一</p>
+      <p class="scenario-text">你录了一段话，想在孩子18岁生日那天给他。到了那天，它会用你的语气发出去——不是一条冷冰冰的定时消息。</p>
+    </div>
+    <div class="scenario s2">
+      <p class="scenario-label">场景二</p>
+      <p class="scenario-text">你在社交平台发了最后一条动态，朋友在底下留言。它会用你说话的方式，替你回复那些比较亲近的人。不是群发，是一条一条回的。</p>
+    </div>
+    <div class="scenario s3">
+      <p class="scenario-label">场景三</p>
+      <p class="scenario-text">你爱人路过你们以前常去的店，手机可能弹出一条提醒——是你之前留下的，说上次在这儿点了什么，发生了什么小故事。</p>
+    </div>
+  </div>
+
+  <div class="tags">
+    <span class="tag t1">日期触发</span>
+    <span class="tag t2">多平台</span>
+    <span class="tag t3">地理触发</span>
+  </div>
+
+  <p class="page-footer-note">你平时怎么说话，它就怎么替你说话</p>
+</div>
+
+<!-- ══════ 第3页 · 怎么做 ══════ -->
+<div class="page page-break page-how">
+  <h2 class="page-title">
+    <span class="accent accent-amber"></span>
+    它怎么做到的
+  </h2>
+
+  <div class="process-image">
+    <img src="images/图E.png" alt="采集 → 蒸馏 → 封存 → 斟满">
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">①</div>
+      <div class="step-content">
+        <p class="step-name">采集原料</p>
+        <p class="step-desc">收集你平时的聊天记录、语音、写的东西，了解你是怎么说话的。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">②</div>
+      <div class="step-content">
+        <p class="step-name">蒸馏风味</p>
+        <p class="step-desc">用大模型分析你的用词习惯、说话节奏，学会你的表达方式。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">③</div>
+      <div class="step-content">
+        <p class="step-name">设定触发</p>
+        <p class="step-desc">你自己决定什么时候、对谁、说什么。比如某个人生日那天，或者到了某个地方。</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">④</div>
+      <div class="step-content">
+        <p class="step-name">斟满交付</p>
+        <p class="step-desc">到了触发条件，它就按你设定好的方式发出去——可能是文字，也可能是语音。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tech-stack">
+    <p class="tech-title">技术支撑</p>
+    <p class="tech-main">DeepSeek 大模型 · TTS 语音合成 · 多模态识别 · 事件触发引擎</p>
+    <p class="tech-sub">转换工具：Whisper · 豆包合成 &nbsp;|&nbsp; 识别处理：DeepSeek</p>
+  </div>
+
+  <p class="ai-badge-bottom">内容使用AI辅助生成</p>
+</div>
+
+</body>
+</html>

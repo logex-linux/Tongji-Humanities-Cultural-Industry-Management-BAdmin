@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 全栈教程 · 从向量到部署</title>
+<link rel="stylesheet" href="apple-design.css">
+<style>
+/* ---- index 专属样式 ---- */
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+
+/* 开场：左对齐排版 + 活的梯度下降 */
+.opening { padding: 72px 0 40px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+.opening .kicker {
+  font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 18px;
+}
+.opening h1 { font-size: clamp(2.6rem, 6vw, 4rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; margin: 0 0 20px; }
+.opening h1 .thin { font-weight: 300; color: var(--text-2); display: block; }
+.opening .lede { font-size: 1.05rem; color: var(--text-2); line-height: 1.7; max-width: 44ch; margin: 0 0 28px; }
+.opening .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent); color: #fff; padding: 12px 24px; border-radius: 980px;
+  font-size: 0.95rem; font-weight: 600; text-decoration: none;
+  transition: transform 0.12s var(--spring), background var(--dur) var(--spring), box-shadow var(--dur) var(--spring);
+  box-shadow: 0 2px 8px rgba(0,113,227,0.25);
+}
+.btn-primary:hover { background: var(--accent-hover); text-decoration: none; box-shadow: 0 4px 16px rgba(0,113,227,0.35); }
+.btn-primary:active { transform: scale(0.96); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--surface); color: var(--text); padding: 12px 24px; border-radius: 980px;
+  font-size: 0.95rem; font-weight: 600; text-decoration: none; border: 1px solid var(--border-strong);
+  transition: transform 0.12s var(--spring), background var(--dur) var(--spring);
+}
+.btn-secondary:hover { background: var(--surface-2); text-decoration: none; }
+.btn-secondary:active { transform: scale(0.96); }
+
+/* 活的梯度下降卡片 */
+.live-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lg); padding: 24px; position: relative; overflow: hidden;
+}
+.live-card .live-tag {
+  position: absolute; top: 16px; right: 16px; font-family: var(--font-mono);
+  font-size: 0.68rem; letter-spacing: 0.1em; color: var(--green); font-weight: 600;
+  display: flex; align-items: center; gap: 6px;
+}
+.live-card .live-tag::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+@keyframes pulse-dot { 0%,100% { opacity: 1; transform: scale(1);} 50% { opacity: 0.4; transform: scale(0.8);} }
+.live-card h3 { margin: 0 0 4px; font-size: 1rem; }
+.live-card .sub { font-size: 0.8rem; color: var(--text-3); margin: 0 0 12px; font-family: var(--font-mono); }
+.gd-ball { animation: gd-roll 5s var(--spring) infinite; }
+@keyframes gd-roll {
+  0%   { cx: 60;  cy: 52; }
+  18%  { cx: 100; cy: 92; }
+  38%  { cx: 132; cy: 128; }
+  58%  { cx: 156; cy: 152; }
+  78%  { cx: 172; cy: 164; }
+  100% { cx: 180; cy: 168; }
+}
+.gd-trail { stroke-dasharray: 300; animation: gd-draw 5s var(--spring) infinite; }
+@keyframes gd-draw { 0% { stroke-dashoffset: 300; } 80%,100% { stroke-dashoffset: 0; } }
+.loss-readout { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-2); margin-top: 10px; display: flex; justify-content: space-between; }
+.loss-readout b { color: var(--accent); }
+
+/* 事实条：横向滚动 strip，非均匀卡片 */
+.fact-strip {
+  display: flex; gap: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 18px 0; margin: 24px 0 8px; overflow-x: auto; scrollbar-width: none;
+}
+.fact-strip::-webkit-scrollbar { display: none; }
+.fact {
+  display: flex; align-items: baseline; gap: 10px; padding: 0 28px; white-space: nowrap;
+  border-right: 1px solid var(--border);
+}
+.fact:last-child { border-right: none; }
+.fact .n { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+.fact .l { font-size: 0.8rem; color: var(--text-3); }
+.fact.link { cursor: pointer; transition: background var(--dur) var(--spring); border-radius: var(--r-sm); }
+.fact.link:hover { background: var(--accent-soft); }
+.fact.link .n { color: var(--accent); }
+
+/* Part 分组 */
+.part { margin: 56px 0 20px; display: flex; align-items: baseline; gap: 16px; }
+.part .part-num { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; }
+.part .part-title { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.015em; }
+.part .part-desc { font-size: 0.85rem; color: var(--text-3); margin-left: auto; }
+
+/* 章节行：编辑式列表，非均匀卡片 */
+.ch-list { display: grid; gap: 12px; }
+.ch-row {
+  display: grid; grid-template-columns: 64px 1fr auto; gap: 20px; align-items: center;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+  padding: 20px 24px; text-decoration: none; color: var(--text); position: relative;
+  transition: transform var(--dur) var(--spring), box-shadow var(--dur) var(--spring), border-color var(--dur) var(--spring);
+  box-shadow: var(--shadow-sm);
+}
+.ch-row:hover { transform: translateX(6px); box-shadow: var(--shadow-md); border-color: var(--border-strong); text-decoration: none; }
+.ch-row:active { transform: translateX(6px) scale(0.995); }
+.ch-row .num {
+  font-family: var(--font-mono); font-size: 1.9rem; font-weight: 700; letter-spacing: -0.03em;
+  color: var(--text-3); line-height: 1; transition: color var(--dur) var(--spring);
+}
+.ch-row:hover .num { color: var(--accent); }
+.ch-row h3 { margin: 0 0 4px; font-size: 1.05rem; letter-spacing: -0.01em; }
+.ch-row .desc { font-size: 0.84rem; color: var(--text-2); margin: 0 0 8px; }
+.ch-row .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.ch-row .tag {
+  font-family: var(--font-mono); font-size: 0.68rem; padding: 3px 9px; border-radius: 980px;
+  background: rgba(0,0,0,0.045); color: var(--text-2); letter-spacing: 0.02em;
+}
+.ch-row .arrow { font-size: 1.3rem; color: var(--text-3); transition: transform var(--dur) var(--spring), color var(--dur) var(--spring); }
+.ch-row:hover .arrow { transform: translateX(4px); color: var(--accent); }
+.ch-row .done-mark {
+  position: absolute; top: 14px; right: 14px; width: 22px; height: 22px; border-radius: 50%;
+  border: 2px solid var(--border-strong); background: var(--surface); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; font-size: 11px; color: transparent;
+  transition: all 0.2s var(--spring); z-index: 2;
+}
+.ch-row .done-mark:hover { border-color: var(--green); transform: scale(1.1); }
+.ch-row .done-mark.done { background: var(--green); border-color: var(--green); color: #fff; }
+
+/* 进度条 */
+.progress-wrap { position: sticky; bottom: 20px; z-index: 90; margin: 32px 0; }
+.progress-card {
+  background: rgba(255,255,255,0.85); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow-lg);
+  padding: 16px 22px; display: flex; align-items: center; gap: 18px;
+}
+.progress-card .p-label { font-size: 0.82rem; font-weight: 600; white-space: nowrap; }
+.progress-card .p-track { flex: 1; height: 8px; background: rgba(0,0,0,0.07); border-radius: 980px; overflow: hidden; }
+.progress-card .p-fill { height: 100%; width: 0%; background: var(--accent); border-radius: 980px; transition: width 0.6s var(--spring-bounce); }
+.progress-card .p-text { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; color: var(--accent); white-space: nowrap; }
+
+/* 概念图 */
+.map-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow-sm); padding: 28px; margin: 24px 0; overflow-x: auto; }
+
+/* 前置要求 */
+.prereq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+.prereq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 18px 20px; box-shadow: var(--shadow-sm); }
+.prereq-item .pi-title { font-weight: 700; font-size: 0.92rem; margin-bottom: 4px; }
+.prereq-item .pi-desc { font-size: 0.82rem; color: var(--text-2); margin: 0; }
+.prereq-item.no { border-left: 3px solid var(--text-3); }
+.prereq-item.yes { border-left: 3px solid var(--green); }
+
+footer { border-top: 1px solid var(--border); margin-top: 72px; padding: 40px 0 60px; text-align: center; color: var(--text-3); font-size: 0.85rem; }
+footer .foot-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
+footer .foot-links a { color: var(--text-2); font-size: 0.85rem; }
+footer .foot-links a:hover { color: var(--accent); }
+
+@media (max-width: 820px) {
+  .opening { grid-template-columns: 1fr; gap: 32px; padding-top: 48px; }
+  .prereq-grid { grid-template-columns: 1fr; }
+  .ch-row { grid-template-columns: 48px 1fr; }
+  .ch-row .arrow { display: none; }
+  .ch-row .num { font-size: 1.4rem; }
+  .part .part-desc { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- 半透明材质导航 -->
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <span class="brand">AI 教程</span>
+    <a href="#part1">数学基础</a>
+    <a href="#part2">核心模型</a>
+    <a href="#part3">模型架构</a>
+    <a href="#part4">AI 应用</a>
+    <a href="#part5">工程化</a>
+    <a href="cheatsheet.html">公式速查</a>
+    <a href="glossary.html">术语表</a>
+    <a href="setup.html">环境准备</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- 开场：活的梯度下降 -->
+<section class="opening">
+  <div>
+    <div class="kicker">Machine Learning · Deep Learning · LLM</div>
+    <h1>AI 全栈教程<span class="thin">从向量到部署</span></h1>
+    <p class="lede">写给"会 Python + 简单微积分"的你。10 章，从最基础的向量一路讲到 Transformer 和生产部署，每一步都有图解、例题、动画和可以动手的实验。</p>
+    <div class="cta-row">
+      <a class="btn-primary" href="ch01-向量.html">开始学习 →</a>
+      <a class="btn-secondary" href="setup.html">先准备环境</a>
+    </div>
+  </div>
+
+  <div class="live-card">
+    <div class="live-tag">LIVE · 梯度下降</div>
+    <h3>AI 学习的本质</h3>
+    <div class="sub">w ← w − η · ∂L/∂w</div>
+    <svg width="100%" height="190" viewBox="0 0 360 190">
+      <line x1="20" y1="170" x2="340" y2="170" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
+      <line x1="20" y1="170" x2="20" y2="15" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
+      <text x="330" y="184" font-size="9" fill="#86868b" font-family="monospace">w</text>
+      <text x="8" y="20" font-size="9" fill="#86868b" font-family="monospace">L</text>
+      <path d="M 30 40 Q 110 40 150 130 Q 175 170 185 170 Q 195 170 220 130 Q 260 40 340 40"
+            fill="none" stroke="rgba(0,113,227,0.25)" stroke-width="2"/>
+      <path class="gd-trail" d="M 60 52 L 100 92 L 132 128 L 156 152 L 172 164 L 180 168"
+            fill="none" stroke="#0071e3" stroke-width="2" stroke-dasharray="4,3"/>
+      <circle class="gd-ball" cx="60" cy="52" r="7" fill="#0071e3"/>
+      <circle cx="185" cy="170" r="4" fill="#248a3d"/>
+      <text x="192" y="166" font-size="9" fill="#248a3d" font-family="monospace">最优</text>
+    </svg>
+    <div class="loss-readout"><span>每一步都沿"下坡"方向</span><span>Loss → <b>0</b></span></div>
+  </div>
+</section>
+
+<!-- 事实条 -->
+<div class="fact-strip">
+  <div class="fact"><span class="n">10</span><span class="l">章节</span></div>
+  <div class="fact"><span class="n">50+</span><span class="l">例题</span></div>
+  <div class="fact"><span class="n">100+</span><span class="l">习题</span></div>
+  <div class="fact"><span class="n">30+</span><span class="l">SVG 图解</span></div>
+  <div class="fact"><span class="n">10</span><span class="l">交互实验</span></div>
+  <div class="fact"><span class="n">~50h</span><span class="l">学习时间</span></div>
+  <div class="fact link" onclick="location.href='cheatsheet.html'"><span class="n">📋</span><span class="l">公式速查表</span></div>
+  <div class="fact link" onclick="location.href='glossary.html'"><span class="n">📖</span><span class="l">术语表</span></div>
+  <div class="fact link" onclick="location.href='setup.html'"><span class="n">🛠️</span><span class="l">环境准备</span></div>
+</div>
+
+<!-- 前置要求 -->
+<h2 style="border:none; margin-top:48px;">你只需要这些</h2>
+<div class="prereq-grid">
+  <div class="prereq-item yes"><div class="pi-title">🐍 Python 基础</div><p class="pi-desc">变量、列表、for 循环、函数——熟练即可</p></div>
+  <div class="prereq-item yes"><div class="pi-title">📐 简单微积分</div><p class="pi-desc">知道导数是"变化率"，不需要会解复杂积分</p></div>
+  <div class="prereq-item yes"><div class="pi-title">➗ 高中数学</div><p class="pi-desc">坐标系、加减乘除、平方根</p></div>
+  <div class="prereq-item no"><div class="pi-title">🚫 不需要</div><p class="pi-desc">线性代数课程、概率论课程、机器学习先修课</p></div>
+</div>
+
+<!-- Part 1 -->
+<div class="part" id="part1">
+  <span class="part-num">Part 1</span>
+  <span class="part-title">数学基础</span>
+  <span class="part-desc">第 1–3 章 · 向量 / 矩阵 / 梯度下降</span>
+</div>
+<div class="ch-list">
+  <a class="ch-row" href="ch01-向量.html" data-ch="ch01">
+    <div class="num">01</div>
+    <div><h3>向量——从箭头到数据表示</h3><p class="desc">点积、余弦相似度、为什么 AI 中万物皆向量</p>
+      <div class="tags"><span class="tag">点积</span><span class="tag">余弦相似度</span><span class="tag">NumPy</span><span class="tag">向量计算器</span></div></div>
+    <span class="arrow">→</span><span class="done-mark" title="标记完成">✓</span>
+  </a>
+  <a class="ch-row" href="ch02-矩阵.html" data-ch="ch02">
+    <div class="num">02</div>
+    <div><h3>矩阵——线性变换的机器</h3><p class="desc">矩阵×向量、维度匹配、神经网络中的矩阵</p>
+      <div class="tags"><span class="tag">矩阵乘法</span><span class="tag">线性变换</span><span class="tag">矩阵计算器</span></div></div>
+    <span class="arrow">→</span><span class="done-mark" title="标记完成">✓</span>
+  </a>
+  <a class="ch-row" href="ch03-梯度下降.html" data-ch="ch03">
+    <div class="num">03</div>
+    <div><h3>梯度下降——AI 如何"学习"</h3><p class="desc">损失函数、梯度、学习率，附可交互的下降实验</p>
+      <div class="tags"><span class="tag">MSE</span><span class="tag">梯度</span><span class="tag">学习率实验</span><span class="tag">推导</span></div></div>
+    <span class="arrow">→</span><span class="done-mark" title="标记完成">✓</span>
+  </a>
+</div>
+
+<!-- Part 2 -->
+<div class="part" id="part2">
+  <span class="part-num">Part 2</span>
+  <span class="part-title">核心模型</span>
+  <span class="part-desc">第 4–5 章 · 神经网络 / 反向传播</span>
+</div>
+<div class="ch-list">
+  <a class="ch-row" href="ch04-神经网络.html" data-ch="ch04">
+    <div class="num">04</div>
+    <div><h3>神经网络——从感知机到多层网络</h3><p class="desc">激活函数、前向传播、为什么需要非线性</p>
+      <div class="tags"><span class="tag">ReLU</span><span class="tag">前向传播</span><span class="tag">神经元计算器</span><span class="tag">PyTorch</span></div></div>
+    <span class="arrow">→</span><span class="done-mark" title="标记完成">✓</span>
+  </a>
+  <a class="ch-row" href="ch05-反向传播.html" data-ch="ch05">
+    <div class="num">05</div>
+    <div><h3>反向传播——链式法则的应用</h3><p class="desc">计算图、完整手算、梯度消失与"死神经元"</p>
+      <div class="tags"><span class="tag">链式法则</span><span class="tag">计算图</span><span class="tag">autograd</span></div></div>
+    <span class="arrow">→</span><span class="done-mark" title="标记完成">✓</span>
+  </a>
+</div>
+
+<!-- Part 3 -->
+<div class="part" id="part3">
+  <span class="part-num">Part 3</span>
+  <span class="part-title">模型架构</span>
+  <span class="part-desc">第 6–7 章 · CNN / Transformer</span>
+</div>
+<div class="ch-list">
+  <a class="ch-row" href="ch06-CNN.html" data-ch="ch06">
+    <div class="num">06</div>
+    <div><h3>CNN——图像识别的原理</h3><p class="desc">卷积、池化、ResNet，附可交互的卷积过程演示</p>
+      <div class="tags"><span class="tag">卷积</span><span class="tag">池化</span><span class="tag">卷积可视化</span><span class="tag">ResNet</span></div></div>
+    <span class="arrow">→</span><span class="done-mark" title="标记完成">✓</span>
+  </a>
+  <a class="ch-row" href="ch07-Transformer.html" data-ch="ch07">
+    <div class="num">07</div>
+    <div><h3>Transformer 与注意力机制</h3><p class="desc">Q/K/V、自注意力手算、可交互的注意力热力图</p>
+      <div class="tags"><span class="tag">Self-Attention</span><span class="tag">Q/K/V</span><span class="tag">注意力可视化</span></div></div>
+    <span class="arrow">→</span><span class="done-mark" title="标记完成">✓</span>
+  </a>
+</div>
+
+<!-- Part 4 -->
+<div class="part" id="part4">
+  <span class="part-num">Part 4</span>
+  <span class="part-title">AI 应用</span>
+  <span class="part-desc">第 8–9 章 · LLM / RAG</span>
+</div>
+<div class="ch-list">
+  <a class="ch-row" href="ch08-大语言模型.html" data-ch="ch08">
+    <div class="num">08</div>
+    <div><h3>大语言模型与 Prompt</h3><p class="desc">Token、训练三阶段、CoT、LoRA 微调</p>
+      <div class="tags"><span class="tag">Token</span><span class="tag">RLHF</span><span class="tag">Prompt</span><span class="tag">LoRA</span></div></div>
+    <span class="arrow">→</span><span class="done-mark" title="标记完成">✓</span>
+  </a>
+  <a class="ch-row" href="ch09-RAG与AI应用.html" data-ch="ch09">
+    <div class="num">09</div>
+    <div><h3>RAG 与 AI 应用开发</h3><p class="desc">Embedding、向量检索、Agent、Function Calling</p>
+      <div class="tags"><span class="tag">RAG</span><span class="tag">Embedding</span><span class="tag">Agent</span></div></div>
+    <span class="arrow">→</span><span class="done-mark" title="标记完成">✓</span>
+  </a>
+</div>
+
+<!-- Part 5 -->
+<div class="part" id="part5">
+  <span class="part-num">Part 5</span>
+  <span class="part-title">工程化</span>
+  <span class="part-desc">第 10 章 · 部署 / MLOps</span>
+</div>
+<div class="ch-list">
+  <a class="ch-row" href="ch10-模型部署.html" data-ch="ch10">
+    <div class="num">10</div>
+    <div><h3>模型部署与 MLOps</h3><p class="desc">Docker、FastAPI、量化、vLLM、监控</p>
+      <div class="tags"><span class="tag">Docker</span><span class="tag">FastAPI</span><span class="tag">量化</span><span class="tag">vLLM</span></div></div>
+    <span class="arrow">→</span><span class="done-mark" title="标记完成">✓</span>
+  </a>
+</div>
+
+<!-- 概念依赖图 -->
+<h2 style="margin-top:64px;">概念依赖关系</h2>
+<p style="color:var(--text-2); font-size:0.9rem;">实线 = 必须先学 · 虚线 = 有帮助。所有内容最终都回到第 1–3 章的向量、矩阵和梯度下降。</p>
+<div class="map-card">
+<svg width="100%" height="380" viewBox="0 0 760 380" style="min-width:640px;">
+  <defs><marker id="cm-a" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,6 2.5,0 5" fill="rgba(0,0,0,0.25)"/></marker></defs>
+  <line x1="100" y1="55" x2="100" y2="105" stroke="rgba(0,0,0,0.15)" stroke-width="1.5" marker-end="url(#cm-a)"/>
+  <line x1="230" y1="55" x2="230" y2="105" stroke="rgba(0,0,0,0.15)" stroke-width="1.5" marker-end="url(#cm-a)"/>
+  <line x1="360" y1="55" x2="230" y2="105" stroke="rgba(0,0,0,0.1)" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="100" y1="145" x2="100" y2="195" stroke="rgba(0,0,0,0.15)" stroke-width="1.5" marker-end="url(#cm-a)"/>
+  <line x1="230" y1="145" x2="230" y2="195" stroke="rgba(0,0,0,0.15)" stroke-width="1.5" marker-end="url(#cm-a)"/>
+  <line x1="100" y1="145" x2="230" y2="195" stroke="rgba(0,0,0,0.1)" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="100" y1="235" x2="100" y2="285" stroke="rgba(0,0,0,0.15)" stroke-width="1.5" marker-end="url(#cm-a)"/>
+  <line x1="230" y1="235" x2="230" y2="285" stroke="rgba(0,0,0,0.15)" stroke-width="1.5" marker-end="url(#cm-a)"/>
+  <line x1="230" y1="235" x2="100" y2="285" stroke="rgba(0,0,0,0.1)" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="100" y1="325" x2="100" y2="355" stroke="rgba(0,0,0,0.15)" stroke-width="1.5" marker-end="url(#cm-a)"/>
+  <line x1="230" y1="325" x2="230" y2="355" stroke="rgba(0,0,0,0.15)" stroke-width="1.5" marker-end="url(#cm-a)"/>
+  <line x1="360" y1="55" x2="500" y2="105" stroke="rgba(0,0,0,0.1)" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="230" y1="235" x2="500" y2="285" stroke="rgba(0,0,0,0.1)" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="500" y1="145" x2="500" y2="195" stroke="rgba(0,0,0,0.15)" stroke-width="1.5" marker-end="url(#cm-a)"/>
+  <line x1="500" y1="235" x2="500" y2="285" stroke="rgba(0,0,0,0.15)" stroke-width="1.5" marker-end="url(#cm-a)"/>
+  <line x1="500" y1="325" x2="500" y2="355" stroke="rgba(0,0,0,0.15)" stroke-width="1.5" marker-end="url(#cm-a)"/>
+
+  <g font-size="12" font-weight="600" text-anchor="middle">
+    <rect x="30" y="20" width="140" height="35" rx="9" fill="rgba(0,113,227,0.08)" stroke="rgba(0,113,227,0.3)"/><text x="100" y="42" fill="#0071e3">1. 向量 · 点积</text>
+    <rect x="160" y="20" width="140" height="35" rx="9" fill="rgba(36,138,61,0.08)" stroke="rgba(36,138,61,0.3)"/><text x="230" y="42" fill="#248a3d">2. 矩阵 · 变换</text>
+    <rect x="290" y="20" width="140" height="35" rx="9" fill="rgba(178,80,0,0.08)" stroke="rgba(178,80,0,0.3)"/><text x="360" y="42" fill="#b25000">3. 梯度下降</text>
+    <rect x="30" y="110" width="140" height="35" rx="9" fill="rgba(94,58,168,0.08)" stroke="rgba(94,58,168,0.3)"/><text x="100" y="132" fill="#5e3aa8">4. 神经网络</text>
+    <rect x="160" y="110" width="140" height="35" rx="9" fill="rgba(195,0,0,0.07)" stroke="rgba(195,0,0,0.25)"/><text x="230" y="132" fill="#c30000">5. 反向传播</text>
+    <rect x="30" y="200" width="140" height="35" rx="9" fill="rgba(0,113,227,0.08)" stroke="rgba(0,113,227,0.3)"/><text x="100" y="222" fill="#0071e3">6. CNN</text>
+    <rect x="160" y="200" width="140" height="35" rx="9" fill="rgba(36,138,61,0.08)" stroke="rgba(36,138,61,0.3)"/><text x="230" y="222" fill="#248a3d">7. Transformer</text>
+    <rect x="30" y="290" width="140" height="35" rx="9" fill="rgba(178,80,0,0.08)" stroke="rgba(178,80,0,0.3)"/><text x="100" y="312" fill="#b25000">8. LLM · Prompt</text>
+    <rect x="160" y="290" width="140" height="35" rx="9" fill="rgba(94,58,168,0.08)" stroke="rgba(94,58,168,0.3)"/><text x="230" y="312" fill="#5e3aa8">9. RAG · Agent</text>
+    <rect x="30" y="355" width="270" height="25" rx="8" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.12)"/><text x="165" y="372" fill="#6e6e73" font-size="11">10. 部署 · MLOps</text>
+    <rect x="440" y="110" width="120" height="35" rx="9" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.12)"/><text x="500" y="132" fill="#6e6e73" font-size="11">余弦相似度</text>
+    <rect x="440" y="200" width="120" height="35" rx="9" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.12)"/><text x="500" y="222" fill="#6e6e73" font-size="11">Embedding</text>
+    <rect x="440" y="290" width="120" height="35" rx="9" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.12)"/><text x="500" y="312" fill="#6e6e73" font-size="11">向量检索</text>
+    <rect x="440" y="355" width="120" height="25" rx="8" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.12)"/><text x="500" y="372" fill="#6e6e73" font-size="11">API 服务</text>
+  </g>
+  <g font-size="10" fill="#86868b">
+    <line x1="620" y1="30" x2="650" y2="30" stroke="rgba(0,0,0,0.3)" stroke-width="2"/><text x="655" y="34">直接依赖</text>
+    <line x1="620" y1="50" x2="650" y2="50" stroke="rgba(0,0,0,0.2)" stroke-width="1" stroke-dasharray="4,3"/><text x="655" y="54">间接关联</text>
+  </g>
+</svg>
+</div>
+
+<!-- 进度 -->
+<div class="progress-wrap">
+  <div class="progress-card">
+    <span class="p-label">📚 学习进度</span>
+    <div class="p-track"><div class="p-fill" id="p-fill"></div></div>
+    <span class="p-text" id="p-text">0 / 10</span>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-links">
+    <a href="cheatsheet.html">📋 公式速查表</a>
+    <a href="glossary.html">📖 术语表</a>
+    <a href="setup.html">🛠️ 环境准备</a>
+  </div>
+  <p>AI 全栈教程 · 从向量到部署 · 学习 AI 最好的方式是动手做项目 🚀</p>
+</footer>
+
+</div>
+
+<script>
+// 进度追踪（localStorage）
+(function() {
+  var KEY = 'ai-tutorial-progress';
+  var chapters = ['ch01','ch02','ch03','ch04','ch05','ch06','ch07','ch08','ch09','ch10'];
+  var done = JSON.parse(localStorage.getItem(KEY) || '[]');
+
+  function update() {
+    var pct = (done.length / chapters.length) * 100;
+    document.getElementById('p-fill').style.width = pct + '%';
+    document.getElementById('p-text').textContent = done.length + ' / 10';
+  }
+
+  document.querySelectorAll('.ch-row').forEach(function(row) {
+    var id = row.getAttribute('data-ch');
+    var mark = row.querySelector('.done-mark');
+    if (done.indexOf(id) >= 0) mark.classList.add('done');
+    mark.addEventListener('click', function(e) {
+      e.preventDefault(); e.stopPropagation();
+      var i = done.indexOf(id);
+      if (i >= 0) { done.splice(i, 1); mark.classList.remove('done'); }
+      else { done.push(id); mark.classList.add('done'); }
+      localStorage.setItem(KEY, JSON.stringify(done));
+      update();
+    });
+  });
+  update();
+})();
+
+// 滚动显现
+(function() {
+  var items = document.querySelectorAll('.ch-row, .prereq-item, .fact');
+  items.forEach(function(el) { el.classList.add('reveal'); });
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    items.forEach(function(el) { el.classList.add('visible'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(en) {
+      if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.08 });
+  items.forEach(function(el) { io.observe(el); });
+})();
+
+// 导航高亮
+(function() {
+  var links = document.querySelectorAll('.top-nav a[href^="#"]');
+  var parts = ['part1','part2','part3','part4','part5'].map(function(id){ return document.getElementById(id); });
+  window.addEventListener('scroll', function() {
+    var y = window.scrollY + 120;
+    var active = -1;
+    parts.forEach(function(p, i) { if (p && p.offsetTop <= y) active = i; });
+    links.forEach(function(l, i) { l.classList.toggle('active', i === active); });
+  }, { passive: true });
+})();
+</script>
+
+</body>
+</html>

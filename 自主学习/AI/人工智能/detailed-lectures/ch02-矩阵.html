@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第2章：矩阵——线性变换的机器</title>
+<style>
+:root {
+  --bg: #fefefe;
+  --text: #1a1a2e;
+  --accent: #4361ee;
+  --accent-light: #eef2ff;
+  --green: #059669;
+  --green-bg: #ecfdf5;
+  --orange: #d97706;
+  --orange-bg: #fffbeb;
+  --red: #dc2626;
+  --red-bg: #fef2f2;
+  --purple: #7c3aed;
+  --purple-bg: #f5f3ff;
+  --gray: #6b7280;
+  --border: #e5e7eb;
+  --code-bg: #f8fafc;
+  --radius: 10px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, "PingFang SC", "Noto Sans SC", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.9;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 24px 100px;
+}
+h1 { font-size: 1.8rem; margin-bottom: 8px; color: var(--accent); }
+h2 { font-size: 1.35rem; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--accent-light); }
+h3 { font-size: 1.1rem; margin: 32px 0 12px; color: var(--accent); }
+h4 { font-size: 1rem; margin: 24px 0 8px; }
+p { margin: 12px 0; }
+.subtitle { color: var(--gray); font-size: 0.95rem; margin-bottom: 32px; }
+.prereq { background: var(--accent-light); border-radius: var(--radius); padding: 16px 20px; margin: 20px 0; font-size: 0.9rem; }
+.prereq strong { color: var(--accent); }
+.concept-box {
+  background: #f0f9ff; border: 1px solid #bae6fd; border-radius: var(--radius);
+  padding: 20px; margin: 20px 0;
+}
+.concept-box .label { font-weight: 700; color: #0284c7; font-size: 0.85rem; margin-bottom: 8px; }
+.example-box {
+  background: var(--green-bg); border: 1px solid #a7f3d0; border-radius: var(--radius);
+  padding: 20px; margin: 20px 0;
+}
+.example-box .label { font-weight: 700; color: var(--green); font-size: 0.85rem; margin-bottom: 8px; }
+.exercise-box {
+  background: var(--orange-bg); border: 1px solid #fde68a; border-radius: var(--radius);
+  padding: 20px; margin: 20px 0;
+}
+.exercise-box .label { font-weight: 700; color: var(--orange); font-size: 0.85rem; margin-bottom: 8px; }
+.answer-box {
+  background: var(--red-bg); border: 1px solid #fecaca; border-radius: var(--radius);
+  padding: 20px; margin: 12px 0; display: none;
+}
+.answer-box.show { display: block; }
+.answer-box .label { font-weight: 700; color: var(--red); font-size: 0.85rem; margin-bottom: 8px; }
+.show-answer {
+  background: none; border: 1px solid var(--red); color: var(--red);
+  padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 8px;
+}
+.show-answer:hover { background: var(--red-bg); }
+pre {
+  background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 16px; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; margin: 12px 0;
+}
+code { font-family: "SF Mono", "Fira Code", monospace; }
+p code, li code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.88em; }
+ul, ol { padding-left: 24px; margin: 12px 0; }
+li { margin: 6px 0; }
+svg { display: block; margin: 20px auto; max-width: 100%; }
+.formula {
+  background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 14px 20px; margin: 16px 0; text-align: center; font-size: 1.05rem;
+  font-family: "SF Mono", monospace;
+}
+.step { margin: 8px 0; padding: 8px 16px; border-left: 3px solid var(--accent); background: var(--accent-light); border-radius: 0 6px 6px 0; }
+.toc { background: var(--code-bg); border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+.toc a { color: var(--accent); text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.toc li { margin: 4px 0; }
+.nav-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; }
+.nav-footer a { color: var(--accent); text-decoration: none; font-size: 0.9rem; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+th, td { padding: 10px 14px; border: 1px solid var(--border); text-align: left; }
+th { background: var(--accent-light); font-weight: 600; }
+.highlight { background: #fef08a; padding: 2px 4px; border-radius: 3px; }
+</style>
+<link rel="stylesheet" href="apple-design.css">
+</head>
+<body>
+
+<h1>第2章：矩阵——线性变换的机器</h1>
+<p class="subtitle">AI 数学基础 · 第 2/10 章 · 预计学习时间：4-5 小时</p>
+
+<div class="prereq">
+<strong>前置知识：</strong>第1章（向量、点积、数乘）<br>
+<strong>本章目标：</strong>理解矩阵是什么、矩阵如何"变换"向量、矩阵乘法的计算方法，以及为什么神经网络的核心就是矩阵乘法。
+</div>
+
+<div class="toc">
+<strong>本章目录</strong>
+<ol>
+<li><a href="#s1">2.1 矩阵是什么？——数字的表格</a></li>
+<li><a href="#s2">2.2 矩阵 × 向量——变换的机器</a></li>
+<li><a href="#s3">2.3 几何直觉——旋转、拉伸、投影</a></li>
+<li><a href="#s4">2.4 矩阵 × 矩阵——变换的叠加</a></li>
+<li><a href="#s5">2.5 特殊矩阵——单位矩阵、零矩阵</a></li>
+<li><a href="#s6">2.6 转置——行列互换</a></li>
+<li><a href="#s7">2.7 神经网络中的矩阵——线性层</a></li>
+<li><a href="#s8">2.8 批量处理——一次处理多个样本</a></li>
+<li><a href="#s9">2.9 本章习题</a></li>
+</ol>
+</div>
+
+<!-- ============ 2.1 ============ -->
+<h2 id="s1">2.1 矩阵是什么？——数字的表格</h2>
+
+<h3>直觉：矩阵就是一个"数字表格"</h3>
+<p>如果你用过 Excel 表格，那你已经理解矩阵了。矩阵就是把数字排成一个 m 行 n 列的表格：</p>
+
+<svg width="320" height="160" viewBox="0 0 320 160">
+  <!-- 矩阵括号 -->
+  <path d="M 40 20 L 30 20 L 30 140 L 40 140" fill="none" stroke="#333" stroke-width="2.5"/>
+  <path d="M 280 20 L 290 20 L 290 140 L 280 140" fill="none" stroke="#333" stroke-width="2.5"/>
+  
+  <!-- 数字 -->
+  <text x="70" y="55" font-size="18" fill="#4361ee" font-weight="bold">1</text>
+  <text x="130" y="55" font-size="18" fill="#4361ee" font-weight="bold">2</text>
+  <text x="190" y="55" font-size="18" fill="#4361ee" font-weight="bold">3</text>
+  <text x="250" y="55" font-size="18" fill="#4361ee" font-weight="bold">4</text>
+  
+  <text x="70" y="105" font-size="18" fill="#059669" font-weight="bold">5</text>
+  <text x="130" y="105" font-size="18" fill="#059669" font-weight="bold">6</text>
+  <text x="190" y="105" font-size="18" fill="#059669" font-weight="bold">7</text>
+  <text x="250" y="105" font-size="18" fill="#059669" font-weight="bold">8</text>
+  
+  <!-- 标注 -->
+  <text x="100" y="155" font-size="12" fill="#666">2 行 × 4 列 → 2×4 矩阵</text>
+  
+  <!-- 行列标注 -->
+  <text x="295" y="55" font-size="11" fill="#4361ee">← 第1行</text>
+  <text x="295" y="105" font-size="11" fill="#059669">← 第2行</text>
+</svg>
+
+<div class="concept-box">
+<div class="label">📌 核心概念：矩阵</div>
+<p><strong>矩阵</strong>是一个 m×n 的数字表格（m 行 n 列）。用大写字母表示，如 A、W。</p>
+<p>矩阵中第 i 行第 j 列的数字记作 A[i,j] 或 aᵢⱼ。</p>
+<p>上面的矩阵：A[1,1]=1, A[1,3]=3, A[2,4]=8</p>
+</div>
+
+<h3>Python 中的矩阵</h3>
+<pre><code>import numpy as np
+
+# 创建一个 2×4 矩阵
+A = np.array([
+    [1, 2, 3, 4],   # 第1行
+    [5, 6, 7, 8]    # 第2行
+])
+
+print(A.shape)   # (2, 4) → 2行4列
+print(A[0, 0])   # 1（第1行第1列，注意从0开始数）
+print(A[1, 3])   # 8（第2行第4列）
+print(A[0])      # [1 2 3 4]（取第1行）
+print(A[:, 2])   # [3 7]（取第3列）</code></pre>
+
+<h3>为什么 AI 需要矩阵？</h3>
+<p>回忆第1章：向量表示数据。那矩阵表示什么？</p>
+<p><strong>矩阵表示"变换规则"</strong>——它定义了一种把输入向量变成输出向量的操作。</p>
+<p>类比：向量是"食材"，矩阵是"菜谱"（加工规则），输出是"做好的菜"。</p>
+
+<!-- ============ 2.2 ============ -->
+<h2 id="s2">2.2 矩阵 × 向量——变换的机器</h2>
+
+<h3>核心操作：矩阵乘以向量</h3>
+<p>这是 AI 中<strong>最最重要的运算</strong>。神经网络每一层的核心计算就是"矩阵 × 向量"。</p>
+
+<div class="concept-box">
+<div class="label">📌 计算规则</div>
+<p>一个 <strong>m×n 矩阵</strong> 乘以一个 <strong>n 维向量</strong>，得到一个 <strong>m 维向量</strong>。</p>
+<p>方法：矩阵的<span class="highlight">每一行</span>和向量做<span class="highlight">点积</span>，得到输出向量的一个分量。</p>
+<div class="formula">
+输出的第 i 个分量 = 矩阵第 i 行 · 输入向量
+</div>
+</div>
+
+
+<style>
+.bridge-box {
+  background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px;
+  padding: 16px 20px; margin: 20px 0; border-left: 4px solid #22c55e;
+}
+.bridge-box .br-label {
+  font-weight: 700; color: #16a34a; font-size: 0.85rem; margin-bottom: 8px;
+}
+.bridge-box p { font-size: 0.9rem; margin: 6px 0; }
+.bridge-box .br-link { color: #4361ee; font-weight: 600; }
+</style>
+
+<div class="bridge-box">
+<div class="br-label">🌉 直觉桥梁：连接第1章</div>
+<p>还记得第1章学的<span class="br-link">点积</span>吗？矩阵×向量其实就是<strong>多次点积</strong>：</p>
+<p>矩阵的每一行和向量做一次点积，得到输出的一个分量。2×3 矩阵 × 3维向量 = 做 2 次点积 → 得到 2 维输出。</p>
+<p>所以你已经会了！矩阵乘法不是新运算，只是"批量点积"。</p>
+</div>
+
+<h3>一步一步计算</h3>
+
+<svg width="500" height="320" viewBox="0 0 500 320">
+  <!-- 矩阵 -->
+  <path d="M 30 30 L 20 30 L 20 130 L 30 130" fill="none" stroke="#333" stroke-width="2"/>
+  <path d="M 170 30 L 180 30 L 180 130 L 170 130" fill="none" stroke="#333" stroke-width="2"/>
+  <text x="50" y="60" font-size="16" fill="#4361ee">1</text>
+  <text x="90" y="60" font-size="16" fill="#4361ee">2</text>
+  <text x="130" y="60" font-size="16" fill="#4361ee">3</text>
+  <text x="50" y="110" font-size="16" fill="#059669">4</text>
+  <text x="90" y="110" font-size="16" fill="#059669">5</text>
+  <text x="130" y="110" font-size="16" fill="#059669">6</text>
+  <text x="80" y="150" font-size="12" fill="#666">2×3 矩阵</text>
+  
+  <!-- 乘号 -->
+  <text x="200" y="85" font-size="24" fill="#333">×</text>
+  
+  <!-- 向量 -->
+  <path d="M 240 40 L 232 40 L 232 120 L 240 120" fill="none" stroke="#333" stroke-width="2"/>
+  <path d="M 280 40 L 288 40 L 288 120 L 280 120" fill="none" stroke="#333" stroke-width="2"/>
+  <text x="255" y="65" font-size="16" fill="#d97706">1</text>
+  <text x="255" y="90" font-size="16" fill="#d97706">0</text>
+  <text x="255" y="115" font-size="16" fill="#d97706">2</text>
+  <text x="240" y="150" font-size="12" fill="#666">3维向量</text>
+  
+  <!-- 等号 -->
+  <text x="310" y="85" font-size="24" fill="#333">=</text>
+  
+  <!-- 结果 -->
+  <path d="M 350 50 L 342 50 L 342 110 L 350 110" fill="none" stroke="#333" stroke-width="2"/>
+  <path d="M 400 50 L 408 50 L 408 110 L 400 110" fill="none" stroke="#333" stroke-width="2"/>
+  <text x="365" y="72" font-size="16" fill="#dc2626" font-weight="bold">7</text>
+  <text x="365" y="102" font-size="16" fill="#dc2626" font-weight="bold">16</text>
+  <text x="345" y="150" font-size="12" fill="#666">2维向量</text>
+  
+  <!-- 计算过程 -->
+  <text x="30" y="200" font-size="13" fill="#4361ee" font-weight="bold">第1行 · 向量：</text>
+  <text x="30" y="225" font-size="13" fill="#333">1×1 + 2×0 + 3×2 = 1 + 0 + 6 = </text>
+  <text x="310" y="225" font-size="14" fill="#dc2626" font-weight="bold">7</text>
+  
+  <text x="30" y="265" font-size="13" fill="#059669" font-weight="bold">第2行 · 向量：</text>
+  <text x="30" y="290" font-size="13" fill="#333">4×1 + 5×0 + 6×2 = 4 + 0 + 12 = </text>
+  <text x="310" y="290" font-size="14" fill="#dc2626" font-weight="bold">16</text>
+</svg>
+
+<div class="example-box">
+<div class="label">✏️ 例题 2.1：手算矩阵×向量</div>
+<p><strong>计算：</strong></p>
+<div class="formula">
+[2  1  0]     [1]       [?]
+[0  3  1]  ×  [2]   =   [?]
+              [3]
+</div>
+<div class="step">第1步：第1行 · 向量 = 2×1 + 1×2 + 0×3 = 2 + 2 + 0 = <strong>4</strong></div>
+<div class="step">第2步：第2行 · 向量 = 0×1 + 3×2 + 1×3 = 0 + 6 + 3 = <strong>9</strong></div>
+<div class="step">结果：输出向量 = (4, 9)</div>
+<p>注意：3×3 矩阵 × 3维向量 = 3维向量（输入输出维度相同）</p>
+</div>
+
+<div class="example-box">
+<div class="label">✏️ 例题 2.2：维度变化</div>
+<p><strong>计算：</strong> 一个 2×3 矩阵乘以 3 维向量</p>
+<div class="formula">
+[1  0  2]     [1]       [?]
+[3  1  0]  ×  [2]   =   [?]
+              [1]
+</div>
+<div class="step">第1行 · 向量 = 1×1 + 0×2 + 2×1 = 1 + 0 + 2 = <strong>3</strong></div>
+<div class="step">第2行 · 向量 = 3×1 + 1×2 + 0×1 = 3 + 2 + 0 = <strong>5</strong></div>
+<div class="step">结果：输出 = (3, 5) ← 从3维变成了2维！</div>
+<p>💡 <strong>关键认知：</strong>矩阵可以改变向量的维度！m×n 矩阵把 n 维向量变成 m 维向量。</p>
+</div>
+
+
+<!-- 动画：矩阵×向量逐行点积 -->
+<style>
+@keyframes mv-row1 { 0%,10% { fill:#f8fafc; } 15%,45% { fill:#dbeafe; } 50%,100% { fill:#f8fafc; } }
+@keyframes mv-row2 { 0%,50% { fill:#f8fafc; } 55%,85% { fill:#dcfce7; } 90%,100% { fill:#f8fafc; } }
+@keyframes mv-res1 { 0%,40% { opacity:0; } 50%,100% { opacity:1; } }
+@keyframes mv-res2 { 0%,80% { opacity:0; } 90%,100% { opacity:1; } }
+@keyframes mv-vec { 0%,10% { fill:#fffbeb; } 15%,85% { fill:#fef3c7; } 90%,100% { fill:#fffbeb; } }
+.mv-r1 { animation: mv-row1 5s ease-in-out infinite; }
+.mv-r2 { animation: mv-row2 5s ease-in-out infinite; }
+.mv-v { animation: mv-vec 5s ease-in-out infinite; }
+.mv-o1 { animation: mv-res1 5s ease-in-out infinite; }
+.mv-o2 { animation: mv-res2 5s ease-in-out infinite; }
+</style>
+
+<div style="text-align:center; margin: 24px 0;">
+<p style="font-size:0.85rem; color:#666; margin-bottom:8px;">👇 动画：矩阵的每一行依次和向量做点积，得到输出的一个分量</p>
+<svg width="520" height="210" viewBox="0 0 520 210" style="background:#fafbfc; border-radius:12px; border:1px solid #e5e7eb;">
+  <!-- 矩阵 2×3 -->
+  <text x="40" y="25" font-size="12" fill="#4361ee" font-weight="bold">矩阵 W (2×3)</text>
+  <path d="M 40 35 L 32 35 L 32 135 L 40 135" fill="none" stroke="#333" stroke-width="2"/>
+  <path d="M 180 35 L 188 35 L 188 135 L 180 135" fill="none" stroke="#333" stroke-width="2"/>
+
+  <!-- 第1行（先高亮） -->
+  <rect class="mv-r1" x="42" y="40" width="136" height="40" rx="4"/>
+  <text x="60" y="65" font-size="15" fill="#4361ee" font-family="monospace">1</text>
+  <text x="100" y="65" font-size="15" fill="#4361ee" font-family="monospace">0</text>
+  <text x="140" y="65" font-size="15" fill="#4361ee" font-family="monospace">2</text>
+
+  <!-- 第2行（后高亮） -->
+  <rect class="mv-r2" x="42" y="85" width="136" height="40" rx="4"/>
+  <text x="60" y="110" font-size="15" fill="#059669" font-family="monospace">3</text>
+  <text x="100" y="110" font-size="15" fill="#059669" font-family="monospace">1</text>
+  <text x="140" y="110" font-size="15" fill="#059669" font-family="monospace">0</text>
+
+  <!-- 乘号 -->
+  <text x="205" y="90" font-size="22" fill="#333">×</text>
+
+  <!-- 向量 -->
+  <text x="240" y="25" font-size="12" fill="#d97706" font-weight="bold">向量 x</text>
+  <path d="M 240 40 L 233 40 L 233 130 L 240 130" fill="none" stroke="#333" stroke-width="2"/>
+  <path d="M 275 40 L 282 40 L 282 130 L 275 130" fill="none" stroke="#333" stroke-width="2"/>
+  <rect class="mv-v" x="242" y="42" width="31" height="28" rx="3"/>
+  <rect class="mv-v" x="242" y="72" width="31" height="28" rx="3"/>
+  <rect class="mv-v" x="242" y="102" width="31" height="28" rx="3"/>
+  <text x="253" y="62" font-size="15" fill="#d97706" font-family="monospace">1</text>
+  <text x="253" y="92" font-size="15" fill="#d97706" font-family="monospace">2</text>
+  <text x="253" y="122" font-size="15" fill="#d97706" font-family="monospace">1</text>
+
+  <!-- 等号 -->
+  <text x="300" y="90" font-size="22" fill="#333">=</text>
+
+  <!-- 输出向量 -->
+  <text x="340" y="25" font-size="12" fill="#dc2626" font-weight="bold">输出 y</text>
+  <path d="M 340 50 L 333 50 L 333 120 L 340 120" fill="none" stroke="#333" stroke-width="2"/>
+  <path d="M 385 50 L 392 50 L 392 120 L 385 120" fill="none" stroke="#333" stroke-width="2"/>
+
+  <!-- 输出值（依次出现） -->
+  <g class="mv-o1">
+    <rect x="345" y="55" width="35" height="28" rx="4" fill="#dbeafe"/>
+    <text x="358" y="75" font-size="16" fill="#4361ee" font-weight="bold" font-family="monospace">3</text>
+  </g>
+  <g class="mv-o2">
+    <rect x="345" y="88" width="35" height="28" rx="4" fill="#dcfce7"/>
+    <text x="358" y="108" font-size="16" fill="#059669" font-weight="bold" font-family="monospace">5</text>
+  </g>
+
+  <!-- 计算过程 -->
+  <g class="mv-o1">
+    <text x="40" y="165" font-size="11" fill="#4361ee">第1行·x = 1×1 + 0×2 + 2×1 = 3 ✓</text>
+  </g>
+  <g class="mv-o2">
+    <text x="40" y="190" font-size="11" fill="#059669">第2行·x = 3×1 + 1×2 + 0×1 = 5 ✓</text>
+  </g>
+
+  <!-- 维度标注 -->
+  <text x="420" y="60" font-size="10" fill="#666">3维→</text>
+  <text x="420" y="80" font-size="10" fill="#dc2626" font-weight="bold">2维</text>
+  <text x="420" y="100" font-size="10" fill="#666">维度变了！</text>
+</svg>
+</div>
+
+<h3>Python 实现</h3>
+<pre><code>import numpy as np
+
+# 矩阵 × 向量
+W = np.array([[1, 0, 2],
+              [3, 1, 0]])   # 2×3 矩阵
+x = np.array([1, 2, 1])     # 3维向量
+
+y = W @ x  # @ 是矩阵乘法运算符
+print(y)   # [3 5]
+
+# 也可以用 np.dot
+y2 = np.dot(W, x)
+print(y2)  # [3 5]（结果一样）
+
+# 手动实现（理解原理）
+def mat_vec_mul(W, x):
+    """矩阵W的每一行和向量x做点积"""
+    result = []
+    for row in W:
+        dot = sum(row[j] * x[j] for j in range(len(x)))
+        result.append(dot)
+    return result
+
+print(mat_vec_mul([[1,0,2],[3,1,0]], [1,2,1]))  # [3, 5]</code></pre>
+
+<div class="concept-box">
+<div class="label">📌 维度匹配规则（必须记住！）</div>
+<p><strong>(m × n) 矩阵 × (n 维向量) = (m 维向量)</strong></p>
+<p>矩阵的<span class="highlight">列数</span>必须等于向量的<span class="highlight">维度</span>，否则无法相乘！</p>
+<p>例：2×3 矩阵 × 3维向量 ✓（列数3 = 向量维度3）</p>
+<p>例：2×3 矩阵 × 2维向量 ✗（列数3 ≠ 向量维度2，报错！）</p>
+</div>
+
+<!-- ============ 2.3 ============ -->
+<h2 id="s3">2.3 几何直觉——旋转、拉伸、投影</h2>
+
+<p>矩阵乘以向量，在几何上就是对向量做"变换"。不同的矩阵产生不同的效果：</p>
+
+<h3>变换1：拉伸</h3>
+<svg width="400" height="220" viewBox="0 0 400 220">
+  <defs>
+    <marker id="a1" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#93c5fd"/></marker>
+    <marker id="a2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4361ee"/></marker>
+  </defs>
+  <!-- 坐标轴 -->
+  <line x1="50" y1="180" x2="350" y2="180" stroke="#eee" stroke-width="1"/>
+  <line x1="50" y1="180" x2="50" y2="20" stroke="#eee" stroke-width="1"/>
+  
+  <!-- 原始向量 -->
+  <line x1="50" y1="180" x2="130" y2="120" stroke="#93c5fd" stroke-width="2.5" marker-end="url(#a1)"/>
+  <text x="65" y="140" font-size="11" fill="#60a5fa">原始 (1,1)</text>
+  
+  <!-- 变换后 -->
+  <line x1="50" y1="180" x2="210" y2="120" stroke="#4361ee" stroke-width="3" marker-end="url(#a2)"/>
+  <text x="120" y="105" font-size="12" fill="#4361ee" font-weight="bold">变换后 (2,1)</text>
+  
+  <!-- 矩阵标注 -->
+  <text x="250" y="60" font-size="12" fill="#333">矩阵 [2 0]</text>
+  <text x="250" y="80" font-size="12" fill="#333">     [0 1]</text>
+  <text x="250" y="105" font-size="11" fill="#666">→ x方向拉伸2倍</text>
+</svg>
+
+<h3>变换2：旋转</h3>
+<svg width="400" height="220" viewBox="0 0 400 220">
+  <defs>
+    <marker id="a3" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#93c5fd"/></marker>
+    <marker id="a4" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#4361ee"/></marker>
+  </defs>
+  <line x1="50" y1="180" x2="350" y2="180" stroke="#eee" stroke-width="1"/>
+  <line x1="50" y1="180" x2="50" y2="20" stroke="#eee" stroke-width="1"/>
+  
+  <!-- 原始 -->
+  <line x1="50" y1="180" x2="150" y2="180" stroke="#93c5fd" stroke-width="2.5" marker-end="url(#a3)"/>
+  <text x="80" y="198" font-size="11" fill="#60a5fa">原始 (1,0)</text>
+  
+  <!-- 旋转90° -->
+  <line x1="50" y1="180" x2="50" y2="80" stroke="#4361ee" stroke-width="3" marker-end="url(#a4)"/>
+  <text x="60" y="120" font-size="12" fill="#4361ee" font-weight="bold">旋转90° (0,1)</text>
+  
+  <!-- 弧线 -->
+  <path d="M 120 180 A 70 70 0 0 0 50 110" fill="none" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="90" y="145" font-size="11" fill="#d97706">90°</text>
+  
+  <text x="220" y="60" font-size="12" fill="#333">矩阵 [0 -1]</text>
+  <text x="220" y="80" font-size="12" fill="#333">     [1  0]</text>
+  <text x="220" y="105" font-size="11" fill="#666">→ 逆时针旋转90°</text>
+</svg>
+
+<div class="concept-box">
+<div class="label">📌 核心认知</div>
+<p><strong>矩阵 = 一种线性变换</strong>。它把输入向量"变换"成输出向量。</p>
+<p>不同的矩阵实现不同的变换：旋转、拉伸、翻转、投影……</p>
+<p>在神经网络中，每一层的权重矩阵 W 就是一种"学到的变换"——它学会了如何把输入数据变换成对任务有用的表示。</p>
+</div>
+
+<!-- ============ 2.4 ============ -->
+<h2 id="s4">2.4 矩阵 × 矩阵——变换的叠加</h2>
+
+<h3>为什么需要矩阵乘矩阵？</h3>
+<p>如果矩阵 A 是一种变换，矩阵 B 是另一种变换，那么"先做 A 变换，再做 B 变换"就等于 B × A（注意顺序！）。</p>
+<p>神经网络有很多层，每层是一个矩阵。多层网络 = 多个矩阵连续相乘 = 多个变换叠加。</p>
+
+<h3>计算规则</h3>
+<div class="concept-box">
+<div class="label">📌 矩阵乘法规则</div>
+<p><strong>(m × n) × (n × p) = (m × p)</strong></p>
+<p>结果矩阵的第 i 行第 j 列 = 左矩阵第 i 行 · 右矩阵第 j 列</p>
+<p>⚠️ 左矩阵的<span class="highlight">列数</span>必须等于右矩阵的<span class="highlight">行数</span>！</p>
+</div>
+
+<div class="example-box">
+<div class="label">✏️ 例题 2.3：矩阵乘法</div>
+<p><strong>计算 (2×3) × (3×2)：</strong></p>
+<div class="formula">
+[1  2  3]     [7  8]     [?  ?]
+[4  5  6]  ×  [9  10]  =  [?  ?]
+              [11 12]
+</div>
+<div class="step">结果[1,1] = 第1行·第1列 = 1×7 + 2×9 + 3×11 = 7+18+33 = <strong>58</strong></div>
+<div class="step">结果[1,2] = 第1行·第2列 = 1×8 + 2×10 + 3×12 = 8+20+36 = <strong>64</strong></div>
+<div class="step">结果[2,1] = 第2行·第1列 = 4×7 + 5×9 + 6×11 = 28+45+66 = <strong>139</strong></div>
+<div class="step">结果[2,2] = 第2行·第2列 = 4×8 + 5×10 + 6×12 = 32+50+72 = <strong>154</strong></div>
+<div class="step">结果 = [[58, 64], [139, 154]]（2×2 矩阵）</div>
+</div>
+
+<pre><code>A = np.array([[1, 2, 3],
+              [4, 5, 6]])       # 2×3
+B = np.array([[7, 8],
+              [9, 10],
+              [11, 12]])        # 3×2
+
+C = A @ B
+print(C)       # [[ 58  64]
+               #  [139 154]]
+print(C.shape) # (2, 2)</code></pre>
+
+<div class="concept-box">
+<div class="label">⚠️ 矩阵乘法不满足交换律！</div>
+<p>A × B ≠ B × A（通常不相等，甚至可能维度不匹配无法计算）</p>
+<p>直觉：先旋转再拉伸 ≠ 先拉伸再旋转</p>
+</div>
+
+<!-- ============ 2.5 ============ -->
+<h2 id="s5">2.5 特殊矩阵</h2>
+
+<h3>单位矩阵 I——"什么都不做"的变换</h3>
+<div class="formula">
+I = [1  0]     I × v = v（任何向量乘以单位矩阵不变）
+    [0  1]
+</div>
+<p>类比：数字 1 在乘法中的角色。a × 1 = a，向量 × I = 向量。</p>
+
+<h3>零矩阵——"全部归零"的变换</h3>
+<div class="formula">
+0 = [0  0]     0 × v = 0（任何向量乘以零矩阵变成零向量）
+    [0  0]
+</div>
+
+<pre><code>I = np.eye(3)  # 3×3 单位矩阵
+print(I)
+# [[1. 0. 0.]
+#  [0. 1. 0.]
+#  [0. 0. 1.]]
+
+v = np.array([5, 3, 7])
+print(I @ v)  # [5 3 7]（不变！）</code></pre>
+
+<!-- ============ 2.6 ============ -->
+<h2 id="s6">2.6 转置——行列互换</h2>
+
+<p>把矩阵的行变成列、列变成行：</p>
+<div class="formula">
+A = [1  2  3]    Aᵀ = [1  4]
+    [4  5  6]         [2  5]
+                      [3  6]
+(2×3 变成 3×2)
+</div>
+
+<pre><code>A = np.array([[1, 2, 3], [4, 5, 6]])
+print(A.T)  # 转置
+# [[1 4]
+#  [2 5]
+#  [3 6]]</code></pre>
+
+<p>转置在 AI 中很常见，比如计算注意力机制时需要把 K 矩阵转置：Q × Kᵀ。</p>
+
+<!-- ============ 2.7 ============ -->
+<h2 id="s7">2.7 神经网络中的矩阵——线性层</h2>
+
+<h3>一层神经网络 = 一次矩阵运算</h3>
+
+<svg width="500" height="200" viewBox="0 0 500 200">
+  <!-- 输入 -->
+  <circle cx="60" cy="60" r="20" fill="#eef2ff" stroke="#4361ee" stroke-width="2"/>
+  <text x="52" y="65" font-size="12" fill="#4361ee">x₁</text>
+  <circle cx="60" cy="120" r="20" fill="#eef2ff" stroke="#4361ee" stroke-width="2"/>
+  <text x="52" y="125" font-size="12" fill="#4361ee">x₂</text>
+  <circle cx="60" cy="180" r="20" fill="#eef2ff" stroke="#4361ee" stroke-width="2"/>
+  <text x="52" y="185" font-size="12" fill="#4361ee">x₃</text>
+  
+  <!-- 权重矩阵 -->
+  <rect x="170" y="40" width="120" height="140" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <text x="195" y="100" font-size="13" fill="#7c3aed" font-weight="bold">权重矩阵 W</text>
+  <text x="200" y="125" font-size="11" fill="#7c3aed">(2×3)</text>
+  
+  <!-- 箭头 -->
+  <line x1="80" y1="60" x2="170" y2="90" stroke="#ccc" stroke-width="1.5"/>
+  <line x1="80" y1="120" x2="170" y2="110" stroke="#ccc" stroke-width="1.5"/>
+  <line x1="80" y1="180" x2="170" y2="130" stroke="#ccc" stroke-width="1.5"/>
+  
+  <!-- 输出 -->
+  <line x1="290" y1="90" x2="360" y2="80" stroke="#ccc" stroke-width="1.5"/>
+  <line x1="290" y1="130" x2="360" y2="140" stroke="#ccc" stroke-width="1.5"/>
+  <circle cx="380" cy="80" r="20" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text x="372" y="85" font-size="12" fill="#059669">y₁</text>
+  <circle cx="380" cy="140" r="20" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text x="372" y="145" font-size="12" fill="#059669">y₂</text>
+  
+  <!-- 公式 -->
+  <text x="150" y="195" font-size="13" fill="#333" font-weight="bold">y = W × x + b</text>
+  <text x="320" y="195" font-size="11" fill="#666">（+ 偏置向量 b）</text>
+</svg>
+
+<div class="concept-box">
+<div class="label">📌 神经网络的核心公式</div>
+<div class="formula">y = W × x + b</div>
+<p>其中：</p>
+<ul>
+<li><strong>x</strong>：输入向量（n 维）</li>
+<li><strong>W</strong>：权重矩阵（m×n）——这是网络要"学习"的参数</li>
+<li><strong>b</strong>：偏置向量（m 维）——也是学习的参数</li>
+<li><strong>y</strong>：输出向量（m 维）</li>
+</ul>
+<p>训练神经网络 = 找到合适的 W 和 b，让输出 y 尽可能接近正确答案。</p>
+</div>
+
+<div class="example-box">
+<div class="label">✏️ 例题 2.4：模拟一个神经网络层</div>
+<p>假设输入 x = (1, 2)，权重 W = [[1, 0], [0, 1], [1, 1]]，偏置 b = (0, 0, 1)</p>
+<div class="step">第1步：W × x = [1×1+0×2, 0×1+1×2, 1×1+1×2] = [1, 2, 3]</div>
+<div class="step">第2步：加上偏置 b：[1+0, 2+0, 3+1] = [1, 2, 4]</div>
+<div class="step">输出 y = (1, 2, 4)（从2维变成了3维）</div>
+</div>
+
+<pre><code># 用 PyTorch 实现一个线性层
+import torch
+import torch.nn as nn
+
+# 创建一个线性层：输入2维，输出3维
+layer = nn.Linear(in_features=2, out_features=3)
+
+# 查看参数
+print(layer.weight.shape)  # torch.Size([3, 2]) ← 权重矩阵 3×2
+print(layer.bias.shape)    # torch.Size([3])    ← 偏置向量 3维
+
+# 前向计算
+x = torch.tensor([1.0, 2.0])
+y = layer(x)
+print(y)  # 输出3维向量
+
+# 手动验证：y = W @ x + b
+y_manual = layer.weight @ x + layer.bias
+print(y_manual)  # 和上面结果一样！</code></pre>
+
+<!-- ============ 2.8 ============ -->
+<h2 id="s8">2.8 批量处理——一次处理多个样本</h2>
+
+<h3>实际问题</h3>
+<p>训练时我们不是一个个样本处理的，而是一批（batch）一起处理。如果有 100 个样本，每个 784 维，怎么一次全算？</p>
+
+<h3>解决方案：数据矩阵</h3>
+<p>把 100 个样本排成一个 100×784 的矩阵 X，然后：</p>
+<div class="formula">
+Y = X × Wᵀ + b
+(100×784) × (784×256) = (100×256)
+100个样本，每个从784维变成256维
+</div>
+
+<pre><code># 批量处理示例
+batch_size = 100
+input_dim = 784
+output_dim = 256
+
+# 100个样本，每个784维
+X = np.random.randn(batch_size, input_dim)  # shape: (100, 784)
+
+# 权重矩阵
+W = np.random.randn(output_dim, input_dim)  # shape: (256, 784)
+b = np.zeros(output_dim)                     # shape: (256,)
+
+# 一次计算所有样本的输出
+Y = X @ W.T + b  # shape: (100, 256)
+print(Y.shape)   # (100, 256) ← 100个样本，每个256维
+
+# 这就是为什么 GPU 快：矩阵乘法可以高度并行！</code></pre>
+
+<div class="concept-box">
+<div class="label">📌 维度总结（AI 中最常见的形状）</div>
+<table>
+<tr><th>数据</th><th>形状</th><th>含义</th></tr>
+<tr><td>一个样本</td><td>(784,)</td><td>784维向量</td></tr>
+<tr><td>一批样本</td><td>(batch, 784)</td><td>batch个784维向量</td></tr>
+<tr><td>权重矩阵</td><td>(output, input)</td><td>线性变换的参数</td></tr>
+<tr><td>输出</td><td>(batch, output)</td><td>batch个output维向量</td></tr>
+</table>
+</div>
+
+<!-- ============ 2.9 ============ -->
+
+<style>
+.misconception-box {
+  background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px;
+  padding: 18px 20px; margin: 20px 0;
+}
+.misconception-box .mc-label {
+  font-weight: 700; color: #dc2626; font-size: 0.85rem; margin-bottom: 10px;
+}
+.misconception-box .mc-item { margin: 10px 0; font-size: 0.9rem; }
+.misconception-box .mc-wrong { color: #dc2626; font-weight: 600; }
+.misconception-box .mc-right { color: #059669; font-weight: 600; }
+</style>
+
+<div class="misconception-box">
+<div class="mc-label">⚠️ 常见误区</div>
+<div class="mc-item">
+  <span class="mc-wrong">✗ "矩阵乘法满足交换律：A×B = B×A"</span><br>
+  <span class="mc-right">✗ 矩阵乘法不满足交换律！</span>A×B 和 B×A 通常不相等，甚至可能维度不匹配无法计算。直觉：先旋转再拉伸 ≠ 先拉伸再旋转。
+</div>
+<div class="mc-item">
+  <span class="mc-wrong">✗ "矩阵就是一个数字表格"</span><br>
+  <span class="mc-right">✓ 矩阵是一种线性变换。</span>表格只是存储形式。矩阵的本质是"把输入向量变换成输出向量"的规则。神经网络每层的权重矩阵就是一种学到的变换。
+</div>
+<div class="mc-item">
+  <span class="mc-wrong">✗ "矩阵越大，网络越强"</span><br>
+  <span class="mc-right">✓ 参数量要和数据量匹配。</span>参数太多、数据太少 → 过拟合（背答案）。参数太少、数据很多 → 欠拟合（学不够）。
+</div>
+</div>
+
+
+<style>
+.checklist-box {
+  background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px;
+  padding: 18px 20px; margin: 24px 0;
+}
+.checklist-box .ck-label {
+  font-weight: 700; color: #2563eb; font-size: 0.9rem; margin-bottom: 10px;
+}
+.checklist-box label {
+  display: block; font-size: 0.88rem; margin: 7px 0; cursor: pointer; color: #334155;
+}
+.checklist-box input[type="checkbox"] { margin-right: 8px; accent-color: #2563eb; }
+</style>
+
+<div class="checklist-box">
+<div class="ck-label">✅ 学完本章，你应该能够：</div>
+<label><input type="checkbox"> 手算一个 2×3 矩阵乘以 3 维向量</label>
+<label><input type="checkbox"> 判断两个矩阵能否相乘（维度匹配规则）</label>
+<label><input type="checkbox"> 解释矩阵在神经网络中的角色（y = Wx + b）</label>
+<label><input type="checkbox"> 用 NumPy 做矩阵乘法和转置</label>
+<label><input type="checkbox"> 计算一个 Linear 层的参数量</label>
+</div>
+
+<h2 id="s9">2.9 本章习题</h2>
+
+<div class="exercise-box">
+<div class="label">📝 基础题</div>
+<ol>
+<li>写出矩阵 A = [[1,2],[3,4],[5,6]] 的形状（几行几列），并指出 A[2,1] 的值。</li>
+<li>计算：[[1, 2], [3, 4]] × [5, 6]ᵀ（矩阵乘向量）。</li>
+<li>计算：[[1, 0], [0, 1]] × [7, 3]ᵀ（单位矩阵乘向量）。</li>
+<li>判断以下乘法是否合法（维度是否匹配）：(2×3) × (2×3)？(3×2) × (2×4)？</li>
+<li>计算 [[1, 2], [3, 4]] 的转置。</li>
+</ol>
+<button class="show-answer" onclick="this.nextElementSibling.classList.toggle('show')">显示答案</button>
+<div class="answer-box">
+<div class="label">参考答案</div>
+<ol>
+<li>形状 3×2（3行2列），A[2,1] = 5（第3行第1列，从0开始数则是 A[2,0]=5）</li>
+<li>[1×5+2×6, 3×5+4×6] = [17, 39]</li>
+<li>[1×7+0×3, 0×7+1×3] = [7, 3]（不变！）</li>
+<li>(2×3)×(2×3) ✗ 不合法（左列3≠右行2）；(3×2)×(2×4) ✓ 合法，结果 3×4</li>
+<li>[[1, 3], [2, 4]]</li>
+</ol>
+</div>
+</div>
+
+<div class="exercise-box">
+<div class="label">📝 进阶题</div>
+<ol start="6">
+<li>手算 (2×3) × (3×2) 矩阵乘法：[[1,0,2],[0,1,1]] × [[1,2],[3,4],[5,6]]。</li>
+<li>验证矩阵乘法不满足交换律：计算 A×B 和 B×A（A=[[1,2],[3,4]], B=[[0,1],[1,0]]），比较结果。</li>
+<li>一个神经网络层：输入3维，输出2维。写出权重矩阵 W 的形状，以及一次前向计算的完整公式。</li>
+<li>如果有 64 个样本，每个 100 维，经过一个输出 50 维的线性层，输出矩阵的形状是什么？</li>
+</ol>
+<button class="show-answer" onclick="this.nextElementSibling.classList.toggle('show')">显示答案</button>
+<div class="answer-box">
+<div class="label">参考答案</div>
+<ol start="6">
+<li>[[1×1+0×3+2×5, 1×2+0×4+2×6], [0×1+1×3+1×5, 0×2+1×4+1×6]] = [[11, 14], [8, 10]]</li>
+<li>A×B = [[2,1],[4,3]]，B×A = [[3,4],[1,2]]，不相等！</li>
+<li>W 形状 (2,3)，公式：y = W×x + b，其中 x∈ℝ³, W∈ℝ²ˣ³, b∈ℝ², y∈ℝ²</li>
+<li>输出形状 (64, 50)</li>
+</ol>
+</div>
+</div>
+
+<div class="exercise-box">
+<div class="label">📝 编程实践题</div>
+<ol start="10">
+<li>用纯 Python（不用 NumPy）实现矩阵乘向量的函数 <code>mat_vec_mul(W, x)</code>，并验证与 NumPy 结果一致。</li>
+<li>用纯 Python 实现矩阵乘法 <code>mat_mul(A, B)</code>。</li>
+<li>用 NumPy 模拟一个 3 层神经网络的前向传播（不用 PyTorch）：输入 4 维 → 隐藏层 8 维 → 隐藏层 6 维 → 输出 2 维。随机初始化权重，计算输出。</li>
+<li>可视化：用 matplotlib 画出一个 2×2 矩阵对一组向量（如单位圆上的点）的变换效果（变换前 vs 变换后的散点图）。</li>
+</ol>
+<button class="show-answer" onclick="this.nextElementSibling.classList.toggle('show')">显示答案</button>
+<div class="answer-box">
+<div class="label">参考答案</div>
+<pre><code># 题10
+def mat_vec_mul(W, x):
+    result = []
+    for row in W:
+        s = sum(row[j] * x[j] for j in range(len(x)))
+        result.append(s)
+    return result
+
+# 题12：3层网络前向传播
+import numpy as np
+np.random.seed(42)
+
+x = np.random.randn(4)          # 输入 4维
+W1 = np.random.randn(8, 4)     # 第1层权重
+b1 = np.zeros(8)
+W2 = np.random.randn(6, 8)     # 第2层权重
+b2 = np.zeros(6)
+W3 = np.random.randn(2, 6)     # 第3层权重
+b3 = np.zeros(2)
+
+# 前向传播（暂不加激活函数）
+h1 = W1 @ x + b1   # 8维
+h2 = W2 @ h1 + b2  # 6维
+y  = W3 @ h2 + b3  # 2维
+print(f"输入: {x.shape} → h1: {h1.shape} → h2: {h2.shape} → 输出: {y.shape}")</code></pre>
+</div>
+</div>
+
+<h2>本章小结</h2>
+<table>
+<tr><th>概念</th><th>一句话总结</th><th>AI 中的用途</th></tr>
+<tr><td>矩阵</td><td>m×n 的数字表格</td><td>存储权重参数</td></tr>
+<tr><td>矩阵×向量</td><td>每行和向量做点积</td><td>神经网络一层的核心计算</td></tr>
+<tr><td>矩阵×矩阵</td><td>行·列点积</td><td>多层变换叠加</td></tr>
+<tr><td>单位矩阵</td><td>对角线为1，其余为0</td><td>恒等变换、初始化</td></tr>
+<tr><td>转置</td><td>行列互换</td><td>注意力机制 Q×Kᵀ</td></tr>
+<tr><td>维度匹配</td><td>左列 = 右行</td><td>设计网络架构时必须检查</td></tr>
+</table>
+
+<div class="nav-footer">
+<a href="ch01-向量.html">← 上一章：向量</a>
+<a href="ch03-梯度下降.html">下一章：梯度下降——AI如何学习 →</a>
+</div>
+
+
+<!-- ============ 交互式板块 ============ -->
+<h2 id="s10">2.10 交互式练习</h2>
+
+<style>
+.quiz-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 20px 0; }
+.quiz-box .q-label { font-weight: 700; color: #7c3aed; font-size: 0.9rem; margin-bottom: 12px; }
+.quiz-q { margin: 16px 0; padding: 14px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; }
+.quiz-q p { font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; }
+.quiz-opt { display: block; padding: 8px 14px; margin: 4px 0; border-radius: 6px; cursor: pointer; font-size: 0.85rem; border: 1px solid #e5e7eb; transition: all 0.15s; }
+.quiz-opt:hover { background: #f0f9ff; border-color: #93c5fd; }
+.quiz-opt.correct { background: #dcfce7; border-color: #4ade80; color: #166534; }
+.quiz-opt.wrong { background: #fef2f2; border-color: #fca5a5; color: #991b1b; }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.7; }
+.quiz-feedback { margin-top: 8px; font-size: 0.82rem; padding: 8px 12px; border-radius: 6px; display: none; }
+.quiz-feedback.show { display: block; }
+.quiz-feedback.ok { background: #dcfce7; color: #166534; }
+.quiz-feedback.no { background: #fef2f2; color: #991b1b; }
+</style>
+
+<div class="quiz-box">
+<div class="q-label">🧪 即时测验</div>
+
+<div class="quiz-q" id="q1">
+  <p>1. 一个 2×3 矩阵乘以 3 维向量，输出的维度是：</p>
+  <span class="quiz-opt" onclick="checkQ2('q1',this,true)">A. 2 维（行数决定输出维度）</span>
+  <span class="quiz-opt" onclick="checkQ2('q1',this,false)">B. 3 维</span>
+  <span class="quiz-opt" onclick="checkQ2('q1',this,false)">C. 6 维</span>
+  <span class="quiz-opt" onclick="checkQ2('q1',this,false)">D. 无法计算</span>
+  <div class="quiz-feedback" id="q1-fb"></div>
+</div>
+
+<div class="quiz-q" id="q2">
+  <p>2. 矩阵乘法 A×B 和 B×A 的关系是：</p>
+  <span class="quiz-opt" onclick="checkQ2('q2',this,false)">A. 总是相等</span>
+  <span class="quiz-opt" onclick="checkQ2('q2',this,true)">B. 通常不相等（矩阵乘法不满足交换律）</span>
+  <span class="quiz-opt" onclick="checkQ2('q2',this,false)">C. 总是互为转置</span>
+  <span class="quiz-opt" onclick="checkQ2('q2',this,false)">D. 总是互为逆矩阵</span>
+  <div class="quiz-feedback" id="q2-fb"></div>
+</div>
+
+<div class="quiz-q" id="q3">
+  <p>3. Linear(784, 256) 层的参数量是：</p>
+  <span class="quiz-opt" onclick="checkQ2('q3',this,false)">A. 784</span>
+  <span class="quiz-opt" onclick="checkQ2('q3',this,false)">B. 256</span>
+  <span class="quiz-opt" onclick="checkQ2('q3',this,true)">C. 200,960（784×256 + 256 = 权重 + 偏置）</span>
+  <span class="quiz-opt" onclick="checkQ2('q3',this,false)">D. 1,040</span>
+  <div class="quiz-feedback" id="q3-fb"></div>
+</div>
+
+<div class="quiz-q" id="q4">
+  <p>4. 单位矩阵 I 乘以任意向量 v 的结果是：</p>
+  <span class="quiz-opt" onclick="checkQ2('q4',this,false)">A. 零向量</span>
+  <span class="quiz-opt" onclick="checkQ2('q4',this,true)">B. v 本身（不变）</span>
+  <span class="quiz-opt" onclick="checkQ2('q4',this,false)">C. v 的转置</span>
+  <span class="quiz-opt" onclick="checkQ2('q4',this,false)">D. 全 1 向量</span>
+  <div class="quiz-feedback" id="q4-fb"></div>
+</div>
+
+<div class="quiz-q" id="q5">
+  <p>5. (2×3) 矩阵能否乘以 (2×3) 矩阵？</p>
+  <span class="quiz-opt" onclick="checkQ2('q5',this,false)">A. 能，结果是 2×2</span>
+  <span class="quiz-opt" onclick="checkQ2('q5',this,true)">B. 不能（左矩阵列数3 ≠ 右矩阵行数2）</span>
+  <span class="quiz-opt" onclick="checkQ2('q5',this,false)">C. 能，结果是 3×3</span>
+  <span class="quiz-opt" onclick="checkQ2('q5',this,false)">D. 能，结果是 2×3</span>
+  <div class="quiz-feedback" id="q5-fb"></div>
+</div>
+</div>
+
+<script src="quiz.js"></script>
+
+<!-- 矩阵×向量计算器 -->
+<h3>🔬 实验：矩阵×向量计算器</h3>
+<p>修改矩阵和向量的值，实时看到计算结果：</p>
+
+<style>
+.mv-calc { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 20px 0; }
+.mv-grid { display: grid; grid-template-columns: auto auto auto; gap: 12px; align-items: center; }
+.mv-matrix { display: grid; grid-template-columns: repeat(3, 50px); gap: 4px; }
+.mv-matrix input { width: 50px; padding: 6px; text-align: center; border: 1px solid #d1d5db; border-radius: 4px; font-size: 0.85rem; }
+.mv-vector { display: grid; grid-template-columns: 50px; gap: 4px; }
+.mv-vector input { width: 50px; padding: 6px; text-align: center; border: 1px solid #d1d5db; border-radius: 4px; font-size: 0.85rem; }
+.mv-result { margin-top: 14px; padding: 14px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 0.9rem; }
+.mv-result .val { font-weight: 700; color: #4361ee; }
+.mv-op { font-size: 1.5rem; color: #666; text-align: center; }
+</style>
+
+<div class="mv-calc">
+  <div class="mv-grid">
+    <div>
+      <p style="font-size:0.8rem; color:#666; margin-bottom:6px;">矩阵 W (2×3)</p>
+      <div class="mv-matrix">
+        <input type="number" id="m00" value="1" oninput="calcMV()"><input type="number" id="m01" value="0" oninput="calcMV()"><input type="number" id="m02" value="2" oninput="calcMV()">
+        <input type="number" id="m10" value="3" oninput="calcMV()"><input type="number" id="m11" value="1" oninput="calcMV()"><input type="number" id="m12" value="0" oninput="calcMV()">
+      </div>
+    </div>
+    <div class="mv-op">×</div>
+    <div>
+      <p style="font-size:0.8rem; color:#666; margin-bottom:6px;">向量 x (3维)</p>
+      <div class="mv-vector">
+        <input type="number" id="v0" value="1" oninput="calcMV()">
+        <input type="number" id="v1" value="2" oninput="calcMV()">
+        <input type="number" id="v2" value="1" oninput="calcMV()">
+      </div>
+    </div>
+  </div>
+  <div class="mv-result" id="mv-result"></div>
+</div>
+
+<script>
+function calcMV() {
+  var m = [[+document.getElementById('m00').value, +document.getElementById('m01').value, +document.getElementById('m02').value],
+           [+document.getElementById('m10').value, +document.getElementById('m11').value, +document.getElementById('m12').value]];
+  var v = [+document.getElementById('v0').value, +document.getElementById('v1').value, +document.getElementById('v2').value];
+  var r0 = m[0][0]*v[0] + m[0][1]*v[1] + m[0][2]*v[2];
+  var r1 = m[1][0]*v[0] + m[1][1]*v[1] + m[1][2]*v[2];
+  document.getElementById('mv-result').innerHTML =
+    '<b>计算过程：</b><br>' +
+    '第1行·x = '+m[0][0]+'×'+v[0]+' + '+m[0][1]+'×'+v[1]+' + '+m[0][2]+'×'+v[2]+' = <span class="val">'+r0+'</span><br>' +
+    '第2行·x = '+m[1][0]+'×'+v[0]+' + '+m[1][1]+'×'+v[1]+' + '+m[1][2]+'×'+v[2]+' = <span class="val">'+r1+'</span><br><br>' +
+    '<b>输出向量 y = (<span class="val">'+r0+'</span>, <span class="val">'+r1+'</span>)</b> ← 3维变成了2维！';
+}
+calcMV();
+</script>
+
+</body>
+</html>

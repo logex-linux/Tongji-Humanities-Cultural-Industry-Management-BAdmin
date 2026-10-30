@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JEV 模型研究报告 · TypeSafe AI System One</title>
+<style>
+  :root {
+    --bg: #fbfbfa;
+    --surface: #ffffff;
+    --ink: #1a1c1f;
+    --ink-2: #4a4f57;
+    --ink-3: #7c828c;
+    --line: #e4e5e7;
+    --line-2: #d1d3d7;
+    --accent: #0f6e8c;
+    --accent-soft: #e8f2f5;
+
+    --vendor: #8a5a12;
+    --vendor-bg: #fdf4e3;
+    --third: #1c6b3f;
+    --third-bg: #e9f5ee;
+    --community: #2b4a8f;
+    --community-bg: #eaeef9;
+    --unverified: #8f2f2f;
+    --unverified-bg: #fbecec;
+
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16181b;
+      --surface: #1d2024;
+      --ink: #e8e9eb;
+      --ink-2: #b0b5bd;
+      --ink-3: #83888f;
+      --line: #2e3238;
+      --line-2: #3d4249;
+      --accent: #5cb8d4;
+      --accent-soft: #1a2c33;
+
+      --vendor: #e0b264;
+      --vendor-bg: #33291a;
+      --third: #6cc496;
+      --third-bg: #16291f;
+      --community: #8ba9e8;
+      --community-bg: #1b2135;
+      --unverified: #e08585;
+      --unverified-bg: #2e1c1c;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 56px 28px 96px;
+  }
+
+  /* ---------- header ---------- */
+  header { margin-bottom: 44px; }
+
+  .kicker {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-size: 40px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    margin: 0 0 14px;
+  }
+
+  .standfirst {
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin: 0 0 22px;
+    max-width: 44em;
+  }
+
+  .meta {
+    font-size: 13px;
+    color: var(--ink-3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+
+  .meta b { color: var(--ink-2); font-weight: 600; }
+
+  /* ---------- verdict ---------- */
+  .verdict {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 24px 26px;
+    margin: 0 0 48px;
+  }
+
+  .verdict h2 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 12px;
+  }
+
+  .verdict p { margin: 0 0 14px; }
+  .verdict p:last-child { margin-bottom: 0; }
+
+  .pull {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink);
+    padding-left: 16px;
+    border-left: 2px solid var(--line-2);
+    margin: 18px 0;
+  }
+
+  /* ---------- sections ---------- */
+  section { margin-bottom: 52px; }
+
+  h2.sec {
+    font-size: 13px
+    ;font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 6px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  h2.sec .num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  h3 {
+    font-size: 21px;
+    line-height: 1.35;
+    font-weight: 650;
+    letter-spacing: -.01em;
+    margin: 34px 0 12px;
+  }
+
+  h4 {
+    font-size: 15px;
+    font-weight: 650;
+    margin: 26px 0 8px;
+    color: var(--ink);
+  }
+
+  p { margin: 0 0 16px; }
+
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); }
+  a:hover { border-bottom-color: var(--accent); }
+
+  ul, ol { margin: 0 0 16px; padding-left: 22px; }
+  li { margin-bottom: 8px; }
+  li > ul, li > ol { margin-top: 8px; margin-bottom: 0; }
+
+  strong { font-weight: 650; }
+
+  code {
+    font-family: var(--mono);
+    font-size: .88em;
+    background: color-mix(in srgb, var(--ink) 6%, transparent);
+    padding: 2px 5px;
+    border-radius: 3px;
+  }
+
+  /* ---------- badges ---------- */
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: .04em;
+    padding: 2px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+    vertical-align: 1px;
+  }
+  .b-vendor     { color: var(--vendor);     background: var(--vendor-bg); }
+  .b-third      { color: var(--third);      background: var(--third-bg); }
+  .b-community  { color: var(--community);  background: var(--community-bg); }
+  .b-unverified { color: var(--unverified); background: var(--unverified-bg); }
+
+  /* ---------- tables ---------- */
+  .tw {
+    overflow-x: auto;
+    margin: 20px 0 24px;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+
+  @media (max-width: 720px) {
+    .tw {
+      padding-bottom: 4px;
+      mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 20px), transparent 100%);
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+    background: var(--surface);
+  }
+
+  caption {
+    caption-side: top;
+    text-align: left;
+    font-size: 13px;
+    color: var(--ink-3);
+    padding-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  th, td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+
+  thead th {
+    font-size: 12px;
+    font-weight: 650;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    border-bottom: 1px solid var(--line-2);
+    background: color-mix(in srgb, var(--ink) 3%, transparent);
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  td.n, th.n {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-family: var(--mono);
+    font-size: 13.5px;
+    white-space: nowrap;
+  }
+
+  td.win { color: var(--third); font-weight: 650; }
+
+  /* ---------- callouts ---------- */
+  .note {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  .note p:last-child { margin-bottom: 0; }
+
+  .note.warn { border-left: 3px solid var(--vendor); }
+  .note.sharp { border-left: 3px solid var(--unverified); }
+  .note.good { border-left: 3px solid var(--third); }
+
+  .note .lbl {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--ink-3);
+  }
+
+  /* ---------- primitives ---------- */
+  .prims { display: grid; gap: 14px; margin: 22px 0 26px; }
+
+  .prim {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 18px 20px;
+  }
+
+  .prim .name {
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 650;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .prim .q { font-size: 14.5px; margin-bottom: 8px; }
+  .prim .r { font-size: 13.5px; color: var(--ink-2); margin: 0; }
+
+  /* ---------- sources ---------- */
+  .srcgroup { margin-bottom: 26px; }
+
+  .srcgroup h4 {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .src {
+    display: block;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .src:last-child { border-bottom: none; }
+  .src .dom {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink-3);
+    margin-right: 8px;
+  }
+  .src .d { color: var(--ink-2); }
+
+  footer {
+    margin-top: 64px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--ink-3);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 36px 18px 64px; }
+    h1 { font-size: 30px; }
+    .standfirst { font-size: 16px; }
+    table { font-size: 13.5px; }
+    th, td { padding: 8px 10px; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .wrap { max-width: none; padding: 0; }
+    a { color: #000; border: none; }
+    .note, .prim, .verdict, table { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">模型研究报告 · 2026 年 9 月</div>
+  <h1>JEV：一个不生成文字、只返回判断的模型</h1>
+  <p class="standfirst">
+    TypeSafe AI 于 2026 年 9 月 15 日发布的首个「System One 模型」。它不做对话、不写代码、不生成解释，
+    只把你的数据变成带概率的类型化答案，直接交给代码分支判断。
+    这份报告的核心问题是：这个主张有多少是真的。
+  </p>
+  <div class="meta">
+    <span><b>研究对象</b> Jev（jev-1.13）</span>
+    <span><b>发布方</b> TypeSafe AI</span>
+    <span><b>数据截止</b> 2026-09-20</span>
+    <span><b>取证来源</b> 25+ 个，经 crawl4ai 抓取</span>
+  </div>
+</header>
+
+<div class="verdict">
+  <h2>结论先行</h2>
+  <p>
+    <strong>Jev 是真实存在的新模型</strong>，不是概念或假消息。它于 2026 年 9 月 18 日上线 OpenRouter，
+    几天内处理超过 1610 亿 token，并已接入 Cloudflare Workers AI 与 LangChain 官方集成。
+  </p>
+  <p class="pull">
+    LLM 生成一段话给你读；Jev 读你的数据，直接返回一个带概率的类型化答案给你的代码用。
+    官方原话是「把 Jev 当成一个前沿智能的函数调用：非结构化状态进，带类型的概率决策出」。
+  </p>
+  <p>
+    <strong>但需要冷静看待的核心一点</strong>：TypeSafe 这次<strong>没有发布任何标准基准测试</strong>，
+    性能数字全部来自厂商自建的工作流评测。第三方独立实测结果好坏参半——速度和成本优势得到确认，
+    判断准确率在有些场景下甚至不如「一行 if 规则」。
+  </p>
+</div>
+
+<!-- ============ 1 ============ -->
+<section>
+  <h2 class="sec"><span class="num">01</span> 它是什么</h2>
+
+  <p>
+    Jev 的 API 只有两个概念：<code>state</code>（要判断的数据，可以是文本或嵌套 JSON）和
+    <code>questions</code>（关于这些数据的问题）。问题被刻意限制成三种形状，
+    官方的解释是「形状固定，返回值才永远可解析；选择有限，概率才校准得出来」。
+  </p>
+
+  <div class="prims">
+    <div class="prim">
+      <div class="name">Choice</div>
+      <div class="q">从你定义的选项里选一个 —— 「这个工单应该归哪个团队？」</div>
+      <p class="r">返回：选中项 + 每个选项的概率 + 置信度。选项之间是竞争关系，概率和为 1。</p>
+    </div>
+    <div class="prim">
+      <div class="name">Score</div>
+      <div class="q">沿有顺序的量表打分 —— 「客户有多沮丧？0 = 平静，2 = 非常沮丧」</div>
+      <p class="r">返回：连续分数 + 底层分布 + 置信度。文档警告不要把小数 Score 当精确测量值。</p>
+    </div>
+    <div class="prim">
+      <div class="name">Noul</div>
+      <div class="q">判断某个陈述是否为真 —— 「客户是否明确要求回电？」</div>
+      <p class="r">返回：一个 0–1 的概率，没有单独的置信度字段。</p>
+    </div>
+  </div>
+
+  <p>
+    多个问题可以在一次请求里并行评估，同一份 <code>state</code> 只发一遍。官方称加问题几乎不影响响应时间，
+    也不产生上下文腐烂。一个典型例子是客服工单「payouts 已经失败 3 天」，同时问：
+    「紧急吗？」→ 0.999、「归谁管？」→ billing（置信度 0.8）、「客户多沮丧？」→ 1.04（置信度 0.94）。
+  </p>
+
+  <p>
+    名字来自卡尼曼《思考，快与慢》：System 1 是快速直觉，System 2 是缓慢推理。
+    TypeSafe 的判断是——被做成产品的是 System 1。
+  </p>
+</section>
+
+<!-- ============ 2 ============ -->
+<section>
+  <h2 class="sec"><span class="num">02</span> 厂商宣称的性能</h2>
+  <p><span class="badge b-vendor">厂商口径</span>
+    以下全部数字来自 TypeSafe 官方博客与文档，<strong>未经独立复核</strong>。官方自己也列出了这些 caveats。</p>
+
+  <div class="tw">
+  <table>
+    <caption>TypeSafe 官方对比表，来源：typesafe.ai/blog/introducing-system-one-models-and-jev（2026-09-15）</caption>
+    <thead>
+      <tr><th>指标</th><th class="n">Jev</th><th class="n">传统 LLM</th><th class="n">差距</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>单次决策延迟</td><td class="n win">0.114 秒</td><td class="n">8.566 秒</td><td class="n">193.6×</td></tr>
+      <tr><td>单次决策成本</td><td class="n win">$0.000081</td><td class="n">$0.01388</td><td class="n">444.6×</td></tr>
+      <tr><td>输入 token 单价</td><td class="n win">$0.042 / 百万</td><td class="n">$0.20–10 / 百万</td><td class="n">—</td></tr>
+      <tr><td>输出 token</td><td class="n win">免费</td><td class="n">约为输入 5 倍</td><td class="n">—</td></tr>
+      <tr><td>端到端响应</td><td class="n win">70–500 ms</td><td class="n">3–329 秒</td><td class="n">40–200×</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="tw">
+  <table>
+    <caption>jev-1.13 规格，来源：docs.typesafe.ai/models（2026-09-17 核查）</caption>
+    <tbody>
+      <tr><td>定价</td><td class="n">$42 / 十亿输入 token；输出免费</td></tr>
+      <tr><td>速率限制</td><td class="n">250,000 token/秒 · 1,200 请求/分钟</td></tr>
+      <tr><td>上下文长度</td><td class="n">64k / 请求；state + 最长问题限 32k</td></tr>
+      <tr><td>输入模态</td><td class="n">仅文本（字符串、JSON 对象、文本数组）</td></tr>
+      <tr><td>训练方法</td><td class="n">RLCD（面向校准决策的强化学习）</td></tr>
+      <tr><td>采样方式</td><td class="n">并行，单次查询输出全部结果</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>
+    训练方法 RLCD（Reinforcement Learning for Calibrated Decisions）是它最核心的技术主张：
+    不优化「人类偏好的文本」，而优化「概率真实反映正确率」。这是置信度阈值策略能成立的前提——
+    没有校准过的概率，你就写不出 <code>if confidence &lt; 0.5</code>。
+  </p>
+
+  <div class="note warn">
+    <span class="lbl">官方自己列出的 caveats</span>
+    <p>
+      速度评测「基本上是在我们西海岸的笔记本上跑的（服务目前部署在那里）」；
+      定价「我们无法证明这不是补贴，需要长期来证明可持续性」；
+      速率限制「可能在有新 GPU 交易落地时无预警变化」。
+    </p>
+  </div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section>
+  <h2 class="sec"><span class="num">03</span> 第三方独立实测</h2>
+  <p>这是本次研究最值得看的部分。我按证据强度分成三类。</p>
+
+  <h3>大规模对照实测 <span class="badge b-third">第三方实测</span></h3>
+  <p>
+    GitHub 项目 <a href="https://github.com/NanmiCoder/jev-arena">jev-arena</a> 用 10,000 条真实评论
+    （B站 5783 / 抖音 1691 / 小红书 1321 / Reddit 755 / Twitter 399 / V2EX 51）同时跑 Jev 和 DeepSeek Flash。
+    所有数字可从原始 <code>manifest.json</code>、<code>events.jsonl</code>、逐条 JSONL 复算，无硬编码。
+  </p>
+
+  <div class="tw">
+  <table>
+    <caption>jev-arena 运行 0919-124001，总墙钟 823.575 秒，双方成功率均 10000/10000</caption>
+    <thead>
+      <tr><th>指标</th><th class="n">Jev</th><th class="n">DeepSeek Flash</th><th class="n">比值</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>墙钟时长</td><td class="n win">203.207 s</td><td class="n">823.486 s</td><td class="n">4.05× 快</td></tr>
+      <tr><td>吞吐（条/秒）</td><td class="n win">49.211</td><td class="n">12.143</td><td class="n">4.05×</td></tr>
+      <tr><td>P50 延迟</td><td class="n win">1,550 ms</td><td class="n">8,859 ms</td><td class="n">—</td></tr>
+      <tr><td>P95 延迟</td><td class="n win">5,610 ms</td><td class="n">14,199 ms</td><td class="n">—</td></tr>
+      <tr><td>总费用</td><td class="n win">$0.8388</td><td class="n">$1.5004</td><td class="n">1.79× 便宜</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>
+    费用口径双方不同，报告明确区分：Jev 用 OpenRouter 响应里的 <code>usage.cost</code>（真实账单）逐条累加；
+    DeepSeek 接口不返回费用，按官方单价本地计算（cache hit/miss 分开计价）。
+     DeepSeek 命中的是 off-peak 档位（高峰价的一半）。
+  </p>
+
+  <p>
+    判断一致率（<strong>注意：一致率不是准确率</strong>）：相关性 89.39%、情感极性 73.59%、
+    意图 67.85%、情感分数 ±0.5 内 95.8%、情感分数平均绝对差 0.1613。
+    报告还诚实地区分了「仪器差异」——aspects 与 emotion 两个字段因双方列举机制不同源
+    （固定维度逐个判定 vs 自由列举），Jaccard 值被标为 <code>comparable: false</code>，
+    明确禁止当作效果指标引用。
+  </p>
+
+  <h3>扑克实测 —— 最尖锐的批评 <span class="badge b-third">第三方实测</span></h3>
+  <p>
+    <a href="https://backnotprop.com/blog/jev-poker/">backnotprop.com 的评测</a>是质量最高的独立批评。
+    作者用 TexasSolver 求解了一个牌面（Q♠9♦4♠，100bb 深，300 次迭代至 0.59% exploitability），
+    把底牌、牌面、行动史、底池赔率、SPR 全部在 Python 里算好后喂给 Jev，只问它该采取什么行动。
+  </p>
+
+  <div class="tw">
+  <table>
+    <caption>150 个随机牌况。第二列剔除 solver 过牌的 95 个，只留 55 个有行动的牌况。完美策略 = 100%</caption>
+    <thead>
+      <tr><th>策略</th><th class="n">全部 150 个牌况</th><th class="n">55 个有行动的牌况</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Jev · 单问「该采取什么行动」</td><td class="n">63%</td><td class="n">38%</td></tr>
+      <tr><td>Jev · 六个判断 + 代码组合</td><td class="n">57%</td><td class="n">44%</td></tr>
+      <tr><td>Jev · 每个动作问一次 regret</td><td class="n">57%</td><td class="n">36%</td></tr>
+      <tr><td>Jev · 六个二元事实 + 扑克逻辑</td><td class="n">59%</td><td class="n">33%</td></tr>
+      <tr><td><em>无模型</em> · 能过牌就过牌，否则跟注</td><td class="n">72%</td><td class="n">24%</td></tr>
+      <tr><td><em>无模型</em> · 随机选</td><td class="n">37%</td><td class="n">25%</td></tr>
+      <tr><td><em>无模型</em> · 总是下注</td><td class="n">31%</td><td class="n">29%</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note sharp">
+    <span class="lbl">第一列是样本警告，不是结果</span>
+    <p>
+      因为 solver 在 150 个里有 95 个选择过牌，「总是过牌」这条规则就能拿 72%。
+      在 solver 真正有行动的 55 个牌况里，Jev 的四种方式得 33%–44%，无模型规则 24%–29%。
+    </p>
+  </div>
+
+  <p>
+    作者的结论很直白：<strong>「Jev 确实在做点什么，但它答错的次数比答对多」</strong>，
+    而且在所有四种方式里，Jev 都会过牌或弃掉 solver 会下注的牌。
+    另一个反讽案例：Jev 拿着同花听牌面对已成型的同花，5 次里有 5 次认为自己领先，
+    把 89.5 推进 22.5 的底池。
+  </p>
+
+  <p>
+    作者同时指出 TypeSafe 跳过了发布标准评测，「我认为这会导致大量天真的部署」。
+    他还提到一个方法论问题：<strong>被展示的用例并没有被分解</strong>——
+    官方 showcase 是「给模型一个 diff，问它是否安全」、「给一个对话线程，问是否该退款」，
+    这恰恰是未分解的用法，也正是被卖点的用法；而文档自己要求的是把问题拆成原子判断再在代码里组合。
+    这两者之间的距离，就是用户实际拿到的效果和演示效果之间的距离。
+  </p>
+
+  <h3>机制复现 —— 有价值的正面证据 <span class="badge b-third">第三方实测</span></h3>
+  <p>
+    <a href="https://github.com/r-ms/mini-jev">mini-Jev</a> 提了一个好问题：Jev 式的接口，
+    有多少是一个普通冻结模型本来就有的？它在 Qwen3-4B 上做了<strong>预注册实验</strong>
+    （有 PREREG.md， amendments v1.1–v1.3，所有数字从存储的运行记录重算）：
+  </p>
+
+  <div class="tw">
+  <table>
+    <caption>mini-Jev 在 Qwen3-4B-Instruct-2507 上的实测，任务 CLINC150，xgrammar 约束生成</caption>
+    <thead>
+      <tr><th>问题</th><th>答案</th><th>证据</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>读选项字母会损失精度吗？</td>
+        <td><strong>不会</strong>。意图字段 6750 个配对观测：JSON 0.909 vs 字母 0.907，Δ −0.22pp，95% CI [−1.44, +1.04]；k 从 2 到 16 每个 CI 都覆盖 0</td>
+        <td>run b2</td>
+      </tr>
+      <tr>
+        <td>真的更快吗？</td>
+        <td>短文本<strong>快 4 倍</strong>（32 token：0.24× 耗时）。2048 token 文本下 1/2/3 字段分别快 1.4×/1.8×/2.4×（共享前缀 KV 缓存）</td>
+        <td>runs b2/b3</td>
+      </tr>
+      <tr>
+        <td>字母优于写选项名称？</td>
+        <td>是，意图任务 +10.0pp [+8.3, +11.7]，domain +13.2pp</td>
+        <td>run b1</td>
+      </tr>
+      <tr>
+        <td>读法在哪里失效？</td>
+        <td>超出范围的文本：50 条里字母选「以上都不是」41 次，JSON 47 次。依赖字段：布尔值跟在另一字段之后时，写在同一个 JSON 里能多拿 5pp</td>
+        <td>run b2</td>
+      </tr>
+      <tr>
+        <td>让模型自己写概率呢？</td>
+        <td><strong>不要</strong>。640 token 上限的 enum grid 形式能跑完，但意图只得 0.346（字母是 0.896），且 62% 的「选择」是第一个选项</td>
+        <td>run b3</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note warn">
+    <span class="lbl">作者自己的警告</span>
+    <p>
+      这些是<strong>归一化的候选分数，不是校准概率</strong>。用 gap 做弃权可以，
+      不要把百分比当成 P(正确)。
+    </p>
+  </div>
+
+  <p>
+    这条证据的意义：它证明了「判断型接口 + 并行采样」这条路在工程上是成立的，
+    而且不需要 Jev 那种专门训练的模型，也能拿到大部分收益。
+  </p>
+
+  <h3>社区生态 <span class="badge b-community">社区报告</span></h3>
+  <p>
+    HuggingFace 上已出现一批社区复刻：基于 DeBERTa-v3-large 的
+    <a href="https://huggingface.co/com-kotobalabs/open-jev-deberta-v3-large">open-jev</a>（29 likes）、
+    Qwen3-0.6B 微调的 <a href="https://huggingface.co/Meanblock/JEV-CPU">JEV-CPU</a>、
+    日文 ModernBERT 版等。HackerNews 上有多个实验项目，包括
+    <a href="https://mikulskibartosz.name/typesafe-jev-guess-what-i-drew">「TypeSafe's Jev Can't See. I Made It Guess What I Drew Anyway」</a>
+    和 Devin 生成的延迟演示。这说明「系统一模型」这个概念正在被独立开发者认真对待。
+  </p>
+</section>
+
+<!-- ============ 4 ============ -->
+<section>
+  <h2 class="sec"><span class="num">04</span> 官方自己承认的缺陷</h2>
+  <p><span class="badge b-vendor">厂商口径</span>
+    这一点值得肯定——TypeSafe 有一份 <a href="https://docs.typesafe.ai/model-jaggedness/jev-1.13">Jev 1.13 jaggedness 页面</a>
+    （2026-09-17 复核），开头就是「Jev isn't perfect」。</p>
+
+  <div class="tw">
+  <table>
+    <caption>jev-1.13 已知失败模式，来源：docs.typesafe.ai/model-jaggedness/jev-1.13</caption>
+    <thead><tr><th>#</th><th>失败模式</th><th>应该怎么做</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td>字面阅读（过于 literal）</td><td>写出精确条件，为每个选项写清标准</td></tr>
+      <tr><td class="n">2</td><td>数学与数字，需要数值精度</td><td>把算术留在代码里</td></tr>
+      <tr><td class="n">3</td><td>日期时间比较</td><td>抽取组件，在代码里比较</td></tr>
+      <tr><td class="n">4</td><td>间接推理（多跳）</td><td>减少跳数，明确指向相关 state</td></tr>
+      <tr><td class="n">5</td><td>大段无关上下文</td><td>先过滤，只送问题需要的</td></tr>
+      <tr><td class="n">6</td><td>对抗性内容</td><td>写精确提示词，部署前测边缘情况</td></tr>
+      <tr><td class="n">7</td><td>矛盾的指令与标准</td><td>让标准和指令一致</td></tr>
+      <tr><td class="n">8</td><td>常识性结构不变量</td><td>—</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>
+    文档明确说：「<code>jev-1.13</code> 快、校准、擅长常识判断，但不完美。
+    它在 System One 任务上表现最好，可能需要额外间接层级的任务上会吃力。它能<em>相当字面地</em>理解。」
+  </p>
+
+  <p>
+    另外，校准性被明确限定为<strong>群体属性</strong>：「校准是在一组预测上测量的，
+    不保证单个答案正确。」文档还特别警告：不要把小数 Score 当成精确测量值——
+    不同的分布可以产生同一个数值。
+  </p>
+</section>
+
+<!-- ============ 5 ============ -->
+<section>
+  <h2 class="sec"><span class="num">05</span> 接入渠道</h2>
+  <p>三条路径都已就绪，这是「真实可用」的重要佐证。</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>渠道</th><th>模型 ID</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Cloudflare Workers AI</td>
+        <td><code>@cf/typesafe/jev</code></td>
+        <td>Worker 绑定或 REST API，32K 上下文，<code>state</code> 支持嵌套 JSON</td>
+      </tr>
+      <tr>
+        <td>OpenRouter</td>
+        <td><code>typesafe/jev-1.13</code></td>
+        <td>2026-09-18 上线，$0.042 / $0 每百万 token。实测 P50 延迟 <strong>0.28s</strong>，uptime <strong>100%</strong>。另有 <code>typesafe/jev-latest</code> 别名</td>
+      </tr>
+      <tr>
+        <td>LangChain</td>
+        <td><code>langchain-typesafe</code></td>
+        <td><code>TypeSafeClassifier</code>，官方博客 2026-09-17 有教程。设置 <code>TYPESAFE_API_KEY</code> 即可</td>
+      </tr>
+      <tr>
+        <td>Agent Skill</td>
+        <td><code>typesafe-ai/skills</code></td>
+        <td>GitHub 组织仓库，让 AI Agent 能直接调用 System One API</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section>
+  <h2 class="sec"><span class="num">06</span> 怎么评价这个模型</h2>
+
+  <h4>它真正解决的问题是真实的</h4>
+  <p>
+    任何做过生产级分类、路由的人都会认出这几个痛点：LLM 返回的 JSON 套在 markdown 代码块里要剥；
+    拼错的 <code>"techincal"</code> 静默写进数据库；为一个 0–2 的分数生成 372 个 token 的解释
+    （你在为「它向你解释自己」付费）；自报的 confidence 字段从未和真实结果对齐过。
+    Jev 的设计直击这些。
+  </p>
+  <p>
+    而且「零幻觉」这个口号在它的语境下是成立的——<strong>输出永远是预期结构，模型不可能产生类型错误</strong>，
+    官方称这在数学上可证，只需一个反例就能证伪。
+  </p>
+
+  <h4>但「系统一模型」这个品类叙事要小心</h4>
+  <p>
+    批评者的观察很到位：被展示的用例并没有被分解。官方 showcase 是「给一个 diff 问是否安全」、
+    「给一个对话线程问是否该退款」——这恰恰是未分解的用法，也正是被卖点的用法。
+    而文档自己要求的是把问题拆成原子判断再在代码里组合。
+  </p>
+  <p>
+    从工程实践看，值得记住的几条：多个标签可能同时成立时用多个 Noul，
+    不要用一个 Choice（Choice 的概率互相竞争，会此消彼长）；
+    <code>confidence &lt; 0.5</code> 是兜底，往上<strong>每个动作按后果分设阈值</strong>——
+    查余额这种只读操作不用门槛，批准转账这种不可逆操作要；
+    阈值本身没有标准答案，必须拿你自己的数据跑出来。
+  </p>
+
+  <h4>对你是否有用，取决于一个问题</h4>
+  <p>
+    你的场景是不是「每封邮件、每个工单、每次工具调用都要判断一次」的高频结构化决策？
+    如果是，成本结构确实让「全量判断」在经济学上首次成立——
+    $0.042/百万输入 token，一美分约 240 次单问题决策。
+  </p>
+  <p>
+    如果只是偶发的判断，一个普通 LLM 加 structured output 就够了——
+    而且 mini-Jev 的实验说明这条路你能自己在冻结模型上拿到大部分收益。
+  </p>
+
+  <div class="note good">
+    <span class="lbl">最实用的建议，来自扑克评测作者</span>
+    <p>
+      你必须对每一个想交给它的场景，逐个对着你信任的答案键做评估，
+      并算清在那里一次错误判断的代价。不要相信任何聚合分数——包括本报告列出的这些。
+    </p>
+  </div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section>
+  <h2 class="sec"><span class="num">07</span> 局限与未解问题</h2>
+  <ul>
+    <li>
+      <strong>无同行评审</strong> <span class="badge b-unverified">未能验证</span><br>
+      arXiv 上搜不到 RLCD 或 System One 相关论文（检索 <code>all:"RLCD" AND all:"calibrated"</code>
+      返回 0 条结果）。训练方法只有博客描述。
+    </li>
+    <li>
+      <strong>无标准基准</strong> <span class="badge b-unverified">未能验证</span><br>
+      厂商明确选择自建「工作流评测」，参考答案是 Astra 和 Fable 这两个最贵最大模型的平均预测。
+      这比刷榜诚实，但也意味着<strong>没有一个数字能告诉你 Jev 是否跨过了你要交给它的那个决策的门槛</strong>。
+      官方原话：「这也意味着，没有任何数字能告诉你，对于你即将交给它的那个决策，Jev 是否达标。」
+    </li>
+    <li>
+      <strong>校准性无独立验证</strong> <span class="badge b-unverified">未能验证</span><br>
+      这是它全部价值主张的地基。我没有找到任何针对 jev-1.13 的独立校准曲线测量。
+      mini-Jev 明确警告它自己的分数「不是校准概率」。
+    </li>
+    <li>
+      <strong>定价可持续性存疑</strong> —— 官方自己承认「我们无法证明这不是补贴」。
+    </li>
+    <li>
+      <strong>延迟基准的采样环境</strong> —— 官方称在自己的笔记本上跑，服务部署在美国西海岸，
+      其他地区实际延迟可能不同。OpenRouter 侧实测 P50 为 0.28s。
+    </li>
+    <li>
+      <strong>速率限制动态调整中</strong> —— 官方称「需求非常大，限制可能在有新 GPU 交易落地时无预警变化」。
+    </li>
+    <li>
+      <strong>一篇中文批评文章未能取得全文</strong> —— 知乎《万字长文解读 Jev 模型》被反爬拦截（HTTP 403），
+      仅从搜索摘要确认其持批评立场（「没有超越统计学的理论创新，能力边界也很窄」），未作为论据采用。
+    </li>
+  </ul>
+</section>
+
+<!-- ============ sources ============ -->
+<section>
+  <h2 class="sec"><span class="num">08</span> 来源清单</h2>
+
+  <div class="srcgroup">
+    <h4>官方 <span class="badge b-vendor">厂商口径</span></h4>
+    <a class="src" href="https://typesafe.ai/blog/introducing-system-one-models-and-jev">
+      <span class="dom">typesafe.ai</span><strong>Introducing System One Models &amp; Jev</strong>
+      <span class="d">— 官方博客，2026-09-15。性能数字与 caveats 的原始出处。作者 Diogo Almeida，创始人，前 OpenAI。</span>
+    </a>
+    <a class="src" href="https://docs.typesafe.ai/introduction">
+      <span class="dom">docs.typesafe.ai</span><strong>Introduction</strong>
+      <span class="d">— 三种原语的定义与返回字段。</span>
+    </a>
+    <a class="src" href="https://docs.typesafe.ai/concepts/system-one">
+      <span class="dom">docs.typesafe.ai</span><strong>System One</strong>
+      <span class="d">— 品类定义、与 LLM 的差异、System 1 命名来源。</span>
+    </a>
+    <a class="src" href="https://docs.typesafe.ai/models">
+      <span class="dom">docs.typesafe.ai</span><strong>Models</strong>
+      <span class="d">— jev-1.13 规格、定价、速率限制、上下文长度。2026-09-17 核查。</span>
+    </a>
+    <a class="src" href="https://docs.typesafe.ai/model-jaggedness/jev-1.13">
+      <span class="dom">docs.typesafe.ai</span><strong>Jev 1.13 jaggedness</strong>
+      <span class="d">— 官方自述的 8 类已知失败模式。2026-09-17 复核。</span>
+    </a>
+    <a class="src" href="https://whatisjev.com/">
+      <span class="dom">whatisjev.com</span><strong>What is Jev</strong>
+      <span class="d">— 自称独立的第三方指南，有四级证据标签体系，示例概率明确标注「非实测」。
+      注意页面标题同时写着 "by TypeSafe AI"，其独立性值得存疑。</span>
+    </a>
+  </div>
+
+  <div class="srcgroup">
+    <h4>第三方集成与渠道 <span class="badge b-third">第三方实测</span></h4>
+    <a class="src" href="https://openrouter.ai/typesafe/jev-1.13">
+      <span class="dom">openrouter.ai</span><strong>TypeSafe: Jev 1.13</strong>
+      <span class="d">— 上架信息、定价、P50 延迟 0.28s、uptime 100%、2026-09-18 发布。</span>
+    </a>
+    <a class="src" href="https://blog.langchain.com/building-a-harness-with-jev/">
+      <span class="dom">blog.langchain.com</span><strong>Building a Harness with Jev</strong>
+      <span class="d">— LangChain 官方博客，S. Runkle &amp; H. Lovell，2026-09-17。</span>
+    </a>
+    <a class="src" href="https://github.com/typesafe-ai/skills">
+      <span class="dom">github.com</span><strong>typesafe-ai/skills</strong>
+      <span class="d">— GitHub 组织仓库，Agent skills。</span>
+    </a>
+  </div>
+
+  <div class="srcgroup">
+    <h4>独立实测 <span class="badge b-third">第三方实测</span></h4>
+    <a class="src" href="https://github.com/NanmiCoder/jev-arena">
+      <span class="dom">github.com</span><strong>NanmiCoder/jev-arena</strong>
+      <span class="d">— 10,000 条评论 vs DeepSeek Flash 的对照工具与数据。
+      <a href="https://raw.githubusercontent.com/NanmiCoder/jev-arena/main/examples/demo/0919-124001/report.md">完整对比报告</a>。</span>
+    </a>
+    <a class="src" href="https://backnotprop.com/blog/jev-poker/">
+      <span class="dom">backnotprop.com</span><strong>Jev is the fish at the poker table</strong>
+      <span class="d">— Mike Ramos，2026-09-17。扑克求解器实测，最重要的独立批评。</span>
+    </a>
+    <a class="src" href="https://github.com/r-ms/mini-jev">
+      <span class="dom">github.com</span><strong>r-ms/mini-jev</strong>
+      <span class="d">— Qwen3-4B 上的预注册复现实验，含置信区间。</span>
+    </a>
+  </div>
+
+  <div class="srcgroup">
+    <h4>社区与综述 <span class="badge b-community">社区报告</span></h4>
+    <a class="src" href="https://www.cnblogs.com/sing1ee/p/23040079">
+      <span class="dom">cnblogs.com</span><strong>2026年完整指南：什么是 Jev？</strong>
+      <span class="d">— 中文综述，2026-09-19。整合了官方口径、三条接入路径与 LangChain 引用。</span>
+    </a>
+    <a class="src" href="https://zhuanlan.zhihu.com/p/2084624500726022179">
+      <span class="dom">zhuanlan.zhihu.com</span><strong>万字长文解读 Jev 模型：毫秒级判定原理与工程应用边界</strong>
+      <span class="d">— 知乎。<strong>全文未能取得</strong>（反爬拦截 HTTP 403），仅确认标题与摘要立场。</span>
+    </a>
+    <a class="src" href="https://mikulskibartosz.name/typesafe-jev-guess-what-i-drew">
+      <span class="dom">mikulskibartosz.name</span><strong>TypeSafe's Jev Can't See. I Made It Guess What I Drew Anyway</strong>
+      <span class="d">— Bartosz Mikulski，HackerNews，2026-09-19。</span>
+    </a>
+    <a class="src" href="https://huggingface.co/com-kotobalabs/open-jev-deberta-v3-large">
+      <span class="dom">huggingface.co</span><strong>com-kotobalabs/open-jev-deberta-v3-large</strong>
+      <span class="d">— 社区复刻，29 likes。同类还有 Meanblock/JEV-CPU、argos1111/modernbert-ja-310m-jev 等。</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>
+    <strong>研究方法说明</strong>　本研究通过 crawl4ai 无头浏览器抓取（WebSearch API 与直接 fetch 搜索引擎
+    均被网络策略拦截，Bing 结果页经 crawl4ai 取得），共访问 25+ 个来源。
+    所有数字均标注来源类型（厂商口径 / 第三方实测 / 社区报告）与时间点；
+    未能取得全文的来源已明确标注，未作为论据采用。
+  </p>
+  <p>
+     <strong>数据截止</strong>　2026 年 9 月 20 日。Jev 处于早期访问阶段，版本、定价与速率限制可能已变化。
+  </p>
+</footer>
+
+</div>
+</body>
+</html>

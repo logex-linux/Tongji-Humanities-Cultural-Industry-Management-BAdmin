@@ -1,0 +1,57 @@
+{
+  "home": "把会用，学成懂得。",
+  "reviewBefore": {
+    "CS102-U01": {
+      "due": "2026-10-31",
+      "created": "2026-10-30T02:17:26.697Z"
+    }
+  },
+  "stateAfterReview": {
+    "version": 1,
+    "read": {},
+    "bookmarks": {},
+    "notes": {},
+    "drafts": {},
+    "submissions": {},
+    "referenceSeen": {},
+    "reviews": {},
+    "last": "CS102-U01",
+    "theme": "light"
+  },
+  "backupMerge": {
+    "incoming": {
+      "text": "same response",
+      "mode": "assisted",
+      "at": "2026-10-29T01:00:00Z",
+      "attempts": [
+        {
+          "text": "first older response",
+          "mode": "independent",
+          "at": "2026-10-28T01:00:00Z"
+        },
+        {
+          "text": "additional evidence",
+          "mode": "assisted",
+          "at": "2026-10-28T03:00:00Z"
+        }
+      ]
+    },
+    "merged": {
+      "text": "same response",
+      "mode": "independent",
+      "at": "2026-10-29T01:00:00Z",
+      "attempts": [
+        {
+          "text": "first older response",
+          "mode": "independent",
+          "at": "2026-10-28T01:00:00Z"
+        }
+      ]
+    }
+  },
+  "counts": {
+    "courses": 29,
+    "units": 269
+  },
+  "errors": []
+}

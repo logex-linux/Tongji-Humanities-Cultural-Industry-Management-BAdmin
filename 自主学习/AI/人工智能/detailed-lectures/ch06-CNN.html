@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第6章：CNN——图像识别的原理</title>
+<style>
+:root {
+  --bg: #fefefe; --text: #1a1a2e; --accent: #4361ee; --accent-light: #eef2ff;
+  --green: #059669; --green-bg: #ecfdf5; --orange: #d97706; --orange-bg: #fffbeb;
+  --red: #dc2626; --red-bg: #fef2f2; --purple: #7c3aed; --purple-bg: #f5f3ff;
+  --gray: #6b7280; --border: #e5e7eb; --code-bg: #f8fafc; --radius: 10px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, "PingFang SC", "Noto Sans SC", sans-serif; background: var(--bg); color: var(--text); line-height: 1.9; max-width: 800px; margin: 0 auto; padding: 40px 24px 100px; }
+h1 { font-size: 1.8rem; margin-bottom: 8px; color: var(--accent); }
+h2 { font-size: 1.35rem; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--accent-light); }
+h3 { font-size: 1.1rem; margin: 32px 0 12px; color: var(--accent); }
+p { margin: 12px 0; }
+.subtitle { color: var(--gray); font-size: 0.95rem; margin-bottom: 32px; }
+.prereq { background: var(--accent-light); border-radius: var(--radius); padding: 16px 20px; margin: 20px 0; font-size: 0.9rem; }
+.prereq strong { color: var(--accent); }
+.concept-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: var(--radius); padding: 20px; margin: 20px 0; }
+.concept-box .label { font-weight: 700; color: #0284c7; font-size: 0.85rem; margin-bottom: 8px; }
+.example-box { background: var(--green-bg); border: 1px solid #a7f3d0; border-radius: var(--radius); padding: 20px; margin: 20px 0; }
+.example-box .label { font-weight: 700; color: var(--green); font-size: 0.85rem; margin-bottom: 8px; }
+.exercise-box { background: var(--orange-bg); border: 1px solid #fde68a; border-radius: var(--radius); padding: 20px; margin: 20px 0; }
+.exercise-box .label { font-weight: 700; color: var(--orange); font-size: 0.85rem; margin-bottom: 8px; }
+.answer-box { background: var(--red-bg); border: 1px solid #fecaca; border-radius: var(--radius); padding: 20px; margin: 12px 0; display: none; }
+.answer-box.show { display: block; }
+.answer-box .label { font-weight: 700; color: var(--red); font-size: 0.85rem; margin-bottom: 8px; }
+.show-answer { background: none; border: 1px solid var(--red); color: var(--red); padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-top: 8px; }
+.show-answer:hover { background: var(--red-bg); }
+pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 16px; overflow-x: auto; font-size: 0.85rem; line-height: 1.6; margin: 12px 0; }
+code { font-family: "SF Mono", "Fira Code", monospace; }
+p code, li code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.88em; }
+ul, ol { padding-left: 24px; margin: 12px 0; }
+li { margin: 6px 0; }
+svg { display: block; margin: 20px auto; max-width: 100%; }
+.formula { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px 20px; margin: 16px 0; text-align: center; font-size: 1.05rem; font-family: "SF Mono", monospace; }
+.step { margin: 8px 0; padding: 8px 16px; border-left: 3px solid var(--accent); background: var(--accent-light); border-radius: 0 6px 6px 0; }
+.toc { background: var(--code-bg); border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+.toc a { color: var(--accent); text-decoration: none; }
+.toc li { margin: 4px 0; }
+.nav-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; }
+.nav-footer a { color: var(--accent); text-decoration: none; font-size: 0.9rem; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+th, td { padding: 10px 14px; border: 1px solid var(--border); text-align: left; }
+th { background: var(--accent-light); font-weight: 600; }
+.highlight { background: #fef08a; padding: 2px 4px; border-radius: 3px; }
+</style>
+<link rel="stylesheet" href="apple-design.css">
+</head>
+<body>
+
+<h1>第6章：CNN——图像识别的原理</h1>
+<p class="subtitle">AI 数学基础 · 第 6/10 章 · 预计学习时间：5-6 小时</p>
+
+<div class="prereq">
+<strong>前置知识：</strong>第1-5章（向量、矩阵、梯度下降、神经网络、反向传播）<br>
+<strong>本章目标：</strong>理解卷积操作的原理、为什么图像需要 CNN、池化的作用，能手算卷积并用 PyTorch 构建图像分类器。
+</div>
+
+<div class="toc">
+<strong>本章目录</strong>
+<ol>
+<li><a href="#s1">6.1 图像在计算机中是什么？</a></li>
+<li><a href="#s2">6.2 为什么全连接网络不适合图像？</a></li>
+<li><a href="#s3">6.3 卷积操作——滑动窗口点积</a></li>
+<li><a href="#s4">6.4 手算卷积（完整例题）</a></li>
+<li><a href="#s5">6.5 多通道卷积——处理彩色图像</a></li>
+<li><a href="#s6">6.6 池化——压缩信息</a></li>
+<li><a href="#s7">6.7 CNN 的完整架构</a></li>
+<li><a href="#s8">6.8 用 PyTorch 构建图像分类器</a></li>
+<li><a href="#s9">6.9 经典 CNN 架构演进</a></li>
+<li><a href="#s10">6.10 本章习题</a></li>
+</ol>
+</div>
+
+<!-- ============ 6.1 ============ -->
+<h2 id="s1">6.1 图像在计算机中是什么？</h2>
+
+<h3>灰度图：一个数字矩阵</h3>
+<p>一张灰度图就是一个二维数字表格，每个数字代表一个像素的亮度（0=黑，255=白）：</p>
+
+<svg width="400" height="200" viewBox="0 0 400 200">
+  <!-- 像素网格 -->
+  <g>
+    <rect x="30" y="30" width="30" height="30" fill="#333" stroke="#fff" stroke-width="1"/>
+    <rect x="60" y="30" width="30" height="30" fill="#666" stroke="#fff" stroke-width="1"/>
+    <rect x="90" y="30" width="30" height="30" fill="#999" stroke="#fff" stroke-width="1"/>
+    <rect x="120" y="30" width="30" height="30" fill="#ccc" stroke="#fff" stroke-width="1"/>
+    <rect x="30" y="60" width="30" height="30" fill="#555" stroke="#fff" stroke-width="1"/>
+    <rect x="60" y="60" width="30" height="30" fill="#888" stroke="#fff" stroke-width="1"/>
+    <rect x="90" y="60" width="30" height="30" fill="#bbb" stroke="#fff" stroke-width="1"/>
+    <rect x="120" y="60" width="30" height="30" fill="#eee" stroke="#fff" stroke-width="1"/>
+    <rect x="30" y="90" width="30" height="30" fill="#777" stroke="#fff" stroke-width="1"/>
+    <rect x="60" y="90" width="30" height="30" fill="#aaa" stroke="#fff" stroke-width="1"/>
+    <rect x="90" y="90" width="30" height="30" fill="#ddd" stroke="#fff" stroke-width="1"/>
+    <rect x="120" y="90" width="30" height="30" fill="#fff" stroke="#999" stroke-width="1"/>
+  </g>
+  
+  <!-- 数字标注 -->
+  <text x="38" y="50" font-size="10" fill="#fff">50</text>
+  <text x="65" y="50" font-size="10" fill="#fff">100</text>
+  <text x="95" y="50" font-size="10" fill="#333">150</text>
+  <text x="125" y="50" font-size="10" fill="#333">200</text>
+  
+  <!-- 箭头 -->
+  <text x="180" y="75" font-size="20" fill="#333">→</text>
+  
+  <!-- 矩阵表示 -->
+  <text x="220" y="40" font-size="12" fill="#333" font-family="monospace">[[ 50, 100, 150, 200],</text>
+  <text x="220" y="65" font-size="12" fill="#333" font-family="monospace"> [ 85, 136, 187, 238],</text>
+  <text x="220" y="90" font-size="12" fill="#333" font-family="monospace"> [119, 170, 221, 255]]</text>
+  <text x="220" y="120" font-size="11" fill="#666">3×4 矩阵（3行4列像素）</text>
+  
+  <!-- 说明 -->
+  <text x="30" y="150" font-size="12" fill="#333">一张 28×28 的 MNIST 手写数字 = 784 个像素值</text>
+  <text x="30" y="175" font-size="12" fill="#333">一张 224×224 的彩色照片 = 224×224×3 = 150,528 个数字</text>
+</svg>
+
+<h3>彩色图：三个矩阵叠在一起</h3>
+<p>彩色图有 R（红）、G（绿）、B（蓝）三个通道，每个通道是一个矩阵：</p>
+<div class="formula">
+彩色图 = 3 个 H×W 矩阵叠在一起 → 形状 (H, W, 3) 或 (3, H, W)
+</div>
+
+<pre><code>import numpy as np
+from PIL import Image
+
+# 读取一张图片
+img = Image.open('cat.jpg')
+img_array = np.array(img)
+print(img_array.shape)  # (224, 224, 3) → 高224, 宽224, 3个通道(RGB)
+
+# 每个像素是 [R, G, B] 三个 0-255 的数字
+print(img_array[0, 0])  # [128, 64, 32] → 这个像素的颜色</code></pre>
+
+<!-- ============ 6.2 ============ -->
+<h2 id="s2">6.2 为什么全连接网络不适合图像？</h2>
+
+<h3>问题1：参数太多</h3>
+<p>一张 224×224×3 的图片有 150,528 个像素。如果第一层全连接到 1000 个神经元：</p>
+<div class="formula">
+参数量 = 150,528 × 1000 + 1000 ≈ 1.5 亿（仅第一层！）
+</div>
+<p>参数太多 → 容易过拟合、训练慢、需要海量数据。</p>
+
+<h3>问题2：忽略空间结构</h3>
+<p>全连接把图片展平成一维向量，<strong>丢失了"哪些像素相邻"的信息</strong>。但图像的特征（边缘、纹理）恰恰依赖局部空间关系。</p>
+
+<h3>问题3：不具备平移不变性</h3>
+<p>一只猫在图片左上角和右下角，应该是同一个东西。但全连接网络会把它们当作完全不同的输入。</p>
+
+<div class="concept-box">
+<div class="label">📌 CNN 的三大核心思想</div>
+<ol>
+<li><strong>局部连接：</strong>每个神经元只看一小块区域（不是整张图）</li>
+<li><strong>权重共享：</strong>同一个"检测器"扫描整张图（平移不变性）</li>
+<li><strong>池化：</strong>逐步缩小尺寸，增大"视野"</li>
+</ol>
+</div>
+
+<!-- ============ 6.3 ============ -->
+<h2 id="s3">6.3 卷积操作——滑动窗口点积</h2>
+
+
+<style>
+.bridge-box {
+  background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px;
+  padding: 16px 20px; margin: 20px 0; border-left: 4px solid #22c55e;
+}
+.bridge-box .br-label {
+  font-weight: 700; color: #16a34a; font-size: 0.85rem; margin-bottom: 8px;
+}
+.bridge-box p { font-size: 0.9rem; margin: 6px 0; }
+.bridge-box .br-link { color: #4361ee; font-weight: 600; }
+</style>
+
+<div class="bridge-box">
+<div class="br-label">🌉 直觉桥梁：连接第1章</div>
+<p>卷积操作的本质就是<span class="br-link">第1章学的点积</span>！</p>
+<p>卷积核（3×3=9个数）和图像局部区域（3×3=9个数）做点积 → 得到一个数。</p>
+<p>然后窗口滑动，再做点积，再滑动……就是在不同位置重复做点积。</p>
+<p>所以卷积 = "滑动窗口点积"，你已经会了核心运算！</p>
+</div>
+
+<h3>核心操作</h3>
+<p>卷积 = 拿一个小矩阵（卷积核/滤波器），在图片上<strong>滑动</strong>，每到一个位置就和那块区域做<strong>点积</strong>。</p>
+
+<svg width="550" height="250" viewBox="0 0 550 250">
+  <!-- 输入图像 5x5 -->
+  <text x="30" y="20" font-size="12" fill="#4361ee" font-weight="bold">输入 (5×5)</text>
+  <g font-size="11" font-family="monospace">
+    <rect x="30" y="30" width="25" height="25" fill="#eef2ff" stroke="#4361ee" stroke-width="1.5"/>
+    <rect x="55" y="30" width="25" height="25" fill="#eef2ff" stroke="#4361ee" stroke-width="1.5"/>
+    <rect x="80" y="30" width="25" height="25" fill="#eef2ff" stroke="#4361ee" stroke-width="1.5"/>
+    <rect x="105" y="30" width="25" height="25" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="130" y="30" width="25" height="25" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="30" y="55" width="25" height="25" fill="#eef2ff" stroke="#4361ee" stroke-width="1.5"/>
+    <rect x="55" y="55" width="25" height="25" fill="#eef2ff" stroke="#4361ee" stroke-width="1.5"/>
+    <rect x="80" y="55" width="25" height="25" fill="#eef2ff" stroke="#4361ee" stroke-width="1.5"/>
+    <rect x="105" y="55" width="25" height="25" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="130" y="55" width="25" height="25" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="30" y="80" width="25" height="25" fill="#eef2ff" stroke="#4361ee" stroke-width="1.5"/>
+    <rect x="55" y="80" width="25" height="25" fill="#eef2ff" stroke="#4361ee" stroke-width="1.5"/>
+    <rect x="80" y="80" width="25" height="25" fill="#eef2ff" stroke="#4361ee" stroke-width="1.5"/>
+    <rect x="105" y="80" width="25" height="25" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="130" y="80" width="25" height="25" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="30" y="105" width="25" height="25" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="55" y="105" width="25" height="25" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="80" y="105" width="25" height="25" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="105" y="105" width="25" height="25" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="130" y="105" width="25" height="25" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="30" y="130" width="25" height="25" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="55" y="130" width="25" height="25" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="80" y="130" width="25" height="25" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="105" y="130" width="25" height="25" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="130" y="130" width="25" height="25" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <text x="37" y="47">1</text><text x="62" y="47">0</text><text x="87" y="47">1</text>
+    <text x="37" y="72">0</text><text x="62" y="72">1</text><text x="87" y="72">0</text>
+    <text x="37" y="97">1</text><text x="62" y="97">0</text><text x="87" y="97">1</text>
+  </g>
+  <text x="40" y="175" font-size="10" fill="#4361ee">蓝色=当前窗口位置</text>
+  
+  <!-- 卷积核 3x3 -->
+  <text x="220" y="20" font-size="12" fill="#d97706" font-weight="bold">卷积核 (3×3)</text>
+  <g font-size="12" font-family="monospace">
+    <rect x="220" y="30" width="30" height="30" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+    <rect x="250" y="30" width="30" height="30" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+    <rect x="280" y="30" width="30" height="30" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+    <rect x="220" y="60" width="30" height="30" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+    <rect x="250" y="60" width="30" height="30" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+    <rect x="280" y="60" width="30" height="30" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+    <rect x="220" y="90" width="30" height="30" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+    <rect x="250" y="90" width="30" height="30" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+    <rect x="280" y="90" width="30" height="30" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+    <text x="230" y="50">1</text><text x="260" y="50">0</text><text x="290" y="50">1</text>
+    <text x="230" y="80">0</text><text x="260" y="80">1</text><text x="290" y="80">0</text>
+    <text x="230" y="110">1</text><text x="260" y="110">0</text><text x="290" y="110">1</text>
+  </g>
+  
+  <!-- 计算过程 -->
+  <text x="220" y="145" font-size="11" fill="#333">点积 = 1×1+0×0+1×1</text>
+  <text x="220" y="165" font-size="11" fill="#333">     +0×0+1×1+0×0</text>
+  <text x="220" y="185" font-size="11" fill="#333">     +1×1+0×0+1×1</text>
+  <text x="220" y="210" font-size="13" fill="#dc2626" font-weight="bold">= 5</text>
+  
+  <!-- 箭头 -->
+  <text x="340" y="80" font-size="20" fill="#333">→</text>
+  
+  <!-- 输出 -->
+  <text x="380" y="20" font-size="12" fill="#059669" font-weight="bold">输出 (3×3)</text>
+  <g font-size="12" font-family="monospace">
+    <rect x="380" y="30" width="30" height="30" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+    <rect x="410" y="30" width="30" height="30" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="440" y="30" width="30" height="30" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="380" y="60" width="30" height="30" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="410" y="60" width="30" height="30" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="440" y="60" width="30" height="30" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="380" y="90" width="30" height="30" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="410" y="90" width="30" height="30" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <rect x="440" y="90" width="30" height="30" fill="#f8fafc" stroke="#ccc" stroke-width="1"/>
+    <text x="390" y="50" fill="#059669" font-weight="bold">5</text>
+    <text x="420" y="50">?</text><text x="450" y="50">?</text>
+    <text x="390" y="80">?</text><text x="420" y="80">?</text><text x="450" y="80">?</text>
+    <text x="390" y="110">?</text><text x="420" y="110">?</text><text x="450" y="110">?</text>
+  </g>
+  <text x="380" y="140" font-size="10" fill="#059669">窗口滑动9次→9个输出</text>
+</svg>
+
+
+<!-- 动画：卷积核滑动 -->
+<style>
+@keyframes conv-slide {
+  0%,12%   { transform: translate(0px, 0px); }
+  16%,28%  { transform: translate(25px, 0px); }
+  32%,44%  { transform: translate(50px, 0px); }
+  48%,60%  { transform: translate(0px, 25px); }
+  64%,76%  { transform: translate(25px, 25px); }
+  80%,92%  { transform: translate(50px, 25px); }
+  96%,100% { transform: translate(0px, 0px); }
+}
+@keyframes conv-out1 { 0%,14% {opacity:0;} 18%,100% {opacity:1;} }
+@keyframes conv-out2 { 0%,30% {opacity:0;} 34%,100% {opacity:1;} }
+@keyframes conv-out3 { 0%,46% {opacity:0;} 50%,100% {opacity:1;} }
+@keyframes conv-out4 { 0%,62% {opacity:0;} 66%,100% {opacity:1;} }
+@keyframes conv-out5 { 0%,78% {opacity:0;} 82%,100% {opacity:1;} }
+@keyframes conv-out6 { 0%,92% {opacity:0;} 96%,100% {opacity:1;} }
+.conv-kernel { animation: conv-slide 8s ease-in-out infinite; }
+.co1 { animation: conv-out1 8s ease-in-out infinite; }
+.co2 { animation: conv-out2 8s ease-in-out infinite; }
+.co3 { animation: conv-out3 8s ease-in-out infinite; }
+.co4 { animation: conv-out4 8s ease-in-out infinite; }
+.co5 { animation: conv-out5 8s ease-in-out infinite; }
+.co6 { animation: conv-out6 8s ease-in-out infinite; }
+</style>
+
+<div style="text-align:center; margin: 24px 0;">
+<p style="font-size:0.85rem; color:#666; margin-bottom:8px;">👇 动画：观察 3×3 卷积核如何在输入上滑动，逐个位置计算点积</p>
+<svg width="560" height="230" viewBox="0 0 560 230" style="background:#fafbfc; border-radius:12px; border:1px solid #e5e7eb;">
+  <!-- 输入网格 5x5 -->
+  <text x="30" y="20" font-size="12" fill="#4361ee" font-weight="bold">输入 (5×5)</text>
+  <g stroke="#ccc" stroke-width="1" fill="#f8fafc">
+    <rect x="30" y="30" width="25" height="25"/><rect x="55" y="30" width="25" height="25"/><rect x="80" y="30" width="25" height="25"/><rect x="105" y="30" width="25" height="25"/><rect x="130" y="30" width="25" height="25"/>
+    <rect x="30" y="55" width="25" height="25"/><rect x="55" y="55" width="25" height="25"/><rect x="80" y="55" width="25" height="25"/><rect x="105" y="55" width="25" height="25"/><rect x="130" y="55" width="25" height="25"/>
+    <rect x="30" y="80" width="25" height="25"/><rect x="55" y="80" width="25" height="25"/><rect x="80" y="80" width="25" height="25"/><rect x="105" y="80" width="25" height="25"/><rect x="130" y="80" width="25" height="25"/>
+    <rect x="30" y="105" width="25" height="25"/><rect x="55" y="105" width="25" height="25"/><rect x="80" y="105" width="25" height="25"/><rect x="105" y="105" width="25" height="25"/><rect x="130" y="105" width="25" height="25"/>
+    <rect x="30" y="130" width="25" height="25"/><rect x="55" y="130" width="25" height="25"/><rect x="80" y="130" width="25" height="25"/><rect x="105" y="130" width="25" height="25"/><rect x="130" y="130" width="25" height="25"/>
+  </g>
+
+  <!-- 滑动的卷积核高亮框 -->
+  <g class="conv-kernel">
+    <rect x="30" y="30" width="75" height="75" fill="rgba(217,119,6,0.15)" stroke="#d97706" stroke-width="2.5" rx="3"/>
+  </g>
+
+  <!-- 卷积核 -->
+  <text x="200" y="20" font-size="12" fill="#d97706" font-weight="bold">卷积核 (3×3)</text>
+  <g stroke="#d97706" stroke-width="1.5" fill="#fffbeb">
+    <rect x="200" y="30" width="28" height="28"/><rect x="228" y="30" width="28" height="28"/><rect x="256" y="30" width="28" height="28"/>
+    <rect x="200" y="58" width="28" height="28"/><rect x="228" y="58" width="28" height="28"/><rect x="256" y="58" width="28" height="28"/>
+    <rect x="200" y="86" width="28" height="28"/><rect x="228" y="86" width="28" height="28"/><rect x="256" y="86" width="28" height="28"/>
+  </g>
+  <g font-size="12" font-family="monospace" fill="#d97706" text-anchor="middle">
+    <text x="214" y="48">1</text><text x="242" y="48">0</text><text x="270" y="48">-1</text>
+    <text x="214" y="76">1</text><text x="242" y="76">0</text><text x="270" y="76">-1</text>
+    <text x="214" y="104">1</text><text x="242" y="104">0</text><text x="270" y="104">-1</text>
+  </g>
+  <text x="200" y="135" font-size="10" fill="#666">垂直边缘检测器</text>
+
+  <!-- 箭头 -->
+  <text x="310" y="75" font-size="18" fill="#333">→</text>
+
+  <!-- 输出网格 3x3 -->
+  <text x="360" y="20" font-size="12" fill="#059669" font-weight="bold">输出 (3×3)</text>
+  <g stroke="#ccc" stroke-width="1" fill="#f8fafc">
+    <rect x="360" y="30" width="30" height="30"/><rect x="390" y="30" width="30" height="30"/><rect x="420" y="30" width="30" height="30"/>
+    <rect x="360" y="60" width="30" height="30"/><rect x="390" y="60" width="30" height="30"/><rect x="420" y="60" width="30" height="30"/>
+    <rect x="360" y="90" width="30" height="30"/><rect x="390" y="90" width="30" height="30"/><rect x="420" y="90" width="30" height="30"/>
+  </g>
+  <!-- 逐个出现的输出值 -->
+  <g font-size="13" font-family="monospace" fill="#059669" font-weight="bold" text-anchor="middle">
+    <text class="co1" x="375" y="50">0</text>
+    <text class="co2" x="405" y="50">-2</text>
+    <text class="co3" x="435" y="50">0</text>
+    <text class="co4" x="375" y="80">0</text>
+    <text class="co5" x="405" y="80">0</text>
+    <text class="co6" x="435" y="80">2</text>
+  </g>
+
+  <!-- 说明 -->
+  <text x="30" y="190" font-size="11" fill="#666">每个位置：卷积核与覆盖区域逐元素相乘再求和（点积）</text>
+  <text x="30" y="210" font-size="11" fill="#666">滑动 9 次（3×3 个位置）→ 得到 3×3 的输出特征图</text>
+</svg>
+</div>
+
+<div class="concept-box">
+<div class="label">📌 卷积操作的本质</div>
+<p><strong>卷积 = 局部区域的加权求和（点积）</strong></p>
+<p>卷积核就是一个"特征检测器"：</p>
+<ul>
+<li>有的核检测水平边缘</li>
+<li>有的核检测垂直边缘</li>
+<li>有的核检测角点</li>
+<li>深层的核检测更复杂的模式（眼睛、轮子...）</li>
+</ul>
+<p>关键：卷积核的权重是<strong>学习出来的</strong>，不是人工设计的！</p>
+</div>
+
+<!-- ============ 6.4 ============ -->
+<h2 id="s4">6.4 手算卷积（完整例题）</h2>
+
+<div class="example-box">
+<div class="label">✏️ 例题 6.1：手算 3×3 卷积</div>
+<p><strong>输入（4×4）：</strong></p>
+<pre><code>[[1, 0, 1, 2],
+ [0, 1, 0, 1],
+ [1, 0, 1, 0],
+ [2, 1, 0, 1]]</code></pre>
+<p><strong>卷积核（3×3）：</strong></p>
+<pre><code>[[1, 0, -1],
+ [1, 0, -1],
+ [1, 0, -1]]   ← 这是一个"垂直边缘检测器"</code></pre>
+
+<h4>第1个位置（左上角 3×3 区域）：</h4>
+<div class="step">窗口覆盖：[[1,0,1],[0,1,0],[1,0,1]]</div>
+<div class="step">点积 = 1×1 + 0×0 + 1×(-1) + 0×1 + 1×0 + 0×(-1) + 1×1 + 0×0 + 1×(-1)</div>
+<div class="step">= 1 + 0 + (-1) + 0 + 0 + 0 + 1 + 0 + (-1) = <strong>0</strong></div>
+
+<h4>第2个位置（右移一格）：</h4>
+<div class="step">窗口覆盖：[[0,1,2],[1,0,1],[0,1,0]]</div>
+<div class="step">点积 = 0×1 + 1×0 + 2×(-1) + 1×1 + 0×0 + 1×(-1) + 0×1 + 1×0 + 0×(-1)</div>
+<div class="step">= 0 + 0 + (-2) + 1 + 0 + (-1) + 0 + 0 + 0 = <strong>-2</strong></div>
+
+<p>继续滑动...最终输出是 2×2 矩阵（4-3+1=2）：</p>
+<pre><code>输出 = [[ 0, -2],
+        [-2,  2]]</code></pre>
+<p>💡 输出尺寸公式：<strong>输出大小 = 输入大小 - 卷积核大小 + 1</strong></p>
+</div>
+
+<h3>Padding（填充）</h3>
+<p>如果不想让输出变小，可以在输入周围补零：</p>
+<div class="formula">
+输出大小 = (输入大小 + 2×padding - 卷积核大小) / stride + 1
+</div>
+<p>常用：padding=1, kernel=3, stride=1 → 输出大小 = 输入大小（不变！）</p>
+
+<!-- ============ 6.5 ============ -->
+<h2 id="s5">6.5 多通道卷积——处理彩色图像</h2>
+
+<p>彩色图有 3 个通道（RGB），卷积核也变成 3 层：</p>
+<div class="formula">
+卷积核形状：(3, 3, 3) → 高3 × 宽3 × 深3（和输入通道数相同）
+</div>
+<p>计算时：每个通道分别卷积，然后把 3 个结果<strong>加起来</strong>，得到一个数。</p>
+<p>一个卷积核 → 输出一张特征图。用 64 个不同的卷积核 → 输出 64 张特征图。</p>
+
+<pre><code>import torch.nn as nn
+
+# 卷积层定义
+conv = nn.Conv2d(
+    in_channels=3,      # 输入通道数（RGB=3）
+    out_channels=64,    # 输出通道数（64个卷积核）
+    kernel_size=3,      # 卷积核大小 3×3
+    stride=1,           # 步长
+    padding=1           # 填充（保持尺寸不变）
+)
+
+# 参数量 = 3×3×3×64 + 64 = 1,792
+# （每个核 3×3×3=27 个权重，64个核，加64个偏置）
+
+x = torch.randn(1, 3, 32, 32)  # 1张 32×32 RGB图
+out = conv(x)
+print(out.shape)  # [1, 64, 32, 32]（64张特征图，尺寸不变）</code></pre>
+
+<!-- ============ 6.6 ============ -->
+<h2 id="s6">6.6 池化——压缩信息</h2>
+
+<h3>最大池化 (Max Pooling)</h3>
+<p>在一个小窗口内取最大值。作用：降低分辨率、减少计算量、提供一定的平移不变性。</p>
+
+<svg width="400" height="180" viewBox="0 0 400 180">
+  <!-- 输入 4x4 -->
+  <text x="20" y="20" font-size="11" fill="#4361ee">输入 4×4</text>
+  <g font-size="11" font-family="monospace">
+    <rect x="20" y="30" width="25" height="25" fill="#dbeafe" stroke="#4361ee" stroke-width="1.5"/>
+    <rect x="45" y="30" width="25" height="25" fill="#dbeafe" stroke="#4361ee" stroke-width="1.5"/>
+    <rect x="70" y="30" width="25" height="25" fill="#f8fafc" stroke="#ccc"/>
+    <rect x="95" y="30" width="25" height="25" fill="#f8fafc" stroke="#ccc"/>
+    <rect x="20" y="55" width="25" height="25" fill="#dbeafe" stroke="#4361ee" stroke-width="1.5"/>
+    <rect x="45" y="55" width="25" height="25" fill="#dbeafe" stroke="#4361ee" stroke-width="1.5"/>
+    <rect x="70" y="55" width="25" height="25" fill="#f8fafc" stroke="#ccc"/>
+    <rect x="95" y="55" width="25" height="25" fill="#f8fafc" stroke="#ccc"/>
+    <rect x="20" y="80" width="25" height="25" fill="#f8fafc" stroke="#ccc"/>
+    <rect x="45" y="80" width="25" height="25" fill="#f8fafc" stroke="#ccc"/>
+    <rect x="70" y="80" width="25" height="25" fill="#f8fafc" stroke="#ccc"/>
+    <rect x="95" y="80" width="25" height="25" fill="#f8fafc" stroke="#ccc"/>
+    <rect x="20" y="105" width="25" height="25" fill="#f8fafc" stroke="#ccc"/>
+    <rect x="45" y="105" width="25" height="25" fill="#f8fafc" stroke="#ccc"/>
+    <rect x="70" y="105" width="25" height="25" fill="#f8fafc" stroke="#ccc"/>
+    <rect x="95" y="105" width="25" height="25" fill="#f8fafc" stroke="#ccc"/>
+    <text x="27" y="47">1</text><text x="52" y="47">3</text>
+    <text x="27" y="72">2</text><text x="52" y="72">4</text>
+  </g>
+  
+  <!-- 箭头 -->
+  <text x="140" y="60" font-size="14" fill="#333">Max Pool</text>
+  <text x="140" y="80" font-size="14" fill="#333">2×2 →</text>
+  
+  <!-- 输出 2x2 -->
+  <text x="250" y="20" font-size="11" fill="#059669">输出 2×2</text>
+  <g font-size="13" font-family="monospace">
+    <rect x="250" y="30" width="35" height="35" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+    <rect x="285" y="30" width="35" height="35" fill="#f8fafc" stroke="#ccc"/>
+    <rect x="250" y="65" width="35" height="35" fill="#f8fafc" stroke="#ccc"/>
+    <rect x="285" y="65" width="35" height="35" fill="#f8fafc" stroke="#ccc"/>
+    <text x="262" y="53" fill="#059669" font-weight="bold">4</text>
+    <text x="297" y="53">?</text>
+    <text x="262" y="88">?</text><text x="297" y="88">?</text>
+  </g>
+  <text x="250" y="120" font-size="10" fill="#059669">max(1,3,2,4) = 4</text>
+  <text x="250" y="140" font-size="10" fill="#666">尺寸减半！</text>
+</svg>
+
+<pre><code># 最大池化：2×2 窗口，步长 2
+pool = nn.MaxPool2d(kernel_size=2, stride=2)
+
+x = torch.randn(1, 64, 32, 32)
+out = pool(x)
+print(out.shape)  # [1, 64, 16, 16]（尺寸减半，通道数不变）</code></pre>
+
+<!-- ============ 6.7 ============ -->
+<h2 id="s7">6.7 CNN 的完整架构</h2>
+
+<svg width="600" height="120" viewBox="0 0 600 120">
+  <!-- 各层 -->
+  <rect x="10" y="30" width="50" height="60" rx="4" fill="#eef2ff" stroke="#4361ee" stroke-width="1.5"/>
+  <text x="18" y="65" font-size="9" fill="#4361ee">输入</text>
+  <text x="15" y="80" font-size="8" fill="#666">3×32×32</text>
+  
+  <text x="65" y="60" font-size="12" fill="#333">→</text>
+  
+  <rect x="80" y="30" width="60" height="60" rx="4" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="88" y="55" font-size="9" fill="#7c3aed">Conv</text>
+  <text x="88" y="70" font-size="9" fill="#7c3aed">+ReLU</text>
+  <text x="85" y="83" font-size="8" fill="#666">32×32×32</text>
+  
+  <text x="145" y="60" font-size="12" fill="#333">→</text>
+  
+  <rect x="160" y="35" width="45" height="50" rx="4" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+  <text x="167" y="60" font-size="9" fill="#d97706">Pool</text>
+  <text x="163" y="75" font-size="8" fill="#666">32×16×16</text>
+  
+  <text x="210" y="60" font-size="12" fill="#333">→</text>
+  
+  <rect x="225" y="30" width="60" height="60" rx="4" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="233" y="55" font-size="9" fill="#7c3aed">Conv</text>
+  <text x="233" y="70" font-size="9" fill="#7c3aed">+ReLU</text>
+  <text x="230" y="83" font-size="8" fill="#666">64×16×16</text>
+  
+  <text x="290" y="60" font-size="12" fill="#333">→</text>
+  
+  <rect x="305" y="35" width="45" height="50" rx="4" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+  <text x="312" y="60" font-size="9" fill="#d97706">Pool</text>
+  <text x="308" y="75" font-size="8" fill="#666">64×8×8</text>
+  
+  <text x="355" y="60" font-size="12" fill="#333">→</text>
+  
+  <rect x="370" y="35" width="50" height="50" rx="4" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="377" y="55" font-size="9" fill="#dc2626">Flatten</text>
+  <text x="375" y="70" font-size="8" fill="#666">4096维</text>
+  
+  <text x="425" y="60" font-size="12" fill="#333">→</text>
+  
+  <rect x="440" y="35" width="45" height="50" rx="4" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+  <text x="450" y="55" font-size="9" fill="#059669">FC</text>
+  <text x="445" y="70" font-size="8" fill="#666">128</text>
+  
+  <text x="490" y="60" font-size="12" fill="#333">→</text>
+  
+  <rect x="505" y="35" width="45" height="50" rx="4" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
+  <text x="515" y="55" font-size="9" fill="#059669">FC</text>
+  <text x="510" y="70" font-size="8" fill="#666">10类</text>
+  
+  <!-- 标注 -->
+  <text x="100" y="110" font-size="10" fill="#7c3aed">特征提取部分（卷积+池化）</text>
+  <text x="430" y="110" font-size="10" fill="#059669">分类部分（全连接）</text>
+</svg>
+
+<div class="concept-box">
+<div class="label">📌 CNN 的通用模式</div>
+<p><strong>特征提取：</strong>[Conv → ReLU → Pool] × N（逐层增加通道数、减小空间尺寸）</p>
+<p><strong>分类：</strong>Flatten → FC → ReLU → FC → 输出</p>
+<p>越深的层"看到"的范围越大，能检测越复杂的特征：</p>
+<ul>
+<li>第1层：边缘、颜色块</li>
+<li>第2-3层：纹理、简单图案</li>
+<li>第4-5层：物体部件（眼睛、轮子）</li>
+<li>更深层：完整物体、场景</li>
+</ul>
+</div>
+
+<!-- ============ 6.8 ============ -->
+<h2 id="s8">6.8 用 PyTorch 构建图像分类器</h2>
+
+<pre><code>import torch
+import torch.nn as nn
+import torchvision
+import torchvision.transforms as transforms
+
+# ===== 1. 数据准备 =====
+transform = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.5,), (0.5,))  # 归一化到[-1,1]
+])
+
+train_data = torchvision.datasets.CIFAR10('./data', train=True, 
+                                           download=True, transform=transform)
+train_loader = torch.utils.data.DataLoader(train_data, batch_size=128, shuffle=True)
+
+# ===== 2. 定义 CNN =====
+class SimpleCNN(nn.Module):
+    def __init__(self):
+        super().__init__()
+        # 特征提取
+        self.features = nn.Sequential(
+            nn.Conv2d(3, 32, 3, padding=1),   # 3→32通道, 32×32
+            nn.ReLU(),
+            nn.MaxPool2d(2),                   # → 16×16
+            
+            nn.Conv2d(32, 64, 3, padding=1),  # 32→64通道, 16×16
+            nn.ReLU(),
+            nn.MaxPool2d(2),                   # → 8×8
+            
+            nn.Conv2d(64, 128, 3, padding=1), # 64→128通道, 8×8
+            nn.ReLU(),
+            nn.AdaptiveAvgPool2d(1),           # → 1×1（全局池化）
+        )
+        # 分类器
+        self.classifier = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(128, 64),
+            nn.ReLU(),
+            nn.Dropout(0.5),
+            nn.Linear(64, 10),  # CIFAR-10 有 10 个类别
+        )
+    
+    def forward(self, x):
+        x = self.features(x)
+        x = self.classifier(x)
+        return x
+
+# ===== 3. 训练 =====
+model = SimpleCNN()
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+
+for epoch in range(10):
+    model.train()
+    total_loss = 0
+    correct = 0
+    
+    for images, labels in train_loader:
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+        
+        total_loss += loss.item()
+        correct += (outputs.argmax(1) == labels).sum().item()
+    
+    acc = correct / len(train_data)
+    print(f"Epoch {epoch+1}: loss={total_loss/len(train_loader):.3f}, acc={acc:.1%}")
+
+print(f"参数量: {sum(p.numel() for p in model.parameters()):,}")</code></pre>
+
+<!-- ============ 6.9 ============ -->
+<h2 id="s9">6.9 经典 CNN 架构演进</h2>
+
+<table>
+<tr><th>模型</th><th>年份</th><th>创新点</th><th>ImageNet 准确率</th></tr>
+<tr><td>AlexNet</td><td>2012</td><td>ReLU + Dropout + GPU训练</td><td>63%（引爆深度学习）</td></tr>
+<tr><td>VGG</td><td>2014</td><td>统一用 3×3 小卷积核，堆很深</td><td>74%</td></tr>
+<tr><td><strong>ResNet</strong></td><td>2015</td><td><strong>残差连接</strong>（跳跃连接）</td><td>78%（能训练 152 层！）</td></tr>
+<tr><td>EfficientNet</td><td>2019</td><td>复合缩放（深度×宽度×分辨率）</td><td>84%</td></tr>
+<tr><td>ViT</td><td>2020</td><td>用 Transformer 替代 CNN</td><td>88%+</td></tr>
+</table>
+
+<div class="concept-box">
+<div class="label">📌 ResNet 残差连接（最重要的创新）</div>
+<div class="formula">output = F(x) + x</div>
+<p>不是让层学习完整变换 H(x)，而是学习"残差" F(x) = H(x) - x。</p>
+<p>好处：梯度可以直接"跳过"层传播，解决深层网络的梯度消失问题。</p>
+<p>这使得训练 100+ 层的网络成为可能。</p>
+</div>
+
+<!-- ============ 6.10 ============ -->
+
+<style>
+.misconception-box {
+  background: #fef2f2; border: 1px solid #fecaca; border-radius: 10px;
+  padding: 18px 20px; margin: 20px 0;
+}
+.misconception-box .mc-label {
+  font-weight: 700; color: #dc2626; font-size: 0.85rem; margin-bottom: 10px;
+}
+.misconception-box .mc-item { margin: 10px 0; font-size: 0.9rem; }
+.misconception-box .mc-wrong { color: #dc2626; font-weight: 600; }
+.misconception-box .mc-right { color: #059669; font-weight: 600; }
+</style>
+
+<div class="misconception-box">
+<div class="mc-label">⚠️ 常见误区</div>
+<div class="mc-item">
+  <span class="mc-wrong">✗ "池化会丢失信息，所以不好"</span><br>
+  <span class="mc-right">✓ 池化提供平移不变性，是有益的。</span>猫在图片左上角和右下角应该被同样识别。池化让网络不敏感于特征的精确位置，反而提高了泛化能力。
+</div>
+<div class="mc-item">
+  <span class="mc-wrong">✗ "CNN 只能处理图像"</span><br>
+  <span class="mc-right">✓ CNN 可以处理任何网格状数据。</span>音频（1D CNN）、文本（1D CNN）、视频（3D CNN）都可以用卷积。核心思想是"局部特征检测"，不限于图像。
+</div>
+<div class="mc-item">
+  <span class="mc-wrong">✗ "卷积核是人工设计的"</span><br>
+  <span class="mc-right">✓ 卷积核的权重是训练学出来的。</span>初始化时是随机数，通过反向传播自动调整。网络自己"发现"了边缘检测器、纹理检测器等。
+</div>
+</div>
+
+
+<style>
+.checklist-box {
+  background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px;
+  padding: 18px 20px; margin: 24px 0;
+}
+.checklist-box .ck-label {
+  font-weight: 700; color: #2563eb; font-size: 0.9rem; margin-bottom: 10px;
+}
+.checklist-box label {
+  display: block; font-size: 0.88rem; margin: 7px 0; cursor: pointer; color: #334155;
+}
+.checklist-box input[type="checkbox"] { margin-right: 8px; accent-color: #2563eb; }
+</style>
+
+<div class="checklist-box">
+<div class="ck-label">✅ 学完本章，你应该能够：</div>
+<label><input type="checkbox"> 手算一个 3×3 卷积在 4×4 输入上的输出</label>
+<label><input type="checkbox"> 解释卷积核、池化、Padding 的作用</label>
+<label><input type="checkbox"> 计算卷积层的输出尺寸和参数量</label>
+<label><input type="checkbox"> 用 PyTorch 构建一个 CNN 并训练</label>
+<label><input type="checkbox"> 解释 ResNet 残差连接解决了什么问题</label>
+</div>
+
+<h2 id="s10">6.10 本章习题</h2>
+
+<div class="exercise-box">
+<div class="label">📝 概念理解题</div>
+<ol>
+<li>为什么全连接网络不适合处理图像？（说出 2 个原因）</li>
+<li>卷积操作的本质是什么？（一句话）</li>
+<li>一个 3×3 卷积核在 5×5 输入上滑动（stride=1, padding=0），输出是多大？</li>
+<li>MaxPool2d(2) 对 32×32 的特征图做什么？输出多大？</li>
+<li>ResNet 的残差连接解决了什么问题？</li>
+</ol>
+<button class="show-answer" onclick="this.nextElementSibling.classList.toggle('show')">显示答案</button>
+<div class="answer-box">
+<div class="label">参考答案</div>
+<ol>
+<li>① 参数太多（容易过拟合）；② 忽略空间结构（不知道哪些像素相邻）</li>
+<li>局部区域的加权求和（点积），用同一个核扫描整张图</li>
+<li>5-3+1 = 3，输出 3×3</li>
+<li>每 2×2 区域取最大值，输出变为 16×16（尺寸减半）</li>
+<li>梯度消失问题。残差连接让梯度可以"跳过"层直接传播，使训练 100+ 层网络成为可能。</li>
+</ol>
+</div>
+</div>
+
+<div class="exercise-box">
+<div class="label">📝 手算题</div>
+<ol start="6">
+<li>输入 3×3：[[1,2,3],[4,5,6],[7,8,9]]，卷积核 2×2：[[1,0],[0,1]]，stride=1, padding=0。手算输出。</li>
+<li>一个 Conv2d(3, 16, 5, padding=2) 层有多少参数？输入 32×32×3 的图片，输出形状是什么？</li>
+<li>网络：Conv(3→32, 3×3, pad=1) → Pool(2) → Conv(32→64, 3×3, pad=1) → Pool(2)。输入 28×28×3，每层后的形状是什么？</li>
+</ol>
+<button class="show-answer" onclick="this.nextElementSibling.classList.toggle('show')">显示答案</button>
+<div class="answer-box">
+<div class="label">参考答案</div>
+<ol start="6">
+<li>输出 2×2：<br>
+[1×1+2×0+4×0+5×1, 2×1+3×0+5×0+6×1] = [6, 8]<br>
+[4×1+5×0+7×0+8×1, 5×1+6×0+8×0+9×1] = [12, 14]<br>
+输出 = [[6,8],[12,14]]</li>
+<li>参数 = 3×5×5×16 + 16 = 1,216。输出形状 = (16, 32, 32)（padding=2 保持尺寸）</li>
+<li>输入(3,28,28) → Conv后(32,28,28) → Pool后(32,14,14) → Conv后(64,14,14) → Pool后(64,7,7)</li>
+</ol>
+</div>
+</div>
+
+<div class="exercise-box">
+<div class="label">📝 编程实践题</div>
+<ol start="9">
+<li>用 PyTorch 的 <code>nn.Conv2d</code> 对一张随机 8×8 图片做卷积，打印输入输出形状，验证维度公式。</li>
+<li>可视化 CNN 第一层学到的卷积核（用 matplotlib 画出 3×3 的权重矩阵），观察它们像什么（边缘？纹理？）。</li>
+<li>在 CIFAR-10 上训练本章的 SimpleCNN，记录每个 epoch 的准确率，画出训练曲线。尝试调整网络深度和宽度，观察效果。</li>
+<li>挑战：用预训练的 ResNet-18 做迁移学习，在自己的 10 张图片上微调，实现一个"猫 vs 狗"分类器。</li>
+</ol>
+<button class="show-answer" onclick="this.nextElementSibling.classList.toggle('show')">显示答案</button>
+<div class="answer-box">
+<div class="label">参考答案（题9）</div>
+<pre><code>import torch, torch.nn as nn
+
+conv = nn.Conv2d(1, 4, kernel_size=3, padding=1)
+x = torch.randn(1, 1, 8, 8)
+out = conv(x)
+print(f"输入: {x.shape}")   # [1, 1, 8, 8]
+print(f"输出: {out.shape}") # [1, 4, 8, 8]（padding=1保持尺寸）
+print(f"参数量: {sum(p.numel() for p in conv.parameters())}")  # 1×3×3×4+4=40</code></pre>
+</div>
+</div>
+
+<h2>本章小结</h2>
+<table>
+<tr><th>概念</th><th>一句话总结</th></tr>
+<tr><td>卷积</td><td>小窗口滑动做点积，检测局部特征</td></tr>
+<tr><td>卷积核</td><td>可学习的"特征检测器"</td></tr>
+<tr><td>多通道</td><td>核的深度 = 输入通道数，一个核输出一张特征图</td></tr>
+<tr><td>池化</td><td>降采样，减小尺寸，增大感受野</td></tr>
+<tr><td>Padding</td><td>补零保持尺寸不变</td></tr>
+<tr><td>残差连接</td><td>output = F(x) + x，解决深层训练</td></tr>
+<tr><td>CNN 架构</td><td>[Conv→ReLU→Pool]×N → Flatten → FC → 输出</td></tr>
+</table>
+
+<div class="nav-footer">
+<a href="ch05-反向传播.html">← 上一章：反向传播</a>
+<a href="ch07-Transformer.html">下一章：Transformer 与注意力机制 →</a>
+</div>
+
+
+<style>
+.quiz-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 20px 0; }
+.quiz-box .q-label { font-weight: 700; color: #7c3aed; font-size: 0.9rem; margin-bottom: 12px; }
+.quiz-q { margin: 16px 0; padding: 14px; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; }
+.quiz-q p { font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; }
+.quiz-opt { display: block; padding: 8px 14px; margin: 4px 0; border-radius: 6px; cursor: pointer; font-size: 0.85rem; border: 1px solid #e5e7eb; transition: all 0.15s; }
+.quiz-opt:hover { background: #f0f9ff; border-color: #93c5fd; }
+.quiz-opt.correct { background: #dcfce7; border-color: #4ade80; color: #166534; }
+.quiz-opt.wrong { background: #fef2f2; border-color: #fca5a5; color: #991b1b; }
+.quiz-opt.disabled { pointer-events: none; opacity: 0.7; }
+.quiz-feedback { margin-top: 8px; font-size: 0.82rem; padding: 8px 12px; border-radius: 6px; display: none; }
+.quiz-feedback.show { display: block; }
+.quiz-feedback.ok { background: #dcfce7; color: #166534; }
+.quiz-feedback.no { background: #fef2f2; color: #991b1b; }
+</style>
+<script src="quiz.js"></script>
+
+
+<!-- 卷积可视化交互实验 -->
+<h3>🔬 实验：卷积过程可视化</h3>
+<p>点击"下一步"，观察 3×3 卷积核如何在输入上滑动并计算每个输出值：</p>
+
+<style>
+.conv-exp { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 20px 0; }
+.conv-layout { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; justify-content: center; }
+.conv-grid { display: grid; grid-template-columns: repeat(4, 44px); gap: 3px; }
+.conv-grid.small { grid-template-columns: repeat(2, 44px); }
+.conv-cell { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 1px solid #d1d5db; border-radius: 4px; font-size: 0.8rem; background: #fff; transition: all 0.3s; }
+.conv-cell.highlight { background: #dbeafe; border-color: #4361ee; border-width: 2px; }
+.conv-cell.computed { background: #dcfce7; border-color: #4ade80; font-weight: 700; }
+.conv-kernel-grid { display: grid; grid-template-columns: repeat(3, 36px); gap: 3px; }
+.conv-kernel-cell { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border: 1px solid #f59e0b; border-radius: 4px; font-size: 0.75rem; background: #fffbeb; color: #d97706; }
+.conv-controls { margin-top: 16px; text-align: center; }
+.conv-btn { padding: 8px 20px; border-radius: 8px; border: 1px solid #4361ee; background: #eef2ff; color: #4361ee; cursor: pointer; font-size: 0.85rem; font-weight: 600; margin: 0 4px; }
+.conv-btn:hover { background: #4361ee; color: #fff; }
+.conv-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.conv-status { margin-top: 12px; font-size: 0.85rem; color: #334155; min-height: 40px; text-align: center; }
+.conv-status .formula { font-family: monospace; background: #fff; padding: 6px 12px; border-radius: 6px; border: 1px solid #e5e7eb; display: inline-block; margin-top: 6px; }
+.conv-label { font-size: 0.8rem; color: #666; text-align: center; margin-bottom: 6px; font-weight: 600; }
+</style>
+
+<div class="conv-exp">
+  <div class="conv-layout">
+    <div>
+      <div class="conv-label">输入 (4×4)</div>
+      <div class="conv-grid" id="conv-input"></div>
+    </div>
+    <div>
+      <div class="conv-label">卷积核 (3×3)</div>
+      <div class="conv-kernel-grid" id="conv-kernel"></div>
+      <div style="font-size:0.7rem; color:#999; text-align:center; margin-top:6px;">垂直边缘检测器</div>
+    </div>
+    <div>
+      <div class="conv-label">输出 (2×2)</div>
+      <div class="conv-grid small" id="conv-output"></div>
+    </div>
+  </div>
+  <div class="conv-status" id="conv-status">点击"下一步"开始</div>
+  <div class="conv-controls">
+    <button class="conv-btn" id="conv-prev" onclick="convStep(-1)" disabled>上一步</button>
+    <button class="conv-btn" id="conv-next" onclick="convStep(1)">下一步</button>
+    <button class="conv-btn" onclick="convReset()">重置</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  var input = [
+    [1,0,1,2],
+    [0,1,0,1],
+    [1,0,1,0],
+    [2,1,0,1]
+  ];
+  var kernel = [
+    [1,0,-1],
+    [1,0,-1],
+    [1,0,-1]
+  ];
+  var positions = [[0,0],[0,1],[1,0],[1,1]]; // 输出的4个位置
+  var step = -1;
+
+  function render() {
+    var inEl = document.getElementById('conv-input');
+    var outEl = document.getElementById('conv-output');
+    inEl.innerHTML = '';
+    outEl.innerHTML = '';
+    // 输入网格
+    for (var r=0; r<4; r++) {
+      for (var c=0; c<4; c++) {
+        var cell = document.createElement('div');
+        cell.className = 'conv-cell';
+        cell.textContent = input[r][c];
+        // 高亮当前窗口
+        if (step >= 0) {
+          var pr = positions[step][0], pc = positions[step][1];
+          if (r >= pr && r < pr+3 && c >= pc && c < pc+3) cell.classList.add('highlight');
+        }
+        inEl.appendChild(cell);
+      }
+    }
+    // 输出网格
+    for (var i=0; i<4; i++) {
+      var oc = document.createElement('div');
+      oc.className = 'conv-cell';
+      if (i <= step) {
+        oc.classList.add('computed');
+        oc.textContent = computeOutput(positions[i][0], positions[i][1]);
+      } else {
+        oc.textContent = '?';
+      }
+      outEl.appendChild(oc);
+    }
+    // 状态
+    var status = document.getElementById('conv-status');
+    if (step < 0) {
+      status.innerHTML = '点击"下一步"开始';
+    } else if (step < 4) {
+      var pr = positions[step][0], pc = positions[step][1];
+      var terms = [];
+      var sum = 0;
+      for (var kr=0; kr<3; kr++) {
+        for (var kc=0; kc<3; kc++) {
+          var iv = input[pr+kr][pc+kc];
+          var kv = kernel[kr][kc];
+          if (kv !== 0) terms.push(iv+'×('+kv+')');
+          sum += iv*kv;
+        }
+      }
+      status.innerHTML = '第 '+(step+1)+'/4 步：窗口位于 ('+pr+','+pc+')<br><span class="formula">'+terms.join(' + ')+' = <b>'+sum+'</b></span>';
+    } else {
+      status.innerHTML = '✅ 完成！4 个位置都算完了。输出就是垂直边缘的强度图。';
+    }
+    document.getElementById('conv-prev').disabled = (step < 0);
+    document.getElementById('conv-next').disabled = (step >= 3);
+  }
+
+  function computeOutput(pr, pc) {
+    var sum = 0;
+    for (var kr=0; kr<3; kr++) for (var kc=0; kc<3; kc++) sum += input[pr+kr][pc+kc]*kernel[kr][kc];
+    return sum;
+  }
+
+  window.convStep = function(d) { step = Math.max(-1, Math.min(3, step + d)); render(); };
+  window.convReset = function() { step = -1; render(); };
+
+  // 渲染卷积核
+  var kEl = document.getElementById('conv-kernel');
+  for (var r=0; r<3; r++) for (var c=0; c<3; c++) {
+    var cell = document.createElement('div');
+    cell.className = 'conv-kernel-cell';
+    cell.textContent = kernel[r][c];
+    kEl.appendChild(cell);
+  }
+  render();
+})();
+</script>
+
+<div class="concept-box">
+<div class="label">💡 从这个实验中学到什么</div>
+<ul>
+<li><strong>卷积核在输入上滑动</strong>，每个位置做一次点积（9个乘法+8个加法）</li>
+<li><strong>输出比输入小</strong>：4×4 输入 + 3×3 核 → 2×2 输出（公式：4-3+1=2）</li>
+<li><strong>这个核检测垂直边缘</strong>：左边×1，右边×(-1)，中间×0。左右差异大的地方输出值大</li>
+<li><strong>权重是学出来的</strong>：这里用的是人工设计的边缘检测核，实际 CNN 中这些值通过反向传播自动学习</li>
+</ul>
+</div>
+
+<h2 id="s11">6.11 交互式测验</h2>
+<div class="quiz-box">
+<div class="q-label">🧪 即时测验</div>
+<div class="quiz-q" id="c6-q1">
+  <p>1. 3×3 卷积核在 5×5 输入上滑动（stride=1, padding=0），输出大小是：</p>
+  <span class="quiz-opt" onclick="checkQQ('c6','q1',this,true)">A. 3×3（5-3+1=3）</span>
+  <span class="quiz-opt" onclick="checkQQ('c6','q1',this,false)">B. 5×5</span>
+  <span class="quiz-opt" onclick="checkQQ('c6','q1',this,false)">C. 4×4</span>
+  <span class="quiz-opt" onclick="checkQQ('c6','q1',this,false)">D. 2×2</span>
+  <div class="quiz-feedback" id="c6-q1-fb"></div>
+</div>
+<div class="quiz-q" id="c6-q2">
+  <p>2. 卷积操作的本质是：</p>
+  <span class="quiz-opt" onclick="checkQQ('c6','q2',this,false)">A. 矩阵乘法</span>
+  <span class="quiz-opt" onclick="checkQQ('c6','q2',this,true)">B. 局部区域的滑动窗口点积</span>
+  <span class="quiz-opt" onclick="checkQQ('c6','q2',this,false)">C. 取最大值</span>
+  <span class="quiz-opt" onclick="checkQQ('c6','q2',this,false)">D. 求平均值</span>
+  <div class="quiz-feedback" id="c6-q2-fb"></div>
+</div>
+<div class="quiz-q" id="c6-q3">
+  <p>3. MaxPool2d(2) 对 32×32 特征图的效果是：</p>
+  <span class="quiz-opt" onclick="checkQQ('c6','q3',this,false)">A. 变成 64×64</span>
+  <span class="quiz-opt" onclick="checkQQ('c6','q3',this,true)">B. 变成 16×16（尺寸减半）</span>
+  <span class="quiz-opt" onclick="checkQQ('c6','q3',this,false)">C. 不变</span>
+  <span class="quiz-opt" onclick="checkQQ('c6','q3',this,false)">D. 变成 30×30</span>
+  <div class="quiz-feedback" id="c6-q3-fb"></div>
+</div>
+<div class="quiz-q" id="c6-q4">
+  <p>4. ResNet 的残差连接 output = F(x) + x 解决了什么问题？</p>
+  <span class="quiz-opt" onclick="checkQQ('c6','q4',this,false)">A. 过拟合</span>
+  <span class="quiz-opt" onclick="checkQQ('c6','q4',this,false)">B. 计算速度太慢</span>
+  <span class="quiz-opt" onclick="checkQQ('c6','q4',this,true)">C. 深层网络的梯度消失（让梯度可以"跳过"层传播）</span>
+  <span class="quiz-opt" onclick="checkQQ('c6','q4',this,false)">D. 数据量不足</span>
+  <div class="quiz-feedback" id="c6-q4-fb"></div>
+</div>
+<div class="quiz-q" id="c6-q5">
+  <p>5. Conv2d(3, 64, 3) 的参数量是：</p>
+  <span class="quiz-opt" onclick="checkQQ('c6','q5',this,false)">A. 64</span>
+  <span class="quiz-opt" onclick="checkQQ('c6','q5',this,false)">B. 576</span>
+  <span class="quiz-opt" onclick="checkQQ('c6','q5',this,true)">C. 1,792（3×3×3×64 + 64 = 1728+64）</span>
+  <span class="quiz-opt" onclick="checkQQ('c6','q5',this,false)">D. 192</span>
+  <div class="quiz-feedback" id="c6-q5-fb"></div>
+</div>
+</div>
+
+</body>
+</html>

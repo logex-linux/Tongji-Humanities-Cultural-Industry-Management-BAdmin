@@ -1,0 +1,12 @@
+{
+  "src/app.js": "9b07aeb9fc9dbe5be6493f3dedf7ec53f7fba9801d52744e8a35082424b6af8a",
+  "build/merge.py": "99573c276c63b4e0d4d6e6d3b8fe6f9ebc4f4d8dd1daf64f9de2b34d56d7d3e8",
+  "build/check_content.py": "6e7fd0b9d92962820fd2fb5cdd152e6b28307eafe63d0616b360dd076df68049",
+  "build/editorial.py": "8cbad205bbd7fb601c53b40f3e0d0dd234cb27e02798d1bc18a87cbb65e7bd11",
+  "README.md": "2858019521f30bf84e11bb8c1e6b73387ffd3eb92f27d2f031b2212cf884e51f",
+  "reports/build.json": "32550de370937944d6974ad439de6d9174fecc9510393cbe1514d0e42222cf1e",
+  "reports/browser-verification.json": "ef7a992be1ae9e33206f99f990c8cf19ca9b43bf0e3935945b27d01326fc42ce",
+  "reports/content-verification.json": "98a420ab1a2f7d050074ba760d43f5a80a80828ef8a9241df99fca35217ac523",
+  "reports/diagram-audit.json": "aef2875b3f9fffb8d9e9e1385b0ed454fcb42450c45101a7c3d3c059cea9c497",
+  "index.html": "bc18f20970c8ece6a2d6c05181e5e53ded8e6ce116007ae26db24da00994182a"
+}

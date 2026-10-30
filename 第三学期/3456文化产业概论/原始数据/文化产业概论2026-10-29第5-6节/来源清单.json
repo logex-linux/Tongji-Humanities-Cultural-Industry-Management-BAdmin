@@ -1,0 +1,171 @@
+{
+  "course_id": "99450",
+  "sub_id": "1971039",
+  "course": "文化产业概论",
+  "lecture": "2026-10-29第5-6节",
+  "date": "2026-10-29",
+  "name": "文化产业概论2026-10-29第5-6节",
+  "duration_seconds": 5708.883583,
+  "base_name": "文化产业概论2026-10-29第5-6节",
+  "original_video_name": "文化产业概论2026-10-29第5-6节.mp4",
+  "original_video_bytes": 562457067,
+  "original_video_deleted": true,
+  "asr_provider": "openrouter",
+  "asr_model": "microsoft/mai-transcribe-2",
+  "asr_endpoint": "https://openrouter.ai/api/v1/audio/transcriptions",
+  "transcript_time_resolution_seconds": 120,
+  "time_note": "时间表示两分钟音频分段边界，不是逐句对齐时间。",
+  "asr_gaps": [],
+  "frames": [
+    {
+      "seconds": 30,
+      "file": "课堂截图/00030.jpg"
+    },
+    {
+      "seconds": 210,
+      "file": "课堂截图/00210.jpg"
+    },
+    {
+      "seconds": 390,
+      "file": "课堂截图/00390.jpg"
+    },
+    {
+      "seconds": 570,
+      "file": "课堂截图/00570.jpg"
+    },
+    {
+      "seconds": 750,
+      "file": "课堂截图/00750.jpg"
+    },
+    {
+      "seconds": 930,
+      "file": "课堂截图/00930.jpg"
+    },
+    {
+      "seconds": 1110,
+      "file": "课堂截图/01110.jpg"
+    },
+    {
+      "seconds": 1290,
+      "file": "课堂截图/01290.jpg"
+    },
+    {
+      "seconds": 1470,
+      "file": "课堂截图/01470.jpg"
+    },
+    {
+      "seconds": 1650,
+      "file": "课堂截图/01650.jpg"
+    },
+    {
+      "seconds": 1830,
+      "file": "课堂截图/01830.jpg"
+    },
+    {
+      "seconds": 2010,
+      "file": "课堂截图/02010.jpg"
+    },
+    {
+      "seconds": 2190,
+      "file": "课堂截图/02190.jpg"
+    },
+    {
+      "seconds": 2370,
+      "file": "课堂截图/02370.jpg"
+    },
+    {
+      "seconds": 2550,
+      "file": "课堂截图/02550.jpg"
+    },
+    {
+      "seconds": 2730,
+      "file": "课堂截图/02730.jpg"
+    },
+    {
+      "seconds": 2910,
+      "file": "课堂截图/02910.jpg"
+    },
+    {
+      "seconds": 3090,
+      "file": "课堂截图/03090.jpg"
+    },
+    {
+      "seconds": 3270,
+      "file": "课堂截图/03270.jpg"
+    },
+    {
+      "seconds": 3450,
+      "file": "课堂截图/03450.jpg"
+    },
+    {
+      "seconds": 3630,
+      "file": "课堂截图/03630.jpg"
+    },
+    {
+      "seconds": 3810,
+      "file": "课堂截图/03810.jpg"
+    },
+    {
+      "seconds": 3990,
+      "file": "课堂截图/03990.jpg"
+    },
+    {
+      "seconds": 4170,
+      "file": "课堂截图/04170.jpg"
+    },
+    {
+      "seconds": 4350,
+      "file": "课堂截图/04350.jpg"
+    },
+    {
+      "seconds": 4530,
+      "file": "课堂截图/04530.jpg"
+    },
+    {
+      "seconds": 4710,
+      "file": "课堂截图/04710.jpg"
+    },
+    {
+      "seconds": 4890,
+      "file": "课堂截图/04890.jpg"
+    },
+    {
+      "seconds": 5070,
+      "file": "课堂截图/05070.jpg"
+    },
+    {
+      "seconds": 5250,
+      "file": "课堂截图/05250.jpg"
+    },
+    {
+      "seconds": 5430,
+      "file": "课堂截图/05430.jpg"
+    },
+    {
+      "seconds": 5610,
+      "file": "课堂截图/05610.jpg"
+    }
+  ],
+  "artifacts": {
+    "screenshots": "<本地学习目录>/第三学期/3456文化产业概论/原始数据/文化产业概论2026-10-29第5-6节/课堂截图",
+    "notes": "<本地学习目录>/第三学期/3456文化产业概论/原始数据/文化产业概论2026-10-29第5-6节/课程笔记.md",
+    "timeline": "<本地学习目录>/第三学期/3456文化产业概论/原始数据/文化产业概论2026-10-29第5-6节/课程时间线.txt",
+    "html": "<本地学习目录>/第三学期/3456文化产业概论/文化产业概论2026-10-29第5-6节.html",
+    "transcript_html": "../../文化产业概论2026-10-29第5-6节.html#full-transcript"
+  },
+  "notes_status": "complete",
+  "notes_master": "课程笔记.md",
+  "visual_review": {
+    "read_frames": [
+      {
+        "seconds": 3990,
+        "file": "课堂截图/03990.jpg"
+      }
+    ],
+    "scope": "按转写线索核对定义、任务、图像或图表；仅列出本次实际阅读的画面，不代表全片逐帧核对。"
+  },
+  "media_cleanup_at": "2026-10-30T14:53:58.674888+08:00",
+  "temporary_audio_deleted": true,
+  "transcript_segments": 48,
+  "transcript_storage": "inline_html"
+}

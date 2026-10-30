@@ -1,0 +1,208 @@
+{
+  "course_id": "99424",
+  "sub_id": "1970651",
+  "course": "现代德国哲学经典",
+  "teacher": "宗成河",
+  "lecture": "2026-10-28第1-2节",
+  "date": "2026-10-28",
+  "name": "现代德国哲学经典2026-10-28第1-2节",
+  "duration_seconds": 5976.760625,
+  "base_name": "现代德国哲学经典2026-10-28第1-2节",
+  "original_video_name": "现代德国哲学经典2026-10-28第1-2节.mp4",
+  "original_video_bytes": 745162608,
+  "original_video_deleted": true,
+  "asr_provider": "stepplan",
+  "asr_model": "stepaudio-2.5-asr",
+  "asr_endpoint": "https://api.stepfun.com/step_plan/v1/audio/asr/sse",
+  "transcript_time_resolution_seconds": 120,
+  "time_note": "时间表示两分钟音频分段边界，不是逐句对齐时间。",
+  "asr_gaps": [
+    {
+      "start_seconds": 1440.0,
+      "end_seconds": 1560.0,
+      "reason": "risk blocked",
+      "preserved_audio": "转写缺口音频/01440-01560.mp3",
+      "audio_sha256": "6b123c19aa82e267d4a0b5dcc4bba083b9e68a714d31e121844e59530da23d69"
+    },
+    {
+      "start_seconds": 2160.0,
+      "end_seconds": 2280.0,
+      "reason": "risk blocked",
+      "preserved_audio": "转写缺口音频/02160-02280.mp3",
+      "audio_sha256": "116c51d01b0ae16fc3450345b21b73e69d185b2b664e94f00928a3a7cd81bd95"
+    }
+  ],
+  "frames": [
+    {
+      "seconds": 30,
+      "file": "课堂截图/00030.jpg"
+    },
+    {
+      "seconds": 210,
+      "file": "课堂截图/00210.jpg"
+    },
+    {
+      "seconds": 390,
+      "file": "课堂截图/00390.jpg"
+    },
+    {
+      "seconds": 570,
+      "file": "课堂截图/00570.jpg"
+    },
+    {
+      "seconds": 750,
+      "file": "课堂截图/00750.jpg"
+    },
+    {
+      "seconds": 930,
+      "file": "课堂截图/00930.jpg"
+    },
+    {
+      "seconds": 1110,
+      "file": "课堂截图/01110.jpg"
+    },
+    {
+      "seconds": 1290,
+      "file": "课堂截图/01290.jpg"
+    },
+    {
+      "seconds": 1470,
+      "file": "课堂截图/01470.jpg"
+    },
+    {
+      "seconds": 1650,
+      "file": "课堂截图/01650.jpg"
+    },
+    {
+      "seconds": 1830,
+      "file": "课堂截图/01830.jpg"
+    },
+    {
+      "seconds": 2010,
+      "file": "课堂截图/02010.jpg"
+    },
+    {
+      "seconds": 2190,
+      "file": "课堂截图/02190.jpg"
+    },
+    {
+      "seconds": 2370,
+      "file": "课堂截图/02370.jpg"
+    },
+    {
+      "seconds": 2550,
+      "file": "课堂截图/02550.jpg"
+    },
+    {
+      "seconds": 2730,
+      "file": "课堂截图/02730.jpg"
+    },
+    {
+      "seconds": 2910,
+      "file": "课堂截图/02910.jpg"
+    },
+    {
+      "seconds": 3090,
+      "file": "课堂截图/03090.jpg"
+    },
+    {
+      "seconds": 3270,
+      "file": "课堂截图/03270.jpg"
+    },
+    {
+      "seconds": 3450,
+      "file": "课堂截图/03450.jpg"
+    },
+    {
+      "seconds": 3630,
+      "file": "课堂截图/03630.jpg"
+    },
+    {
+      "seconds": 3810,
+      "file": "课堂截图/03810.jpg"
+    },
+    {
+      "seconds": 3990,
+      "file": "课堂截图/03990.jpg"
+    },
+    {
+      "seconds": 4170,
+      "file": "课堂截图/04170.jpg"
+    },
+    {
+      "seconds": 4350,
+      "file": "课堂截图/04350.jpg"
+    },
+    {
+      "seconds": 4530,
+      "file": "课堂截图/04530.jpg"
+    },
+    {
+      "seconds": 4710,
+      "file": "课堂截图/04710.jpg"
+    },
+    {
+      "seconds": 4890,
+      "file": "课堂截图/04890.jpg"
+    },
+    {
+      "seconds": 5070,
+      "file": "课堂截图/05070.jpg"
+    },
+    {
+      "seconds": 5250,
+      "file": "课堂截图/05250.jpg"
+    },
+    {
+      "seconds": 5430,
+      "file": "课堂截图/05430.jpg"
+    },
+    {
+      "seconds": 5610,
+      "file": "课堂截图/05610.jpg"
+    },
+    {
+      "seconds": 5790,
+      "file": "课堂截图/05790.jpg"
+    },
+    {
+      "seconds": 5970,
+      "file": "课堂截图/05970.jpg"
+    }
+  ],
+  "artifacts": {
+    "screenshots": "<本地学习目录>/第三学期/3312现代德国哲学经典/原始数据/现代德国哲学经典2026-10-28第1-2节/课堂截图",
+    "transcript_html": "../../现代德国哲学经典2026-10-28第1-2节.html#full-transcript",
+    "notes": "<本地学习目录>/第三学期/3312现代德国哲学经典/原始数据/现代德国哲学经典2026-10-28第1-2节/课程笔记.md",
+    "timeline": "<本地学习目录>/第三学期/3312现代德国哲学经典/原始数据/现代德国哲学经典2026-10-28第1-2节/课程时间线.txt",
+    "html": "<本地学习目录>/第三学期/3312现代德国哲学经典/现代德国哲学经典2026-10-28第1-2节.html"
+  },
+  "transcript_storage": "inline_html",
+  "transcript_segments": 50,
+  "transcript_files_removed_after_verification": true,
+  "notes_status": "complete_with_declared_asr_gap",
+  "notes_master": "课程笔记.md",
+  "visual_review": {
+    "read_frames": [
+      {
+        "seconds": 1470,
+        "file": "课堂截图/01470.jpg"
+      },
+      {
+        "seconds": 2190,
+        "file": "课堂截图/02190.jpg"
+      },
+      {
+        "seconds": 2730,
+        "file": "课堂截图/02730.jpg"
+      },
+      {
+        "seconds": 4530,
+        "file": "课堂截图/04530.jpg"
+      }
+    ],
+    "scope": "按转写线索核对定义、任务、图像或图表；仅列出本次实际阅读的画面，不代表全片逐帧核对。"
+  },
+  "media_cleanup_at": "2026-10-28T20:46:40.637873+08:00",
+  "temporary_audio_deleted": true
+}

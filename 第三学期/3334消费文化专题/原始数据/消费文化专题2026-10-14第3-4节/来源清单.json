@@ -1,0 +1,155 @@
+{
+  "course": "3334消费文化专题",
+  "base_name": "消费文化专题2026-10-14第3-4节",
+  "original_video_name": "消费文化专题2026-10-14第3-4节.mp4",
+  "original_video_bytes": 702347322,
+  "duration_seconds": 5744.254833,
+  "original_video_deleted": true,
+  "asr_provider": "stepplan",
+  "asr_model": "stepaudio-2.5-asr",
+  "asr_endpoint": "https://api.stepfun.com/step_plan/v1/audio/asr/sse",
+  "artifacts": {
+    "timeline": "<本地学习目录>/第三学期/3334消费文化专题/原始数据/消费文化专题2026-10-14第3-4节/课程时间线.txt",
+    "notes": "<本地学习目录>/第三学期/3334消费文化专题/原始数据/消费文化专题2026-10-14第3-4节/课程笔记.md",
+    "screenshots": "<本地学习目录>/第三学期/3334消费文化专题/原始数据/消费文化专题2026-10-14第3-4节/课堂截图",
+    "transcript_html": "../../消费文化专题2026-10-14第3-4节.html#full-transcript"
+  },
+  "frames": [
+    {
+      "seconds": 30,
+      "file": "课堂截图/00030.jpg"
+    },
+    {
+      "seconds": 210,
+      "file": "课堂截图/00210.jpg"
+    },
+    {
+      "seconds": 390,
+      "file": "课堂截图/00390.jpg"
+    },
+    {
+      "seconds": 570,
+      "file": "课堂截图/00570.jpg"
+    },
+    {
+      "seconds": 750,
+      "file": "课堂截图/00750.jpg"
+    },
+    {
+      "seconds": 930,
+      "file": "课堂截图/00930.jpg"
+    },
+    {
+      "seconds": 1110,
+      "file": "课堂截图/01110.jpg"
+    },
+    {
+      "seconds": 1290,
+      "file": "课堂截图/01290.jpg"
+    },
+    {
+      "seconds": 1470,
+      "file": "课堂截图/01470.jpg"
+    },
+    {
+      "seconds": 1650,
+      "file": "课堂截图/01650.jpg"
+    },
+    {
+      "seconds": 1830,
+      "file": "课堂截图/01830.jpg"
+    },
+    {
+      "seconds": 2010,
+      "file": "课堂截图/02010.jpg"
+    },
+    {
+      "seconds": 2190,
+      "file": "课堂截图/02190.jpg"
+    },
+    {
+      "seconds": 2370,
+      "file": "课堂截图/02370.jpg"
+    },
+    {
+      "seconds": 2550,
+      "file": "课堂截图/02550.jpg"
+    },
+    {
+      "seconds": 2730,
+      "file": "课堂截图/02730.jpg"
+    },
+    {
+      "seconds": 2910,
+      "file": "课堂截图/02910.jpg"
+    },
+    {
+      "seconds": 3090,
+      "file": "课堂截图/03090.jpg"
+    },
+    {
+      "seconds": 3270,
+      "file": "课堂截图/03270.jpg"
+    },
+    {
+      "seconds": 3450,
+      "file": "课堂截图/03450.jpg"
+    },
+    {
+      "seconds": 3630,
+      "file": "课堂截图/03630.jpg"
+    },
+    {
+      "seconds": 3810,
+      "file": "课堂截图/03810.jpg"
+    },
+    {
+      "seconds": 3990,
+      "file": "课堂截图/03990.jpg"
+    },
+    {
+      "seconds": 4170,
+      "file": "课堂截图/04170.jpg"
+    },
+    {
+      "seconds": 4350,
+      "file": "课堂截图/04350.jpg"
+    },
+    {
+      "seconds": 4530,
+      "file": "课堂截图/04530.jpg"
+    },
+    {
+      "seconds": 4710,
+      "file": "课堂截图/04710.jpg"
+    },
+    {
+      "seconds": 4890,
+      "file": "课堂截图/04890.jpg"
+    },
+    {
+      "seconds": 5070,
+      "file": "课堂截图/05070.jpg"
+    },
+    {
+      "seconds": 5250,
+      "file": "课堂截图/05250.jpg"
+    },
+    {
+      "seconds": 5430,
+      "file": "课堂截图/05430.jpg"
+    },
+    {
+      "seconds": 5610,
+      "file": "课堂截图/05610.jpg"
+    }
+  ],
+  "transcript_time_resolution_seconds": 120,
+  "time_note": "时间范围表示输入音频分段边界，不是逐句对齐时间。",
+  "asr_gaps": [],
+  "original_video_sha256": "aa11945b542b5921e4a88d04c4f13f410746e885a9c960c4378393b8f1adcf34",
+  "processing_completed_at": "2026-10-14T15:13:20.594920+08:00",
+  "transcript_storage": "inline_html",
+  "transcript_segments": 48,
+  "transcript_files_removed_after_verification": true
+}

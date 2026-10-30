@@ -1,0 +1,284 @@
+{
+  "course_id": "95970",
+  "sub_id": "1914419",
+  "course": "马克思主义基本原理",
+  "teacher": "杨小勇",
+  "lecture": "2026-10-21第9-11节",
+  "date": "2026-10-21",
+  "name": "马克思主义基本原理2026-10-21第9-11节",
+  "duration_seconds": 8680.675433,
+  "base_name": "马克思主义基本原理2026-10-21第9-11节",
+  "original_video_name": "马克思主义基本原理2026-10-21第9-11节.mp4",
+  "original_video_bytes": 722577973,
+  "original_video_deleted": true,
+  "asr_provider": "stepplan",
+  "asr_model": "stepaudio-2.5-asr",
+  "asr_endpoint": "https://api.stepfun.com/step_plan/v1/audio/asr/sse",
+  "transcript_time_resolution_seconds": 120,
+  "time_note": "时间表示两分钟音频分段边界，不是逐句对齐时间。",
+  "asr_gaps": [
+    {
+      "start_seconds": 3960.0,
+      "end_seconds": 4080.0,
+      "reason": "risk blocked",
+      "preserved_audio": "未识别音频/03960.mp3",
+      "audio_sha256": "26664c658b41bd73393f0d955a17ab143c0acb90d84df0f3df1bfd3836886c61"
+    },
+    {
+      "start_seconds": 8520.0,
+      "end_seconds": 8640.0,
+      "reason": "risk blocked",
+      "preserved_audio": "未识别音频/08520.mp3",
+      "audio_sha256": "baa88b85d546164c108edbb64ee4737f2ab98ae4e2693658a2f6ee324a5c9b00"
+    }
+  ],
+  "frames": [
+    {
+      "seconds": 30,
+      "file": "课堂截图/00030.jpg"
+    },
+    {
+      "seconds": 210,
+      "file": "课堂截图/00210.jpg"
+    },
+    {
+      "seconds": 390,
+      "file": "课堂截图/00390.jpg"
+    },
+    {
+      "seconds": 570,
+      "file": "课堂截图/00570.jpg"
+    },
+    {
+      "seconds": 750,
+      "file": "课堂截图/00750.jpg"
+    },
+    {
+      "seconds": 930,
+      "file": "课堂截图/00930.jpg"
+    },
+    {
+      "seconds": 1110,
+      "file": "课堂截图/01110.jpg"
+    },
+    {
+      "seconds": 1290,
+      "file": "课堂截图/01290.jpg"
+    },
+    {
+      "seconds": 1470,
+      "file": "课堂截图/01470.jpg"
+    },
+    {
+      "seconds": 1650,
+      "file": "课堂截图/01650.jpg"
+    },
+    {
+      "seconds": 1830,
+      "file": "课堂截图/01830.jpg"
+    },
+    {
+      "seconds": 2010,
+      "file": "课堂截图/02010.jpg"
+    },
+    {
+      "seconds": 2190,
+      "file": "课堂截图/02190.jpg"
+    },
+    {
+      "seconds": 2370,
+      "file": "课堂截图/02370.jpg"
+    },
+    {
+      "seconds": 2550,
+      "file": "课堂截图/02550.jpg"
+    },
+    {
+      "seconds": 2730,
+      "file": "课堂截图/02730.jpg"
+    },
+    {
+      "seconds": 2910,
+      "file": "课堂截图/02910.jpg"
+    },
+    {
+      "seconds": 3090,
+      "file": "课堂截图/03090.jpg"
+    },
+    {
+      "seconds": 3270,
+      "file": "课堂截图/03270.jpg"
+    },
+    {
+      "seconds": 3450,
+      "file": "课堂截图/03450.jpg"
+    },
+    {
+      "seconds": 3630,
+      "file": "课堂截图/03630.jpg"
+    },
+    {
+      "seconds": 3810,
+      "file": "课堂截图/03810.jpg"
+    },
+    {
+      "seconds": 3990,
+      "file": "课堂截图/03990.jpg"
+    },
+    {
+      "seconds": 4170,
+      "file": "课堂截图/04170.jpg"
+    },
+    {
+      "seconds": 4350,
+      "file": "课堂截图/04350.jpg"
+    },
+    {
+      "seconds": 4530,
+      "file": "课堂截图/04530.jpg"
+    },
+    {
+      "seconds": 4710,
+      "file": "课堂截图/04710.jpg"
+    },
+    {
+      "seconds": 4890,
+      "file": "课堂截图/04890.jpg"
+    },
+    {
+      "seconds": 5070,
+      "file": "课堂截图/05070.jpg"
+    },
+    {
+      "seconds": 5250,
+      "file": "课堂截图/05250.jpg"
+    },
+    {
+      "seconds": 5430,
+      "file": "课堂截图/05430.jpg"
+    },
+    {
+      "seconds": 5610,
+      "file": "课堂截图/05610.jpg"
+    },
+    {
+      "seconds": 5790,
+      "file": "课堂截图/05790.jpg"
+    },
+    {
+      "seconds": 5970,
+      "file": "课堂截图/05970.jpg"
+    },
+    {
+      "seconds": 6150,
+      "file": "课堂截图/06150.jpg"
+    },
+    {
+      "seconds": 6330,
+      "file": "课堂截图/06330.jpg"
+    },
+    {
+      "seconds": 6510,
+      "file": "课堂截图/06510.jpg"
+    },
+    {
+      "seconds": 6690,
+      "file": "课堂截图/06690.jpg"
+    },
+    {
+      "seconds": 6870,
+      "file": "课堂截图/06870.jpg"
+    },
+    {
+      "seconds": 7050,
+      "file": "课堂截图/07050.jpg"
+    },
+    {
+      "seconds": 7230,
+      "file": "课堂截图/07230.jpg"
+    },
+    {
+      "seconds": 7410,
+      "file": "课堂截图/07410.jpg"
+    },
+    {
+      "seconds": 7590,
+      "file": "课堂截图/07590.jpg"
+    },
+    {
+      "seconds": 7770,
+      "file": "课堂截图/07770.jpg"
+    },
+    {
+      "seconds": 7950,
+      "file": "课堂截图/07950.jpg"
+    },
+    {
+      "seconds": 8130,
+      "file": "课堂截图/08130.jpg"
+    },
+    {
+      "seconds": 8310,
+      "file": "课堂截图/08310.jpg"
+    },
+    {
+      "seconds": 8490,
+      "file": "课堂截图/08490.jpg"
+    },
+    {
+      "seconds": 8670,
+      "file": "课堂截图/08670.jpg"
+    }
+  ],
+  "artifacts": {
+    "screenshots": "<本地学习目录>/第三学期/3391马克思主义原理/原始数据/马克思主义基本原理2026-10-21第9-11节/课堂截图",
+    "notes": "<本地学习目录>/第三学期/3391马克思主义原理/原始数据/马克思主义基本原理2026-10-21第9-11节/课程笔记.md",
+    "timeline": "<本地学习目录>/第三学期/3391马克思主义原理/原始数据/马克思主义基本原理2026-10-21第9-11节/课程时间线.txt",
+    "html": "<本地学习目录>/第三学期/3391马克思主义原理/马克思主义基本原理2026-10-21第9-11节.html",
+    "transcript_html": "../../马克思主义基本原理2026-10-21第9-11节.html#full-transcript"
+  },
+  "notes_status": "complete_with_declared_asr_gap",
+  "notes_master": "课程笔记.md",
+  "visual_review": {
+    "read_frames": [
+      {
+        "seconds": 1650,
+        "file": "课堂截图/01650.jpg"
+      },
+      {
+        "seconds": 3090,
+        "file": "课堂截图/03090.jpg"
+      },
+      {
+        "seconds": 3990,
+        "file": "课堂截图/03990.jpg"
+      },
+      {
+        "seconds": 4350,
+        "file": "课堂截图/04350.jpg"
+      },
+      {
+        "seconds": 6150,
+        "file": "课堂截图/06150.jpg"
+      },
+      {
+        "seconds": 6870,
+        "file": "课堂截图/06870.jpg"
+      },
+      {
+        "seconds": 8490,
+        "file": "课堂截图/08490.jpg"
+      },
+      {
+        "seconds": 8670,
+        "file": "课堂截图/08670.jpg"
+      }
+    ],
+    "scope": "按转写线索核对定义、任务、图像或图表；仅列出本次实际阅读的画面，不代表全片逐帧核对。"
+  },
+  "media_cleanup_at": "2026-10-22T14:30:11.389122+08:00",
+  "temporary_audio_deleted": true,
+  "transcript_storage": "inline_html",
+  "transcript_segments": 73,
+  "transcript_files_removed_after_verification": true
+}

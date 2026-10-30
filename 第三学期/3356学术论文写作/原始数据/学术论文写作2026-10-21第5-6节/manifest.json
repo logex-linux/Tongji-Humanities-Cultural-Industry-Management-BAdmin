@@ -1,0 +1,19 @@
+{
+  "course_id": "99384",
+  "sub_id": "1970074",
+  "course_title": "学术论文写作",
+  "session_title": "2026-10-21第5-6节",
+  "base_name": "学术论文写作2026-10-21第5-6节",
+  "duration_seconds": 5750.910167,
+  "artifacts": {
+    "screenshots": "<本地学习目录>/第三学期/3356学术论文写作/原始数据/学术论文写作2026-10-21第5-6节/课堂截图",
+    "notes": "<本地学习目录>/第三学期/3356学术论文写作/原始数据/学术论文写作2026-10-21第5-6节/课程笔记.md",
+    "timeline": "<本地学习目录>/第三学期/3356学术论文写作/原始数据/学术论文写作2026-10-21第5-6节/课程时间线.txt",
+    "slides": "",
+    "transcript_html": "../../学术论文写作2026-10-21第5-6节.html#full-transcript"
+  },
+  "notes_master": "课程笔记.md",
+  "transcript_storage": "inline_html",
+  "transcript_segments": 48,
+  "transcript_files_removed_after_verification": true
+}

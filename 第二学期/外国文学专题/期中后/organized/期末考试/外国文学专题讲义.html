@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>外国文学专题 · 讲义大纲</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; background: #f8f9fb; color: #1a1a2e; line-height: 1.8; }
+a { color: inherit; text-decoration: none; }
+
+/* Layout */
+#app { display: flex; min-height: 100vh; }
+
+/* Sidebar */
+#sidebar { width: 280px; min-width: 280px; background: #1a1a2e; color: #c9d1d9; position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; z-index: 100; transition: transform .3s; }
+#sidebar.hidden { transform: translateX(-280px); }
+#sidebar-header { padding: 24px 20px; border-bottom: 1px solid rgba(255,255,255,.08); }
+#sidebar-header h2 { margin: 0 0 4px; font-size: 17px; color: #fff; }
+#sidebar-header span { font-size: 12px; color: #8b949e; }
+#sidebar-nav { padding: 12px 0; }
+.toc-list { list-style: none; margin: 0; padding: 0; }
+.toc-list li { margin: 0; }
+.toc-list li a { display: block; padding: 5px 20px; font-size: 13px; color: #c9d1d9; border-left: 3px solid transparent; transition: all .15s; line-height: 1.5; }
+.toc-list li a:hover, .toc-list li a.active { background: rgba(255,255,255,.05); color: #fff; border-left-color: #6366f1; }
+.toc-list li.toc-exam a { color: #f59e0b; }
+.toc-list li.toc-exam a:hover, .toc-list li.toc-exam a.active { color: #fbbf24; background: rgba(245,158,11,.1); border-left-color: #f59e0b; }
+
+/* Sidebar toggle */
+#sidebar-toggle { position: fixed; top: 16px; left: 290px; z-index: 101; width: 36px; height: 36px; border-radius: 8px; background: #fff; border: 1px solid #e5e7eb; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,.06); transition: left .3s; }
+#sidebar.hidden ~ #sidebar-toggle { left: 10px; }
+
+/* Search */
+#search-box { margin: 12px 16px; display: flex; }
+#search-box input { flex: 1; padding: 8px 12px; border: 1px solid rgba(255,255,255,.1); border-radius: 6px; background: rgba(255,255,255,.05); color: #fff; font-size: 13px; outline: none; }
+#search-box input::placeholder { color: #8b949e; }
+#search-results { display: none; font-size: 12px; color: #8b949e; padding: 0 20px; }
+
+/* Main */
+#main { margin-left: 280px; flex: 1; padding: 40px 48px; max-width: 900px; transition: margin-left .3s; }
+#sidebar.hidden ~ #main { margin-left: 0; }
+
+/* Content */
+.content { background: #fff; border-radius: 12px; padding: 40px; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+.content h1 { font-size: 28px; margin: 0 0 8px; color: #111; }
+.content h1:first-child { margin-top: 20px; }
+.content h2 { font-size: 22px; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid #e5e7eb; color: #1a1a2e; }
+.content h3 { font-size: 18px; margin: 32px 0 12px; color: #374151; }
+.content h4 { font-size: 15px; margin: 24px 0 8px; color: #4b5563; }
+.content h2 .header-anchor { font-size: 16px; opacity: 0; margin-left: 8px; transition: opacity .2s; }
+.content h2:hover .header-anchor { opacity: .4; }
+.content p { margin: 12px 0; font-size: 15px; }
+.content ul { margin: 8px 0; padding-left: 24px; }
+.content ul li { margin: 4px 0; font-size: 14px; }
+.content blockquote { margin: 16px 0; padding: 12px 20px; background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 0 8px 8px 0; font-size: 14px; }
+.content blockquote p { margin: 4px 0; }
+.content hr { border: none; border-top: 1px dashed #e5e7eb; margin: 32px 0; }
+.content strong { color: #1a1a2e; font-weight: 600; }
+.content code { background: #f1f5f9; padding: 1px 6px; border-radius: 4px; font-size: 13px; color: #e11d48; }
+.content .code-block { background: #1e293b; border-radius: 8px; overflow-x: auto; padding: 16px 20px; margin: 12px 0; }
+.content .code-block code { background: transparent; color: #e2e8f0; font-size: 13px; }
+.content .table-wrap { overflow-x: auto; margin: 12px 0; }
+.content table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.content table th { background: #f1f5f9; padding: 10px 14px; text-align: left; font-weight: 600; border-bottom: 2px solid #e5e7eb; white-space: nowrap; }
+.content table td { padding: 8px 14px; border-bottom: 1px solid #f1f5f9; }
+.content table tr:hover td { background: #f8fafc; }
+.content img { max-width: 100%; }
+
+/* Highlight exam-relevant sections */
+.exam-section { border-left: 3px solid #f59e0b; padding-left: 20px !important; margin-left: -23px; }
+.exam-section h2, .exam-section h3 { color: #b45309; }
+.exam-section::before { content: "📌 考题相关"; display: block; font-size: 11px; color: #f59e0b; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; font-weight: 600; }
+
+/* Back to top */
+#back-top { position: fixed; bottom: 24px; right: 24px; width: 44px; height: 44px; border-radius: 50%; background: #6366f1; color: #fff; border: none; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(99,102,241,.3); opacity: 0; transform: translateY(20px); transition: all .3s; z-index: 99; }
+#back-top.visible { opacity: 1; transform: translateY(0); }
+
+/* Highlight animation */
+.highlight-flash { animation: flash .8s ease-out; }
+@keyframes flash { from { background: #fef3c7; } to { background: transparent; } }
+
+/* Mobile */
+@media (max-width: 768px) {
+  #sidebar { transform: translateX(-280px); }
+  #sidebar.open { transform: translateX(0); }
+  #sidebar-toggle { left: 10px; }
+  #main { margin-left: 0; padding: 16px; }
+  .content { padding: 20px; border-radius: 8px; }
+  .content h1 { font-size: 22px; }
+  .content h2 { font-size: 18px; }
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <nav id="sidebar">
+    <div id="sidebar-header">
+      <h2>外国文学专题</h2>
+      <span>高伟权 · 2026春 · 讲义大纲</span>
+    </div>
+    <div id="search-box">
+      <input type="text" id="search-input" placeholder="🔍 搜索讲义内容...">
+    </div>
+    <div id="search-results"></div>
+    <div id="sidebar-nav">
+      <ul class="toc-list"><li style="padding-left:0px"><a href="#外国文学专题-讲义大纲">外国文学专题 · 讲义大纲</a></li><li style="padding-left:0px"><a href="#第一讲4月29日何為英國文學-英國的五個版本">第一讲（4月29日）：何為英國文學 — 英國的五個版本</a></li><li style="padding-left:16px"><a href="#一课程开场与考核说明">一、课程开场与考核说明</a></li><li style="padding-left:32px"><a href="#课程安排">课程安排</a></li><li style="padding-left:32px"><a href="#考核方式">考核方式</a></li><li style="padding-left:16px"><a href="#二英国文学概念的问题化">二、"英国文学"概念的问题化</a></li><li style="padding-left:32px"><a href="#核心追问">核心追问</a></li><li style="padding-left:32px"><a href="#传统文学史分期的缺陷">传统文学史分期的缺陷</a></li><li style="padding-left:16px"><a href="#三不列颠群岛术语The-Terminology-of-British-Isles">三、不列颠群岛术语（The Terminology of British Isles）</a></li><li style="padding-left:16px"><a href="#四英国的五个版本">四、英国的五个版本</a></li><li style="padding-left:32px"><a href="#01版凯尔特不列颠Britain">0.1版：凯尔特不列颠（Britain）</a></li><li style="padding-left:32px"><a href="#02版盎格鲁撒克逊时期450-1100年">0.2版：盎格鲁撒克逊时期（450-1100年）</a></li><li style="padding-left:48px"><a href="#英国第一部史诗贝奥武夫Beowulf">英国第一部史诗：《贝奥武夫》（Beowulf）</a></li><li style="padding-left:32px"><a href="#诺曼征服1066年-中古英语">诺曼征服（1066年）→ 中古英语</a></li><li style="padding-left:48px"><a href="#乔叟坎特伯雷故事集序言四行课堂翻译练习">乔叟《坎特伯雷故事集》序言四行（课堂翻译练习）</a></li><li style="padding-left:48px"><a href="#斯宾塞仙后The-Faerie-Queene第一诗节">斯宾塞《仙后》（The Faerie Queene）第一诗节</a></li><li style="padding-left:32px"><a href="#20版英格兰与苏格兰共主联邦1603年">2.0版：英格兰与苏格兰共主联邦（1603年）</a></li><li style="padding-left:32px"><a href="#30版大不列颠王国1707年">3.0版：大不列颠王国（1707年）</a></li><li class="toc-exam" style="padding-left:48px"><a href="#苏格兰对英国文化的贡献极其重要关联第四题">🔴 苏格兰对英国文化的贡献（极其重要——关联第四题）</a></li><li style="padding-left:32px"><a href="#40版大不列颠及爱尔兰联合王国1801年">4.0版：大不列颠及爱尔兰联合王国（1801年）</a></li><li style="padding-left:32px"><a href="#爱尔兰殖民史">爱尔兰殖民史</a></li><li style="padding-left:32px"><a href="#50版大不列颠及北爱尔兰联合王国">5.0版：大不列颠及北爱尔兰联合王国</a></li><li style="padding-left:48px"><a href="#爱尔兰民族的悖论">爱尔兰民族的悖论</a></li><li style="padding-left:0px"><a href="#第二讲5月6日莎士比亚爱的徒劳与丰辞">第二讲（5月6日）：莎士比亚《爱的徒劳》与"丰辞"</a></li><li class="toc-exam" style="padding-left:16px"><a href="#关联考题题目一-丰辞辨析">🔴 【关联考题：题目一 · 丰辞辨析】</a></li><li style="padding-left:16px"><a href="#一开场为何读莎士比亚">一、开场：为何读莎士比亚</a></li><li style="padding-left:16px"><a href="#二爱的徒劳Loves-Labours-Lost故事梗概">二、《爱的徒劳》（Love's Labour's Lost）故事梗概</a></li><li style="padding-left:32px"><a href="#阿基坦Aquitaine典故">阿基坦（Aquitaine）典故</a></li><li style="padding-left:32px"><a href="#人物阶级对照">人物阶级对照</a></li><li style="padding-left:16px"><a href="#三两种解读">三、两种解读</a></li><li style="padding-left:32px"><a href="#解读一肖新尧重庆大学2021年">解读一：肖新尧（重庆大学，2021年）</a></li><li style="padding-left:32px"><a href="#解读二陈星2007年21世纪杯冠军南京大学">解读二：陈星（2007年"21世纪杯"冠军，南京大学）</a></li><li class="toc-exam" style="padding-left:16px"><a href="#四陈星论文结构精讲考题核心">🔴 四、陈星论文结构精讲（考题核心）</a></li><li style="padding-left:32px"><a href="#第一部分言行不一的莎士比亚">第一部分：言行不一的莎士比亚</a></li><li style="padding-left:32px"><a href="#第二部分修辞术手册与修辞教学本篇核心知识">第二部分：修辞术手册与修辞教学（本篇核心知识）</a></li><li style="padding-left:48px"><a href="#古典修辞学的定义亚里士多德">古典修辞学的定义（亚里士多德）</a></li><li style="padding-left:48px"><a href="#修辞学的历史转型文艺复兴时期">修辞学的历史转型（文艺复兴时期）</a></li><li style="padding-left:48px"><a href="#伊拉斯谟丰辞Copia">伊拉斯谟《丰辞》（Copia）</a></li><li style="padding-left:48px"><a href="#修辞的起效原理陈星论文核心论点">修辞的起效原理（陈星论文核心论点）</a></li><li style="padding-left:32px"><a href="#第三部分无效修辞反面例证">第三部分：无效修辞（反面例证）</a></li><li style="padding-left:48px"><a href="#亚马多的臃肿英文">亚马多的臃肿英文</a></li><li style="padding-left:48px"><a href="#其他反例">其他反例</a></li><li style="padding-left:32px"><a href="#第四部分有效修辞十四行诗第87首Sonnet-87">第四部分：有效修辞——十四行诗第87首（Sonnet 87）</a></li><li style="padding-left:32px"><a href="#补充早期现代英语语法常识">补充：早期现代英语语法常识</a></li><li style="padding-left:0px"><a href="#第三讲5月13日乔伊斯阿拉比">第三讲（5月13日）：乔伊斯《阿拉比》</a></li><li class="toc-exam" style="padding-left:16px"><a href="#关联考题题目四-苏格兰关联阿拉比部分10分">🔴 【关联考题：题目四 · 苏格兰关联（《阿拉比》部分10分）】</a></li><li style="padding-left:16px"><a href="#一乔伊斯生平与国家身份">一、乔伊斯生平与国家身份</a></li><li style="padding-left:16px"><a href="#二逐段文本细读">二、逐段文本细读</a></li><li style="padding-left:32px"><a href="#第一段环境与政治">第一段：环境与政治</a></li><li style="padding-left:32px"><a href="#女主角的出场光中">女主角的出场——光中</a></li><li style="padding-left:32px"><a href="#穿越意象foregrounded-image">穿越意象（foregrounded image）</a></li><li style="padding-left:32px"><a href="#市场场景的政治性">市场场景的政治性</a></li><li style="padding-left:32px"><a href="#女主角第一句话Arabie">女主角第一句话："Arabie"</a></li><li style="padding-left:16px"><a href="#三欲望三角理论勒内基拉尔René-Girard">三、欲望三角理论（勒内·基拉尔／René Girard）</a></li><li style="padding-left:32px"><a href="#理论核心">理论核心</a></li><li style="padding-left:32px"><a href="#虚荣人vanité的两个经典案例">虚荣人（vanité）的两个经典案例</a></li><li style="padding-left:32px"><a href="#阿拉比中的应用">《阿拉比》中的应用</a></li><li style="padding-left:32px"><a href="#帽子意象">帽子意象</a></li><li style="padding-left:16px"><a href="#四慈善的历史语义学分析">四、慈善的历史语义学分析</a></li><li style="padding-left:32px"><a href="#charity-的词源">charity 的词源</a></li><li style="padding-left:32px"><a href="#1687年的转变">1687年的转变</a></li><li style="padding-left:16px"><a href="#五阿拉伯集市Bazaar的历史原型">五、阿拉伯集市（Bazaar）的历史原型</a></li><li style="padding-left:32px"><a href="#第一个Bazaar">第一个Bazaar</a></li><li style="padding-left:32px"><a href="#都柏林阿拉伯集市真实存在">都柏林阿拉伯集市（真实存在）</a></li><li style="padding-left:16px"><a href="#六慈善资本主义Philanthropcapitalism">六、慈善资本主义（Philanthropcapitalism）</a></li><li style="padding-left:32px"><a href="#当代案例">当代案例</a></li><li style="padding-left:48px"><a href="#星巴克Starbucks">星巴克（Starbucks）</a></li><li style="padding-left:48px"><a href="#Ethos-Water">Ethos Water</a></li><li style="padding-left:16px"><a href="#七小说的三层幻灭">七、小说的三层幻灭</a></li><li style="padding-left:32px"><a href="#1-Eros欲望爱情层面的幻灭">1. Eros（欲望/爱情）层面的幻灭</a></li><li style="padding-left:32px"><a href="#2-宗教层面的幻灭">2. 宗教层面的幻灭</a></li><li style="padding-left:32px"><a href="#3-国家层面的幻灭">3. 国家层面的幻灭</a></li><li style="padding-left:16px"><a href="#八总结段教师朗诵">八、总结段（教师朗诵）</a></li><li style="padding-left:0px"><a href="#第四讲5月20日萨莉鲁尼正常人与美丽的世界你在哪里">第四讲（5月20日）：萨莉·鲁尼《正常人》与《美丽的世界你在哪里》</a></li><li style="padding-left:16px"><a href="#一作家介绍">一、作家介绍</a></li><li style="padding-left:16px"><a href="#二正常人Normal-People分析">二、《正常人》（Normal People）分析</a></li><li style="padding-left:32px"><a href="#实验框架">实验框架</a></li><li style="padding-left:32px"><a href="#核心理论爱情作为最小单位的共产主义阿兰巴迪欧">核心理论：爱情作为最小单位的共产主义（阿兰·巴迪欧）</a></li><li style="padding-left:32px"><a href="#选段一表白场景">选段一：表白场景</a></li><li style="padding-left:32px"><a href="#核心概念内在性自我Immanent-Self">核心概念：内在性自我（Immanent Self）</a></li><li style="padding-left:32px"><a href="#共同处境Shared-Situation">共同处境（Shared Situation）</a></li><li style="padding-left:16px"><a href="#三文学危机">三、文学危机</a></li><li style="padding-left:32px"><a href="#读书会批判通过Connell的眼睛">读书会批判（通过Connell的眼睛）</a></li><li style="padding-left:32px"><a href="#美丽的世界你在哪里的自我批判">《美丽的世界你在哪里》的自我批判</a></li><li style="padding-left:16px"><a href="#四阶级负气Class-based-Pique">四、阶级负气（Class-based Pique）</a></li><li style="padding-left:16px"><a href="#五结尾核心段落附中文版封面">五、结尾核心段落（附中文版封面）</a></li><li style="padding-left:0px"><a href="#第五讲5月27日美国早期文学与历史-独立宣言">第五讲（5月27日）：美国早期文学与历史 + 《独立宣言》</a></li><li class="toc-exam" style="padding-left:16px"><a href="#关联考题题目二荷兰记忆背景-题目四苏格兰关联独立宣言部分">🔴 【关联考题：题目二·荷兰记忆（背景）/ 题目四·苏格兰关联（《独立宣言》部分）】</a></li><li style="padding-left:16px"><a href="#一America词源">一、"America"词源</a></li><li style="padding-left:16px"><a href="#二殖民史1565-1700">二、殖民史（1565-1700）</a></li><li style="padding-left:32px"><a href="#殖民动因">殖民动因</a></li><li style="padding-left:32px"><a href="#关键年份与事件">关键年份与事件</a></li><li style="padding-left:32px"><a href="#殖民与移民的根本区别">殖民与移民的根本区别</a></li><li style="padding-left:32px"><a href="#北美语言构成">北美语言构成</a></li><li style="padding-left:32px"><a href="#13殖民地三分区">13殖民地三分区</a></li><li style="padding-left:32px"><a href="#当代美国的非正式帝国">当代美国的非正式帝国</a></li><li style="padding-left:16px"><a href="#三独立宣言Declaration-of-Independence">三、《独立宣言》（Declaration of Independence）</a></li><li style="padding-left:32px"><a href="#历史背景">历史背景</a></li><li style="padding-left:32px"><a href="#文本结构">文本结构</a></li><li style="padding-left:32px"><a href="#独立宣言的两条逻辑线">独立宣言的两条逻辑线</a></li><li style="padding-left:48px"><a href="#第一条自然权利哲学约翰洛克">第一条：自然权利哲学（约翰·洛克）</a></li><li style="padding-left:48px"><a href="#第二条英帝国构成理论本杰明富兰克林">第二条：英帝国构成理论（本杰明·富兰克林）</a></li><li style="padding-left:48px"><a href="#文本策略的巧妙之处">文本策略的巧妙之处</a></li><li style="padding-left:0px"><a href="#第六讲6月3日华盛顿欧文瑞普凡温克尔">第六讲（6月3日）：华盛顿·欧文《瑞普·凡·温克尔》</a></li><li class="toc-exam" style="padding-left:16px"><a href="#关联考题题目二-荷兰记忆-题目四-苏格兰关联瑞普部分5分苏格兰部分">🔴 【关联考题：题目二 · 荷兰记忆 / 题目四 · 苏格兰关联（瑞普部分5分+苏格兰部分）】</a></li><li style="padding-left:16px"><a href="#一小说结构五个部分">一、小说结构（五个部分）</a></li><li style="padding-left:16px"><a href="#二引文分析为什么引司各特">二、引文分析——为什么引司各特？</a></li><li style="padding-left:16px"><a href="#三尼克博克引言">三、尼克博克引言</a></li><li style="padding-left:32px"><a href="#两处关于truth的强调">两处关于truth的强调</a></li><li style="padding-left:16px"><a href="#四正文分析">四、正文分析</a></li><li style="padding-left:32px"><a href="#Rip-Van-Winkle的形象">Rip Van Winkle的形象</a></li><li style="padding-left:32px"><a href="#Rip的劳动观对现代文明的批判">Rip的劳动观（对现代文明的批判）</a></li><li style="padding-left:32px"><a href="#酒馆意象">酒馆意象</a></li><li style="padding-left:32px"><a href="#山中奇遇与二十年沉睡">山中奇遇与二十年沉睡</a></li><li style="padding-left:32px"><a href="#醒来后的世界一切都变了">醒来后的世界——一切都变了</a></li><li style="padding-left:32px"><a href="#老友们怎么样了">老友们怎么样了</a></li><li style="padding-left:32px"><a href="#Rip的妻子">Rip的妻子</a></li><li style="padding-left:16px"><a href="#五论文解读">五、论文解读</a></li><li style="padding-left:32px"><a href="#核心问题为什么美国建国之初写一个荷兰人的故事">核心问题：为什么美国建国之初写一个荷兰人的故事？</a></li><li style="padding-left:48px"><a href="#答案Anglophobia恐英症">答案：Anglophobia（恐英症）</a></li><li style="padding-left:48px"><a href="#Rip的多重民族身份">Rip的多重民族身份</a></li><li style="padding-left:48px"><a href="#恐英症的延续美国作家对英国的排斥">恐英症的延续：美国作家对英国的排斥</a></li><li style="padding-left:48px"><a href="#对华盛顿总统的致敬">对华盛顿总统的致敬</a></li><li style="padding-left:48px"><a href="#欧文的矛盾和张力">欧文的矛盾和张力</a></li><li style="padding-left:48px"><a href="#为什么不写一个参加独立战争的英雄">为什么不写一个参加独立战争的英雄？</a></li><li style="padding-left:0px"><a href="#第七讲6月10日亨利詹姆斯丛林猛兽">第七讲（6月10日）：亨利·詹姆斯《丛林猛兽》</a></li><li class="toc-exam" style="padding-left:16px"><a href="#关联考题题目三-猛兽是什么">🔴 【关联考题：题目三 · 猛兽是什么】</a></li><li style="padding-left:16px"><a href="#一考试要求重申">一、考试要求重申</a></li><li style="padding-left:16px"><a href="#二亨利詹姆斯与马克吐温的对比">二、亨利·詹姆斯与马克·吐温的对比</a></li><li style="padding-left:16px"><a href="#三基本情节">三、基本情节</a></li><li style="padding-left:16px"><a href="#四Marcher的职业身份最关键的解謎线索">四、Marcher的职业身份（最关键的解謎线索）</a></li><li style="padding-left:32px"><a href="#证据一政府小办公室第二章">证据一：政府小办公室（第二章）</a></li><li style="padding-left:32px"><a href="#证据二他去过的地方第六章">证据二：他去过的地方（第六章）</a></li><li style="padding-left:32px"><a href="#结论">结论</a></li><li style="padding-left:32px"><a href="#为什么这个身份被放在背景中">为什么这个身份被放在背景中？</a></li><li style="padding-left:16px"><a href="#五殖民经历对他个人生活的影响">五、殖民经历对他个人生活的影响</a></li><li style="padding-left:32px"><a href="#1-Masculine-Heroism-爆棚">1. Masculine Heroism 爆棚</a></li><li style="padding-left:32px"><a href="#2-猎虎隐喻殖民地的历史实践">2. 猎虎隐喻（殖民地的历史实践）</a></li><li style="padding-left:32px"><a href="#3-占有逻辑Profit-Logic">3. 占有逻辑（Profit Logic）</a></li><li style="padding-left:32px"><a href="#4-极致自恋Narcissistic">4. 极致自恋（Narcissistic）</a></li><li style="padding-left:16px"><a href="#六May-Bartram的象征功能">六、May Bartram的象征功能</a></li><li style="padding-left:32px"><a href="#圣餐隐喻">圣餐隐喻</a></li><li style="padding-left:32px"><a href="#May的名字分析">May的名字分析</a></li><li style="padding-left:32px"><a href="#圣经中的其他对应">圣经中的其他对应</a></li><li style="padding-left:16px"><a href="#七猛兽The-Beast是什么">七、猛兽（The Beast）是什么？</a></li><li style="padding-left:32px"><a href="#文本层面">文本层面</a></li><li style="padding-left:32px"><a href="#启示录中的猛兽">《启示录》中的猛兽</a></li><li style="padding-left:32px"><a href="#历史化解读">历史化解读</a></li><li style="padding-left:16px"><a href="#八亨利詹姆斯的反帝国主义立场">八、亨利·詹姆斯的反帝国主义立场</a></li><li style="padding-left:32px"><a href="#给哥哥的信1903年小说发表同年">给哥哥的信（1903年，小说发表同年）</a></li><li style="padding-left:32px"><a href="#美国反帝国主义联盟American-Anti-Imperialist-League">美国反帝国主义联盟（American Anti-Imperialist League）</a></li><li style="padding-left:16px"><a href="#九总结">九、总结</a></li><li class="toc-exam" style="padding-left:0px"><a href="#附录四道考题相关要点速查">🔴 附录：四道考题相关要点速查</a></li><li style="padding-left:16px"><a href="#题目一25分丰辞copia辨析">题目一（25分）：丰辞（copia）辨析</a></li><li style="padding-left:16px"><a href="#题目二25分瑞普凡温克尔中的荷兰记忆">题目二（25分）：瑞普·凡·温克尔中的"荷兰记忆"</a></li><li style="padding-left:16px"><a href="#题目三25分丛林猛兽中的猛兽">题目三（25分）：《丛林猛兽》中的"猛兽"</a></li><li class="toc-exam" style="padding-left:16px"><a href="#题目四25分苏格兰文学关联">🔴 题目四（25分）：苏格兰文学关联</a></li><li style="padding-left:32px"><a href="#阿拉比10分">《阿拉比》（10分）</a></li><li style="padding-left:32px"><a href="#独立宣言10分-需自行补充原文">《独立宣言》（10分）⚠️ 需自行补充原文</a></li><li style="padding-left:32px"><a href="#瑞普凡温克尔5分">《瑞普·凡·温克尔》（5分）</a></li></ul>
+    </div>
+  </nav>
+  <button id="sidebar-toggle" title="目录">☰</button>
+  <main id="main">
+    <div class="content">
+      <div class="section" id="外国文学专题-讲义大纲">
+<h1>外国文学专题 · 讲义大纲</h1>
+<p><strong>课程：</strong> 50002680138 外国文学专题  </p>
+<p><strong>教师：</strong> 高伟权  </p>
+<p><strong>学期：</strong> 2026年春季  </p>
+<p><strong>整理日期：</strong> 2026年6月14日</p>
+<hr>
+</div><!-- end 外国文学专题-讲义大纲 -->
+<div class="section" id="第一讲4月29日何為英國文學-英國的五個版本">
+<h1>第一讲（4月29日）：何為英國文學 — 英國的五個版本</h1>
+<div class="section" id="一课程开场与考核说明">
+<h2>一、课程开场与考核说明</h2>
+<div class="section" id="课程安排">
+<h3>课程安排</h3>
+<ul>
+<li>课程共8周，涵盖古代（莎士比亚）、现代（乔伊斯）、当代（萨莉·鲁尼）文学</li><li>美国文学：华盛顿·欧文（美国文学之父）→ 亨利·詹姆斯《丛林猛兽》</li><li>最后一周Q&A</li>
+</ul>
+</div><!-- end 课程安排 -->
+<div class="section" id="考核方式">
+<h3>考核方式</h3>
+<ul>
+<li><strong>期末考试（40%）</strong>：开卷大作业，4道简答题，第15周发布，第17周周二12:00前递交纸质版至绘文楼二楼木头信箱</li><li><strong>出勤（5%）</strong>：迟到扣10分，旷课扣30分，病假须医生假条</li><li><strong>课堂参与（5%）</strong></li><li>教师强调：良以上不轻易给差评</li>
+</ul>
+<hr>
+</div><!-- end 考核方式 -->
+</div><!-- end 一课程开场与考核说明 -->
+<div class="section" id="二英国文学概念的问题化">
+<h2>二、"英国文学"概念的问题化</h2>
+<div class="section" id="核心追问">
+<h3>核心追问</h3>
+<p>1. 英国是一个从古至今从未变化的单位吗？→ 不是，经历了五个版本</p>
+<p>2. 现代意义&quot;文学&quot;概念何时兴起？→ 19世纪以后</p>
+<p>3. 莎士比亚时期存在&quot;文学&quot;这个概念吗？→ 需要讨论</p>
+</div><!-- end 核心追问 -->
+<div class="section" id="传统文学史分期的缺陷">
+<h3>传统文学史分期的缺陷</h3>
+<p>传统分期：中古时期 → 文艺复兴 → 革命与复辟 → 启蒙时代 → 浪漫主义 → 维多利亚时代 → 现代主义</p>
+<ul>
+<li><strong>问题</strong>：分期标准不统一（时代/文学风格混用）</li><li><strong>教师主张</strong>：应以英国历史变化为基本框架进入文学分期——文学写的是写作者内心的悲喜，与其所处时代最相关</li>
+</ul>
+<hr>
+</div><!-- end 传统文学史分期的缺陷 -->
+</div><!-- end 二英国文学概念的问题化 -->
+<div class="section" id="三不列颠群岛术语The-Terminology-of-British-Isles">
+<h2>三、不列颠群岛术语（The Terminology of British Isles）</h2>
+<div class="table-wrap"><table><thead>
+<tr><th>地理单位</th><th>行政单位</th></tr>
+</thead><tbody>
+<tr><td>British Isles（不列颠群岛）</td><td>United Kingdom of Great Britain and Northern Ireland</td></tr>
+<tr><td>Great Britain（大不列颠岛）</td><td>含苏格兰、英格兰、威尔士</td></tr>
+<tr><td>Ireland（爱尔兰岛，翡翠岛）</td><td>北爱尔兰 + 爱尔兰共和国</td></tr>
+</tbody></table></div>
+<hr>
+</div><!-- end 三不列颠群岛术语The-Terminology-of-British-Isles -->
+<div class="section" id="四英国的五个版本">
+<h2>四、英国的五个版本</h2>
+<div class="section" id="01版凯尔特不列颠Britain">
+<h3>0.1版：凯尔特不列颠（Britain）</h3>
+<ul>
+<li><strong>原住民</strong>：凯尔特人（Celts），说凯尔特语</li><li><strong>文字</strong>：欧甘文字（Ogham），刻于金属/骨头上，不便书写</li><li><strong>最古地名</strong>：Albion（阿尔比恩），意为"白崖"</li><li><strong>罗马征服（公元前55年）</strong>：凯撒占领高卢后北上不列颠</li>
+</ul>
+<p>  - 罗马人命名：英格兰→Britannia，苏格兰→Caledonia，爱尔兰→Hibernia，威尔士→Cambria</p>
+<p>  - <strong>关键</strong>：原住民逃入威尔士/苏格兰山地 → 称布里图人（Britons）为&quot;威尔士人&quot;的原因</p>
+<p>  - 文学关联：康拉德《黑暗的心》中Sailor站在泰晤士河上回忆此段历史</p>
+</div><!-- end 01版凯尔特不列颠Britain -->
+<div class="section" id="02版盎格鲁撒克逊时期450-1100年">
+<h3>0.2版：盎格鲁撒克逊时期（450-1100年）</h3>
+<ul>
+<li><strong>盎格鲁-撒克逊人</strong>：来自德国西岸/荷兰，原为罗马雇佣兵，后反客为主</li><li><strong>文字</strong>：卢尼文字（Runic）→ 附在拉丁字母上形成<strong>古英语</strong>（Old English）</li><li><strong>七国时代</strong>（Heptarchy）：七个小王国（Northumbria, Mercia, East Anglia, Essex, Wessex, Sussex, Kent）</li><li><strong>统一</strong>：埃塞尔斯坦（Æthelstan，阿尔弗雷德大帝之孙）在埃蒙特达成协议，建立<strong>Kingdom of England</strong>（英格兰王国1.0版）</li>
+</ul>
+<div class="section" id="英国第一部史诗贝奥武夫Beowulf" exam-section>
+<h4>⭐ 英国第一部史诗：《贝奥武夫》（Beowulf）</h4>
+<p><strong>地位</strong>：相当于中国的《诗经》；英国是史诗民族，中国是抒情诗民族</p>
+<p><strong>故事概要</strong>：</p>
+<ul>
+<li><strong>上篇</strong>：丹麦王修建宴乐厅，妖怪来袭；Geat国勇士贝奥武夫主动请缨，杀死男妖及其母</li><li><strong>下篇</strong>：50年后贝奥武夫为王，一个奴隶逃脱鞭打误入火龙洞穴，带走圣杯献给主人以求原谅；主人贪宝寻洞，火龙大怒毁灭国家；老迈的贝奥武夫与火龙同归于尽</li>
+</ul>
+<p><strong>核心寓意</strong>：</p>
+<blockquote>
+<p>"你不要以为你是最幸福的那个人，你就跟那个最悲哀的那个人毫无关联。那个最悲哀的人的命运和那个最幸福的人的命运是捆绑在一起的。这就是为什么在哲学上、在人文上，我们永远不停地为那些底层的人呐喊——因为他们关乎这个世界上的每一个人的命运。"</p>
+</blockquote>
+<ul>
+<li>故事起源于一个奴隶的反抗与悲哀</li><li>教师指出这是Beowulf留给我们的宝贵的<strong>人文财产</strong></li>
+</ul>
+<p><strong>语言</strong>：Old English（古英语），附有Modern English对照</p>
+</div><!-- end 英国第一部史诗贝奥武夫Beowulf -->
+</div><!-- end 02版盎格鲁撒克逊时期450-1100年 -->
+<div class="section" id="诺曼征服1066年-中古英语">
+<h3>诺曼征服（1066年）→ 中古英语</h3>
+<ul>
+<li><strong>背景</strong>：忏悔者爱德华（Edward the Confessor）去世无嗣</li><li><strong>征服者威廉</strong>（William the Conqueror），诺曼底公爵，1066年北上征服英国</li><li><strong>诺曼人来源</strong>：北欧维京人的后裔，曾受封于法王"淳朴的"查理（Charles the Simple）</li>
+</ul>
+<p>  - 教师注解：&quot;simple&quot;在伍尔夫《到灯塔去》中是对母亲品格的极高赞誉——&quot;drunk plump like stone, rest exact as a bird on truth&quot;</p>
+<ul>
+<li><strong>中古英语</strong>（Anglo-Norman language）：古英语+法语的融合</li><li><strong>代表诗人：乔叟</strong>（Geoffrey Chaucer）</li>
+</ul>
+<div class="section" id="乔叟坎特伯雷故事集序言四行课堂翻译练习">
+<h4>乔叟《坎特伯雷故事集》序言四行（课堂翻译练习）</h4>
+<blockquote>
+<p>When April with his showers sweet with fruit / The drought of March has pierced unto the root / And bathed each vein with liquor that has power / To generate therein and sire the flower</p>
+</blockquote>
+<ul>
+<li>中古英语特征：词尾多加-e（法语的痕迹）</li><li>例：sweet→sweet<strong>e</strong>，root→root<strong>e</strong>，vein→veyn<strong>e</strong>，liquor→licour</li>
+</ul>
+</div><!-- end 乔叟坎特伯雷故事集序言四行课堂翻译练习 -->
+<div class="section" id="斯宾塞仙后The-Faerie-Queene第一诗节">
+<h4>斯宾塞《仙后》（The Faerie Queene）第一诗节</h4>
+<ul>
+<li>早期现代英语但仍保留中古拼写特征</li><li>内容：祈求缪斯赐灵感，写亚瑟王寻找仙后的故事</li><li><strong>关键</strong>：亚瑟王的故事是<strong>诺曼人带来的</strong>，且斯宾塞本人是英国王室派往<strong>爱尔兰的殖民官</strong>——既是诗人又是殖民者</li>
+</ul>
+</div><!-- end 斯宾塞仙后The-Faerie-Queene第一诗节 -->
+</div><!-- end 诺曼征服1066年-中古英语 -->
+<div class="section" id="20版英格兰与苏格兰共主联邦1603年">
+<h3>2.0版：英格兰与苏格兰共主联邦（1603年）</h3>
+<ul>
+<li><strong>触发</strong>：伊丽莎白一世（童贞女王）无嗣→ 整个文艺复兴时期英国文人"充满焦虑"</li><li><strong>解决方案</strong>：请苏格兰国王詹姆斯六世来做英格兰国王→ 英格兰的詹姆斯一世</li><li><strong>权力交接类型</strong>：<strong>王朝国家</strong>（dynastic realm of state）——以<strong>血统</strong>为继承标准</li>
+</ul>
+<p>  - 对比现代<strong>主权国家</strong>（sovereign state）：以民众意志为标准</p>
+<ul>
+<li>Bennedict Anderson《想象的共同体》的三种共同体形态：</li>
+</ul>
+<p>  1. 宗教共同体</p>
+<p>  2. 王朝国家</p>
+<p>  3. 主权国家</p>
+<ul>
+<li>此时期为<strong>Personal Union</strong>（君合国）</li>
+</ul>
+</div><!-- end 20版英格兰与苏格兰共主联邦1603年 -->
+<div class="section" id="30版大不列颠王国1707年">
+<h3>3.0版：大不列颠王国（1707年）</h3>
+<ul>
+<li><strong>起因：达连事件</strong>（Darien Scheme）</li>
+</ul>
+<p>  - 苏格兰眼红英格兰在美洲的殖民地收入</p>
+<p>  - 政府向民间借资去投资巴拿马达连（太平洋-大西洋咽喉）</p>
+<p>  - 结果：热带疾病+其他殖民势力争夺→ <strong>国家破产</strong></p>
+<p>  - 破产后：<strong>把政权卖给英格兰</strong> → <strong>1707年合并</strong>（Act of Union）</p>
+<ul>
+<li>教师强调：合并不是英格兰压榨苏格兰，而是苏格兰自身财政破产的自愿行为</li>
+</ul>
+<div class="section" id="苏格兰对英国文化的贡献极其重要关联第四题" exam-section>
+<h4>⭐ 苏格兰对英国文化的贡献（极其重要——关联第四题）</h4>
+<div class="table-wrap"><table><thead>
+<tr><th>领域</th><th>人物</th></tr>
+</thead><tbody>
+<tr><td>哲学</td><td>大卫·休谟</td></tr>
+<tr><td>经济学</td><td>亚当·斯密</td></tr>
+<tr><td>科技</td><td>瓦特</td></tr>
+<tr><td>文学</td><td>罗伯特·彭斯、司各特（欧洲历史小说之父）</td></tr>
+</tbody></table></div>
+<blockquote>
+<p>"假设苏格兰从英国独立出去，那么英格兰这个时期是非常黯淡的。因为所有这些巨擘都是苏格兰人带来的。"</p>
+</blockquote>
+</div><!-- end 苏格兰对英国文化的贡献极其重要关联第四题 -->
+</div><!-- end 30版大不列颠王国1707年 -->
+<div class="section" id="40版大不列颠及爱尔兰联合王国1801年">
+<h3>4.0版：大不列颠及爱尔兰联合王国（1801年）</h3>
+<p>加入爱尔兰后文学史中加入爱尔兰作家：</p>
+<div class="table-wrap"><table><thead>
+<tr><th>作家</th><th>成就</th></tr>
+</thead><tbody>
+<tr><td>王尔德</td><td>剧作家</td></tr>
+<tr><td>萧伯纳</td><td>诺贝尔文学奖</td></tr>
+<tr><td>叶芝（W.B. Yeats）</td><td>诺贝尔文学奖，领导爱尔兰独立运动</td></tr>
+<tr><td>乔伊斯</td><td>现代文学大师</td></tr>
+<tr><td>贝克特（Samuel Beckett）</td><td>诺贝尔文学奖，《等待戈多》</td></tr>
+</tbody></table></div>
+<blockquote>
+<p>"英国文学的半壁江山是靠爱尔兰人支撑起来的。中国有句话叫'国家不幸诗家幸'——爱尔兰人每天肚子里想的都是国家的悲哀，所以他们的文学不单薄、很厚重、很有崇高感。"</p>
+</blockquote>
+</div><!-- end 40版大不列颠及爱尔兰联合王国1801年 -->
+<div class="section" id="爱尔兰殖民史">
+<h3>爱尔兰殖民史</h3>
+<ul>
+<li>1169-1171年：诺曼人入侵爱尔兰</li>
+</ul>
+<p>  - 爱尔兰被驱逐的国王MacRochada向英王亨利二世求助</p>
+<p>  - 招募到Pembroke伯爵Richard FitzGilbert de Clare（&quot;强弓&quot;Strongbow）</p>
+<p>  - 1171年MacRochada死后Strongbow自称Leinster国王</p>
+<p>  - 亨利二世震怒→ 率兵至爱尔兰→ Strongbow臣服→ 始建殖民关系</p>
+<ul>
+<li><strong>姓氏线索</strong>：</li>
+</ul>
+<p>  - Mac-：凯尔特姓（爱尔兰/苏格兰人）</p>
+<p>  - Fitz-：诺曼姓（后也成凯尔特姓，如Fitzgerald祖籍是爱尔兰）</p>
+<p>  - de-：法语词&quot;of&quot;，诺曼贵族标志</p>
+<ul>
+<li>殖民反复：爱尔兰人因独特文化和语言，常将英国统治者同化为自己人</li><li><strong>Tudor Reconquest</strong>（都铎王朝再征服）与新航路开辟是同一历史阶段</li><li><strong>West Countrymen</strong>：英格兰西海岸人，先殖民爱尔兰，后殖民北美</li>
+</ul>
+<p>  - 爱尔兰成为英国殖民全球的&quot;实验场&quot;</p>
+</div><!-- end 爱尔兰殖民史 -->
+<div class="section" id="50版大不列颠及北爱尔兰联合王国">
+<h3>5.0版：大不列颠及北爱尔兰联合王国</h3>
+<ul>
+<li>1920年代爱尔兰独立 → 南爱独立、北爱留英</li><li><strong>殖民逻辑核心</strong>：不是<strong>同化</strong>（assimilation），而是<strong>隔离</strong>（segregation）</li>
+</ul>
+<p>  &gt; &quot;sgregation比assimilation更具侵犯性——我跟你不一樣，因為我比你具有優越性，我要維持我跟你的差異和優越性。&quot;</p>
+<ul>
+<li>英帝国在其所殖民的地方总会分出南北（苏丹/印度/巴基斯坦/爱尔兰）</li><li><strong>反噬</strong>：长期分裂最终反噬英国自身</li>
+</ul>
+<div class="section" id="爱尔兰民族的悖论">
+<h4>爱尔兰民族的悖论</h4>
+<ul>
+<li>鸦片战争英国陆军总司令是<strong>爱尔兰人</strong></li><li>爱尔兰以侵犯过其他国家的本国人为耻，公共场所没有任何纪念，与日本形成鲜明对比</li><li>教师评价：爱尔兰民族"值得尊重"</li>
+</ul>
+<hr>
+</div><!-- end 爱尔兰民族的悖论 -->
+</div><!-- end 50版大不列颠及北爱尔兰联合王国 -->
+</div><!-- end 四英国的五个版本 -->
+</div><!-- end 第一讲4月29日何為英國文學-英國的五個版本 -->
+<div class="section" id="第二讲5月6日莎士比亚爱的徒劳与丰辞">
+<h1>第二讲（5月6日）：莎士比亚《爱的徒劳》与"丰辞"</h1>
+<div class="section" id="关联考题题目一-丰辞辨析" exam-section>
+<h2>【关联考题：题目一 · 丰辞辨析】</h2>
+<hr>
+</div><!-- end 关联考题题目一-丰辞辨析 -->
+<div class="section" id="一开场为何读莎士比亚">
+<h2>一、开场：为何读莎士比亚</h2>
+<p>教师开场英语：</p>
+<blockquote>
+<p>"Life is too short to experience all the lives in human history. That's why we need old books — they bring past lives back into our present experience."</p>
+</blockquote>
+<ul>
+<li>读文学的意义：我们只活100年，时代的体验有限；通过古书把古人的生活经验重放回当代理</li>
+</ul>
+<hr>
+</div><!-- end 一开场为何读莎士比亚 -->
+<div class="section" id="二爱的徒劳Loves-Labours-Lost故事梗概">
+<h2>二、《爱的徒劳》（Love's Labour's Lost）故事梗概</h2>
+<ul>
+<li><strong>首演</strong>：1597年圣诞节，献给伊丽莎白一世</li><li><strong>地点</strong>：纳瓦国（Navarre，今西班牙位置）</li><li><strong>人物</strong>：国王腓迪南 + 三位侍臣（毕隆、杜曼、朗格维）</li><li><strong>情节</strong>：四人发誓清心寡欲、不近女色、专心读书三年 → 法国公主带三位侍女来访讨债 → 四人全部坠入爱河、忘记誓言 → 写情诗闹出修辞笑话 → 被公主训斥而去</li>
+</ul>
+<div class="section" id="阿基坦Aquitaine典故">
+<h3>阿基坦（Aquitaine）典故</h3>
+<ul>
+<li>公主来访的实质是<strong>讨债</strong>：要么还钱，要么还地（阿基坦）</li><li><strong>历史背景</strong>：</li>
+</ul>
+<p>  - 1152年阿基坦女公爵Eleanor与法王离婚，改嫁英王亨利二世</p>
+<p>  - 此后阿基坦属英格兰</p>
+<p>  - 1337年法王欲收回→ <strong>触发英法百年战争</strong></p>
+<p>  - 1453年英军惨败，阿基坦归还法国</p>
+<p>  - 1558年（伊丽莎白一世时期）加莱也被法国收回——<strong>伊丽莎白王朝的痛點</strong></p>
+<ul>
+<li><strong>政治用意</strong>：莎士比亚将伊丽莎白女王化作法国公主——讨债成功、美貌智慧——拍女王马屁</li>
+</ul>
+</div><!-- end 阿基坦Aquitaine典故 -->
+<div class="section" id="人物阶级对照">
+<h3>人物阶级对照</h3>
+<div class="table-wrap"><table><thead>
+<tr><th>宫廷贵族</th><th>民间下层</th></tr>
+</thead><tbody>
+<tr><td>腓迪南国王</td><td>村女杰奎妮妲</td></tr>
+<tr><td>毕隆 / 杜曼 / 朗格维</td><td>亚马多（夸诞的西班牙人）</td></tr>
+<tr><td>法国公主 + 三位侍女</td><td>考斯塔德（质朴农民）</td></tr>
+<tr><td>鲍益 / 马凯德</td><td>纳森尼尔（教区牧师）</td></tr>
+<tr><td></td><td>霍罗福尼斯（乡村塾师）</td></tr>
+<tr><td></td><td>毛子（侍童）</td></tr>
+</tbody></table></div>
+<ul>
+<li>莎士比亚的<strong>阶级意识</strong>：让下层人混入宫廷，听贵族说什么，再嘲讽他们</li><li>教师评：莎士比亚"很叛逆"——你以为他拍女王马屁，其实他在笑话她</li><li><strong>电影《哈姆奈特》</strong>（赵婷导演）：写莎士比亚因儿子之死而有《哈姆雷特》，但被学界批评未拍出历史考据的面向</li>
+</ul>
+<hr>
+</div><!-- end 人物阶级对照 -->
+</div><!-- end 二爱的徒劳Loves-Labours-Lost故事梗概 -->
+<div class="section" id="三两种解读">
+<h2>三、两种解读</h2>
+<div class="section" id="解读一肖新尧重庆大学2021年">
+<h3>解读一：肖新尧（重庆大学，2021年）</h3>
+<ul>
+<li>认为此剧反映了<strong>"变质了的男性修辞术"</strong></li><li>修习修辞术不能改变身份阶层，也不能服务公共政治</li><li>女性对男性修辞术持<strong>鄙视态度</strong>——拒绝掌握变质修辞术的男性</li><li>影射伊丽莎白女王拒绝男性君主的<strong>政治史</strong></li><li>"court"的双关：既是<strong>宫廷</strong>，又是<strong>追求</strong></li><li>女性拒绝男性的<strong>性别史</strong></li>
+</ul>
+</div><!-- end 解读一肖新尧重庆大学2021年 -->
+<div class="section" id="解读二陈星2007年21世纪杯冠军南京大学">
+<h3>解读二：陈星（2007年"21世纪杯"冠军，南京大学）</h3>
+<ul>
+<li>与现行<strong>语言悲观主义</strong>进行辩论</li><li><strong>核心问题</strong>：什么是<strong>有效修辞（有效修辞）</strong>？</li><li>该剧<strong>不是单纯讽刺修辞</strong>，而是参与了对当时修辞教育缺失这一社会弊病的反思</li>
+</ul>
+<hr>
+</div><!-- end 解读二陈星2007年21世纪杯冠军南京大学 -->
+</div><!-- end 三两种解读 -->
+<div class="section" id="四陈星论文结构精讲考题核心" exam-section>
+<h2>四、陈星论文结构精讲（⭐ 考题核心）</h2>
+<div class="section" id="第一部分言行不一的莎士比亚">
+<h3>第一部分：言行不一的莎士比亚</h3>
+<p><strong>最后一句台词</strong>（1598年四开本）：</p>
+<blockquote>
+<p>The words of Mercury are harsh after the songs of Apollo</p>
+</blockquote>
+<ul>
+<li>四开本（1598年）：此话用大一號字体、无演者归属→ 像是剧本的<strong>寓意总结</strong></li><li>第一对开本（1623年）：才明确为亚马多的台词，加"you that way, we this way"</li>
+</ul>
+<p><strong>阿波罗 vs 墨丘利</strong>：</p>
+<ul>
+<li>阿波罗 = 日神 = 理性/秩序/人意（Art）= 文明</li><li>墨丘利 = 山林畜牧之神 = 自然/原始/粗糙</li>
+</ul>
+<p>→ 传统解读：尊自然、抑人意（修辭術/書面文字）</p>
+<p><strong>矛盾出现</strong>：</p>
+<ul>
+<li>莎士比亚一边在剧中讽刺写情诗之人</li><li>一边在剧外一首一首创作十四行诗</li><li>→ "言行不一的莎士比亚"</li>
+</ul>
+<p><strong>陈星观点</strong>：</p>
+<blockquote>
+<p>"现有观点所反映的与其说是文艺复兴时期的人意和修辞观，不如说是当代（尤其是1960年代后结构主义洗礼后）形成的<strong>语言悲观主义倾向</strong>。"</p>
+</blockquote>
+<ul>
+<li>1960年代才形成体系化的语言不信任理论</li><li>钱钟书："中国文明和思想太早熟了，在先秦就已形成'言不尽意'"</li><li>C.S. 刘易斯："修辭術是現代西方人與祖先之間最大的鴻溝"</li>
+</ul>
+<p><strong>关键细节</strong>：</p>
+<blockquote>
+<p>纳瓦君臣的读书计划<strong>几乎未及实施</strong>——他们根本没来得及做多少学问！问题不在"读了书"，而在"才疏学浅、学艺不精"</p>
+</blockquote>
+<p>→ 该剧讽刺的<strong>不是人意（Art）本身</strong>，而是<strong>拙劣世人的无效修辞</strong></p>
+<hr>
+</div><!-- end 第一部分言行不一的莎士比亚 -->
+<div class="section" id="第二部分修辞术手册与修辞教学本篇核心知识" exam-section>
+<h3>第二部分：修辞术手册与修辞教学（⭐ 本篇核心知识）</h3>
+<div class="section" id="古典修辞学的定义亚里士多德">
+<h4>古典修辞学的定义（亚里士多德）</h4>
+<p>亚里士多德定义：修辞是一种<strong>观察能力</strong>——在任何一种特定情境中，观察所有可能的<strong>说服方式</strong></p>
+<ul>
+<li>服务于<strong>城邦政治</strong>——公民通过观察政客的修辞来判断其是否堪当大任</li><li>教师类比：福柯的话语分析——穿透各种discourses看到本质</li><li>古典修辞学 = 集<strong>认知、逻辑、表述</strong>于一体、可与哲学比肩的复杂体系</li><li>语言风格只是其中一小部分</li>
+</ul>
+</div><!-- end 古典修辞学的定义亚里士多德 -->
+<div class="section" id="修辞学的历史转型文艺复兴时期">
+<h4>修辞学的历史转型（文艺复兴时期）</h4>
+<p><strong>文艺复兴的物质条件</strong>：</p>
+<ul>
+<li>彼特拉克等人搜索古老经典手稿——近乎考古学/文献学的新学科</li><li>在英国更有趣：宗教改革→ 教堂财产清单→ 发现本土古英语文本→ <strong>本土文献复兴</strong></li>
+</ul>
+<p>  - 不仅是古希腊罗马复兴，还有本民族古老文本的复兴</p>
+<p><strong>修辞术的收缩</strong>：</p>
+<blockquote>
+<p>"历史在变化，你再复兴是没有办法复兴出来的，一定是复兴出来的新的变体。"</p>
+</blockquote>
+<ul>
+<li>修辞术从认知道德体系 → 收缩为<strong>语言风格/修饰手法</strong>（metaphor, simile, personification等）</li><li>变成"华而不实之言"</li><li><strong>当代政治学家的焦虑</strong>：如果美国公众有基本修辞学素养，就不会把特朗普选上去</li>
+</ul>
+</div><!-- end 修辞学的历史转型文艺复兴时期 -->
+<div class="section" id="伊拉斯谟丰辞Copia">
+<h4>伊拉斯谟《丰辞》（Copia）</h4>
+<ul>
+<li>欧洲文艺复兴时期<strong>印数最多</strong>的修辞类书籍</li><li>英国文法学校常用教材</li><li>在开篇就点名批评过度修饰：</li>
+</ul>
+<p>  &gt; &quot;我们将无意义的词语与表达不加区别地堆砌起来，这样既模糊了他们话语的中心，还折磨了那些不幸的耳朵。&quot;</p>
+<ul>
+<li>这段描写仿佛就是为亚马多、霍罗福尼斯、纳森尼尔三人<strong>量身定做的</strong></li>
+</ul>
+<p><strong>讽刺的悖论</strong>：</p>
+<ul>
+<li>《丰辞》中关于制止文风华而不实的提醒<strong>5次加起来只占全书的1%</strong></li><li>剩余99%都是详细列举、解释200余类扩充表述的具体方式</li><li>甚至还展示了"你的来信令我欢喜"这句话的<strong>195种说法</strong></li><li>伊拉斯谟自己说："我不是在规定最佳的写作和说话方式，只是在指出一些有益的练习，而在练习中一切都必须被夸大和放大。"</li><li>昆体良："乐见年轻人有极其丰繁的风格，因为批评以及岁月可以轻松地削减各种冗赘，但单薄贫瘠的风格却无药可救。"</li>
+</ul>
+<p><strong>结论</strong>：</p>
+<blockquote>
+<p>"当16、17世纪的修辞教育和修辞手册大幅压缩古典修辞术的逻辑认知分析，并着力列举修辞手法时，<strong>语言形式便失去起效前提，从手段变成了目的本身。</strong>"</p>
+</blockquote>
+</div><!-- end 伊拉斯谟丰辞Copia -->
+<div class="section" id="修辞的起效原理陈星论文核心论点" exam-section>
+<h4>⭐ 修辞的起效原理（陈星论文核心论点）</h4>
+<blockquote>
+<p>"修辞之所以诞生，是为了弥补语言表达的欠缺。因语与物及各侧面之间存在间隙，修辞便因语而生——其作用是在交流中最大限度填补这个间隙。"</p>
+</blockquote>
+<ul>
+<li><strong>修辞的根本目的</strong>：不是炫耀说服他人，而是<strong>最大限度保证自己的表达能准确反映自己的想法</strong>，令他人朝自己希望的方向理解自己的言辞</li><li><strong>修辞手段的本质</strong>：通过比喻、拟人、借代等方式不断<strong>细化描述</strong>，使语言勾勒的形象和观点<strong>个性化、具体化</strong>，不因语言固有的概括性而朦胧笼统</li><li>关联20世纪新批评学派"<strong>去熟悉化</strong>"（Defamiliarization）：不要让已经熟悉得像石头一样的词继续出现 → 文学语言必须让它陌生起来</li><li>例如"我的爱人是一朵红红的玫瑰"——初写时耳目一新，用多后就烂大街了</li>
+</ul>
+<p><strong>当时教材的结论</strong>：</p>
+<blockquote>
+<p>"在该时期学生所接触的材料中，<strong>没有与语言本质紧密相连的理论层面的修辞原理分析</strong>。" ——更形而上一点的、关于语言之本质的思考、什么样的语言是最好的——这些基本问题的讨论是<strong>缺失</strong>的。</p>
+</blockquote>
+<hr>
+</div><!-- end 修辞的起效原理陈星论文核心论点 -->
+</div><!-- end 第二部分修辞术手册与修辞教学本篇核心知识 -->
+<div class="section" id="第三部分无效修辞反面例证">
+<h3>第三部分：无效修辞（反面例证）</h3>
+<div class="section" id="亚马多的臃肿英文">
+<h4>亚马多的臃肿英文</h4>
+<blockquote>
+<p>"I do affect the very ground which is base, where her shoe which is baser, guided by her foot which is basest doth tread."</p>
+</blockquote>
+<ul>
+<li>问题：<strong>太多修饰</strong>，过多插入性定语使句子臃肿</li><li>教师提示："最好的英文标准是<strong>lucid English</strong>——清晰的语言，而非堆砌修辞。"</li>
+</ul>
+</div><!-- end 亚马多的臃肿英文 -->
+<div class="section" id="其他反例">
+<h4>其他反例</h4>
+<ul>
+<li>说英文时非加拉丁文 → 好比说汉语时非加英文才显文采</li><li>when/where/who类型的句子中大量修饰性定语</li>
+</ul>
+<hr>
+</div><!-- end 其他反例 -->
+</div><!-- end 第三部分无效修辞反面例证 -->
+<div class="section" id="第四部分有效修辞十四行诗第87首Sonnet-87">
+<h3>第四部分：有效修辞——十四行诗第87首（Sonnet 87）</h3>
+<blockquote>
+<p>Farewell, thou art too dear for my possessing,</p>
+<p>And like enough thou know'st thy estimate.</p>
+<p>The charter of thy worth gives thee releasing;</p>
+<p>My bonds in thee are all determinate...</p>
+</blockquote>
+<p><strong>诗中使用的核心隐喻域</strong>：<strong>经济学</strong>（charter/bonds/estimate/possessing/patent/gift）</p>
+<p><strong>教师提问</strong>：爱情中到底有多少经济的成分？</p>
+<p><strong>莎士比亚的策略</strong>：一正一反  </p>
+<ul>
+<li>戏剧 → 反讽无效修辞</li><li>十四行诗 → 正面展示有效修辞</li>
+</ul>
+<p><strong>核心观点</strong>：</p>
+<blockquote>
+<p>"不要有过度的、丰繁的修辞来遮蔽自己想要表达的本意。"这是莎士比亚对当时修辞学教育的思索。</p>
+</blockquote>
+<hr>
+</div><!-- end 第四部分有效修辞十四行诗第87首Sonnet-87 -->
+<div class="section" id="补充早期现代英语语法常识">
+<h3>补充：早期现代英语语法常识</h3>
+<div class="table-wrap"><table><thead>
+<tr><th>类别</th><th>例</th></tr>
+</thead><tbody>
+<tr><td>第二人称主格</td><td>thou</td></tr>
+<tr><td>第二人称宾格</td><td>thee</td></tr>
+<tr><td>第二人称物主</td><td>thy / thine</td></tr>
+<tr><td>动词第二人称变形</td><td>sendest, hast, dost</td></tr>
+<tr><td>动词第三人称变形</td><td>sendeth, hath, doth</td></tr>
+<tr><td>否定</td><td>I know not（而非 I don&#x27;t know）</td></tr>
+<tr><td>系动词完成式</td><td>I am come（而非 I have come）</td></tr>
+<tr><td>被动进行式</td><td>the house is building（而非 is being built）</td></tr>
+</tbody></table></div>
+<hr>
+</div><!-- end 补充早期现代英语语法常识 -->
+</div><!-- end 四陈星论文结构精讲考题核心 -->
+</div><!-- end 第二讲5月6日莎士比亚爱的徒劳与丰辞 -->
+<div class="section" id="第三讲5月13日乔伊斯阿拉比">
+<h1>第三讲（5月13日）：乔伊斯《阿拉比》</h1>
+<div class="section" id="关联考题题目四-苏格兰关联阿拉比部分10分" exam-section>
+<h2>【关联考题：题目四 · 苏格兰关联（《阿拉比》部分10分）】</h2>
+<hr>
+</div><!-- end 关联考题题目四-苏格兰关联阿拉比部分10分 -->
+<div class="section" id="一乔伊斯生平与国家身份">
+<h2>一、乔伊斯生平与国家身份</h2>
+<ul>
+<li><strong>生卒</strong>：1882-1941</li><li><strong>横跨两个版本的英国</strong>：4.0版（大不列颠及爱尔兰联合王国）→ 5.0版（爱尔兰独立后）</li><li>前期作品（《阿拉比》《都柏林人》《青年艺术家的肖像》）→ 写于爱尔兰未独立时</li><li>后期（《尤利西斯》《芬尼根的守灵夜》）→ 爱尔兰共和国时期，开始极端语言实验</li><li>写作背景：爱尔兰民族主义风起云涌，乔伊斯本人也觉得爱尔兰"腐朽一片"，需要"塑造一种独立精神"</li>
+</ul>
+<hr>
+</div><!-- end 一乔伊斯生平与国家身份 -->
+<div class="section" id="二逐段文本细读">
+<h2>二、逐段文本细读</h2>
+<div class="section" id="第一段环境与政治">
+<h3>第一段：环境与政治</h3>
+<p><strong>North Richmond Street, being blind</strong>（死胡同）</p>
+<ul>
+<li><strong>牧师之屋</strong>：牧师已死，房屋空气不流通</li><li><strong>三本书的政治排列</strong>：</li>
+</ul>
+<div class="table-wrap"><table><thead>
+<tr><th>书</th><th>作者/性质</th><th>政治内涵</th></tr>
+</thead><tbody>
+<tr><td>The Abbot</td><td>Walter Scott（苏格兰）</td><td>苏格兰=凯尔特，与爱尔兰同根</td></tr>
+<tr><td>The Devout Communicant</td><td>天主教作家</td><td>爱尔兰=天主教，改信新教=叛国</td></tr>
+<tr><td>The Memoirs of Vidocq</td><td>警匪小说</td><td>无政治内涵</td></tr>
+</tbody></table></div>
+<ul>
+<li><strong>经验自我 vs 叙事自我</strong>：成年后的叙事者将政治性文本前置，娱乐文本后置，并讽刺"那时我最爱最后一本，仅仅因它的书页是黄色的"</li><li>→ <strong>这个小说的叙事者是成人在回看童年</strong>——有了政治意识、历史意识，才明白那次爱的旅程里"隐含了那么多东西"</li>
+</ul>
+<blockquote>
+<p>"这个故事里面至少有三层东西：一个是爱尔兰国家和我，第二个宗教和我，第三个那个小女孩和我。<strong>三种爱是拼在一起写的</strong>，所以你才会觉得怎么动人，又好像很剧烈的情感。"</p>
+</blockquote>
+</div><!-- end 第一段环境与政治 -->
+<div class="section" id="女主角的出场光中">
+<h3>女主角的出场——光中</h3>
+<blockquote>
+<p>"her figure defined by the light from the half-open door"</p>
+</blockquote>
+<ul>
+<li>女主角每次出现都在<strong>光中</strong></li><li>圣经意义：上帝第一天造的就是光</li><li>教师注："defined by"这个词无法翻译——凡是能用汉语一个字一个字准确对应的英语表达，一定不是好英语，因为"自洽的东西拒绝转移"</li>
+</ul>
+</div><!-- end 女主角的出场光中 -->
+<div class="section" id="穿越意象foregrounded-image">
+<h3>穿越意象（foregrounded image）</h3>
+<div class="table-wrap"><table><thead>
+<tr><th>场景</th><th>穿越内容</th></tr>
+</thead><tbody>
+<tr><td>孩童玩耍</td><td>穿过黑暗泥泞的巷子，被野蛮部族&quot;夹道棒打&quot;</td></tr>
+<tr><td>周六购物</td><td>抱着包裹像&quot;抱着圣杯穿越一群敌人&quot;</td></tr>
+<tr><td>去阿拉比集市</td><td>列车穿过&quot;ruinous houses&quot;</td></tr>
+</tbody></table></div>
+<p>→ 每一次穿越都是<strong>对立的</strong>——我穿越的是&quot;在打我的人&quot;</p>
+</div><!-- end 穿越意象foregrounded-image -->
+<div class="section" id="市场场景的政治性">
+<h3>市场场景的政治性</h3>
+<blockquote>
+<p>"We walked through the flaring streets, jostled by drunken men and bargaining women..."</p>
+</blockquote>
+<p>关键意象：</p>
+<ul>
+<li><strong>醉酒的男人</strong>（工作辛苦→ 酗酒）、<strong>讨价还价的妇女</strong>（操持家务→ 节省）</li><li><strong>劳工咒骂</strong>（被剥削）</li><li><strong>民谣</strong>："Come all you" about <strong>Dana Rosa</strong>（爱尔兰民族英雄）</li><li>"About the troubles in our native land"——<strong>国土上的灾难</strong></li>
+</ul>
+<p>→ &quot;同学们现在还是青春洋溢的年代，非常容易把握住爱情那条线索。对于这种政治性的、我们国土上的灾难这样的很严肃的、让人很忧愁的字眼，你要有一些意识。&quot;</p>
+</div><!-- end 市场场景的政治性 -->
+<div class="section" id="女主角第一句话Arabie">
+<h3>女主角第一句话："Arabie"</h3>
+<p><strong>细节</strong>：女孩说话时不断地转手上的<strong>银镯子</strong></p>
+<p>象征：<strong>深刻的宗教矛盾</strong></p>
+<ul>
+<li>女孩让他去阿拉伯集市（慈善集市）→ 是宗教行为</li><li>但她自己不能去→ 要在<strong>修道院进修</strong>→ 是另一种宗教行为</li><li>同为宗教行为，同为对人的精神的提升，却出现了<strong>制度性的分裂</strong></li><li>银镯子=她被<strong>宗教仪式的分裂所捆绑</strong></li>
+</ul>
+<hr>
+</div><!-- end 女主角第一句话Arabie -->
+</div><!-- end 二逐段文本细读 -->
+<div class="section" id="三欲望三角理论勒内基拉尔René-Girard">
+<h2>三、欲望三角理论（勒内·基拉尔／René Girard）</h2>
+<div class="section" id="理论核心">
+<h3>理论核心</h3>
+<blockquote>
+<p>"人的欲望是一个三角结构。人不可能作为主体直接对欲望对象产生desire——人必须通过<strong>另一个人（中介/媒介）</strong>对欲望对象的欲望的<strong>模仿</strong>，来生成自己的欲望。"</p>
+</blockquote>
+</div><!-- end 理论核心 -->
+<div class="section" id="虚荣人vanité的两个经典案例">
+<h3>虚荣人（vanité）的两个经典案例</h3>
+<div class="table-wrap"><table><thead>
+<tr><th>人物</th><th>模仿谁</th><th>来源</th></tr>
+</thead><tbody>
+<tr><td>堂吉诃德</td><td>模仿高卢的阿马迪斯</td><td>《骑士罗曼斯》</td></tr>
+<tr><td>爱玛·包法利</td><td>模仿小说中的贵妇</td><td>感伤小说</td></tr>
+</tbody></table></div>
+</div><!-- end 虚荣人vanité的两个经典案例 -->
+<div class="section" id="阿拉比中的应用">
+<h3>《阿拉比》中的应用</h3>
+<ul>
+<li><strong>男孩为什么爱上Mangan's sister？</strong> → 他在模仿其他男孩——所有男孩都躲在阴影里看她</li><li>→ "爱一个人不是因为对象本身有多完美，是因为<strong>很多人都在欲望着他</strong>"</li><li>→ <strong>欲望是中空的</strong>——人没有主体性（拉康主义观点）</li><li>佐证：小说中<strong>没有一个人有名字</strong>——"都是一些符号式的人"</li><li>莎士比亚《爱的徒劳》已触及此深度：毕隆说"我们爱的是这个人吗？我们只是爱的一个符号而已"</li>
+</ul>
+</div><!-- end 阿拉比中的应用 -->
+<div class="section" id="帽子意象">
+<h3>帽子意象</h3>
+<p>所有男孩争抢帽子 → 类比《圣经》中罗马士兵掷骰子争抢耶稣的衣物 → 争抢一个<strong>圣物</strong>，争抢一个<strong>爱的对象</strong></p>
+<hr>
+</div><!-- end 帽子意象 -->
+</div><!-- end 三欲望三角理论勒内基拉尔René-Girard -->
+<div class="section" id="四慈善的历史语义学分析">
+<h2>四、慈善的历史语义学分析</h2>
+<div class="section" id="charity-的词源">
+<h3>charity 的词源</h3>
+<ul>
+<li>希伯来文/希腊文圣经：<strong>Agape</strong>（爱）→ 一个词</li><li>翻译成拉丁文再转英文：分裂为<strong>charity</strong> 和 <strong>love</strong> 两个词</li>
+</ul>
+</div><!-- end charity-的词源 -->
+<div class="section" id="1687年的转变">
+<h3>1687年的转变</h3>
+<ul>
+<li>OED（牛津英语大词典）记录：1687年，charity首次出现<strong>实体机构</strong>含义（慈善机构）</li><li><strong>原因</strong>：资产階級革命 → 慈善从宗教机构中独立出来 → <strong>因为有利可图</strong></li>
+</ul>
+<p><strong>历史例证</strong>：</p>
+<ul>
+<li>1749年菲尔丁《汤姆·琼斯》中大量弃儿</li><li>Thomas Coram创办<strong>Foundling Hospital</strong>（弃儿医院）</li><li>但这些孩子长大后成为<strong>最早的大工业免费劳工</strong></li><li>海军社團（Marine Society）：小孩将来充当英国海军的人员补充</li>
+</ul>
+<blockquote>
+<p>"人一旦被嵌入所谓的慈善机构里面，确实活下来了。但是它是融入到<strong>资本主义再生产当中的一个环节</strong>。"</p>
+</blockquote>
+<hr>
+</div><!-- end 1687年的转变 -->
+</div><!-- end 四慈善的历史语义学分析 -->
+<div class="section" id="五阿拉伯集市Bazaar的历史原型">
+<h2>五、阿拉伯集市（Bazaar）的历史原型</h2>
+<div class="section" id="第一个Bazaar">
+<h3>第一个Bazaar</h3>
+<ul>
+<li>创立者：John Trotter</li><li>创立时间：1815年，<strong>拿破仑战争</strong>后</li><li>地点：伦敦苏活区</li><li>背景：Trotter在拿破仑战争中<strong>发了战争财</strong>，有一个个人仓库；看到战争中有许多失去丈夫/父亲的女性 → 建苏活义卖集市</li><li>摊位出租给这些女性贩卖手工艺品 → 她们赚租金的一部分</li>
+</ul>
+</div><!-- end 第一个Bazaar -->
+<div class="section" id="都柏林阿拉伯集市真实存在">
+<h3>都柏林阿拉伯集市（真实存在）</h3>
+<ul>
+<li>1894年的数据：参观人数达<strong>92,652人</strong>，而当时都柏林总人口仅347,912人</li><li><strong>将近三分之一</strong>的都柏林人口参加</li><li>声称一部分收入捐给<strong>Jervis Street Hospital</strong></li><li>乔伊斯自己参加过</li>
+</ul>
+<hr>
+</div><!-- end 都柏林阿拉伯集市真实存在 -->
+</div><!-- end 五阿拉伯集市Bazaar的历史原型 -->
+<div class="section" id="六慈善资本主义Philanthropcapitalism">
+<h2>六、慈善资本主义（Philanthropcapitalism）</h2>
+<div class="section" id="当代案例">
+<h3>当代案例</h3>
+<div class="section" id="星巴克Starbucks">
+<h4>星巴克（Starbucks）</h4>
+<ul>
+<li>齐泽克（Slavoj Žižek）在《先是悲剧后是闹剧》中分析</li><li>当你买星巴克时，你不只是买咖啡——你在买"咖啡的本质"，买一种<strong>人道主义消费</strong></li><li>"我们买了比世界上更多的公司的咖啡，我们还用了一个宗教里的词——<strong>仁理</strong>（karma）"</li>
+</ul>
+</div><!-- end 星巴克Starbucks -->
+<div class="section" id="Ethos-Water">
+<h4>Ethos Water</h4>
+<ul>
+<li>每买一瓶多付0.05美元 → 承诺捐1000万美元给亚非拉</li><li>但公司盈利<strong>远超</strong>一千万</li>
+</ul>
+<p><strong>齐泽克的批判</strong>：</p>
+<blockquote>
+<p>"我们买东西不是买它的用途，不是买它作为地位的象征——我们买它以便宜的方式为我们提供的<strong>意义</strong>。我们通过购买，让自己的生活变得快乐、有价值、有意义。这就叫做<strong>文化资本主义</strong>。"</p>
+</blockquote>
+<p><strong>教师补充</strong>：</p>
+<blockquote>
+<p>"齐泽克没有分析19世纪早期就已出现的义卖集市，但在那里面已经蕴含了星巴克、Ethos Water当代资本的机制。所以分析这个问题时，必须有一个<strong>历史化的脉络</strong>——回到历史发生的原点去思考。"</p>
+</blockquote>
+<hr>
+</div><!-- end Ethos-Water -->
+</div><!-- end 当代案例 -->
+</div><!-- end 六慈善资本主义Philanthropcapitalism -->
+<div class="section" id="七小说的三层幻灭">
+<h2>七、小说的三层幻灭</h2>
+<div class="section" id="1-Eros欲望爱情层面的幻灭">
+<h3>1. Eros（欲望/爱情）层面的幻灭</h3>
+<ul>
+<li>集市中听到英国男女轻佻的对话 → 意识到女孩可能只是随口一说</li><li>"她是不是对很多其他男人都说了arabie这个事?"</li>
+</ul>
+</div><!-- end 1-Eros欲望爱情层面的幻灭 -->
+<div class="section" id="2-宗教层面的幻灭">
+<h3>2. 宗教层面的幻灭</h3>
+<ul>
+<li>两个英国人<strong>在爱尔兰做慈善</strong></li><li>英国人殖民奴役爱尔兰 → 英国人开的慈善集市是<strong>伪装成"爱"的殖民机构</strong></li><li>男孩以为做慈善，殊不知是"英国人的机构" → 极深的悲哀</li>
+</ul>
+</div><!-- end 2-宗教层面的幻灭 -->
+<div class="section" id="3-国家层面的幻灭">
+<h3>3. 国家层面的幻灭</h3>
+<ul>
+<li>最终觉醒：英国权力通过伪装成"爱"的机构来殖民爱尔兰</li><li><strong>成长后的叙事者</strong>回头看：当初的爱"太虚无了"</li>
+</ul>
+<hr>
+</div><!-- end 3-国家层面的幻灭 -->
+</div><!-- end 七小说的三层幻灭 -->
+<div class="section" id="八总结段教师朗诵">
+<h2>八、总结段（教师朗诵）</h2>
+<blockquote>
+<p>"By dint of Araby, James Joyce aims to elaborate an ethical paradox deeply and implicitly rooted in philanthrocapitalism. Charity is regarded as a positive force, by the course of which it is expected that various social problems in a community could be resolved. <strong>Yet mimetic desire, as the motivator of charity, reduces the charitable givers into vanity men,</strong> thus leaving a loophole to be exploited by capitalism. Under the logic of capital, charity is merely one of the palliative measures taken by its initiators to temporarily ease the tension of the crisis precipitated by themselves. In fact, it is theatricality determines that the charity participant's sense of honor in constructing an ideal community is destined to be an illusion, because of its exploitive nature and colonial intentions."</p>
+</blockquote>
+<p><strong>关键论点</strong>：</p>
+<ul>
+<li>慈善是<strong>缓释性策略</strong>（palliative measure）中的一种</li><li>这个策略的问题制造者（initiators）正是<strong>贫困问题的造实者本身</strong></li><li>真正的目的是<strong>维持资本主义体制的正常运转</strong></li>
+</ul>
+<blockquote>
+<p>"历史的发生是有各种偶然因素的。拿破仑战争不是一个人设计出来的。每个人都在<strong>无意识当中</strong>促进了这样一种制度的形成。我们批判的不是任何一个对象，不是那些赚了很多钱的总裁，不是星巴克，不是消费者——我们批判的仅仅是<strong>system per se</strong>——这个制度本身。"</p>
+</blockquote>
+<hr>
+</div><!-- end 八总结段教师朗诵 -->
+</div><!-- end 第三讲5月13日乔伊斯阿拉比 -->
+<div class="section" id="第四讲5月20日萨莉鲁尼正常人与美丽的世界你在哪里">
+<h1>第四讲（5月20日）：萨莉·鲁尼《正常人》与《美丽的世界你在哪里》</h1>
+<div class="section" id="一作家介绍">
+<h2>一、作家介绍</h2>
+<ul>
+<li><strong>出生</strong>：1991年，爱尔兰作者</li><li>被称为"Forum Millennials最重要的千禧一代作家"</li><li>特点：既有动人的情感，又有<strong>与现代世界所有思想的对话</strong>，深度已够</li><li>三部（现已四部）小说均有英汉双语版</li>
+</ul>
+<hr>
+</div><!-- end 一作家介绍 -->
+<div class="section" id="二正常人Normal-People分析">
+<h2>二、《正常人》（Normal People）分析</h2>
+<div class="section" id="实验框架">
+<h3>实验框架</h3>
+<p><strong>核心</strong>：鲁尼是一个&quot;很有思想的人，为什么写小说呢？因为她想用这些人物来<strong>搞实验</strong>，来看一看这些人碰撞起来之后到底是怎么样的。&quot;</p>
+<div class="table-wrap"><table><thead>
+<tr><th>维度</th><th>Connell</th><th>Marianne</th></tr>
+</thead><tbody>
+<tr><td>**经济层面**</td><td>穷（母亲在Marianne家做女工）</td><td>富</td></tr>
+<tr><td>**中学受欢迎度**</td><td>Popular（上层）</td><td>Unpopular（下层）</td></tr>
+<tr><td>**大学受欢迎度**</td><td>Unpopular（下层）</td><td>Popular（上层）</td></tr>
+</tbody></table></div>
+<p>→ 阶层的不断反转意味着巨大的矛盾，但两人<strong>始终分不开</strong></p>
+</div><!-- end 实验框架 -->
+<div class="section" id="核心理论爱情作为最小单位的共产主义阿兰巴迪欧" exam-section>
+<h3>⭐ 核心理论：爱情作为最小单位的共产主义（阿兰·巴迪欧）</h3>
+<blockquote>
+<p>"Love is the minimal form of communism."</p>
+</blockquote>
+<ul>
+<li>马克思在《哥达纲领批判》中定义共产主义："各尽所能，按需分配"</li><li>在现实中极难实现 → 但在日常生活中可以实现吗？</li><li><strong>巴迪欧说：爱就是最小单位的共产主义</strong></li><li>"文学把一个哲学高度的东西变成了一个日常化的、人和人之间情感当中的东西。这是一个非常大的跃进，这个跃进来自于什么东西可以为这次跃进提供绝大动力？<strong>文学</strong>。因为文学自古以来不谈爱情的文学几乎没有。"</li>
+</ul>
+</div><!-- end 核心理论爱情作为最小单位的共产主义阿兰巴迪欧 -->
+<div class="section" id="选段一表白场景">
+<h3>选段一：表白场景</h3>
+<ul>
+<li>Connell拿着《共产党宣言》去跟Marianne搭话 → <strong>攻击性</strong>（class-based pique）</li><li>他因经济困境而把自己放到很低的位置 → 用激烈的哲学文本来"防卫"</li><li>但Marianne在<strong>笑</strong>——"爱的空间腾出来了"</li>
+</ul>
+<p>  - 如果在政治空间，这一笑意味着&quot;巴掌&quot;，是&quot;战场、武器、革命&quot;</p>
+<p>  - 但在爱的空间里，两个人都在笑</p>
+</div><!-- end 选段一表白场景 -->
+<div class="section" id="核心概念内在性自我Immanent-Self">
+<h3>核心概念：内在性自我（Immanent Self）</h3>
+<p><strong>德勒兹读狄更斯</strong>：一个恶棍掉进水里，所有人围上来救他→ 一救活，大家四散而去</p>
+<ul>
+<li>有一个<strong>Immanent Self</strong>——跟恶棍的社会性邪恶行为毫无关系</li><li>"我们的所有关爱、关怀、同情、共鸣，全部是建立在<strong>Immanent Self</strong>上面。这个是人的特殊性，动物没有的。"</li>
+</ul>
+</div><!-- end 核心概念内在性自我Immanent-Self -->
+<div class="section" id="共同处境Shared-Situation">
+<h3>共同处境（Shared Situation）</h3>
+<blockquote>
+<p>"they had been laughing together at a shared situation they found themselves in, but how to describe the situation or what was funny about it, Marianne didn't know exactly."</p>
+</blockquote>
+<ul>
+<li>两人的共同处境：<strong>都被边缘化的经验</strong></li><li>不是一见钟情的那种天南海北→ 而是底色的相同 → 内在性自我被社会性标准不断归类、推向边缘</li><li>类比：莎士比亚《哈姆奈特》——莎士比亚和妻子都是被村里排挤的"怪人"</li>
+</ul>
+<hr>
+</div><!-- end 共同处境Shared-Situation -->
+</div><!-- end 二正常人Normal-People分析 -->
+<div class="section" id="三文学危机">
+<h2>三、文学危机</h2>
+<div class="section" id="读书会批判通过Connell的眼睛">
+<h3>读书会批判（通过Connell的眼睛）</h3>
+<ul>
+<li>看到一个作家在读书会上背诵自己书里的文字</li><li>感觉："被什么破坏了呢？被the hand of the world——被这个世界的手围住了，没有任何即兴的东西，变得非常程式化。"</li><li>"The stiffness of the performance made the observations in the book seem false, <strong>separating the writer from the people he wrote about</strong>. 好像他这个作家观察人，只是为了跟时尚的学生讨论而已。"</li>
+</ul>
+<blockquote>
+<p>"很多大学里的搞文学的人把书看作是<strong>让他们显得有教育和文化的方式</strong>。"</p>
+<p>"<strong>Literature fetishized</strong>——文学被物化成了一种能力：带着受过教育的人去看人家那些情感上遇到挫折的人的真实经历，然后感觉高贵于未受教育的人。"</p>
+</blockquote>
+<ul>
+<li>Connell的评价："<strong>It was culture as class performance.</strong> 文化是作为一种<strong>阶级表演</strong>的存在。"</li>
+</ul>
+</div><!-- end 读书会批判通过Connell的眼睛 -->
+<div class="section" id="美丽的世界你在哪里的自我批判">
+<h3>《美丽的世界你在哪里》的自我批判</h3>
+<p><strong>Alice给Eileen的信</strong>：</p>
+<ul>
+<li>第一层批判："作家们接受四个报纸采访、拍三次照片、参加两次售卖会、吃三顿优闲的晚餐……回到家打开旧的苹果电脑，写下一个关于所谓'真实生活'的美丽小故事。你刚刚过完那样一种生活，你怎么去理解那种真实的生活呢？"</li><li>第二层批判："当代欧美小说的症结在于它<strong>依赖于对地球上大多数人的真实生活的压制</strong>。"→ 写男女主人公分不分手，在越来越快的全球剥削面前"有什么意义？"</li><li>但教师指出这其中有<strong>自我矛盾</strong>：分手还是在一起，这本身极其重要——"我们的生命不就是分分合合吗？我们到最后追求的不就是永远在一起没有动荡吗？"</li>
+</ul>
+<hr>
+</div><!-- end 美丽的世界你在哪里的自我批判 -->
+</div><!-- end 三文学危机 -->
+<div class="section" id="四阶级负气Class-based-Pique">
+<h2>四、阶级负气（Class-based Pique）</h2>
+<p>定义：你因工人阶级出身而对自己有<strong>过分的自信</strong>，任何对你自尊的冲击都会产生这种负气</p>
+<p>母亲的角色（Immanent Self的化身）：</p>
+<ul>
+<li>不带阶级视角看待儿子的感情</li><li>对Connell隐瞒与Marianne的关系的批评："你开了爱了，你为什么不告诉大家？你不告诉大家就意味着你内心有太多不该有的曲折。"</li>
+</ul>
+<blockquote>
+<p>"在中国有一段很不好的历史，一群人迫害另一群人的时候，带的就正是这种阶级负气。这本小说最大的价值在于重思社会主义实现的时候，你必须去掉的一个问题就是<strong>class-based pique</strong>——你必须回归人本身，你才可以解决这个问题。"</p>
+</blockquote>
+<hr>
+</div><!-- end 四阶级负气Class-based-Pique -->
+<div class="section" id="五结尾核心段落附中文版封面">
+<h2>五、结尾核心段落（附中文版封面）</h2>
+<blockquote>
+<p>"All these years, they have been like two little plants sharing the same plot of soil, <strong>growing around one another, contorting to make room, taking certain unloved positions.</strong>"</p>
+</blockquote>
+<ul>
+<li>人在恋爱中是<strong>要改变的</strong></li><li>鲁尼的女性主义：永远是女性在帮助男性——"她让一个新的生命成为可能，她会永远为此感到欣慰"</li><li><strong>社会主义的核心</strong>："soci"=伙伴，"-ism"=主义→ 一群伙伴的联结 → "社会主义最终所希望抵达的地方，是携手共同的、和平的、和谐的生活，是新的生命的诞生以及新的社会的诞生。"</li>
+</ul>
+<hr>
+</div><!-- end 五结尾核心段落附中文版封面 -->
+</div><!-- end 第四讲5月20日萨莉鲁尼正常人与美丽的世界你在哪里 -->
+<div class="section" id="第五讲5月27日美国早期文学与历史-独立宣言">
+<h1>第五讲（5月27日）：美国早期文学与历史 + 《独立宣言》</h1>
+<div class="section" id="关联考题题目二荷兰记忆背景-题目四苏格兰关联独立宣言部分" exam-section>
+<h2>【关联考题：题目二·荷兰记忆（背景）/ 题目四·苏格兰关联（《独立宣言》部分）】</h2>
+<hr>
+</div><!-- end 关联考题题目二荷兰记忆背景-题目四苏格兰关联独立宣言部分 -->
+<div class="section" id="一America词源">
+<h2>一、"America"词源</h2>
+<ul>
+<li><strong>1507年地图</strong>：制图师Martin Waldseemüller首次使用"America"</li><li>词源：意大利航海家<strong>Amerigo Vespucci</strong> —— 他是第一个怀疑这片土地<strong>不是印度</strong>的人</li>
+</ul>
+<p>  - &quot;这个怀疑不算是一场千年世界里面的大觉醒，它一点都不亚于日心说。&quot;</p>
+<ul>
+<li>这幅地图现藏于美国国会图书馆，被称为<strong>"美国出生证"</strong>（American Birth Certificate）</li>
+</ul>
+<hr>
+</div><!-- end 一America词源 -->
+<div class="section" id="二殖民史1565-1700">
+<h2>二、殖民史（1565-1700）</h2>
+<div class="section" id="殖民动因">
+<h3>殖民动因</h3>
+<p>1. <strong>外部经济动因</strong>：中国瓷器/香料→ 西方逆差 → 白银危机 → 需要找贵金属</p>
+<p>   - 教师展示上海博物馆&quot;景德镇窑青花阿拉伯文器座&quot;→ 证明中国与西方殖民的全球史关联</p>
+<p>2. <strong>内部制度动因</strong>：<strong>长子继承制</strong>——次子无产需谋生路</p>
+<p>3. <strong>都铎王朝</strong>的扩张雄心：</p>
+<p>   - 伊丽莎白一世时期：加莱被法国收回→ 在欧洲大陆无领土</p>
+<p>   - 爱尔兰是先&quot;实验场&quot;→ 经验用于美洲殖民</p>
+<p>   - 斯宾塞（《仙后》作者）= 爱尔兰殖民官 + 大诗人</p>
+</div><!-- end 殖民动因 -->
+<div class="section" id="关键年份与事件">
+<h3>关键年份与事件</h3>
+<div class="table-wrap"><table><thead>
+<tr><th>年份</th><th>事件</th></tr>
+</thead><tbody>
+<tr><td>1565</td><td>西班牙建圣奥古斯丁（最古老的城市）</td></tr>
+<tr><td>1585</td><td>Sir Walter Raleigh建第一个英国殖民地（北卡罗来纳），次年解散</td></tr>
+<tr><td>1606</td><td>詹姆斯一世颁发charter → Virginia Company + Plymouth Company</td></tr>
+<tr><td>1607</td><td>Jamestown建立</td></tr>
+<tr><td>1609</td><td>荷兰人在哈德逊河建**新阿姆斯特丹**（→ 后来变成**纽约**）⭐</td></tr>
+<tr><td>1610</td><td>Santa Fe（西班牙）</td></tr>
+<tr><td>1619</td><td>**关键转折年**：第一艘奴隶船抵达+ 议会制建立 → &quot;整个殖民最变质的一年&quot;</td></tr>
+<tr><td>1620</td><td>五月花号（分离主义者/香客）</td></tr>
+<tr><td>1630</td><td>马萨诸塞湾殖民地（约翰·温斯洛普）</td></tr>
+<tr><td>1638</td><td>瑞典建Fort Christina</td></tr>
+<tr><td>1664</td><td>英国夺取新阿姆斯特丹→ 纽约</td></tr>
+<tr><td>1692</td><td>塞勒姆女巫审判案</td></tr>
+</tbody></table></div>
+</div><!-- end 关键年份与事件 -->
+<div class="section" id="殖民与移民的根本区别">
+<h3>殖民与移民的根本区别</h3>
+<ul>
+<li><strong>移民</strong>：assimilation（同化/润化）——"你变成我，我变成你，咱们一家人"</li><li><strong>殖民</strong>：<strong>segregation（隔离）</strong>——"绝对不允许被殖民者变成我"</li><li>中国历史上的"移民"（如中原文明向东夷）用的是同化逻辑，而不是隔离逻辑</li>
+</ul>
+</div><!-- end 殖民与移民的根本区别 -->
+<div class="section" id="北美语言构成">
+<h3>北美语言构成</h3>
+<div class="table-wrap"><table><thead>
+<tr><th>语言</th><th>主要区域</th></tr>
+</thead><tbody>
+<tr><td>英语</td><td>东海岸13殖民地</td></tr>
+<tr><td>西班牙语</td><td>南部/加勒比/拉美</td></tr>
+<tr><td>法语</td><td>加拿大魁北克</td></tr>
+<tr><td>荷兰语</td><td>纽约地区（历史）</td></tr>
+</tbody></table></div>
+<p><strong>加勒比地区的战略意义</strong>：语言混杂，有12个独立主权国家和近20个海外领地；目前有4个国家未与大陆建交→ 文化/文学交流是突破口</p>
+</div><!-- end 北美语言构成 -->
+<div class="section" id="13殖民地三分区">
+<h3>13殖民地三分区</h3>
+<div class="table-wrap"><table><thead>
+<tr><th>区域</th><th>包含</th><th>特点</th></tr>
+</thead><tbody>
+<tr><td>**新英格兰**</td><td>麻省、新罕布什尔、罗德岛、康涅狄格</td><td>识字率最高，文学重镇</td></tr>
+<tr><td>**中部**</td><td>纽约、宾夕法尼亚、新泽西、特拉华</td><td>多元化</td></tr>
+<tr><td>**南部**</td><td>马里兰、弗吉尼亚、南北卡、佐治亚</td><td>种植园经济</td></tr>
+</tbody></table></div>
+<p><strong>Mason-Dixon Line</strong>：马里兰南北分界线→ 南北文学分化（如福克纳《献给艾米丽的玫瑰》）</p>
+</div><!-- end 13殖民地三分区 -->
+<div class="section" id="当代美国的非正式帝国">
+<h3>当代美国的非正式帝国</h3>
+<ul>
+<li>Daniel Immerwahr《How to Hide an Empire: A History of the Greater United States》（2019）</li><li>美国不仅有本土版图，还有大量海外领地（包括曾有的菲律宾）+ 散落各洋的小岛</li><li>当代形式：<strong>非正式帝国</strong>（Informal Empire）——通过<strong>金融控制</strong>（Financial Control）+ 军事威胁实现间接控制</li>
+</ul>
+<hr>
+</div><!-- end 当代美国的非正式帝国 -->
+</div><!-- end 二殖民史1565-1700 -->
+<div class="section" id="三独立宣言Declaration-of-Independence">
+<h2>三、《独立宣言》（Declaration of Independence）</h2>
+<div class="section" id="历史背景">
+<h3>历史背景</h3>
+<ul>
+<li><strong>1775年</strong>：莱克星顿枪声</li><li><strong>1776年7月2日</strong>：大陆会议通过《独立决议》（Resolution）——<strong>真正的建国日</strong></li><li><strong>1776年7月4日</strong>：《独立宣言》发表——文学文本的影响力盖过了政治决议</li>
+</ul>
+<p>  - 约翰·亚当斯Journal中预测&quot;人们会永远记住7月2号&quot;→ 事实是人们只记住7月4号</p>
+<p>  - 归功于杰斐逊的&quot;remarkable for the peculiar felicity of expression&quot;</p>
+</div><!-- end 历史背景 -->
+<div class="section" id="文本结构">
+<h3>文本结构</h3>
+<p><strong>前三段</strong>：</p>
+<p>1. 我们在人类事件进程中，不得不独立→ 解释&quot;what causes impel us to the separation&quot;</p>
+<p>2. <strong>不言自明的真理</strong>：人被创造而平等（created equal），造物主赋予不可剥夺的权利→ 生命权、自由权、追求幸福的权利；政府权力来自<strong>被统治者的同意</strong>（consent of the governed）</p>
+<p>3. 如果政府破坏这些目的，人民有权<strong>abolish/alter</strong>它，建立新政府保障安全与幸福</p>
+<p><strong>后续</strong>：列举英王的罪状（&quot;facts be submitted to a candid world&quot;）→ 56个签名</p>
+</div><!-- end 文本结构 -->
+<div class="section" id="独立宣言的两条逻辑线" exam-section>
+<h3>⭐ 独立宣言的两条逻辑线</h3>
+<div class="section" id="第一条自然权利哲学约翰洛克">
+<h4>第一条：自然权利哲学（约翰·洛克）</h4>
+<ul>
+<li>人生而平等，有自然权利</li><li>政府权力来自被统治者的同意</li><li>→ 攻击<strong>英王</strong>的专制</li>
+</ul>
+</div><!-- end 第一条自然权利哲学约翰洛克 -->
+<div class="section" id="第二条英帝国构成理论本杰明富兰克林" exam-section>
+<h4>第二条：英帝国构成理论（⭐ 本杰明·富兰克林）</h4>
+<p><strong>核心论点</strong>：</p>
+<blockquote>
+<p>"我们跟英格兰的关系，就如同<strong>英格兰和苏格兰的关系</strong>。"</p>
+</blockquote>
+<ul>
+<li>富兰克林研究发现：殖民地的charter（特许状）是<strong>国王</strong>颁发的→ 殖民地只对国王有效忠义务</li><li>但现在<strong>议会</strong>（Parliament）篡夺了原本属于国王的权威（usurpation）</li><li>因此只需攻击国王，不需要与议会打交道</li><li><strong>类比</strong>：英格兰和苏格兰之前只是在同一个国王统治下（Personal Union），并不受对方议会统治</li>
+</ul>
+<blockquote>
+<p>"殖民地的英国人已经失去了对英国的认同。大部分人本来就不是长子——被一个制度迫使他来到美洲，经过几代人，他早忘了英国。而且他的祖先老告诉他在英国活不下去……当他衣锦还乡的时候，英国人说'你是从殖民地来的吧，做了一些什么买卖而已'——不受尊重。<strong>因为失去了文化认同，直接带来了最后美国的独立。</strong>"</p>
+</blockquote>
+</div><!-- end 第二条英帝国构成理论本杰明富兰克林 -->
+<div class="section" id="文本策略的巧妙之处">
+<h4>文本策略的巧妙之处</h4>
+<blockquote>
+<p>"封建王朝是罪恶的，君主是十恶不赦的——所以当他独立宣言里不断攻击英王如何如何的时候，所有人就揭竿而起了。"</p>
+</blockquote>
+<ul>
+<li>被<strong>未明说</strong>的部分：殖民地只需向英王效忠 → 现在只需跟英王说拜拜 → <strong>议会我不管你</strong></li><li>真实导火索（税收）其实微不足道——根本原因是<strong>文化认同的丧失</strong></li>
+</ul>
+<hr>
+</div><!-- end 文本策略的巧妙之处 -->
+</div><!-- end 独立宣言的两条逻辑线 -->
+</div><!-- end 三独立宣言Declaration-of-Independence -->
+</div><!-- end 第五讲5月27日美国早期文学与历史-独立宣言 -->
+<div class="section" id="第六讲6月3日华盛顿欧文瑞普凡温克尔">
+<h1>第六讲（6月3日）：华盛顿·欧文《瑞普·凡·温克尔》</h1>
+<div class="section" id="关联考题题目二-荷兰记忆-题目四-苏格兰关联瑞普部分5分苏格兰部分" exam-section>
+<h2>【关联考题：题目二 · 荷兰记忆 / 题目四 · 苏格兰关联（瑞普部分5分+苏格兰部分）】</h2>
+<hr>
+</div><!-- end 关联考题题目二-荷兰记忆-题目四-苏格兰关联瑞普部分5分苏格兰部分 -->
+<div class="section" id="一小说结构五个部分">
+<h2>一、小说结构（五个部分）</h2>
+<p>1. <strong>引文</strong>（epigraph）：引自沃尔特·司各特《古董商》</p>
+<p>2. <strong>引言</strong>（introduction）：尼克博克（Diedrich Knickerbocker）的遗作说明</p>
+<p>3. <strong>正文</strong>（body）：Rip的故事</p>
+<p>4. <strong>注</strong>（note）：尼克博克的考证来源</p>
+<p>5. <strong>后记</strong>（postscript）：印第安人的传说</p>
+<hr>
+</div><!-- end 一小说结构五个部分 -->
+<div class="section" id="二引文分析为什么引司各特">
+<h2>二、引文分析——为什么引司各特？</h2>
+<blockquote>
+<p>"白沃登，神尊之神，我以沃登起誓——Truth is a thing that I ever will keep, till and to the day in which I creep into my sepulcher."</p>
+</blockquote>
+<ul>
+<li><strong>沃登</strong>（Woden）= 撒克逊之神 → Wednesday = Woden's day</li><li>司各特 = <strong>苏格兰人</strong></li><li>⭐ 关联《独立宣言》中富兰克林的英帝国构成理论：美国与英格兰的关系就如<strong>苏格兰与英格兰的关系</strong></li><li>→ 美国文学之父建构美国文学时，<strong>模仿苏格兰</strong>来解构美国人的英国身份认同</li>
+</ul>
+<hr>
+</div><!-- end 二引文分析为什么引司各特 -->
+<div class="section" id="三尼克博克引言">
+<h2>三、尼克博克引言</h2>
+<ul>
+<li>Knickerbocker = 荷兰殖民者的裤子 → 纽约人的代称</li><li>华盛顿·欧文在《纽约外史》中使用的笔名</li><li>引言讨论"真实的历史在哪里"：不在书里，而在<strong>活生生的人们的生活中</strong>——口口相传是真历史</li><li>类比中国蒲松龄/司马迁找人问故事</li>
+</ul>
+<div class="section" id="两处关于truth的强调">
+<h3>两处关于truth的强调</h3>
+<p>1. 引文：坚守真理</p>
+<p>2. 引言：真实的历史在人们的生活中</p>
+<p>→ <strong>双重的&quot;我在讲真话&quot;的强调</strong>，暗示文中隐藏了不便直言的真实</p>
+<hr>
+</div><!-- end 两处关于truth的强调 -->
+</div><!-- end 三尼克博克引言 -->
+<div class="section" id="四正文分析">
+<h2>四、正文分析</h2>
+<div class="section" id="Rip-Van-Winkle的形象">
+<h3>Rip Van Winkle的形象</h3>
+<p><strong>基本设定</strong>：</p>
+<ul>
+<li>荷兰后裔（Van = 荷兰姓）</li><li>祖上曾随Peter Stuyvesant参与<strong>Fort Christina</strong>围攻</li><li>但完全不继承祖先的英勇特质</li><li>性格：simple, good-natured, kind neighbor, <strong>obedient hen-pecked husband</strong>（妻管严）</li>
+</ul>
+</div><!-- end Rip-Van-Winkle的形象 -->
+<div class="section" id="Rip的劳动观对现代文明的批判" exam-section>
+<h3>⭐ Rip的劳动观（对现代文明的批判）</h3>
+<blockquote>
+<p>"a great error in Rip's composition was an <strong>insuperable aversion to all kinds of profitable labor</strong>"</p>
+<p>"他特别反感各种各样的以赚钱为目的的劳动。"</p>
+</blockquote>
+<p>但他：</p>
+<ul>
+<li>可以坐在湿石头上钓一整天鱼，没鱼上钩也无怨言</li><li>扛着枪漫山遍野打几只松鼠野鸽</li><li>帮邻居干最粗最重的活从不拒绝</li><li>帮村妇跑腿做零碎活</li>
+</ul>
+<blockquote>
+<p>"In a word, Rip was ready to attend to anybody's business but his own."</p>
+</blockquote>
+<ul>
+<li>跟自己家的田：是全村落最荒的一块地</li><li>教师提问：<strong>"在1819年出版这么一个小说、这么一个人，跟当时的社会相符吗？他为什么要写这么一个人物？"</strong></li><li>→ Rip代表的是<strong>前工业文明</strong>的、悠闲的、非功利的生活状态</li><li>→ 这种生活方式已经被现代工业文明判了死刑（RIP = rest in peace = 安息）</li>
+</ul>
+</div><!-- end Rip的劳动观对现代文明的批判 -->
+<div class="section" id="酒馆意象">
+<h3>酒馆意象</h3>
+<ul>
+<li>酒馆挂着<strong>乔治三世</strong>的红彤彤肖像（ruby portrait）</li><li>这是村里sages, philosophers的聚会俱乐部</li><li>Rip的妻子甚至追到这里把他赶走</li>
+</ul>
+</div><!-- end 酒馆意象 -->
+<div class="section" id="山中奇遇与二十年沉睡">
+<h3>山中奇遇与二十年沉睡</h3>
+<ul>
+<li>在山上遇到<strong>古代荷兰人装束</strong>的幽灵</li><li>帮他把酒桶背到圆形剧场（amphitheatre）</li><li>看到一群人在玩九柱戏（nine-pins）——全都面无表情（哥特元素）</li><li>偷喝酒→ 沉睡</li><li>醒来：枪生锈了，狗不见了</li>
+</ul>
+</div><!-- end 山中奇遇与二十年沉睡 -->
+<div class="section" id="醒来后的世界一切都变了">
+<h3>醒来后的世界——一切都变了</h3>
+<div class="table-wrap"><table><thead>
+<tr><th>变化</th><th>原貌</th><th>新貌</th></tr>
+</thead><tbody>
+<tr><td>家门口名字</td><td>熟悉的名字</td><td>**strange names**</td></tr>
+<tr><td>酒馆</td><td>乔治三世红肖像</td><td>**Union Hotel**</td></tr>
+<tr><td>国王肖像</td><td>red coat/权杖（scepter）</td><td>blue and buff/剑（sword）/三角帽</td></tr>
+<tr><td>画像下方文字</td><td>乔治三世</td><td>**General Washington**</td></tr>
+<tr><td>国旗</td><td>无</td><td>星条旗（stars and stripes）</td></tr>
+<tr><td>人们问的问题</td><td>—</td><td>&quot;你是Federal还是Democrat？&quot;</td></tr>
+<tr><td>Rip的身份</td><td>国王忠臣子民</td><td>被骂**Tory/spy/refugee**</td></tr>
+</tbody></table></div>
+<p><strong>Rip的反应</strong>：</p>
+<blockquote>
+<p>"I am a poor quiet man, a native of the place, and a loyal subject of the King, God bless him!"</p>
+<p>→ 被人群"hustle away"</p>
+</blockquote>
+</div><!-- end 醒来后的世界一切都变了 -->
+<div class="section" id="老友们怎么样了">
+<h3>老友们怎么样了</h3>
+<div class="table-wrap"><table><thead>
+<tr><th>人物</th><th>结局</th></tr>
+</thead><tbody>
+<tr><td>Nicholas Vedder</td><td>死去18年</td></tr>
+<tr><td>Brom Dutcher</td><td>独立战争中戰死</td></tr>
+<tr><td>Van Bummel</td><td>参战成为民兵将军，进国会当议员</td></tr>
+</tbody></table></div>
+<p><strong>关键句</strong>：</p>
+<blockquote>
+<p>"Rip's heart died away——他的心死掉了。在这些悲剧的改变中，朋友们和自己在世界上独自抗争，他觉得这个世界上非常非常孤独。"</p>
+</blockquote>
+<p><strong>教师引申</strong>：假设20年后你所有喜欢的人、不喜欢的人都不存在了——你带着这个想象回到现在的生活中，你会怎么念你现在不喜欢的人、怎么念你喜欢的人？&quot;<strong>指导生活的是文学</strong>。&quot;</p>
+</div><!-- end 老友们怎么样了 -->
+<div class="section" id="Rip的妻子">
+<h3>Rip的妻子</h3>
+<ul>
+<li>"She broke a blood vessel in a fit of passion at a New England peddler."——血管爆掉死掉了</li><li>教师反思：一个"为了生活奔波的女性面对的命运"，情绪要稳定、要平静地生活</li><li>但整个描写对女性"很不公平"——有这样的丈夫，妻子怎么可能不焦虑</li><li>→ "我们从文学里面要得到一点东西，然后再批判一点东西，然后我们的思想就在往前进。"</li>
+</ul>
+<hr>
+</div><!-- end Rip的妻子 -->
+</div><!-- end 四正文分析 -->
+<div class="section" id="五论文解读">
+<h2>五、论文解读</h2>
+<div class="section" id="核心问题为什么美国建国之初写一个荷兰人的故事" exam-section>
+<h3>⭐ 核心问题：为什么美国建国之初写一个荷兰人的故事？</h3>
+<div class="section" id="答案Anglophobia恐英症">
+<h4>答案：Anglophobia（恐英症）</h4>
+<p><strong>逻辑链</strong>：</p>
+<p>1. 美国独立后，最大的问题是：大家都还觉得自己是<strong>英国人</strong>（British subject）</p>
+<p>2. 必须建构<strong>美国人</strong>的身份认同</p>
+<p>3. 不能用英国历史建构→ 写<strong>荷兰历史</strong>来解构英国身份</p>
+<p>4. &quot;你们不要以为你们只有一个民族身份就是英国人——在这个地方，之前还有荷兰人！你怎么不觉得自己是荷兰人？&quot;</p>
+<p>5. 荷兰身份→ 解构英国身份→ 建构美国身份</p>
+<p><strong>证据</strong>：欧文的非虚构著作《纽约外史》只写到<strong>荷兰统治结束</strong>就戛然而止——刻意跳过英国统治时期</p>
+</div><!-- end 答案Anglophobia恐英症 -->
+<div class="section" id="Rip的多重民族身份">
+<h4>Rip的多重民族身份</h4>
+<ul>
+<li>Dutch descendant（荷兰后裔）</li><li>British subject（英国子民）</li><li>American citizen（美国公民）</li><li>他的名字缩写RIP = rest in peace = 安息 = 死亡</li>
+</ul>
+<p>→ <strong>代表旧民族身份的死亡，意味着新民族身份（美国人）的诞生</strong></p>
+</div><!-- end Rip的多重民族身份 -->
+<div class="section" id="恐英症的延续美国作家对英国的排斥">
+<h4>恐英症的延续：美国作家对英国的排斥</h4>
+<ul>
+<li><strong>马克·吐温</strong>（1880年《傻子出国记》）：奉劝做短途旅行，"preserve us from becoming Europeanized"</li><li><strong>马克·吐温</strong>《哈克贝利·费恩历险记》（1885年）：刻画两个小丑"国王"和"公爵"——讽刺英国君主立宪制和贵族制度</li><li>为什么不写"女王"？因为"太辛辣了"，需要迎合英国读者</li>
+</ul>
+</div><!-- end 恐英症的延续美国作家对英国的排斥 -->
+<div class="section" id="对华盛顿总统的致敬">
+<h4>对华盛顿总统的致敬</h4>
+<ul>
+<li>欧文的名字取自华盛顿</li><li>此小说致敬华盛顿总统——美国历史上唯一<strong>没有党派倾向</strong>的总统，反对两党制</li><li>欧文也担忧两党制 → "filibustering, corruption in election, muck-throwing war"</li>
+</ul>
+</div><!-- end 对华盛顿总统的致敬 -->
+<div class="section" id="欧文的矛盾和张力">
+<h4>欧文的矛盾和张力</h4>
+<p>一篇小说里包含了：</p>
+<p>1. 对美国统一的向往</p>
+<p>2. 对英国的恐惧（Anglophobia）</p>
+<p>3. 对英国读者的迎合（需要在英国卖书）</p>
+<p>4. 对华盛顿的致敬</p>
+<p>5. 对两党制的担忧</p>
+<p>6. 对印第安人的同情 + 白人的优越感（反对屠杀，主张同化/寒化/acculturation）</p>
+<p>7. 对现代工业文明的担忧——人失去了悠闲的生活</p>
+<blockquote>
+<p>"你说他有一个恒定的主旨吗？我觉得很难这样讲。"</p>
+</blockquote>
+</div><!-- end 欧文的矛盾和张力 -->
+<div class="section" id="为什么不写一个参加独立战争的英雄">
+<h4>为什么不写一个参加独立战争的英雄？</h4>
+<ul>
+<li><strong>需要迎合英国读者</strong>——欧文是第一个在英国卖得很好的美国作家</li><li>他不敢直接写反英内容 → 通过写荷兰史来<strong>隐微表达</strong></li>
+</ul>
+<hr>
+</div><!-- end 为什么不写一个参加独立战争的英雄 -->
+</div><!-- end 核心问题为什么美国建国之初写一个荷兰人的故事 -->
+</div><!-- end 五论文解读 -->
+</div><!-- end 第六讲6月3日华盛顿欧文瑞普凡温克尔 -->
+<div class="section" id="第七讲6月10日亨利詹姆斯丛林猛兽">
+<h1>第七讲（6月10日）：亨利·詹姆斯《丛林猛兽》</h1>
+<div class="section" id="关联考题题目三-猛兽是什么" exam-section>
+<h2>【关联考题：题目三 · 猛兽是什么】</h2>
+<hr>
+</div><!-- end 关联考题题目三-猛兽是什么 -->
+<div class="section" id="一考试要求重申">
+<h2>一、考试要求重申</h2>
+<p>1. 4道简答题</p>
+<p>2. <strong>严禁使用AI</strong>——发现即零分（&quot;我写了多少年的论文，搞了多少年的AI，我知道AI的语气&quot;）</p>
+<p>3. 中文回答，必要时可注英文</p>
+<p>4. 格式勿更改</p>
+<p>5. 填写个人序号</p>
+<p>6. 正反面黑白打印</p>
+<p>7. 6月16日12:00前交至绘文楼二楼木头信箱</p>
+<hr>
+</div><!-- end 一考试要求重申 -->
+<div class="section" id="二亨利詹姆斯与马克吐温的对比">
+<h2>二、亨利·詹姆斯与马克·吐温的对比</h2>
+<div class="table-wrap"><table><thead>
+<tr><th>马克·吐温</th><th>亨利·詹姆斯</th></tr>
+</thead><tbody>
+<tr><td>**Local Color**（地方色彩）</td><td>新英格兰标准英语</td></tr>
+<tr><td>密西西比河畔学徒</td><td>传统文学训练</td></tr>
+<tr><td>方言/非标准英语</td><td>长绵密的复杂句</td></tr>
+<tr><td>美国英语融入文学的标志</td><td>英语极致精致</td></tr>
+</tbody></table></div>
+<blockquote>
+<p>"如果你想快速提高英语的理解和阅读能力，一定要把这篇小说硬着头皮每一个表达都弄清楚，然后每天熟读。你的英语的语感会大幅度的提高。AI写不出亨利·詹姆斯这样的英语。"</p>
+</blockquote>
+<hr>
+</div><!-- end 二亨利詹姆斯与马克吐温的对比 -->
+<div class="section" id="三基本情节">
+<h2>三、基本情节</h2>
+<ul>
+<li><strong>开始</strong>：男女主角多年后在一处庄园（Weatherend）重遇</li><li><strong>误会</strong>：男主角（John Marcher）不记得他们十年前在哪相遇；女主角（May Bartram）清楚记得</li><li><strong>Marcher的秘密</strong>：他一直觉得有一头<strong>猛兽</strong>会在丛林中跳出来袭击他</li><li>May愿意陪着他等待"猛兽"</li><li>漫长岁月中两人没有缔结婚姻——May一直陪在他身边</li><li>May病逝</li><li>Marcher在May墓前看到一个陌生丈夫在妻子墓前的悲痛表情——他才意识到自己<strong>从来没有真正爱过May</strong></li><li>最后：猛兽跃出 → 幻觉中脸朝下撞在墓上 → 死亡</li>
+</ul>
+<hr>
+</div><!-- end 三基本情节 -->
+<div class="section" id="四Marcher的职业身份最关键的解謎线索" exam-section>
+<h2>四、Marcher的职业身份（⭐ 最关键的解謎线索）</h2>
+<div class="section" id="证据一政府小办公室第二章">
+<h3>证据一：政府小办公室（第二章）</h3>
+<blockquote>
+<p>"This little office under Government..."</p>
+</blockquote>
+<p>身份是<strong>government worker</strong></p>
+</div><!-- end 证据一政府小办公室第二章 -->
+<div class="section" id="证据二他去过的地方第六章">
+<h3>证据二：他去过的地方（第六章）</h3>
+<blockquote>
+<p>"He visited the depths of Asia..."</p>
+</blockquote>
+<p><strong>亚洲内陆</strong>（中亚地区）</p>
+<blockquote>
+<p>"With a force beyond any of his impressions of Egypt or of India"</p>
+</blockquote>
+<p><strong>埃及</strong>和<strong>印度</strong></p>
+</div><!-- end 证据二他去过的地方第六章 -->
+<div class="section" id="结论">
+<h3>结论</h3>
+<blockquote>
+<p>"在19世纪下半叶，一个人既去亚洲内陆、又去非洲、又去南亚的人，只有两种身份：一个是传教士，第二个是殖民者。传教士是半个殖民者。综上三个证据：<strong>他是colonial officer</strong>。"</p>
+</blockquote>
+</div><!-- end 结论 -->
+<div class="section" id="为什么这个身份被放在背景中">
+<h3>为什么这个身份被放在背景中？</h3>
+<blockquote>
+<p>"这就是亨利·詹姆斯的艺术手法——艺术就是要把你最想探讨的那部分凸显在前面（日常生活），但人物说话的语气、思想动机、情感的语句，<strong>全部来自于一个核心的根源</strong>：他曾经给英帝国做colonial officer。这不是写小说的不会写——上来就告诉他曾经是colonial officer。这是没有什么艺术修养的人才会做的。"</p>
+</blockquote>
+<hr>
+</div><!-- end 为什么这个身份被放在背景中 -->
+</div><!-- end 四Marcher的职业身份最关键的解謎线索 -->
+<div class="section" id="五殖民经历对他个人生活的影响">
+<h2>五、殖民经历对他个人生活的影响</h2>
+<div class="section" id="1-Masculine-Heroism-爆棚">
+<h3>1. Masculine Heroism 爆棚</h3>
+<p><strong>第一章</strong>：Marcher想跟May聊天时想的都是：</p>
+<ul>
+<li>如果当时在海湾里救过她（saved her from a capsized boat）→ 现在就有话聊了</li><li>至少在拿坡里抢回她被混混抢走的梳妆包 → 至少有个故事</li><li>→ "我在你面前是英雄，我才可以跟你聊天"</li>
+</ul>
+</div><!-- end 1-Masculine-Heroism-爆棚 -->
+<div class="section" id="2-猎虎隐喻殖民地的历史实践">
+<h3>2. 猎虎隐喻（殖民地的历史实践）</h3>
+<blockquote>
+<p>"a man of feeling doesn't cause himself to be accompanied by a lady on a tiger hunt"</p>
+</blockquote>
+<ul>
+<li>猎虎是<strong>殖民地印度</strong>的流行运动</li><li>展示维多利亚时期人的<strong>男性气质</strong>（magnitude）</li><li>展现爱国情怀/肌肉力量/忍耐力/<strong>不可战胜性</strong></li><li>因为你杀死了当地野兽 → 意味着对当地居民"比较仁慈和关怀"</li><li>教师引William K. Storey（霍普金斯大学）："Big Cats and Imperialism"</li><li>引John MacKenzie："Empire of Nature"——连自然景观都被殖民者改变了</li>
+</ul>
+</div><!-- end 2-猎虎隐喻殖民地的历史实践 -->
+<div class="section" id="3-占有逻辑Profit-Logic">
+<h3>3. 占有逻辑（Profit Logic）</h3>
+<p><strong>第五章墓前段落分析</strong>（最重要的一段）：</p>
+<p>Marcher在May墓前的感觉是：</p>
+<blockquote>
+<p>"It was as if in the view of society he had not been markedly bereaved... he resembled for the hour a <strong>contented landlord reviewing a piece of property</strong>."</p>
+</blockquote>
+<ul>
+<li><strong>bereaved</strong>：失去亲人——很重的词</li><li>但Marcher没有失去亲人的感觉——他像一个<strong>心满意足的地主在看一块地产</strong></li><li>他把May的墓地视为自己的<strong>财产</strong>（plot of ground / graven tablet / flowers = as belonging to him）</li>
+</ul>
+<p><strong>类比</strong>：Joseph Chamberlain（帝国主义领袖）说：</p>
+<blockquote>
+<p>"We are landlords of a great estate. It is the duty of the landlord to develop his estate in Africa."</p>
+</blockquote>
+<p>→ 帝国主义者把非洲整个地方当作他的地产——Marcher把爱人当作地产</p>
+</div><!-- end 3-占有逻辑Profit-Logic -->
+<div class="section" id="4-极致自恋Narcissistic">
+<h3>4. 极致自恋（Narcissistic）</h3>
+<p>Marcher不断向May确认自己的&quot;英雄行为&quot;：</p>
+<ul>
+<li>"你看我就像一个事情，谁也不跟谁说，我一个人担着他，我觉得我很伟大。"</li><li>→ May的回答：<strong>"Is it a heroic?" "Yes it is."</strong></li>
+</ul>
+<blockquote>
+<p>"只有真正理解你、爱你的人才会说Yes it is."</p>
+</blockquote>
+<hr>
+</div><!-- end 4-极致自恋Narcissistic -->
+</div><!-- end 五殖民经历对他个人生活的影响 -->
+<div class="section" id="六May-Bartram的象征功能">
+<h2>六、May Bartram的象征功能</h2>
+<div class="section" id="圣餐隐喻">
+<h3>圣餐隐喻</h3>
+<p>May说的话：</p>
+<blockquote>
+<p>"I am the <strong>daily bread</strong> for which you pray at church."</p>
+</blockquote>
+<ul>
+<li><strong>面包</strong> = 圣餐（Eucharist / Holy Communion）</li><li>在基督教传统中：耶稣说"吃我的身体，喝我的血"</li><li>耶稣为谁而死？→ 为大众而死 → <strong>替代你受罪</strong></li><li>耶稣死后，人们做什么？→ 好好生活，做个纯净纯洁的人</li>
+</ul>
+<p>→ <strong>May自比耶稣</strong>：她替Marcher等待、受苦、付出生命——等待他觉醒</p>
+</div><!-- end 圣餐隐喻 -->
+<div class="section" id="May的名字分析">
+<h3>May的名字分析</h3>
+<ul>
+<li><strong>May</strong> = 五月 → 明媚的季节</li><li>对比：耶稣在<strong>四月</strong>（April）受判，《荒原》"April is the cruelest month"</li><li>May病重与Marcher再次相见的那个下午也是四月</li><li>Barton中Bot/Poet=诗人的意思，Ram=绵羊 → 圣经中象征温暖的名字</li>
+</ul>
+</div><!-- end May的名字分析 -->
+<div class="section" id="圣经中的其他对应">
+<h3>圣经中的其他对应</h3>
+<ul>
+<li>当Marcher说"我觉得我的门都被堵上了"→ May说"你的门不会堵上"</li><li>耶稣说："我在你们面前开了一扇门，没有人会把它关上。"</li>
+</ul>
+<hr>
+</div><!-- end 圣经中的其他对应 -->
+</div><!-- end 六May-Bartram的象征功能 -->
+<div class="section" id="七猛兽The-Beast是什么" exam-section>
+<h2>七、⭐ 猛兽（The Beast）是什么？</h2>
+<div class="section" id="文本层面">
+<h3>文本层面</h3>
+<p>Marcher认为自己一生中总会有一只猛兽来袭击他 → 他为此等待了一辈子</p>
+</div><!-- end 文本层面 -->
+<div class="section" id="启示录中的猛兽">
+<h3>《启示录》中的猛兽</h3>
+<blockquote>
+<p>"有一头野兽会从海中出现，有7个头、10根角，每根角上都带着王冠……它会要求所有人在额头和手上留印记，标示你信它。"</p>
+</blockquote>
+<p>→ 学者解读：这只野兽影射的是<strong>罗马帝国</strong>（地中海强国）</p>
+<ul>
+<li>"Who can wage war against it?" → 谁可以跟罗马帝国打仗？</li><li>"It was given authority over every tribe, people, language and nation." → 罗马帝国统治万族万邦</li>
+</ul>
+</div><!-- end 启示录中的猛兽 -->
+<div class="section" id="历史化解读">
+<h3>历史化解读</h3>
+<blockquote>
+<p><strong>The Beast = 帝国主义</strong></p>
+</blockquote>
+<ul>
+<li>Marcher是殖民官员 → 他从殖民地的丛林中退回日常生活的丛林</li><li><strong>野兽就是他内心中被帝国经历所扭曲的那部分自己</strong></li><li>具体表现：</li>
+</ul>
+<p>  1. 无法真正爱一个人</p>
+<p>  2. 把爱人当作财产（占有逻辑）</p>
+<p>  3. 极端的自恋</p>
+<p>  4. Masculine heroism 不让他接受女性陪伴</p>
+<blockquote>
+<p>"What Henry James describes is the <strong>distorted psyche</strong> of an imperialist who, when removed from the jungle in colonies, failed to agree with the jungle in everyday life."</p>
+</blockquote>
+<hr>
+</div><!-- end 历史化解读 -->
+</div><!-- end 七猛兽The-Beast是什么 -->
+<div class="section" id="八亨利詹姆斯的反帝国主义立场">
+<h2>八、亨利·詹姆斯的反帝国主义立场</h2>
+<div class="section" id="给哥哥的信1903年小说发表同年">
+<h3>给哥哥的信（1903年，小说发表同年）</h3>
+<blockquote>
+<p>"I am carried away by your anti-imperialist discourse. I am carried away by every word of yours. I just worry that it will take a very very long time for the United States to pull out of the Philippines."</p>
+</blockquote>
+</div><!-- end 给哥哥的信1903年小说发表同年 -->
+<div class="section" id="美国反帝国主义联盟American-Anti-Imperialist-League">
+<h3>美国反帝国主义联盟（American Anti-Imperialist League）</h3>
+<ul>
+<li>成立：1898年6月15日</li><li>主要反对：美国<strong>吞并菲律宾</strong></li><li>参与人物：</li>
+</ul>
+<p>  - <strong>Henry James</strong>（亨利·詹姆斯）</p>
+<p>  - <strong>William James</strong>（威廉·詹姆斯，著名心理学家/实用主义奠基人）</p>
+<p>  - <strong>John Dewey</strong>（约翰·杜威）</p>
+<p>  - <strong>William Dean Howells</strong>（美国现实主义文学教父）</p>
+<p>  - <strong>Mark Twain</strong>（马克·吐温，也声援中国<strong>义和团运动</strong>——反帝国主义意义上）</p>
+<hr>
+</div><!-- end 美国反帝国主义联盟American-Anti-Imperialist-League -->
+</div><!-- end 八亨利詹姆斯的反帝国主义立场 -->
+<div class="section" id="九总结">
+<h2>九、总结</h2>
+<blockquote>
+<p>"There are no winners in the system of imperialism. The colonized suffer from it — but <strong>the imperialists are no exception.</strong>"</p>
+</blockquote>
+<blockquote>
+<p>"文学批判社会黑暗面的一种典型方式：<strong>带着最少的怒气，带着最多的共情</strong>，去描写在这个黑暗面里面受难的人们——不论他是强权还是弱者。"</p>
+</blockquote>
+<blockquote>
+<p>"所有主流的最顶尖的作品，都是讲<strong>人的崇高性</strong>——在日常生活当中闪出來的人的崇高。这才是最大的最好的作品。"</p>
+</blockquote>
+<hr>
+</div><!-- end 九总结 -->
+</div><!-- end 第七讲6月10日亨利詹姆斯丛林猛兽 -->
+<div class="section" id="附录四道考题相关要点速查" exam-section>
+<h1>附录：四道考题相关要点速查</h1>
+<div class="section" id="题目一25分丰辞copia辨析" exam-section>
+<h2>题目一（25分）：丰辞（copia）辨析</h2>
+<p><strong>出处</strong>：第二讲（5月6日）</p>
+<p><strong>核心论据</strong>：</p>
+<p>1. 古典修辞学定义：亚里士多德——修辞是观察能力，观察所有可能的<strong>说服方式</strong></p>
+<p>2. 修辞学的历史转型：文艺复兴时期从认知体系收缩为<strong>语言风格/修饰手法</strong></p>
+<p>3. 伊拉斯谟《丰辞》：99%列举修辞手法，1%提醒节用→ 学童只看手法不看节用</p>
+<p>4. 修辞的起效原理：修辞的作用是<strong>最大限度填补语与物之间的间隙</strong>——给出足够具体信息以补充名物间隙</p>
+<p>5. 莎士比亚在《爱的徒劳》中的策略：一正一反——戏剧反讽无效修辞，十四行诗展示有效修辞</p>
+<p>6. 结论：该剧讽刺的不是人意/修辞术本身，而是<strong>拙劣世人的无效修辞</strong>；莎士比亚<strong>参与了当时修辞学教育缺失这一社会弊病的反思</strong></p>
+<p><strong>必读</strong>：陈星《&quot;丰辞&quot;的原理》第四部分（Sonnet 87分析）</p>
+<hr>
+</div><!-- end 题目一25分丰辞copia辨析 -->
+<div class="section" id="题目二25分瑞普凡温克尔中的荷兰记忆" exam-section>
+<h2>题目二（25分）：瑞普·凡·温克尔中的"荷兰记忆"</h2>
+<p><strong>出处</strong>：第六讲（6月3日），关联第五讲（5月27日）殖民史</p>
+<p><strong>核心论据</strong>：</p>
+<p>1. <strong>Anglophobia</strong>（恐英症）：美国独立后最大问题是国民仍自认英国人 → 需建构美国身份</p>
+<p>2. <strong>荷兰记忆的功能</strong>：写荷兰殖民史 → <strong>解构英国身份认同</strong> → 建构美国身份</p>
+<p>   - &quot;你们不要以为只有一个民族身份是英国人——之前还有荷兰人！&quot;</p>
+<p>3. 欧文《纽约外史》只写到<strong>荷兰统治结束</strong> → 刻意跳过英国统治</p>
+<p>4. Rip身上多重民族身份：Dutch descendant + British subject + American citizen → 名字RIP = 旧民族身份的死亡</p>
+<p>5. 关联《独立宣言》中富兰克林的英帝国构成理论：美国与英格兰关系=苏格兰与英格兰关系 → 向苏格兰作家司各特致敬的引文</p>
+<p>6. 矛盾与张力：欧文一面迎合英国读者（需要在英国卖书），一面通过荷兰历史隐微表达反英情绪</p>
+<p>7. 对印第安人的态度：反对屠杀但主张同化（acculturation）</p>
+<p><strong>必读</strong>：金烁锋论文 + 教师补充的&quot;为什么写荷兰&quot;论证</p>
+<hr>
+</div><!-- end 题目二25分瑞普凡温克尔中的荷兰记忆 -->
+<div class="section" id="题目三25分丛林猛兽中的猛兽" exam-section>
+<h2>题目三（25分）：《丛林猛兽》中的"猛兽"</h2>
+<p><strong>出处</strong>：第七讲（6月10日）</p>
+<p><strong>核心论据</strong>：</p>
+<p>1. Marcher是<strong>colonial officer</strong>（殖民官员）——证据：政府办公室/去过亚洲内陆、埃及、印度</p>
+<p>2. 殖民经历对他的影响：masculine heroism爆棚 / 占有逻辑（把爱人当财产）/ 极端自恋</p>
+<p>3. &quot;猛兽&quot;的多层含义：</p>
+<p>   - 文本层面：Marcher恐惧的未知命运</p>
+<p>   - 《启示录》层面：海中出现的七头十角野兽 = <strong>罗马帝国</strong></p>
+<p>   - <strong>历史化解读：猛兽 = 帝国主义本身</strong></p>
+<p>4. May的象征：自比耶稣（&quot;I am the daily bread&quot;）→ 为Marcher等待、牺牲、付出生命</p>
+<p>5. 墓前段落：Marcher像&quot;心满意足的地主看地产&quot;——已被帝国主义占有逻辑<strong>内化</strong></p>
+<p>6. 结论：这是一个帝国主义者的扭曲心理——从殖民地丛林退回日常生活丛林后<strong>无法适应</strong>，<strong>失去了真正爱一个人的能力</strong></p>
+<p>7. 亨利·詹姆斯是<strong>美国反帝国主义联盟成员</strong>，与兄威廉、马克·吐温、杜威一同反对美国吞并菲律宾</p>
+<p><strong>必读</strong>：解友广论文 + 教师关于Marcher职业/猎虎隐喻的分析</p>
+<hr>
+</div><!-- end 题目三25分丛林猛兽中的猛兽 -->
+<div class="section" id="题目四25分苏格兰文学关联" exam-section>
+<h2>题目四（25分）：苏格兰文学关联</h2>
+<div class="section" id="阿拉比10分">
+<h3>《阿拉比》（10分）</h3>
+<ul>
+<li>三本书列表：第一本就是<strong>Walter Scott</strong>的The Abbot → 苏格兰作家</li><li>Scott是欧洲历史小说之父，属于<strong>苏格兰文学传统</strong></li><li>凯尔特人 = 苏格兰+爱尔兰+威尔士 → 同根同源</li><li>苏格兰启蒙运动对爱尔兰知识分子的影响（乔伊斯本人深受其影响）</li>
+</ul>
+</div><!-- end 阿拉比10分 -->
+<div class="section" id="独立宣言10分-需自行补充原文">
+<h3>《独立宣言》（10分）⚠️ 需自行补充原文</h3>
+<ul>
+<li><strong>富兰克林的英帝国构成理论</strong>：美国与英格兰的关系=<strong>苏格兰与英格兰的关系</strong></li><li>苏格兰与英格兰在1707年之前只是<strong>Personal Union</strong>——同一国王但不是同一议会</li><li>类比：殖民地只对国王有效忠义务，<strong>议会无权</strong>施加法律</li><li>因此《独立宣言》只需攻击国王，不需攻击议会</li><li>苏格兰启蒙运动（休谟、亚当·斯密等）对建国之父的思想影响</li><li>《独立宣言》"人生而平等"等自然权利思想与苏格兰启蒙哲学的关联</li>
+</ul>
+</div><!-- end 独立宣言10分-需自行补充原文 -->
+<div class="section" id="瑞普凡温克尔5分">
+<h3>《瑞普·凡·温克尔》（5分）</h3>
+<ul>
+<li>引文来自<strong>沃尔特·司各特</strong>——苏格兰作家</li><li>欧文追随《独立宣言》中富兰克林的逻辑：美国与英格兰的关系=苏格兰与英格兰的关系</li><li>→ 建构美国文学时模仿苏格兰文学：<strong>以解构英国身份来建构美国身份</strong></li><li>司各特的历史小说传统对欧文的影响</li><li>苏格兰在1707年合并中的<strong>破產经历</strong>——与美国人"被压迫而独立"的叙事形成对照</li><li>苏格兰文学中对民族文化存亡的焦虑——欧文同样面对美国民族文学建构的问题</li>
+</ul>
+<hr>
+<p>*本讲义基于高伟权老师2026年春季&quot;外国文学专题&quot;课堂讲授整理，保留了大量教师原话、文学原文及课堂互动内容，力求不遗漏任何对考试作答有参考价值的部分。*</p>
+</div>
+</div>
+</div>
+    </div>
+  </main>
+  <button id="back-top" title="返回顶部">↑</button>
+</div>
+
+<script>
+(function() {
+  const sidebar = document.getElementById('sidebar');
+  const toggle = document.getElementById('sidebar-toggle');
+  const backTop = document.getElementById('back-top');
+  const main = document.getElementById('main');
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+  const tocLinks = document.querySelectorAll('.toc-list a');
+
+  // Sidebar toggle
+  toggle.addEventListener('click', function() {
+    sidebar.classList.toggle('open');
+  });
+
+  // Back to top visibility
+  window.addEventListener('scroll', function() {
+    backTop.classList.toggle('visible', window.scrollY > 600);
+  });
+
+  // Back to top action
+  backTop.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Smooth scroll for TOC links + highlight
+  tocLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const id = this.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (target) {
+        // close sidebar on mobile
+        sidebar.classList.remove('open');
+        // remove all active
+        tocLinks.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+        // scroll
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // flash
+        target.classList.remove('highlight-flash');
+        void target.offsetWidth;
+        target.classList.add('highlight-flash');
+      }
+    });
+  });
+
+  // Scroll spy
+  const headings = document.querySelectorAll('.section[id]');
+  function updateActiveLink() {
+    let current = '';
+    headings.forEach(function(section) {
+      if (section.getBoundingClientRect().top <= 120) {
+        current = section.id;
+      }
+    });
+    tocLinks.forEach(function(link) {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+
+  // Search
+  if (searchInput) {
+    const allText = document.querySelector('.content').innerText;
+    searchInput.addEventListener('input', function() {
+      const q = this.value.trim().toLowerCase();
+      if (q.length < 2) {
+        searchResults.style.display = 'none';
+        // restore all sections
+        document.querySelectorAll('.section').forEach(s => s.style.display = '');
+        return;
+      }
+      // find headings that match
+      let matches = [];
+      headings.forEach(function(s) {
+        if (s.innerText.toLowerCase().includes(q)) {
+          matches.push({ id: s.id, text: s.querySelector('h2,h3,h4') ? s.querySelector('h2,h3,h4').innerText : s.id });
+        }
+      });
+      if (matches.length) {
+        searchResults.style.display = 'block';
+        searchResults.innerHTML = '找到 ' + matches.length + ' 个匹配: ' + matches.map(m => '<a href="#' + m.id + '" style="color:#6366f1;cursor:pointer">' + m.text.substring(0,30) + '</a>').join(', ');
+      } else {
+        searchResults.style.display = 'block';
+        searchResults.innerHTML = '未找到匹配';
+      }
+      // simple highlight: show only matching sections
+      document.querySelectorAll('.section').forEach(function(s) {
+        s.style.display = q.length >= 2 && !s.innerText.toLowerCase().includes(q) ? 'none' : '';
+      });
+    });
+  }
+
+  // If URL has hash, scroll to it
+  if (window.location.hash) {
+    setTimeout(function() {
+      const target = document.getElementById(window.location.hash.slice(1));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  }
+})();
+</script>
+</body>
+</html>

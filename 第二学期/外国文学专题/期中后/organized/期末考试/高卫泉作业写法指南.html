@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>高卫泉 · 作业写法指南</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #faf9f6; color: #1a1a1a; line-height: 1.8; }
+
+/* Hero */
+.hero { background: linear-gradient(135deg, #1c1917 0%, #292524 60%, #44403c 100%); color: #faf9f6; padding: 64px 24px 52px; text-align: center; position: relative; overflow: hidden; }
+.hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #d97706, #dc2626, #7c3aed); }
+.hero h1 { font-size: 38px; margin: 0; letter-spacing: 2px; }
+.hero p { margin-top: 10px; font-size: 15px; color: #a8a29e; }
+.hero .badge { display: inline-block; margin-top: 16px; padding: 4px 14px; border: 1px solid rgba(255,255,255,.15); border-radius: 20px; font-size: 12px; color: #d6d3d1; }
+
+/* Container */
+.container { max-width: 860px; margin: 0 auto; padding: 40px 24px; }
+
+/* Section titles */
+.section-title { font-size: 20px; font-weight: 700; margin: 44px 0 20px; padding-bottom: 8px; border-bottom: 2px solid #d6d3d1; color: #1c1917; display: flex; align-items: center; gap: 10px; }
+.section-title .num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; background: #1c1917; color: #faf9f6; font-size: 14px; flex-shrink: 0; }
+
+/* Cards */
+.card { background: #fff; border: 1px solid #e7e5e4; border-radius: 12px; padding: 28px; margin-bottom: 18px; transition: box-shadow .2s; }
+.card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.06); }
+.card h3 { margin: 0 0 8px; font-size: 17px; color: #1c1917; }
+.card .card-intro { font-size: 14px; color: #57534e; margin-bottom: 14px; }
+
+/* Examples */
+.example { margin: 10px 0; padding: 12px 16px; background: #f5f5f4; border-left: 3px solid #d97706; border-radius: 0 6px 6px 0; }
+.example .ex-text { font-size: 14px; color: #292524; line-height: 1.7; }
+.example .ex-text em { background: #fef3c7; font-style: normal; padding: 1px 4px; border-radius: 2px; }
+.example .ex-src { display: block; margin-top: 6px; font-size: 11px; color: #a8a29e; }
+.example.danger { border-left-color: #dc2626; background: #fef2f2; }
+.example.success { border-left-color: #16a34a; background: #f0fdf4; }
+
+/* Pattern boxes */
+.pattern { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 10px 0; }
+.pattern .do, .pattern .dont { padding: 16px; border-radius: 8px; font-size: 13px; }
+.pattern .do { background: #f0fdf4; border: 1px solid #bbf7d0; }
+.pattern .dont { background: #fef2f2; border: 1px solid #fecaca; }
+.pattern h4 { margin: 0 0 8px; font-size: 14px; }
+.pattern .do h4 { color: #16a34a; }
+.pattern .dont h4 { color: #dc2626; }
+
+/* Formula */
+.formula { background: #1c1917; color: #faf9f6; padding: 20px 24px; border-radius: 12px; margin: 14px 0; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+.formula .step { display: flex; gap: 12px; align-items: flex-start; margin: 8px 0; }
+.formula .step-num { background: #d97706; color: #fff; width: 24px; height: 24px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+.formula .step-text { font-size: 14px; line-height: 1.7; }
+.formula .step-text .highlight { background: rgba(217,119,6,.3); padding: 1px 6px; border-radius: 3px; }
+
+/* Tabs */
+.tab-nav { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.tab-btn { padding: 10px 20px; border-radius: 8px; border: 1px solid #d6d3d1; background: #fff; cursor: pointer; font-size: 14px; font-family: inherit; transition: all .2s; }
+.tab-btn:hover { border-color: #d97706; }
+.tab-btn.active { background: #1c1917; color: #fff; border-color: #1c1917; }
+
+/* Vocab grid */
+.vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.vocab-item { padding: 10px 14px; background: #f5f5f4; border-radius: 8px; font-size: 13px; }
+.vocab-item .word { font-weight: 600; color: #d97706; }
+.vocab-item .note { color: #78716c; font-size: 12px; margin-left: 8px; }
+
+/* Checklist */
+.checklist { list-style: none; padding: 0; }
+.checklist li { padding: 8px 0 8px 28px; position: relative; font-size: 14px; }
+.checklist li::before { content: '☐'; position: absolute; left: 0; color: #d97706; font-size: 16px; }
+.checklist li.critical::before { content: '☒'; color: #dc2626; }
+
+/* Footer */
+.footer { text-align: center; padding: 40px; color: #a8a29e; font-size: 13px; border-top: 1px solid #e7e5e4; margin-top: 40px; }
+
+@media (max-width: 640px) {
+  .pattern { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 26px; }
+  .container { padding: 20px 14px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>高卫泉 · 作业写法指南</h1>
+  <p>基于其论文《〈古董家〉与司各特"虚假的"凯尔特认同》的全量拆解</p>
+  <div class="badge">论文原句 + 课堂风格交叉验证</div>
+</div>
+
+<div class="container">
+
+<!-- 总览 -->
+<div class="section-title"><span class="num">0</span> 他会在五秒内判断你的作业</div>
+
+<div class="card">
+  <h3>他看作业的第一眼扫描顺序</h3>
+  <ol style="font-size:14px; line-height:2.2; padding-left:20px;">
+    <li><strong>是不是 AI 写的</strong> → 句子有没有"人的气息"，有没有具体文本引证</li>
+    <li><strong>有没有上课的内容</strong> → 讲过的观点、原文、术语有没有出现</li>
+    <li><strong>有没有读文献</strong> → 论文里给的关键论据有没有用到</li>
+    <li><strong>有没有自己的判断</strong> → 有没有一句话是"只有你才能写出来的"</li>
+  </ol>
+  <div class="example danger" style="margin-top:14px;">
+    <div class="ex-text">他在第七讲课上原话：<em>"AI 没有脑子。你让它分析，非常会想象，非常会胡说八道，而且说的一本正经地胡说八道。写一大段，然后你看不懂他在说什么。……往年同学有答的一看就是 AI 的，胡说八道。上课听讲的话，这个试卷半小时就能做完。"</em></div>
+  </div>
+</div>
+
+<!-- 一、论文结构拆解 -->
+<div class="section-title"><span class="num">1</span> 他的论文是怎么搭的——你按这个架子写</div>
+
+<div class="card">
+  <h3>宏观结构：四段式"破立合一"</h3>
+  <div class="formula">
+    <div class="step">
+      <span class="step-num">0</span>
+      <span class="step-text"><span class="highlight">标题即论点</span>：「古董家」与司各特"虚假的"凯尔特认同——不是"试论""浅析"，而是直接告诉读者结论</span>
+    </div>
+    <div class="step">
+      <span class="step-num">1</span>
+      <span class="step-text"><span class="highlight">引论 = 摆出对立阵营 → 指出空缺 → 宣布你的立场</span> （占比约15%）<br>他的做法：20世纪初苏格兰文艺复兴 A 派 vs 当今学界 B 派 → 一个未解决的问题 → "这就需要在……进一步澄清"</span>
+    </div>
+    <div class="step">
+      <span class="step-num">2</span>
+      <span class="step-text"><span class="highlight">正文逐层推进（占比约70%）</span><br>每节一个论点，用一手文献（书信、日记、评论文）与小说文本交叉互证</span>
+    </div>
+    <div class="step">
+      <span class="step-num">3</span>
+      <span class="step-text"><span class="highlight">结论回到根本动因</span> （占比约10%）<br>不重复摘要，而是点出"根本动因"——阶级、市场、意识形态</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>引论段落的精准解剖</h3>
+  <div class="example success">
+    <div class="ex-text">
+      "20 世纪初……苏格兰文艺复兴运动对 18、19 世纪苏格兰英语作家采取疏离态度……<em>然而</em>，与苏格兰文艺复兴文人相反，<em>当今学界</em>却有不少研究认为司各特的作品中……有着重要的苏格兰'文化民族主义'贡献……<em>这意味著</em>关于司各特的民族立场问题有着近乎截然相反的理解，<em>这就需要</em>将'凯尔特种族''苏格兰民族'等相关概念还原到司各特所处的时代，进一步澄清司各特真实的民族立场。"
+    </div>
+  </div>
+  <div class="pattern" style="margin-top:14px;">
+    <div class="dont">
+      <h4>❌ 别这样写</h4>
+      <p style="font-size:13px;line-height:1.7;">"司各特是苏格兰著名作家，他的《古董家》是一部重要的小说。本文将从多个角度分析司各特的民族立场。"</p>
+    </div>
+    <div class="do">
+      <h4>✅ 这样写</h4>
+      <p style="font-size:13px;line-height:1.7;">"关于 X 问题，A 派认为……而 B 派则认为……这种截然相反的理解表明，X 的实质尚未被澄清。本文将还原到 X 所处的历史语境中，通过考察……来揭示 X 的真实立场。"</p>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>他每一节的论证推进方式</h3>
+  <div class="formula">
+    <div class="step">
+      <span class="step-num">①</span>
+      <span class="step-text"><span class="highlight">用一个具体的文本时刻开头</span>（小说中的一段对话、日记中的一句话、一封信中的一个表述）</span>
+    </div>
+    <div class="step">
+      <span class="step-num">②</span>
+      <span class="step-text"><span class="highlight">追溯这个表述的"前史"</span>（作者早期怎么想的 → 中间受了什么影响 → 后来怎么变）——他论文里做了 1804→1810→1816→1829 的完整时间线追踪</span>
+    </div>
+    <div class="step">
+      <span class="step-num">③</span>
+      <span class="step-text"><span class="highlight">用外部证据验证</span>（同期书信、日记、评论文章、同时代其他人的说法）——不是凭空推理，是用一手文献说话</span>
+    </div>
+    <div class="step">
+      <span class="step-num">④</span>
+      <span class="step-text"><span class="highlight">揭示表面之下的"根本动因"</span>（"这主要源于，一方面……另一方面……"——阶级品味 + 市场逻辑 + 意识形态）</span>
+    </div>
+  </div>
+</div>
+
+<div class="example success" style="margin-top:14px;">
+  <div class="ex-text">
+    论文原句示范：「司各特之所以没有从最先的哥特派走向以查莫斯为代表的凯尔特派，而是走向他自己的'混合种族'立场，<em>并不完全是由于相关语言学证据的支持</em>。司各特进入文学市场后，<em>所要迎合的'联合帝国'子民的阶级品味以及他所要捍卫的阶级利益，才是这一立场得以生成的根本动因。</em>」
+  </div>
+</div>
+
+<!-- 二、关键词汇与句式 -->
+<div class="section-title"><span class="num">2</span> 他爱用的词句——你写的时候要"说他的语言"</div>
+
+<div class="card">
+  <h3>高频句式结构</h3>
+  <div class="vocab-grid">
+    <div class="vocab-item"><span class="word">"这意味著……"</span><span class="note">给出深层含义时</span></div>
+    <div class="vocab-item"><span class="word">"然而/但/却"</span><span class="note">高频转折，从不平铺</span></div>
+    <div class="vocab-item"><span class="word">"之所以……是由于……"</span><span class="note">给出原因判断时</span></div>
+    <div class="vocab-item"><span class="word">"可以说"</span><span class="note">给出个人判断时</span></div>
+    <div class="vocab-item"><span class="word">"根本动因"</span><span class="note">最深层的解释</span></div>
+    <div class="vocab-item"><span class="word">"本质上"</span><span class="note">剥离表象</span></div>
+    <div class="vocab-item"><span class="word">"真实立场"</span><span class="note">区分表面与真实</span></div>
+    <div class="vocab-item"><span class="word">"意识形态"</span><span class="note">批判时必用</span></div>
+    <div class="vocab-item"><span class="word">"并非……而是……"</span><span class="note">他最爱的否定+肯定</span></div>
+    <div class="vocab-item"><span class="word">"这就需要在……"</span><span class="note">引出你的研究方案</span></div>
+    <div class="vocab-item"><span class="word">"一方面……另一方面……"</span><span class="note">双因解释</span></div>
+    <div class="vocab-item"><span class="word">"反映/揭示/呈明"</span><span class="note">勿用"体现/展示"</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <h3>他的理论语汇工具箱（按好用程度排序）</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:13px;">
+    <thead><tr style="background:#f5f5f4;"><th style="text-align:left;padding:8px 12px;">理论域</th><th style="text-align:left;padding:8px 12px;">他用的关键词</th><th style="text-align:left;padding:8px 12px;">你可以用在哪儿</th></tr></thead>
+    <tbody>
+      <tr><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">阶级分析</td><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">中产阶级团体、阶级品味、阶级利益</td><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">四道题都可以用</td></tr>
+      <tr><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">殖民/后殖民</td><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">权力凝视、隔离（segregation）vs 同化（assimilation）、殖民话语</td><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">题目二/三/四</td></tr>
+      <tr><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">意识形态批判</td><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">文明论意识形态、想象的共同体</td><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">所有题目</td></tr>
+      <tr><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">市场/经济</td><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">文学市场、帝国经济、迎合读者</td><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">题目一/二</td></tr>
+      <tr><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">审美/品味</td><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">美学隔离、品味判断、阶级表演</td><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">题目二/三</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h3>他喜欢用作者自己的原话做分析入口</h3>
+  <div class="example success">
+    <div class="ex-text">
+      论文第一节标题直接用司各特自己的话：<em>"我已几乎陷入论争的绝望沼"</em> ——然后用"绝望沼"这个意象贯穿整节。这不是装饰，是分析工具：他用这个隐喻来论证司各特如何从"陷进去"到"奋力挣扎"到"脱离"。
+    </div>
+  </div>
+  <div class="pattern" style="margin-top:14px;">
+    <div class="dont"><h4>❌ 别这样用文本</h4><p style="font-size:13px;">"小说中出现了XX描写，体现了作者的XX思想。" → 文本当装饰品</p></div>
+    <div class="do"><h4>✅ 这样用文本</h4><p style="font-size:13px;">"作者自己说'XX'，但他在另一处又说'YY'。这中间的矛盾不是自相矛盾，而是暴露了……" → 文本当解剖对象</p></div>
+  </div>
+</div>
+
+<!-- 三、拿分模型 -->
+<div class="section-title"><span class="num">3</span> 四道题各自应该怎么写</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" data-tab="q1">题目一 · 丰辞</button>
+  <button class="tab-btn" data-tab="q2">题目二 · 荷兰记忆</button>
+  <button class="tab-btn" data-tab="q3">题目三 · 猛兽</button>
+  <button class="tab-btn" data-tab="q4">题目四 · 苏格兰关联</button>
+</div>
+
+<div class="tab-content" id="tab-q1">
+  <div class="card">
+    <h3>题目一（25分）："丰辞"辨析</h3>
+    <p style="font-size:14px;color:#57534e;">根据陈星论文和课堂讲授，谈一谈何为"丰辞"</p>
+    <div class="formula">
+      <div class="step"><span class="step-num">①</span><span class="step-text">开头不要解释"丰辞是什么"。直接引陈星论文的核心论点：<span class="highlight">"学界一般认为《爱的徒劳》是对修辞的讽刺，但陈星认为该剧探讨的是一个更基本的问题——什么是有效修辞。"</span></span></div>
+      <div class="step"><span class="step-num">②</span><span class="step-text">追溯<span class="highlight">古典修辞学到文艺复兴修辞学的历史转型</span>：亚里士多德定义（观察所有可能的说服方式）→ 文艺复兴收缩为语言风格 → 伊拉斯谟《丰辞》99%列举手法、1%提醒节用。必须引用亚里士多德原句"修辞是一种观察能力"。</span></div>
+      <div class="step"><span class="step-num">③</span><span class="step-text">点名剧中<span class="highlight">具体的无效修辞例子</span>：亚马多的臃肿句子、霍罗福尼斯的学究气。要引用英文原句（至少一句）。</span></div>
+      <div class="step"><span class="step-num">④</span><span class="step-text">引出<span class="highlight">修辞的起效原理</span>：修辞的根本目的是"最大限度保证自己的表达能准确反映自己的想法"，即填补语与物之间的间隙。定义化、具体化。</span></div>
+      <div class="step"><span class="step-num">⑤</span><span class="step-text">以<span class="highlight">十四行诗第87首</span>作有效修辞的正例。必须引用诗句。点出诗中"经济学隐喻"（charter/bonds/patent）。</span></div>
+      <div class="step"><span class="step-num">⑥</span><span class="step-text"><span class="highlight">结尾落到根本原因</span>：当时修辞教育体系缺少"形而上层面的修辞原理分析"，只有技巧手册没有理论反思。这跟当代文学变成"阶级表演"是同一逻辑的早期形态。</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-q2" style="display:none;">
+  <div class="card">
+    <h3>题目二（25分）：瑞普·凡·温克尔中的"荷兰记忆"</h3>
+    <p style="font-size:14px;color:#57534e;">金烁锋论文未说明欧文为何写一个关于"荷兰记忆"的故事，根据课堂讲述加以分析</p>
+    <div class="formula">
+      <div class="step"><span class="step-num">①</span><span class="step-text"><span class="highlight">开门见山点出金烁锋论文的"空缺"</span>：论文讨论了瑞普为何沉睡（政治焦虑），但没有解释为什么必须是"荷兰记忆"而不是英格兰记忆。</span></div>
+      <div class="step"><span class="step-num">②</span><span class="step-text"><span class="highlight">引教师补充的核心论点</span>：Anglophobia——美国刚刚独立，最大问题是国民仍自认英国人。建构美国身份需要解构英国身份。怎么做？写荷兰殖民史。因为"在这个地方，之前还有荷兰人——你怎么不觉得自己是荷兰人？"</span></div>
+      <div class="step"><span class="step-num">③</span><span class="step-text"><span class="highlight">用文本证据</span>：小说开篇引司各特（苏格兰人）、Rip的荷兰祖籍（Van姓）、纽约外史只写到荷兰统治结束。把这三个点串成一条逻辑链。</span></div>
+      <div class="step"><span class="step-num">④</span><span class="step-text"><span class="highlight">关联《独立宣言》中的英帝国构成理论</span>：富兰克林论证殖民地只对国王有效忠义务（类比苏格兰与英格兰的Personal Union）。欧文在小说里做的是同样的事情：用苏格兰/荷兰来解构英国身份。</span></div>
+      <div class="step"><span class="step-num">⑤</span><span class="step-text">别忘了Rip名字的双关（RIP = rest in peace = 安息 = 旧民族身份的死亡），以及Rip身上多重民族身份（Dutch descendant + British subject + American citizen）的象征意义。</span></div>
+      <div class="step"><span class="step-num">⑥</span><span class="step-text"><span class="highlight">不要忽略矛盾面</span>：欧文既要迎合英国读者（因为他是第一个在英国卖得很好的美国作家），又要隐微表达反英。这种"半屈服半腐朽"的写作姿态就是他论文里说的"阶级品味对作家的约束"。</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-q3" style="display:none;">
+  <div class="card">
+    <h3>题目三（25分）：《丛林猛兽》中的"猛兽"</h3>
+    <p style="font-size:14px;color:#57534e;">根据解友广论文和课堂讲授，谈一谈"猛兽"是什么</p>
+    <div class="formula">
+      <div class="step"><span class="step-num">①</span><span class="step-text"><span class="highlight">不要一开始就说"猛兽是帝国主义"。</span>先呈现文本层面：Marcher一直感到有一只猛兽潜伏在生命中——这个"猛兽"到底是什么，小说没有直说。</span></div>
+      <div class="step"><span class="step-num">②</span><span class="step-text"><span class="highlight">列出Marcher的职业身份证据（课上重点）</span>：第二章"little office under Government"；第六章"depths of Asia""Egypt""India"。19世纪末同时去这些地方的人只有两种：传教士和殖民官员。→ colonial officer。</span></div>
+      <div class="step"><span class="step-num">③</span><span class="step-text"><span class="highlight">分析殖民经历对他的具体影响</span>：猎虎隐喻（殖民地印度的实践 → 展示不可战胜的男性气质）、占有逻辑（在May墓前像"contented landlord reviewing a piece of property"把她当财产）、自恋。</span></div>
+      <div class="step"><span class="step-num">④</span><span class="step-text"><span class="highlight">引入启示录维度</span>：启示录中"从海中出现的七头十角野兽"= 罗马帝国。May自比耶稣（"I am the daily bread"）。Marcher等待的"猛兽"本质上就是他自身被帝国经历扭曲的那部分。</span></div>
+      <div class="step"><span class="step-num">⑤</span><span class="step-text"><span class="highlight">给出历史化结论</span>：猛兽 = 帝国主义本身。Marcher是"从殖民地的丛林退回日常生活的丛林后无法适应的帝国主义者"。他并非不爱May，是"失去了真正爱一个人的能力"——帝国主义体制下没有胜者。</span></div>
+      <div class="step"><span class="step-num">⑥</span><span class="step-text">加分项：提亨利·詹姆斯是"美国反帝国主义联盟"成员（1898年成立），与兄弟威廉、马克·吐温共同反对美国吞并菲律宾。</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-q4" style="display:none;">
+  <div class="card">
+    <h3>题目四（25分）：苏格兰文学关联</h3>
+    <p style="font-size:14px;color:#57534e;">《阿拉比》（10分）+《独立宣言》（10分）+《瑞普》（5分）</p>
+    <div class="formula">
+      <div class="step"><span class="step-num">阿</span><span class="step-text"><strong>《阿拉比》</strong>：第一段落列的三本书，第一本就是Walter Scott的The Abbot。Scott是苏格兰作家、欧洲历史小说之父。苏格兰人和爱尔兰人同属凯尔特种族（课堂第一讲）。乔伊斯引用Scott是暗示凯尔特传统与爱尔兰民族身份的内在关联。更重要的是：Scott小说中的历史意识、对民族文化存亡的焦虑，直接影响乔伊斯对都柏林"瘫痪"的书写。</span></div>
+      <div class="step"><span class="step-num">独</span><span class="step-text"><strong>《独立宣言》</strong>：最核心的是富兰克林的"英帝国构成理论"——殖民地与英格兰的关系 = 苏格兰与英格兰的关系。苏格兰在1707年之前只是Personal Union。杰斐逊在宣言里只攻击国王不攻击议会，是因为按富兰克林的逻辑，殖民地只需要向国王效忠，议会的权力是"篡夺"（usurpation）。苏格兰启蒙运动（休谟、亚当·斯密）的哲学思想也是宣言自然权利理论的思想源头。</span></div>
+      <div class="step"><span class="step-num">瑞</span><span class="step-text"><strong>《瑞普》</strong>：开篇引文来自司各特《古董商》。司各特是苏格兰人。欧文追随独立宣言的逻辑（用苏格兰解构英国），在文学层面用司各特来建构美国文学。另外可以加一句：苏格兰1707年合并是"国家破产"后的主动行为，这与美国"被压迫不得不独立"的叙事形成对照——欧文通过写荷兰历史绕开了这个敏感对比。</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 四、禁忌 -->
+<div class="section-title"><span class="num">4</span> 他必定反感的写法（绝对红线）</div>
+
+<div class="card">
+  <ul class="checklist">
+    <li class="critical"><strong>用 AI 写</strong>——"我说是 AI 就是 AI"，零分，没商量</li>
+    <li class="critical"><strong>无具体文本引证</strong>——只说"小说表现了XX"而不引原文的句子或段落</li>
+    <li class="critical"><strong>只复述情节不做分析</strong>——他没有耐心看你在第一页复述故事</li>
+    <li class="critical"><strong>不引用课堂讲过的内容</strong>——他最在意的就是"你上课有没有听讲"</li>
+    <li class="critical"><strong>使用"首先/其次/最后""综上所述""值得注意的是"</strong>——他从SOUL（+他的写作风格）里明确厌恶这些词</li>
+    <li class="critical"><strong>不区分历史语境</strong>——把不同时代的"民族""文学""修辞"混为一谈</li>
+    <li class="critical"><strong>纯审美/纯情感分析<i>不加</i>政治经济维度</strong>——只谈"爱情""美""人性"而不触及阶级/殖民/市场，在他眼里是浅的</li>
+    <li class="critical"><strong>结尾用"有待进一步研究"</strong>——他最烦这种"安全结论"</li>
+    <li class="critical"><strong>只引用论文不引用文学作品原文</strong>——必须回到原始文本本身</li>
+  </ul>
+</div>
+
+<!-- 五、思维模型 -->
+<div class="section-title"><span class="num">5</span> 他的思考路径——你分析任何文本时都按这个来</div>
+
+<div class="card">
+  <h3>高卫泉式三段分析法</h3>
+  <div class="formula">
+    <div class="step"><span class="step-num">1</span><span class="step-text"><span class="highlight">文本层</span>：这个文本说了什么？具体哪个段落、哪句话？引用原文。英语文本尽量引英文。</span></div>
+    <div class="step"><span class="step-num">2</span><span class="step-text"><span class="highlight">历史层</span>：作者为什么这样说？他当时面临什么读者？什么市场？什么政治压力？有没有书信/日记佐证？</span></div>
+    <div class="step"><span class="step-num">3</span><span class="step-text"><span class="highlight">意识形态层</span>：表面之下的根本动因是什么？阶级？殖民？资本主义？文明论？谁的权力在被维护？谁的声音在被压制？</span></div>
+  </div>
+  <p style="font-size:13px;color:#78716c;margin-top:14px;">三层缺任何一层，在他眼里就不是完整的分析。只写第一层 = 中学水平。只写一二层 = 普通本科水平。三层都写到 = 他心目中的"好"。注意第三层不是"拔高"，而是从他给的论文材料里<span style="font-weight:600;">—直接推导出来的</span>——他课堂上已经反复示范过了。</p>
+</div>
+
+<div class="card">
+  <h3>每道题落地的"根本动因"参考</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:13px;">
+    <thead><tr style="background:#f5f5f4;"><th style="text-align:left;padding:8px 12px;">题目</th><th style="text-align:left;padding:8px 12px;">表面问题</th><th style="text-align:left;padding:8px 12px;">根本动因（他想要的深度答案）</th></tr></thead>
+    <tbody>
+      <tr><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">丰辞</td><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">什么是好的修辞</td><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">修辞教育沦为技巧手册 → 语言与认知脱节 → 文人信用破产 → 根源在文艺复兴修辞学收缩时失去了古典时期的政治批判功能</td></tr>
+      <tr><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">荷兰记忆</td><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">为什么写荷兰故事</td><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">建构美国民族身份必须解构英国身份 → 殖民政权交替中的身份流动性 → 但作家必须在迎合读者（市场）与表达真立场之间走钢丝 → 阶级品味对作家的约束</td></tr>
+      <tr><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">猛兽</td><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">猛兽是什么</td><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">殖民经历内化为扭曲心理 → 帝国主义者失去爱的能力 → 制度之下没有胜者 → 文学以"最少的怒气、最多的共情"揭示制度对人的异化</td></tr>
+      <tr><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">苏格兰关联</td><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">几部作品与苏格兰的关系</td><td style="padding:8px 12px;border-bottom:1px solid #e7e5e4;">苏格兰 = 凯尔特同根 + 合并创伤 + 启蒙思想源 → 爱尔兰/美国在建构独立身份时都需要苏格兰作为"非英格兰"的参照系 → 民族身份不是本质的，是策略性地建构出来的</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 六、他欣赏的作业的样子 -->
+<div class="section-title"><span class="num">6</span> 一份"高卫泉会喜欢"的作业长什么样</div>
+
+<div class="card">
+  <h3>八条自查清单</h3>
+  <ul class="checklist">
+    <li>开头前两句话有没有摆出一个矛盾/张力/对立的观点？</li>
+    <li>有没有在一页纸内引用了至少一处文学作品原文（英文）？</li>
+    <li>有没有用到至少一个课堂讲过的概念或原文段落？</li>
+    <li>有没有一个句子是"没有我这个人就写不出来的"？</li>
+    <li>有没有点出文本现象背后的经济/政治/阶级原因？</li>
+    <li>"然而""但是"出现了至少三次吗？（平铺直叙 = 没分析）</li>
+    <li>结尾是回到开头的核心问题，还是说了"综上所述"？</li>
+    <li>如果有人复制粘贴到 AI 里问"这是人写的还是 AI 写的"，AI 会犹豫吗？（会犹豫就对了）</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>他论文中的结论段（你应该模仿的调性）</h3>
+  <div class="example success">
+    <div class="ex-text">
+      "司各特所维护的民族<em>本质上</em>是苏格兰中产阶级团体，与 20 世纪苏格兰文艺复兴文人所维护的作为整体的苏格兰民族<em>相差甚远</em>。后一种立场下，司各特是'一个虚假民族的虚假的凯尔特诗人'。"
+    </div>
+  </div>
+  <p style="font-size:13px;color:#78716c;margin-top:10px;">特点：不重复前文。直接给一个带定性的判断（"本质上"）。用一个有力的引语收尾。不留那种"有待进一步研究"的尾巴。</p>
+</div>
+
+<div class="card">
+  <h3>一句话总结：他怎么判定你的作业</h3>
+  <div class="example" style="border-left-color:#7c3aed;background:#f5f3ff;">
+    <div class="ex-text">
+      他第七讲课上原话：<em>"一看就知道——你上课有没有听讲，这个题你有没有看懂，你有没有思考。言简意赅，分条缕析，直指要害。不要浪费彼此的时间。……上课听讲的话，这个试卷半小时就能做完。"</em>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>分析基于：高卫泉《〈古董家〉与司各特"虚假的"凯尔特认同》全文 + 七讲课堂录音</p>
+  <p>外国文学研究 2025 年第 2 期 · 国家社会科学基金青年项目 (23CWW019)</p>
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    const tabId = this.dataset.tab;
+    document.querySelectorAll('.tab-content').forEach(tc => tc.style.display = 'none');
+    document.getElementById('tab-' + tabId).style.display = 'block';
+  });
+});
+</script>
+
+</body>
+</html>

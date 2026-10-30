@@ -1,0 +1,16 @@
+{
+  "status": "built",
+  "bytes": 35444766,
+  "sha256": "bc18f20970c8ece6a2d6c05181e5e53ded8e6ce116007ae26db24da00994182a",
+  "title": "CS 进阶大课程",
+  "edition": "合并版 · 2026.10.30",
+  "date": "2026-10-30",
+  "course_count": 29,
+  "unit_count": 269,
+  "excerpt_count": 372,
+  "required": 14,
+  "elective": 15,
+  "documents": 1610,
+  "learner_initial": "not_assessed",
+  "input_hash": "7d0a02f65065243bfc0c3f521a59249cd1cf8f04638274a4355bba56a6dce6b3"
+}
